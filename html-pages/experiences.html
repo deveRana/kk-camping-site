@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Experiences — LakeStay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terracotta: { DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
+                        amber: { warm: '#F2A65A', light: '#F9C89B' },
+                        cream: { DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+                    },
+                    fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #FFF8F0;
+            color: #2C1810;
+        }
+
+        .font-display {
+            font-family: 'Fraunces', Georgia, serif;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: #F5E9D7;
+            color: #6B2416;
+        }
+
+        .exp-card {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .exp-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 32px rgba(107, 36, 22, 0.14);
+        }
+    </style>
+</head>
+
+<body class="antialiased" data-page="experiences">
+    <div id="navSlot"></div>
+
+    <!-- Hero -->
+    <section class="relative h-[400px] md:h-[500px] overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=1920&q=80"
+            class="absolute inset-0 w-full h-full object-cover" alt="" />
+        <div
+            class="absolute inset-0 bg-gradient-to-b from-terracotta-deep/40 via-terracotta-deep/30 to-terracotta-deep/70">
+        </div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-4">
+            <p class="text-amber-light font-semibold uppercase tracking-widest text-xs mb-3">Beyond the stay</p>
+            <h1 class="font-display text-4xl md:text-6xl font-semibold leading-tight mb-4 max-w-3xl">
+                Every kind of <span class="italic text-amber-light">lakeside adventure</span>
+            </h1>
+            <p class="text-white/85 max-w-xl">Curated activities you can add to any stay, or book as day experiences.
+            </p>
+        </div>
+    </section>
+
+    <!-- Category filter -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="flex flex-wrap gap-2 justify-center">
+            <button class="chip" style="background: #C65D3E; color: white;">All experiences</button>
+            <button class="chip">Water</button>
+            <button class="chip">Adventure</button>
+            <button class="chip">Food</button>
+            <button class="chip">Wellness</button>
+            <button class="chip">Nightlife</button>
+        </div>
+    </div>
+
+    <!-- Experiences grid -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- 1 Kayaking -->
+            <div class="exp-card bg-white rounded-2xl overflow-hidden border border-cream-dark">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1526491109672-74740652b963?auto=format&fit=crop&w=800&q=80"
+                        class="w-full h-full object-cover" alt="" />
+                    <div class="absolute top-3 left-3 chip" style="background: rgba(255,255,255,0.95); color: #6B2416;">
+                        💧 Water</div>
+                </div>
+                <div class="p-5">
+                    <h3 class="font-display text-xl font-semibold text-terracotta-deep mb-1">Kayaking on the lake</h3>
+                    <p class="text-sm text-terracotta-deep/70 mb-4">Solo or twin kayaks with life jackets. Best at
+                        sunrise or sunset when the water is glass-flat.</p>
+                    <div
+                        class="grid grid-cols-3 gap-2 text-xs text-terracotta-deep/70 mb-4 pb-4 border-b border-cream-dark">
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">1 hour</div>Duration
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">All levels</div>Skill
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">Age 8+</div>Restriction
+                        </div>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <div class="font-display text-2xl font-semibold text-terracotta">₹500</div>
+                            <div class="text-xs text-terracotta-deep/60">per person</div>
+                        </div>
+                        <button
+                            class="bg-terracotta hover:bg-terracotta-dark text-white text-sm font-semibold px-4 py-2 rounded-lg">Add
+                            to stay</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2 Sunrise Trek -->
+            <div class="exp-card bg-white rounded-2xl overflow-hidden border border-cream-dark">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=800&q=80"
+                        class="w-full h-full object-cover" alt="" />
+                    <div class="absolute top-3 left-3 chip" style="background: rgba(255,255,255,0.95); color: #6B2416;">
+                        🥾 Adventure</div>
+                </div>
+                <div class="p-5">
+                    <h3 class="font-display text-xl font-semibold text-terracotta-deep mb-1">Sunrise trek to Tikona Fort
+                    </h3>
+                    <p class="text-sm text-terracotta-deep/70 mb-4">Guided 2-hour trek to the 3,000-ft fort. Views of
+                        Pawna, Lohagad, and Visapur. Chai at the summit.</p>
+                    <div
+                        class="grid grid-cols-3 gap-2 text-xs text-terracotta-deep/70 mb-4 pb-4 border-b border-cream-dark">
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">2 hours</div>Duration
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">Easy</div>Difficulty
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">5:30 AM</div>Start
+                        </div>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <div class="font-display text-2xl font-semibold text-terracotta">₹300</div>
+                            <div class="text-xs text-terracotta-deep/60">per person</div>
+                        </div>
+                        <button
+                            class="bg-terracotta hover:bg-terracotta-dark text-white text-sm font-semibold px-4 py-2 rounded-lg">Add
+                            to stay</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 BBQ -->
+            <div class="exp-card bg-white rounded-2xl overflow-hidden border border-cream-dark">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80"
+                        class="w-full h-full object-cover" alt="" />
+                    <div class="absolute top-3 left-3 chip" style="background: rgba(255,255,255,0.95); color: #6B2416;">
+                        🍖 Food</div>
+                    <div class="absolute top-3 right-3 chip" style="background: #F2A65A; color: #6B2416;">Included</div>
+                </div>
+                <div class="p-5">
+                    <h3 class="font-display text-xl font-semibold text-terracotta-deep mb-1">BBQ dinner spread</h3>
+                    <p class="text-sm text-terracotta-deep/70 mb-4">Marinated chicken tikka, paneer skewers, veggies,
+                        and roti. Prepared over the bonfire by our host.</p>
+                    <div
+                        class="grid grid-cols-3 gap-2 text-xs text-terracotta-deep/70 mb-4 pb-4 border-b border-cream-dark">
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">Included</div>Price
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">Both</div>Veg &amp; NV
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">8 PM</div>Served
+                        </div>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <div class="font-display text-2xl font-semibold text-terracotta">Free</div>
+                            <div class="text-xs text-terracotta-deep/60">with every stay</div>
+                        </div>
+                        <span class="text-xs text-terracotta-deep/60 italic">Auto-added</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 Bonfire -->
+            <div class="exp-card bg-white rounded-2xl overflow-hidden border border-cream-dark">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=800&q=80"
+                        class="w-full h-full object-cover" alt="" />
+                    <div class="absolute top-3 left-3 chip" style="background: rgba(255,255,255,0.95); color: #6B2416;">
+                        🔥 Nightlife</div>
+                    <div class="absolute top-3 right-3 chip" style="background: #F2A65A; color: #6B2416;">Included</div>
+                </div>
+                <div class="p-5">
+                    <h3 class="font-display text-xl font-semibold text-terracotta-deep mb-1">Bonfire nights</h3>
+                    <p class="text-sm text-terracotta-deep/70 mb-4">Every night, weather permitting. Marshmallows on
+                        request. Music encouraged.</p>
+                    <div
+                        class="grid grid-cols-3 gap-2 text-xs text-terracotta-deep/70 mb-4 pb-4 border-b border-cream-dark">
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">Included</div>Price
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">Every</div>Night
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">7-11 PM</div>Timing
+                        </div>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <div class="font-display text-2xl font-semibold text-terracotta">Free</div>
+                            <div class="text-xs text-terracotta-deep/60">with every stay</div>
+                        </div>
+                        <span class="text-xs text-terracotta-deep/60 italic">Auto-added</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5 Live music -->
+            <div class="exp-card bg-white rounded-2xl overflow-hidden border border-cream-dark">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=800&q=80"
+                        class="w-full h-full object-cover" alt="" />
+                    <div class="absolute top-3 left-3 chip" style="background: rgba(255,255,255,0.95); color: #6B2416;">
+                        🎸 Nightlife</div>
+                </div>
+                <div class="p-5">
+                    <h3 class="font-display text-xl font-semibold text-terracotta-deep mb-1">Live acoustic music</h3>
+                    <p class="text-sm text-terracotta-deep/70 mb-4">A local musician plays lakeside acoustic for an
+                        hour. Bollywood, English classics, ghazals — requests welcome.</p>
+                    <div
+                        class="grid grid-cols-3 gap-2 text-xs text-terracotta-deep/70 mb-4 pb-4 border-b border-cream-dark">
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">1 hour</div>Duration
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">On-request</div>Availability
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">Flat rate</div>Pricing
+                        </div>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <div class="font-display text-2xl font-semibold text-terracotta">₹1,200</div>
+                            <div class="text-xs text-terracotta-deep/60">flat, up to 20 guests</div>
+                        </div>
+                        <button
+                            class="bg-terracotta hover:bg-terracotta-dark text-white text-sm font-semibold px-4 py-2 rounded-lg">Add
+                            to stay</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6 Yoga -->
+            <div class="exp-card bg-white rounded-2xl overflow-hidden border border-cream-dark">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80"
+                        class="w-full h-full object-cover" alt="" />
+                    <div class="absolute top-3 left-3 chip" style="background: rgba(255,255,255,0.95); color: #6B2416;">
+                        🧘 Wellness</div>
+                </div>
+                <div class="p-5">
+                    <h3 class="font-display text-xl font-semibold text-terracotta-deep mb-1">Lakeside yoga</h3>
+                    <p class="text-sm text-terracotta-deep/70 mb-4">60-minute Hatha session with certified instructor.
+                        Mats provided. On the lake deck at 6:30 AM.</p>
+                    <div
+                        class="grid grid-cols-3 gap-2 text-xs text-terracotta-deep/70 mb-4 pb-4 border-b border-cream-dark">
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">1 hour</div>Duration
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">All levels</div>Skill
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">6:30 AM</div>Start
+                        </div>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <div class="font-display text-2xl font-semibold text-terracotta">₹400</div>
+                            <div class="text-xs text-terracotta-deep/60">per person</div>
+                        </div>
+                        <button
+                            class="bg-terracotta hover:bg-terracotta-dark text-white text-sm font-semibold px-4 py-2 rounded-lg">Add
+                            to stay</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7 Boat ride -->
+            <div class="exp-card bg-white rounded-2xl overflow-hidden border border-cream-dark">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1524643189571-f2c9036f1c14?auto=format&fit=crop&w=800&q=80"
+                        class="w-full h-full object-cover" alt="" />
+                    <div class="absolute top-3 left-3 chip" style="background: rgba(255,255,255,0.95); color: #6B2416;">
+                        ⛵ Water</div>
+                </div>
+                <div class="p-5">
+                    <h3 class="font-display text-xl font-semibold text-terracotta-deep mb-1">Sunset boat ride</h3>
+                    <p class="text-sm text-terracotta-deep/70 mb-4">30-minute lake circuit at golden hour. Up to 8
+                        guests per boat. Life jackets provided.</p>
+                    <div
+                        class="grid grid-cols-3 gap-2 text-xs text-terracotta-deep/70 mb-4 pb-4 border-b border-cream-dark">
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">30 min</div>Duration
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">6 PM</div>Departure
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">All ages</div>Suitable
+                        </div>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <div class="font-display text-2xl font-semibold text-terracotta">₹350</div>
+                            <div class="text-xs text-terracotta-deep/60">per person</div>
+                        </div>
+                        <button
+                            class="bg-terracotta hover:bg-terracotta-dark text-white text-sm font-semibold px-4 py-2 rounded-lg">Add
+                            to stay</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8 Decor -->
+            <div class="exp-card bg-white rounded-2xl overflow-hidden border border-cream-dark">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
+                        class="w-full h-full object-cover" alt="" />
+                    <div class="absolute top-3 left-3 chip" style="background: rgba(255,255,255,0.95); color: #6B2416;">
+                        💐 Special</div>
+                </div>
+                <div class="p-5">
+                    <h3 class="font-display text-xl font-semibold text-terracotta-deep mb-1">Romantic tent decor</h3>
+                    <p class="text-sm text-terracotta-deep/70 mb-4">Fresh flowers, candles, fairy lights, personalized
+                        banner. Set up before you arrive.</p>
+                    <div
+                        class="grid grid-cols-3 gap-2 text-xs text-terracotta-deep/70 mb-4 pb-4 border-b border-cream-dark">
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">Set up</div>On arrival
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">Custom</div>Message
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">Flat</div>Pricing
+                        </div>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <div class="font-display text-2xl font-semibold text-terracotta">₹800</div>
+                            <div class="text-xs text-terracotta-deep/60">flat</div>
+                        </div>
+                        <button
+                            class="bg-terracotta hover:bg-terracotta-dark text-white text-sm font-semibold px-4 py-2 rounded-lg">Add
+                            to stay</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9 Cake -->
+            <div class="exp-card bg-white rounded-2xl overflow-hidden border border-cream-dark">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1587248720327-8eb72564be1e?auto=format&fit=crop&w=800&q=80"
+                        class="w-full h-full object-cover" alt="" />
+                    <div class="absolute top-3 left-3 chip" style="background: rgba(255,255,255,0.95); color: #6B2416;">
+                        🎂 Special</div>
+                </div>
+                <div class="p-5">
+                    <h3 class="font-display text-xl font-semibold text-terracotta-deep mb-1">Birthday cake</h3>
+                    <p class="text-sm text-terracotta-deep/70 mb-4">500g custom cake. Chocolate, vanilla, red velvet, or
+                        truffle. Includes candles and cutter.</p>
+                    <div
+                        class="grid grid-cols-3 gap-2 text-xs text-terracotta-deep/70 mb-4 pb-4 border-b border-cream-dark">
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">500g</div>Size
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">4 flavors</div>Choice
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">Fresh</div>On arrival
+                        </div>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <div class="font-display text-2xl font-semibold text-terracotta">₹650</div>
+                            <div class="text-xs text-terracotta-deep/60">flat</div>
+                        </div>
+                        <button
+                            class="bg-terracotta hover:bg-terracotta-dark text-white text-sm font-semibold px-4 py-2 rounded-lg">Add
+                            to stay</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <section class="bg-terracotta py-14">
+        <div class="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8 text-white">
+            <h2 class="font-display text-3xl md:text-4xl font-semibold mb-3">Something else in mind?</h2>
+            <p class="text-white/85 mb-6">Custom cake, live band, proposal setup — we've done it all. Just ask.</p>
+            <a href="contact.html"
+                class="inline-block bg-white text-terracotta-deep font-semibold px-8 py-3 rounded-lg hover:bg-cream transition">Talk
+                to us →</a>
+        </div>
+    </section>
+
+    <div id="footerSlot"></div>
+    <script src="_common.js"></script>
+</body>
+
+</html>

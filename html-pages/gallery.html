@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery — LakeStay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terracotta: { DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
+                        amber: { warm: '#F2A65A', light: '#F9C89B' },
+                        cream: { DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+                    },
+                    fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #FFF8F0;
+            color: #2C1810;
+        }
+
+        .font-display {
+            font-family: 'Fraunces', Georgia, serif;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.15s;
+            cursor: pointer;
+        }
+
+        .filter-btn.active {
+            background: #C65D3E;
+            color: white;
+        }
+
+        .filter-btn:not(.active) {
+            background: white;
+            color: #6B2416;
+            border: 1px solid #F5E9D7;
+        }
+
+        .filter-btn:not(.active):hover {
+            border-color: #C65D3E;
+        }
+
+        /* Masonry-ish grid */
+        .photo-tile {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .photo-tile img {
+            transition: transform 0.5s ease;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-tile:hover img {
+            transform: scale(1.08);
+        }
+
+        .photo-tile::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(107, 36, 22, 0.5) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .photo-tile:hover::after {
+            opacity: 1;
+        }
+
+        .photo-tile .caption {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            right: 12px;
+            color: white;
+            font-size: 12px;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 1;
+        }
+
+        .photo-tile:hover .caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hidden-tile {
+            display: none;
+        }
+
+        .modal-hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body class="antialiased" data-page="gallery">
+    <div id="navSlot"></div>
+
+    <!-- Hero -->
+    <section class="py-14 text-center">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-terracotta font-semibold uppercase tracking-widest text-xs mb-3">The vibe</p>
+            <h1 class="font-display text-4xl md:text-5xl font-semibold text-terracotta-deep mb-4">Moments at LakeStay
+            </h1>
+            <p class="text-terracotta-deep/75">Every photo real, taken by us or our guests. Tag <span
+                    class="font-semibold text-terracotta">@lakestay.in</span> to be featured.</p>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+        <div class="flex flex-wrap gap-2 justify-center">
+            <button class="filter-btn active" data-filter="all">All photos</button>
+            <button class="filter-btn" data-filter="stays">Stays</button>
+            <button class="filter-btn" data-filter="activities">Activities</button>
+            <button class="filter-btn" data-filter="food">Food &amp; bonfire</button>
+            <button class="filter-btn" data-filter="nature">Nature &amp; sunsets</button>
+            <button class="filter-btn" data-filter="guests">Guests</button>
+        </div>
+    </div>
+
+    <!-- Photo grid -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div id="photoGrid" class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4"></div>
+
+        <div class="text-center mt-10">
+            <button id="loadMore"
+                class="border-2 border-terracotta text-terracotta hover:bg-terracotta hover:text-white font-semibold px-8 py-3 rounded-lg transition">Load
+                more photos</button>
+        </div>
+    </div>
+
+    <!-- Video section -->
+    <section class="bg-cream-dark/40 py-16 md:py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-terracotta font-semibold uppercase tracking-widest text-xs mb-3">Watch</p>
+            <h2 class="font-display text-3xl md:text-4xl font-semibold text-terracotta-deep mb-8">A weekend at Pawna
+                Lake</h2>
+            <div
+                class="relative rounded-2xl overflow-hidden aspect-video max-w-4xl mx-auto shadow-xl group cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=1400&q=80"
+                    class="w-full h-full object-cover" alt="" />
+                <div
+                    class="absolute inset-0 bg-terracotta-deep/30 flex items-center justify-center group-hover:bg-terracotta-deep/40 transition">
+                    <div
+                        class="w-20 h-20 rounded-full bg-white/95 flex items-center justify-center shadow-lg group-hover:scale-110 transition">
+                        <svg width="32" height="32" fill="#C65D3E" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="absolute bottom-4 left-4 text-white">
+                    <div class="text-xs opacity-90">2:34</div>
+                    <div class="font-display text-lg font-semibold">Bonfires, boats and blue mornings</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IG feed style -->
+    <section class="py-16 md:py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <p class="text-terracotta font-semibold uppercase tracking-widest text-xs mb-3">Follow along</p>
+                <h2 class="font-display text-3xl md:text-4xl font-semibold text-terracotta-deep mb-3">On Instagram</h2>
+                <a href="#" class="text-terracotta font-semibold hover:underline">@lakestay.in →</a>
+            </div>
+
+            <div class="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
+                <img src="https://images.unsplash.com/photo-1487730116645-74489c95b41b?auto=format&fit=crop&w=400&q=80"
+                    class="aspect-square object-cover rounded" alt="" />
+                <img src="https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=400&q=80"
+                    class="aspect-square object-cover rounded" alt="" />
+                <img src="https://images.unsplash.com/photo-1445308394109-4ec2920981b1?auto=format&fit=crop&w=400&q=80"
+                    class="aspect-square object-cover rounded" alt="" />
+                <img src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?auto=format&fit=crop&w=400&q=80"
+                    class="aspect-square object-cover rounded" alt="" />
+                <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=400&q=80"
+                    class="aspect-square object-cover rounded" alt="" />
+                <img src="https://images.unsplash.com/photo-1595877244574-e90ce41ce089?auto=format&fit=crop&w=400&q=80"
+                    class="aspect-square object-cover rounded" alt="" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="modal-hidden fixed inset-0 bg-terracotta-deep/95 z-50 items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white p-2 z-10" aria-label="Close">
+            <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <button onclick="navLightbox(-1)"
+            class="absolute left-4 top-1/2 -translate-y-1/2 text-white w-11 h-11 rounded-full border border-white/40 hover:bg-white/10 flex items-center justify-center z-10">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+        <button onclick="navLightbox(1)"
+            class="absolute right-4 top-1/2 -translate-y-1/2 text-white w-11 h-11 rounded-full border border-white/40 hover:bg-white/10 flex items-center justify-center z-10">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+        <img id="lightboxImg" src="" class="max-w-full max-h-[85vh] rounded-xl object-contain" alt="" />
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-sm text-center">
+            <div id="lightboxCaption" class="mb-1"></div>
+            <div class="text-white/60 text-xs"><span id="lbIdx">1</span> / <span id="lbTotal">24</span></div>
+        </div>
+    </div>
+
+    <div id="footerSlot"></div>
+
+    <script src="_common.js"></script>
+    <script>
+        const PHOTOS = [
+            { url: 'https://images.unsplash.com/photo-1504851149312-7a075b496cc7?auto=format&fit=crop&w=800&q=80', cat: 'stays', caption: 'Lakeside Deluxe Tents at dusk' },
+            { url: 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=800&q=80', cat: 'food', caption: 'Bonfire nights, every night' },
+            { url: 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=800&q=80', cat: 'stays', caption: 'Sunset Villa pool view' },
+            { url: 'https://images.unsplash.com/photo-1487730116645-74489c95b41b?auto=format&fit=crop&w=800&q=80', cat: 'nature', caption: 'Morning fog on the lake' },
+            { url: 'https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=800&q=80', cat: 'nature', caption: 'Golden hour on Pawna' },
+            { url: 'https://images.unsplash.com/photo-1526491109672-74740652b963?auto=format&fit=crop&w=800&q=80', cat: 'activities', caption: 'Kayaking at sunrise' },
+            { url: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80', cat: 'food', caption: 'BBQ dinner spread' },
+            { url: 'https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=800&q=80', cat: 'activities', caption: 'Sunrise trek to Tikona Fort' },
+            { url: 'https://images.unsplash.com/photo-1537565266759-34bbc16be345?auto=format&fit=crop&w=800&q=80', cat: 'stays', caption: 'Woodstone Cottage deck' },
+            { url: 'https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?auto=format&fit=crop&w=800&q=80', cat: 'nature', caption: 'The lake at dawn' },
+            { url: 'https://images.unsplash.com/photo-1445308394109-4ec2920981b1?auto=format&fit=crop&w=800&q=80', cat: 'food', caption: 'Chai and stories' },
+            { url: 'https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?auto=format&fit=crop&w=800&q=80', cat: 'stays', caption: 'Riverbank Camp setup' },
+            { url: 'https://images.unsplash.com/photo-1595877244574-e90ce41ce089?auto=format&fit=crop&w=800&q=80', cat: 'stays', caption: 'Starlight Glamping interior' },
+            { url: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80', cat: 'stays', caption: 'Hillside Tent Village' },
+            { url: 'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=800&q=80', cat: 'stays', caption: 'Premium Lake Villa exterior' },
+            { url: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80', cat: 'stays', caption: 'Lakefront Studio Cottage' },
+            { url: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=800&q=80', cat: 'stays', caption: 'Pawna Farmhouse living' },
+            { url: 'https://images.unsplash.com/photo-1478827387698-1527781a4887?auto=format&fit=crop&w=800&q=80', cat: 'guests', caption: 'Group camp basecamp' },
+            { url: 'https://images.unsplash.com/photo-1476820865390-c52aeebb9891?auto=format&fit=crop&w=800&q=80', cat: 'nature', caption: 'Monsoon greens' },
+            { url: 'https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&w=800&q=80', cat: 'activities', caption: 'Star gazing' },
+        ];
+
+        let filter = 'all';
+        let visibleCount = 12;
+
+        function render() {
+            const grid = document.getElementById('photoGrid');
+            const filtered = PHOTOS.filter(p => filter === 'all' || p.cat === filter);
+            grid.innerHTML = filtered.slice(0, visibleCount).map((p, i) => {
+                const rowSpan = i % 5 === 0 ? 'row-span-2 aspect-[3/4]' : 'aspect-square';
+                return `<div class="photo-tile rounded-xl ${rowSpan}" onclick="openLightbox(${PHOTOS.indexOf(p)})">
+          <img src="${p.url}" alt="${p.caption}" loading="lazy" />
+          <div class="caption font-medium">${p.caption}</div>
+        </div>`;
+            }).join('');
+
+            document.getElementById('loadMore').style.display = filtered.length > visibleCount ? '' : 'none';
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                filter = btn.dataset.filter;
+                visibleCount = 12;
+                render();
+            });
+        });
+
+        document.getElementById('loadMore').addEventListener('click', () => {
+            visibleCount += 8;
+            render();
+        });
+
+        render();
+
+        // Lightbox
+        let lbIdx = 0;
+        function openLightbox(i) {
+            lbIdx = i;
+            updateLightbox();
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('modal-hidden');
+            lb.classList.add('flex');
+        }
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            lb.classList.add('modal-hidden');
+            lb.classList.remove('flex');
+        }
+        function navLightbox(d) {
+            lbIdx = (lbIdx + d + PHOTOS.length) % PHOTOS.length;
+            updateLightbox();
+        }
+        function updateLightbox() {
+            document.getElementById('lightboxImg').src = PHOTOS[lbIdx].url;
+            document.getElementById('lightboxCaption').textContent = PHOTOS[lbIdx].caption;
+            document.getElementById('lbIdx').textContent = lbIdx + 1;
+            document.getElementById('lbTotal').textContent = PHOTOS.length;
+        }
+        window.openLightbox = openLightbox;
+        window.closeLightbox = closeLightbox;
+        window.navLightbox = navLightbox;
+        document.addEventListener('keydown', e => {
+            if (document.getElementById('lightbox').classList.contains('modal-hidden')) return;
+            if (e.key === 'ArrowRight') navLightbox(1);
+            if (e.key === 'ArrowLeft') navLightbox(-1);
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+
+</html>

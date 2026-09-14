@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lakeside Deluxe Tents — LakeStay</title>
+    <meta name="description"
+        content="Book Lakeside Deluxe Tents at Pawna Lake — luxury glamping with attached washroom, bonfire, BBQ dinner. 2 min walk from the lake." />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terracotta: { DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
+                        amber: { warm: '#F2A65A', light: '#F9C89B' },
+                        cream: { DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+                    },
+                    fontFamily: {
+                        display: ['Fraunces', 'Georgia', 'serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #FFF8F0;
+            color: #2C1810;
+        }
+
+        .font-display {
+            font-family: 'Fraunces', Georgia, serif;
+        }
+
+        /* Calendar */
+        .cal-cell {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.15s;
+        }
+
+        .cal-cell:hover:not(.disabled):not(.selected) {
+            background: #F5E9D7;
+        }
+
+        .cal-cell.disabled {
+            color: #C6B8A5;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+        .cal-cell.selected {
+            background: #C65D3E;
+            color: white;
+            font-weight: 600;
+        }
+
+        .cal-cell.in-range {
+            background: #FBEDE1;
+            color: #6B2416;
+        }
+
+        .cal-cell.faded {
+            color: #C6B8A5;
+            cursor: default;
+        }
+
+        /* Rating bar */
+        .rating-bar {
+            height: 6px;
+            background: #F5E9D7;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .rating-bar-fill {
+            height: 100%;
+            background: #C65D3E;
+            border-radius: 3px;
+        }
+
+        /* Gallery hover */
+        .gallery-img {
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-tile:hover .gallery-img {
+            transform: scale(1.03);
+        }
+
+        /* Modal */
+        .modal-hidden {
+            display: none;
+        }
+
+        /* Rating stars */
+        .stars {
+            color: #F2A65A;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b border-cream-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <a href="index.html"
+                    class="font-display text-2xl md:text-3xl font-semibold text-terracotta">LakeStay</a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="properties.html"
+                        class="text-terracotta-deep hover:text-terracotta text-sm font-medium">Stays</a>
+                    <a href="index.html#experiences"
+                        class="text-terracotta-deep hover:text-terracotta text-sm font-medium">Experiences</a>
+                    <a href="index.html#how-it-works"
+                        class="text-terracotta-deep hover:text-terracotta text-sm font-medium">How it works</a>
+                    <a href="index.html#contact"
+                        class="text-terracotta-deep hover:text-terracotta text-sm font-medium">Contact</a>
+                    <a href="#"
+                        class="bg-terracotta hover:bg-terracotta-dark text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition">My
+                        Bookings</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== BREADCRUMB + TITLE ========== -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+        <div class="text-xs text-terracotta-deep/60 mb-3 flex items-center gap-2">
+            <a href="index.html" class="hover:text-terracotta">Home</a>
+            <span>/</span>
+            <a href="properties.html" class="hover:text-terracotta">Stays</a>
+            <span>/</span>
+            <span class="text-terracotta-deep">Lakeside Deluxe Tents</span>
+        </div>
+
+        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-5">
+            <div>
+                <h1 class="font-display text-3xl md:text-4xl font-semibold text-terracotta-deep">Lakeside Deluxe Tents
+                </h1>
+                <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2 text-sm text-terracotta-deep/80">
+                    <span class="flex items-center gap-1"><span class="stars">★</span> <span
+                            class="font-semibold text-terracotta-deep">4.9</span> <span
+                            class="text-terracotta-deep/60">(342 reviews)</span></span>
+                    <span class="text-terracotta-deep/40">·</span>
+                    <span class="flex items-center gap-1">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        Pawna Lake, Lonavala
+                    </span>
+                    <span class="text-terracotta-deep/40">·</span>
+                    <span class="bg-amber-light text-terracotta-deep text-xs font-semibold px-2 py-0.5 rounded">2 min
+                        from lake</span>
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <button
+                    class="flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-cream-dark text-sm font-medium text-terracotta-deep">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                    </svg>
+                    Share
+                </button>
+                <button
+                    class="flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-cream-dark text-sm font-medium text-terracotta-deep">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== PHOTO GALLERY ========== -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-4 grid-rows-2 gap-2 h-[280px] md:h-[480px] rounded-2xl overflow-hidden relative">
+            <div class="col-span-4 md:col-span-2 md:row-span-2 relative gallery-tile overflow-hidden cursor-pointer"
+                onclick="openGallery(0)">
+                <img src="https://images.unsplash.com/photo-1504851149312-7a075b496cc7?auto=format&fit=crop&w=1400&q=80"
+                    class="gallery-img w-full h-full object-cover" alt="Main view" />
+            </div>
+            <div class="hidden md:block relative gallery-tile overflow-hidden cursor-pointer" onclick="openGallery(1)">
+                <img src="https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=800&q=80"
+                    class="gallery-img w-full h-full object-cover" alt="Bonfire" />
+            </div>
+            <div class="hidden md:block relative gallery-tile overflow-hidden cursor-pointer" onclick="openGallery(2)">
+                <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=800&q=80"
+                    class="gallery-img w-full h-full object-cover" alt="Interior" />
+            </div>
+            <div class="hidden md:block relative gallery-tile overflow-hidden cursor-pointer" onclick="openGallery(3)">
+                <img src="https://images.unsplash.com/photo-1487730116645-74489c95b41b?auto=format&fit=crop&w=800&q=80"
+                    class="gallery-img w-full h-full object-cover" alt="Sunset" />
+            </div>
+            <div class="hidden md:block relative gallery-tile overflow-hidden cursor-pointer" onclick="openGallery(4)">
+                <img src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?auto=format&fit=crop&w=800&q=80"
+                    class="gallery-img w-full h-full object-cover" alt="Lake" />
+            </div>
+            <button onclick="openGallery(0)"
+                class="absolute bottom-4 right-4 bg-white text-terracotta-deep hover:bg-cream-dark px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 shadow-md">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M4 6a2 2 0 012-2h2M4 6v2M4 6h16M20 6v2m0-2a2 2 0 00-2-2h-2M4 10h16M4 10v8a2 2 0 002 2h12a2 2 0 002-2v-8" />
+                </svg>
+                Show all 24 photos
+            </button>
+        </div>
+    </div>
+
+    <!-- ========== MAIN CONTENT + BOOKING SIDEBAR ========== -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+            <!-- ===== LEFT COLUMN ===== -->
+            <div class="lg:col-span-2 space-y-8">
+
+                <!-- Property intro -->
+                <div class="pb-6 border-b border-cream-dark">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h2 class="font-display text-2xl font-semibold text-terracotta-deep">Luxury tent hosted by
+                                Rahul</h2>
+                            <p class="text-sm text-terracotta-deep/70 mt-1">2–4 guests · 1 bedroom · Attached washroom ·
+                                1 king bed</p>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-full bg-terracotta text-white flex items-center justify-center font-semibold flex-shrink-0">
+                            RK</div>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-4 mt-4 text-sm">
+                        <span
+                            class="inline-flex items-center gap-1.5 bg-amber-light text-terracotta-deep px-3 py-1 rounded-full text-xs font-semibold">
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6z" />
+                            </svg>
+                            Superhost
+                        </span>
+                        <span class="text-terracotta-deep/70">Hosting since 2019</span>
+                    </div>
+                </div>
+
+                <!-- Highlights -->
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-11 h-11 rounded-full bg-cream-dark flex items-center justify-center flex-shrink-0">
+                            <svg width="20" height="20" fill="none" stroke="#6B2416" stroke-width="1.8"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">Prime lakeside spot</div>
+                            <p class="text-sm text-terracotta-deep/70">Just 120 metres from the water. Sunset view
+                                straight from your tent.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-11 h-11 rounded-full bg-cream-dark flex items-center justify-center flex-shrink-0">
+                            <svg width="20" height="20" fill="none" stroke="#6B2416" stroke-width="1.8"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">All-inclusive package</div>
+                            <p class="text-sm text-terracotta-deep/70">Evening tea, BBQ dinner, bonfire, breakfast —
+                                everything covered.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-11 h-11 rounded-full bg-cream-dark flex items-center justify-center flex-shrink-0">
+                            <svg width="20" height="20" fill="none" stroke="#6B2416" stroke-width="1.8"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">Instant confirmation</div>
+                            <p class="text-sm text-terracotta-deep/70">Book now — no wait for approval. Free
+                                cancellation up to 7 days out.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About -->
+                <div class="pt-6 border-t border-cream-dark">
+                    <h2 class="font-display text-2xl font-semibold text-terracotta-deep mb-3">About this stay</h2>
+                    <p class="text-terracotta-deep/80 leading-relaxed">
+                        Wake up to birdsong and the smell of chai brewing over a wood fire. Our Deluxe Tents are pitched
+                        on a private clearing 120 metres from Pawna Lake, spaced out enough that you never feel crowded
+                        but close enough to hear the water.
+                    </p>
+                    <p class="text-terracotta-deep/80 leading-relaxed mt-3">
+                        Each tent has a proper queen bed, cotton linens, an attached bathroom with hot water, and a
+                        small sit-out with a view. Evenings are around the bonfire with BBQ, music, and stories. Perfect
+                        for couples, small friend groups, or anyone who wants nature without giving up comfort.
+                    </p>
+                    <button class="text-terracotta font-semibold text-sm mt-3 hover:underline">Read more →</button>
+                </div>
+
+                <!-- What this place offers -->
+                <div class="pt-6 border-t border-cream-dark">
+                    <h2 class="font-display text-2xl font-semibold text-terracotta-deep mb-5">What this place offers
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="flex items-center gap-3 text-sm text-terracotta-deep/85"><svg width="20" height="20"
+                                fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            </svg> Lakeside location</div>
+                        <div class="flex items-center gap-3 text-sm text-terracotta-deep/85"><svg width="20" height="20"
+                                fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8V7m0 9v1" />
+                            </svg> Attached washroom with hot water</div>
+                        <div class="flex items-center gap-3 text-sm text-terracotta-deep/85"><svg width="20" height="20"
+                                fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143z" />
+                            </svg> Bonfire every night</div>
+                        <div class="flex items-center gap-3 text-sm text-terracotta-deep/85"><svg width="20" height="20"
+                                fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg> BBQ dinner (veg &amp; non-veg)</div>
+                        <div class="flex items-center gap-3 text-sm text-terracotta-deep/85"><svg width="20" height="20"
+                                fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg> Cotton linens &amp; towels</div>
+                        <div class="flex items-center gap-3 text-sm text-terracotta-deep/85"><svg width="20" height="20"
+                                fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                            </svg> Parking on site</div>
+                        <div class="flex items-center gap-3 text-sm text-terracotta-deep/85"><svg width="20" height="20"
+                                fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+                            </svg> WiFi (patchy but available)</div>
+                        <div class="flex items-center gap-3 text-sm text-terracotta-deep/85"><svg width="20" height="20"
+                                fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg> 24/7 on-site host</div>
+                        <div class="flex items-center gap-3 text-sm text-terracotta-deep/40 line-through"><svg
+                                width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 2.829a4.978 4.978 0 01-1.414-2.83m-1.414 5.658a9 9 0 01-2.167-9.238m7.824 2.167a1 1 0 111.414 1.414m-1.414-1.414L3 3m8.293 8.293l1.414 1.414" />
+                            </svg> AC (nature-cooled only)</div>
+                        <div class="flex items-center gap-3 text-sm text-terracotta-deep/40 line-through"><svg
+                                width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg> Room service</div>
+                    </div>
+                    <button
+                        class="mt-5 border border-terracotta-deep/30 hover:bg-cream-dark text-terracotta-deep font-semibold text-sm px-5 py-2.5 rounded-lg">Show
+                        all 32 amenities</button>
+                </div>
+
+                <!-- Availability calendar -->
+                <div class="pt-6 border-t border-cream-dark">
+                    <h2 class="font-display text-2xl font-semibold text-terracotta-deep mb-1">Select your dates</h2>
+                    <p class="text-sm text-terracotta-deep/70 mb-5" id="dateHint">Add your travel dates to see the total
+                        price</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="calendar"></div>
+
+                    <div class="flex items-center justify-between mt-6 text-sm">
+                        <button class="text-terracotta font-semibold hover:underline" onclick="clearDates()">Clear
+                            dates</button>
+                        <div class="flex items-center gap-4 text-xs text-terracotta-deep/70">
+                            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-terracotta"></span>
+                                Selected</div>
+                            <div class="flex items-center gap-1.5"><span
+                                    class="w-3 h-3 rounded bg-cream-dark line-through">&nbsp;</span> Booked</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location -->
+                <div class="pt-6 border-t border-cream-dark">
+                    <h2 class="font-display text-2xl font-semibold text-terracotta-deep mb-1">Where you'll be</h2>
+                    <p class="text-sm text-terracotta-deep/70 mb-5">Pawna Lake, Lonavala, Maharashtra · 2hr from Pune,
+                        2.5hr from Mumbai</p>
+                    <div id="propertyMap" class="w-full h-80 rounded-2xl overflow-hidden border border-cream-dark">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+                        <div class="bg-cream-dark rounded-xl p-4">
+                            <div class="text-xs text-terracotta-deep/60 uppercase tracking-wide">Nearest station</div>
+                            <div class="font-semibold text-terracotta-deep mt-1">Kamshet Railway</div>
+                            <div class="text-xs text-terracotta-deep/70">14 km · 25 min drive</div>
+                        </div>
+                        <div class="bg-cream-dark rounded-xl p-4">
+                            <div class="text-xs text-terracotta-deep/60 uppercase tracking-wide">Nearest highway</div>
+                            <div class="font-semibold text-terracotta-deep mt-1">Mumbai-Pune Expressway</div>
+                            <div class="text-xs text-terracotta-deep/70">Kamshet exit · 12 km</div>
+                        </div>
+                        <div class="bg-cream-dark rounded-xl p-4">
+                            <div class="text-xs text-terracotta-deep/60 uppercase tracking-wide">Nearest airport</div>
+                            <div class="font-semibold text-terracotta-deep mt-1">Pune Airport</div>
+                            <div class="text-xs text-terracotta-deep/70">75 km · 2 hr drive</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reviews -->
+                <div class="pt-6 border-t border-cream-dark">
+                    <div class="flex items-baseline gap-3 mb-6">
+                        <h2 class="font-display text-2xl font-semibold text-terracotta-deep flex items-center gap-2">
+                            <span class="stars">★</span> 4.9
+                        </h2>
+                        <span class="text-terracotta-deep/70">· 342 reviews</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3 mb-8">
+                        <div class="flex items-center gap-3 text-sm text-terracotta-deep">
+                            <span class="w-32">Cleanliness</span>
+                            <div class="flex-1 rating-bar">
+                                <div class="rating-bar-fill" style="width: 98%"></div>
+                            </div>
+                            <span class="font-semibold w-8 text-right">4.9</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-terracotta-deep">
+                            <span class="w-32">Accuracy</span>
+                            <div class="flex-1 rating-bar">
+                                <div class="rating-bar-fill" style="width: 96%"></div>
+                            </div>
+                            <span class="font-semibold w-8 text-right">4.8</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-terracotta-deep">
+                            <span class="w-32">Communication</span>
+                            <div class="flex-1 rating-bar">
+                                <div class="rating-bar-fill" style="width: 100%"></div>
+                            </div>
+                            <span class="font-semibold w-8 text-right">5.0</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-terracotta-deep">
+                            <span class="w-32">Location</span>
+                            <div class="flex-1 rating-bar">
+                                <div class="rating-bar-fill" style="width: 98%"></div>
+                            </div>
+                            <span class="font-semibold w-8 text-right">4.9</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-terracotta-deep">
+                            <span class="w-32">Check-in</span>
+                            <div class="flex-1 rating-bar">
+                                <div class="rating-bar-fill" style="width: 96%"></div>
+                            </div>
+                            <span class="font-semibold w-8 text-right">4.8</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-terracotta-deep">
+                            <span class="w-32">Value</span>
+                            <div class="flex-1 rating-bar">
+                                <div class="rating-bar-fill" style="width: 94%"></div>
+                            </div>
+                            <span class="font-semibold w-8 text-right">4.7</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Review 1 -->
+                        <div>
+                            <div class="flex items-center gap-3 mb-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-terracotta text-white flex items-center justify-center font-semibold text-sm">
+                                    PS</div>
+                                <div>
+                                    <div class="font-semibold text-terracotta-deep text-sm">Priya Sharma</div>
+                                    <div class="text-xs text-terracotta-deep/60">3 weeks ago</div>
+                                </div>
+                            </div>
+                            <div class="stars text-sm mb-2">★★★★★</div>
+                            <p class="text-sm text-terracotta-deep/80 leading-relaxed">Everything about this place was
+                                thoughtful. The tents are actually comfortable, the bathroom is clean, and Rahul made
+                                sure we had everything. The bonfire evening was the highlight — highly recommend!</p>
+                        </div>
+                        <!-- Review 2 -->
+                        <div>
+                            <div class="flex items-center gap-3 mb-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-amber-warm text-terracotta-deep flex items-center justify-center font-semibold text-sm">
+                                    AK</div>
+                                <div>
+                                    <div class="font-semibold text-terracotta-deep text-sm">Aditya Kulkarni</div>
+                                    <div class="text-xs text-terracotta-deep/60">1 month ago</div>
+                                </div>
+                            </div>
+                            <div class="stars text-sm mb-2">★★★★★</div>
+                            <p class="text-sm text-terracotta-deep/80 leading-relaxed">Went with 6 friends. Great
+                                location right by the lake, food was amazing (that BBQ chicken!), and the staff was
+                                super chill. Only feedback: bring warm clothes even in summer, gets cold at night near
+                                the water.</p>
+                        </div>
+                        <!-- Review 3 -->
+                        <div>
+                            <div class="flex items-center gap-3 mb-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-terracotta-dark text-white flex items-center justify-center font-semibold text-sm">
+                                    MJ</div>
+                                <div>
+                                    <div class="font-semibold text-terracotta-deep text-sm">Meghana Joshi</div>
+                                    <div class="text-xs text-terracotta-deep/60">1 month ago</div>
+                                </div>
+                            </div>
+                            <div class="stars text-sm mb-2">★★★★★</div>
+                            <p class="text-sm text-terracotta-deep/80 leading-relaxed">Perfect for a weekend detox. No
+                                signal is a blessing not a curse here. Watched the sunset from a hammock and slept
+                                better than I have in months.</p>
+                        </div>
+                        <!-- Review 4 -->
+                        <div>
+                            <div class="flex items-center gap-3 mb-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-terracotta-deep text-cream flex items-center justify-center font-semibold text-sm">
+                                    RV</div>
+                                <div>
+                                    <div class="font-semibold text-terracotta-deep text-sm">Rohan Verma</div>
+                                    <div class="text-xs text-terracotta-deep/60">2 months ago</div>
+                                </div>
+                            </div>
+                            <div class="stars text-sm mb-2">★★★★☆</div>
+                            <p class="text-sm text-terracotta-deep/80 leading-relaxed">Great overall. Location and food
+                                were 10/10. Only reason I'm giving 4 stars is the WiFi didn't work when we needed to
+                                send some urgent emails. But maybe that's the point of a getaway!</p>
+                        </div>
+                    </div>
+
+                    <button
+                        class="mt-6 border border-terracotta-deep/30 hover:bg-cream-dark text-terracotta-deep font-semibold text-sm px-5 py-2.5 rounded-lg">Show
+                        all 342 reviews</button>
+                </div>
+
+                <!-- Things to know -->
+                <div class="pt-6 border-t border-cream-dark">
+                    <h2 class="font-display text-2xl font-semibold text-terracotta-deep mb-5">Things to know</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <h3 class="font-semibold text-terracotta-deep mb-3 text-sm">House rules</h3>
+                            <ul class="space-y-1.5 text-sm text-terracotta-deep/75">
+                                <li>Check-in: 12:00 PM onwards</li>
+                                <li>Check-out: 11:00 AM</li>
+                                <li>No loud music after 11 PM</li>
+                                <li>No smoking inside tents</li>
+                                <li>Pets allowed (₹500/night)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-terracotta-deep mb-3 text-sm">Safety &amp; property</h3>
+                            <ul class="space-y-1.5 text-sm text-terracotta-deep/75">
+                                <li>Smoke &amp; CO detectors</li>
+                                <li>First aid kit</li>
+                                <li>Fire extinguisher</li>
+                                <li>Security cameras (common areas)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-terracotta-deep mb-3 text-sm">Cancellation</h3>
+                            <ul class="space-y-1.5 text-sm text-terracotta-deep/75">
+                                <li>Free cancellation up to 7 days before</li>
+                                <li>50% refund up to 3 days before</li>
+                                <li>No refund within 72 hours</li>
+                                <li>Reschedule allowed within 6 months</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ===== RIGHT: BOOKING SIDEBAR ===== -->
+            <div class="lg:col-span-1">
+                <div class="sticky top-24">
+                    <div class="bg-white rounded-2xl border border-cream-dark shadow-lg p-6">
+                        <div class="flex items-baseline justify-between mb-1">
+                            <div>
+                                <span class="font-display text-3xl font-semibold text-terracotta">₹1,499</span>
+                                <span class="text-sm text-terracotta-deep/60">/person</span>
+                            </div>
+                            <div class="text-sm flex items-center gap-1">
+                                <span class="stars">★</span>
+                                <span class="font-semibold text-terracotta-deep">4.9</span>
+                                <span class="text-terracotta-deep/60">(342)</span>
+                            </div>
+                        </div>
+
+                        <!-- Date + Guest picker -->
+                        <div class="mt-5 border border-cream-dark rounded-xl overflow-hidden">
+                            <div class="grid grid-cols-2 divide-x divide-cream-dark">
+                                <div class="p-3">
+                                    <div class="text-xs font-semibold text-terracotta-deep uppercase tracking-wide">
+                                        Check-in</div>
+                                    <div class="text-sm text-terracotta-deep font-medium mt-1" id="checkInLabel">Add
+                                        date</div>
+                                </div>
+                                <div class="p-3">
+                                    <div class="text-xs font-semibold text-terracotta-deep uppercase tracking-wide">
+                                        Check-out</div>
+                                    <div class="text-sm text-terracotta-deep font-medium mt-1" id="checkOutLabel">Add
+                                        date</div>
+                                </div>
+                            </div>
+                            <div class="border-t border-cream-dark p-3">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="text-xs font-semibold text-terracotta-deep uppercase tracking-wide">
+                                            Guests</div>
+                                        <div class="text-sm text-terracotta-deep font-medium mt-1"><span
+                                                id="guestCount">2</span> guests</div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <button onclick="changeGuests(-1)"
+                                            class="w-8 h-8 rounded-full border border-cream-dark text-terracotta-deep hover:bg-cream-dark font-semibold">−</button>
+                                        <button onclick="changeGuests(1)"
+                                            class="w-8 h-8 rounded-full border border-cream-dark text-terracotta-deep hover:bg-cream-dark font-semibold">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add-ons -->
+                        <div class="mt-4">
+                            <div class="text-xs font-semibold text-terracotta-deep uppercase tracking-wide mb-2">Add
+                                experiences</div>
+                            <label class="flex items-center justify-between py-2 cursor-pointer">
+                                <div class="flex items-center gap-2 text-sm text-terracotta-deep"><input type="checkbox"
+                                        class="w-4 h-4 rounded" style="accent-color:#C65D3E" onchange="calc()"
+                                        data-price="500" data-per-guest="true" /> Kayaking</div>
+                                <span class="text-sm text-terracotta-deep/70">₹500/pp</span>
+                            </label>
+                            <label class="flex items-center justify-between py-2 cursor-pointer">
+                                <div class="flex items-center gap-2 text-sm text-terracotta-deep"><input type="checkbox"
+                                        class="w-4 h-4 rounded" style="accent-color:#C65D3E" onchange="calc()"
+                                        data-price="300" data-per-guest="true" /> Sunrise trek (guided)</div>
+                                <span class="text-sm text-terracotta-deep/70">₹300/pp</span>
+                            </label>
+                            <label class="flex items-center justify-between py-2 cursor-pointer">
+                                <div class="flex items-center gap-2 text-sm text-terracotta-deep"><input type="checkbox"
+                                        class="w-4 h-4 rounded" style="accent-color:#C65D3E" onchange="calc()"
+                                        data-price="800" data-per-guest="false" /> Anniversary decor</div>
+                                <span class="text-sm text-terracotta-deep/70">₹800 flat</span>
+                            </label>
+                        </div>
+
+                        <!-- Reserve button -->
+                        <button
+                            class="w-full bg-terracotta hover:bg-terracotta-dark text-white font-semibold py-3.5 rounded-xl mt-4 text-base transition">Reserve</button>
+                        <p class="text-center text-xs text-terracotta-deep/60 mt-3">You won't be charged yet</p>
+
+                        <!-- Price breakdown -->
+                        <div class="mt-5 pt-5 border-t border-cream-dark space-y-2 text-sm">
+                            <div class="flex justify-between text-terracotta-deep">
+                                <span class="underline" id="rateLine">₹1,499 × 2 guests × 1 night</span>
+                                <span id="baseTotal">₹2,998</span>
+                            </div>
+                            <div class="flex justify-between text-terracotta-deep" id="addonLine" style="display:none;">
+                                <span>Add-ons</span>
+                                <span id="addonTotal">₹0</span>
+                            </div>
+                            <div class="flex justify-between text-terracotta-deep">
+                                <span class="underline">Cleaning fee</span>
+                                <span>₹200</span>
+                            </div>
+                            <div class="flex justify-between text-terracotta-deep">
+                                <span class="underline">Service fee</span>
+                                <span>₹150</span>
+                            </div>
+                            <div class="flex justify-between text-terracotta-deep">
+                                <span class="underline">GST (18%)</span>
+                                <span id="gstAmount">₹603</span>
+                            </div>
+                            <div
+                                class="flex justify-between pt-3 border-t border-cream-dark font-semibold text-terracotta-deep text-base">
+                                <span>Total</span>
+                                <span id="grandTotal">₹3,951</span>
+                            </div>
+                            <div class="text-xs text-terracotta-deep/60 pt-1">Pay 30% now (₹<span
+                                    id="payNow">1,185</span>), rest on arrival</div>
+                        </div>
+                    </div>
+
+                    <button
+                        class="w-full mt-4 border border-terracotta-deep/30 hover:bg-white text-terracotta-deep font-semibold py-3 rounded-xl text-sm flex items-center justify-center gap-2">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347" />
+                        </svg>
+                        Enquire on WhatsApp
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ========== SIMILAR PROPERTIES ========== -->
+    <section class="bg-cream-dark py-14 mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-display text-3xl font-semibold text-terracotta-deep mb-8">Similar stays you might like</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <a href="#"
+                    class="bg-white rounded-2xl overflow-hidden shadow-sm border border-cream-dark hover:shadow-lg transition block">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1595877244574-e90ce41ce089?auto=format&fit=crop&w=800&q=80"
+                            class="w-full h-full object-cover" alt="" />
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-start justify-between">
+                            <h3 class="font-display text-lg font-semibold text-terracotta-deep">Starlight Glamping</h3>
+                            <div class="flex items-center gap-1 text-sm"><span class="stars">★</span> <span
+                                    class="font-semibold text-terracotta-deep">4.7</span></div>
+                        </div>
+                        <p class="text-xs text-terracotta-deep/60 mt-1">Tent · Sleeps 2–3</p>
+                        <p class="mt-3"><span
+                                class="font-display text-xl font-semibold text-terracotta">₹2,499</span><span
+                                class="text-xs text-terracotta-deep/60">/person</span></p>
+                    </div>
+                </a>
+
+                <a href="#"
+                    class="bg-white rounded-2xl overflow-hidden shadow-sm border border-cream-dark hover:shadow-lg transition block">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?auto=format&fit=crop&w=800&q=80"
+                            class="w-full h-full object-cover" alt="" />
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-start justify-between">
+                            <h3 class="font-display text-lg font-semibold text-terracotta-deep">Riverbank Camp</h3>
+                            <div class="flex items-center gap-1 text-sm"><span class="stars">★</span> <span
+                                    class="font-semibold text-terracotta-deep">4.5</span></div>
+                        </div>
+                        <p class="text-xs text-terracotta-deep/60 mt-1">Tent · Sleeps 2</p>
+                        <p class="mt-3"><span
+                                class="font-display text-xl font-semibold text-terracotta">₹899</span><span
+                                class="text-xs text-terracotta-deep/60">/person</span></p>
+                    </div>
+                </a>
+
+                <a href="#"
+                    class="bg-white rounded-2xl overflow-hidden shadow-sm border border-cream-dark hover:shadow-lg transition block">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80"
+                            class="w-full h-full object-cover" alt="" />
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-start justify-between">
+                            <h3 class="font-display text-lg font-semibold text-terracotta-deep">Hillside Tent Village
+                            </h3>
+                            <div class="flex items-center gap-1 text-sm"><span class="stars">★</span> <span
+                                    class="font-semibold text-terracotta-deep">4.4</span></div>
+                        </div>
+                        <p class="text-xs text-terracotta-deep/60 mt-1">Tent · Sleeps 2</p>
+                        <p class="mt-3"><span
+                                class="font-display text-xl font-semibold text-terracotta">₹1,199</span><span
+                                class="text-xs text-terracotta-deep/60">/person</span></p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-terracotta-deep text-cream/80 py-10">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+            <div class="font-display text-2xl text-white font-semibold">LakeStay</div>
+            <div class="flex gap-6">
+                <a href="index.html" class="hover:text-amber-warm">Home</a>
+                <a href="properties.html" class="hover:text-amber-warm">All stays</a>
+                <a href="index.html#contact" class="hover:text-amber-warm">Contact</a>
+            </div>
+            <div>© 2026 LakeStay</div>
+        </div>
+    </footer>
+
+    <!-- ========== MOBILE STICKY BOOK BAR ========== -->
+    <div class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-cream-dark z-40 p-3 shadow-2xl">
+        <div class="flex items-center justify-between gap-3">
+            <div>
+                <div class="font-display text-lg font-semibold text-terracotta">₹1,499<span
+                        class="text-xs font-sans text-terracotta-deep/60">/person</span></div>
+                <div class="text-xs text-terracotta-deep/70 flex items-center gap-1"><span class="stars">★</span> 4.9 ·
+                    342 reviews</div>
+            </div>
+            <button
+                class="flex-1 max-w-[180px] bg-terracotta text-white font-semibold py-3 rounded-lg text-sm">Reserve</button>
+        </div>
+    </div>
+
+    <!-- ========== GALLERY LIGHTBOX (basic) ========== -->
+    <div id="galleryModal"
+        class="modal-hidden fixed inset-0 bg-terracotta-deep/95 z-50 items-center justify-center p-4">
+        <button onclick="closeGallery()" class="absolute top-4 right-4 text-white p-2" aria-label="Close">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <img id="galleryImg" src="" class="max-w-full max-h-[85vh] rounded-xl" alt="" />
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 text-white">
+            <button onclick="navGallery(-1)"
+                class="w-10 h-10 rounded-full border border-white/40 hover:bg-white/10 flex items-center justify-center"
+                aria-label="Previous">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <span class="text-sm"><span id="galleryIndex">1</span> / 5</span>
+            <button onclick="navGallery(1)"
+                class="w-10 h-10 rounded-full border border-white/40 hover:bg-white/10 flex items-center justify-center"
+                aria-label="Next">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ============ GALLERY ============
+        const galleryImages = [
+            "https://images.unsplash.com/photo-1504851149312-7a075b496cc7?auto=format&fit=crop&w=1600&q=80",
+            "https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=1600&q=80",
+            "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=1600&q=80",
+            "https://images.unsplash.com/photo-1487730116645-74489c95b41b?auto=format&fit=crop&w=1600&q=80",
+            "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?auto=format&fit=crop&w=1600&q=80",
+        ];
+        let galleryIdx = 0;
+        function openGallery(i) {
+            galleryIdx = i;
+            document.getElementById('galleryImg').src = galleryImages[i];
+            document.getElementById('galleryIndex').textContent = i + 1;
+            const m = document.getElementById('galleryModal');
+            m.classList.remove('modal-hidden');
+            m.classList.add('flex');
+        }
+        function navGallery(d) {
+            galleryIdx = (galleryIdx + d + galleryImages.length) % galleryImages.length;
+            document.getElementById('galleryImg').src = galleryImages[galleryIdx];
+            document.getElementById('galleryIndex').textContent = galleryIdx + 1;
+        }
+        function closeGallery() {
+            const m = document.getElementById('galleryModal');
+            m.classList.add('modal-hidden');
+            m.classList.remove('flex');
+        }
+        window.openGallery = openGallery; window.navGallery = navGallery; window.closeGallery = closeGallery;
+
+        // ============ CALENDAR ============
+        const today = new Date(); today.setHours(0, 0, 0, 0);
+        // Random booked dates
+        const bookedDates = new Set();
+        for (let i = 0; i < 8; i++) {
+            const d = new Date(today);
+            d.setDate(d.getDate() + Math.floor(Math.random() * 60) + 3);
+            bookedDates.add(d.toDateString());
+        }
+
+        let checkIn = null, checkOut = null;
+
+        function renderCalendar() {
+            const wrapper = document.getElementById('calendar');
+            wrapper.innerHTML = '';
+            for (let m = 0; m < 2; m++) {
+                const first = new Date(today.getFullYear(), today.getMonth() + m, 1);
+                const monthName = first.toLocaleString('en-IN', { month: 'long', year: 'numeric' });
+                const startDay = first.getDay();
+                const daysInMonth = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
+
+                let html = `<div>
+          <div class="flex items-center justify-between mb-3">
+            ${m === 0 ? '<button class="text-terracotta-deep/50 p-1"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg></button>' : '<div></div>'}
+            <div class="font-semibold text-terracotta-deep text-sm">${monthName}</div>
+            ${m === 1 ? '<button class="text-terracotta-deep p-1 hover:bg-cream-dark rounded"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>' : '<div></div>'}
+          </div>
+          <div class="grid grid-cols-7 gap-1 text-center text-xs text-terracotta-deep/60 font-semibold mb-1">
+            <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+          </div>
+          <div class="grid grid-cols-7 gap-1">`;
+
+                for (let i = 0; i < startDay; i++) html += '<div></div>';
+
+                for (let d = 1; d <= daysInMonth; d++) {
+                    const date = new Date(first.getFullYear(), first.getMonth(), d);
+                    const isPast = date < today;
+                    const isBooked = bookedDates.has(date.toDateString());
+                    const disabled = isPast || isBooked;
+                    html += `<div class="cal-cell ${disabled ? 'disabled' : ''}" data-date="${date.toISOString()}">${d}</div>`;
+                }
+
+                html += '</div></div>';
+                wrapper.innerHTML += html;
+            }
+
+            // Attach clicks
+            document.querySelectorAll('.cal-cell:not(.disabled)').forEach(cell => {
+                cell.addEventListener('click', () => selectDate(new Date(cell.dataset.date)));
+            });
+            updateCalendarSelection();
+        }
+
+        function selectDate(date) {
+            if (!checkIn || (checkIn && checkOut)) {
+                checkIn = date; checkOut = null;
+            } else if (date < checkIn) {
+                checkIn = date;
+            } else {
+                checkOut = date;
+            }
+            updateCalendarSelection();
+            updateBookingLabels();
+            calc();
+        }
+
+        function updateCalendarSelection() {
+            document.querySelectorAll('.cal-cell').forEach(cell => {
+                if (cell.classList.contains('disabled')) return;
+                cell.classList.remove('selected', 'in-range');
+                if (!cell.dataset.date) return;
+                const d = new Date(cell.dataset.date);
+                if (checkIn && d.toDateString() === checkIn.toDateString()) cell.classList.add('selected');
+                if (checkOut && d.toDateString() === checkOut.toDateString()) cell.classList.add('selected');
+                if (checkIn && checkOut && d > checkIn && d < checkOut) cell.classList.add('in-range');
+            });
+        }
+
+        function updateBookingLabels() {
+            const fmt = d => d ? d.toLocaleString('en-IN', { day: 'numeric', month: 'short' }) : 'Add date';
+            document.getElementById('checkInLabel').textContent = fmt(checkIn);
+            document.getElementById('checkOutLabel').textContent = fmt(checkOut);
+            if (checkIn && checkOut) {
+                const nights = Math.round((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+                document.getElementById('dateHint').textContent = `${nights} night${nights > 1 ? 's' : ''} · ${checkIn.toLocaleDateString('en-IN')} to ${checkOut.toLocaleDateString('en-IN')}`;
+            }
+        }
+
+        function clearDates() { checkIn = null; checkOut = null; updateCalendarSelection(); updateBookingLabels(); document.getElementById('dateHint').textContent = 'Add your travel dates to see the total price'; calc(); }
+        window.clearDates = clearDates;
+
+        // ============ GUESTS + PRICE ============
+        let guests = 2;
+        function changeGuests(d) {
+            guests = Math.max(1, Math.min(8, guests + d));
+            document.getElementById('guestCount').textContent = guests;
+            calc();
+        }
+        window.changeGuests = changeGuests;
+
+        function calc() {
+            const rate = 1499;
+            const nights = (checkIn && checkOut) ? Math.max(1, Math.round((checkOut - checkIn) / (1000 * 60 * 60 * 24))) : 1;
+            const base = rate * guests * nights;
+            document.getElementById('rateLine').textContent = `₹${rate.toLocaleString('en-IN')} × ${guests} guests × ${nights} night${nights > 1 ? 's' : ''}`;
+            document.getElementById('baseTotal').textContent = '₹' + base.toLocaleString('en-IN');
+
+            let addons = 0;
+            document.querySelectorAll('input[data-price]').forEach(cb => {
+                if (cb.checked) {
+                    const p = parseInt(cb.dataset.price);
+                    addons += cb.dataset.perGuest === 'true' ? p * guests : p;
+                }
+            });
+            const addonLine = document.getElementById('addonLine');
+            if (addons > 0) { addonLine.style.display = 'flex'; document.getElementById('addonTotal').textContent = '₹' + addons.toLocaleString('en-IN'); }
+            else addonLine.style.display = 'none';
+
+            const cleaning = 200, service = 150;
+            const gst = Math.round((base + addons + cleaning + service) * 0.18);
+            const total = base + addons + cleaning + service + gst;
+            document.getElementById('gstAmount').textContent = '₹' + gst.toLocaleString('en-IN');
+            document.getElementById('grandTotal').textContent = '₹' + total.toLocaleString('en-IN');
+            document.getElementById('payNow').textContent = Math.round(total * 0.3).toLocaleString('en-IN');
+        }
+        window.calc = calc;
+
+        renderCalendar();
+        calc();
+
+        // ============ MAP ============
+        const map = L.map('propertyMap', { center: [18.7604, 73.4070], zoom: 14, scrollWheelZoom: false });
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
+        L.circle([18.7604, 73.4070], { color: '#C65D3E', fillColor: '#C65D3E', fillOpacity: 0.15, radius: 400 }).addTo(map);
+        const propIcon = L.divIcon({
+            className: '',
+            html: '<div style="background:#C65D3E;color:white;padding:6px 12px;border-radius:20px;font-family:Inter;font-size:12px;font-weight:600;box-shadow:0 2px 8px rgba(107,36,22,0.3);border:2px solid white;">Lakeside Deluxe Tents</div>',
+            iconSize: [180, 32], iconAnchor: [90, 16],
+        });
+        L.marker([18.7604, 73.4070], { icon: propIcon }).addTo(map);
+    </script>
+
+</body>
+
+</html>

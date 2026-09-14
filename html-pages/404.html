@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page not found — LakeStay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terracotta: { DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
+                        amber: { warm: '#F2A65A', light: '#F9C89B' },
+                        cream: { DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+                    },
+                    fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #FFF8F0;
+            color: #2C1810;
+            min-height: 100vh;
+        }
+
+        .font-display {
+            font-family: 'Fraunces', Georgia, serif;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes flicker {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.75;
+            }
+        }
+
+        .flicker {
+            animation: flicker 1.5s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="antialiased" data-page="404">
+    <div id="navSlot"></div>
+
+    <section class="flex-1 flex items-center justify-center min-h-[80vh] py-16">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+            <!-- Illustration - simple camping SVG scene -->
+            <div class="mb-8">
+                <svg viewBox="0 0 400 260" class="w-full max-w-md mx-auto" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Sky -->
+                    <rect width="400" height="180" fill="#FFF8F0" />
+                    <!-- Moon -->
+                    <circle cx="320" cy="50" r="22" fill="#F9C89B" class="float" />
+                    <!-- Stars -->
+                    <circle cx="80" cy="30" r="1.5" fill="#C65D3E" class="flicker" />
+                    <circle cx="140" cy="60" r="1.2" fill="#C65D3E" class="flicker" style="animation-delay:0.3s" />
+                    <circle cx="200" cy="25" r="1.5" fill="#C65D3E" class="flicker" style="animation-delay:0.6s" />
+                    <circle cx="260" cy="80" r="1.2" fill="#C65D3E" class="flicker" style="animation-delay:0.9s" />
+                    <circle cx="360" cy="100" r="1.3" fill="#C65D3E" class="flicker" style="animation-delay:1.2s" />
+                    <!-- Mountains bg -->
+                    <path d="M0 180 L60 110 L120 150 L180 90 L240 140 L300 100 L360 130 L400 100 L400 180 Z"
+                        fill="#F5E9D7" />
+                    <path d="M0 180 L80 140 L160 170 L240 130 L320 160 L400 140 L400 180 Z" fill="#F2A65A"
+                        opacity="0.55" />
+                    <!-- Lake -->
+                    <rect y="180" width="400" height="80" fill="#F5E9D7" />
+                    <path d="M0 180 Q 100 190, 200 180 T 400 180 L400 260 L0 260 Z" fill="#F9C89B" opacity="0.5" />
+                    <!-- Tent -->
+                    <polygon points="150,190 190,140 230,190" fill="#C65D3E" />
+                    <polygon points="190,140 190,190 150,190" fill="#A54A2E" />
+                    <line x1="190" y1="140" x2="190" y2="190" stroke="#6B2416" stroke-width="1.5" />
+                    <!-- Bonfire -->
+                    <ellipse cx="260" cy="200" rx="18" ry="4" fill="#6B2416" opacity="0.35" />
+                    <path d="M255 200 Q253 190 258 185 Q261 189 259 194 Q264 189 267 185 Q267 194 262 200 Z"
+                        fill="#C65D3E" class="flicker" />
+                    <path d="M258 200 Q257 195 260 192 Q263 195 261 200 Z" fill="#F2A65A" class="flicker"
+                        style="animation-delay:0.4s" />
+                    <!-- Logs -->
+                    <rect x="247" y="200" width="26" height="3" rx="1.5" fill="#6B2416" />
+                    <rect x="250" y="203" width="20" height="3" rx="1.5" fill="#8B4028" />
+                </svg>
+            </div>
+
+            <p class="text-terracotta font-semibold uppercase tracking-widest text-xs mb-3">404</p>
+            <h1 class="font-display text-4xl md:text-6xl font-semibold text-terracotta-deep mb-4 leading-tight">
+                Looks like this trail<br /><span class="italic text-terracotta">doesn't exist.</span>
+            </h1>
+            <p class="text-terracotta-deep/75 mb-8 max-w-md mx-auto">
+                We searched every tent, checked behind the bonfire, and even asked the lake — but the page you're
+                looking for isn't here.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <a href="index.html"
+                    class="bg-terracotta hover:bg-terracotta-dark text-white font-semibold px-8 py-3.5 rounded-lg transition">Take
+                    me home</a>
+                <a href="properties.html"
+                    class="border-2 border-terracotta text-terracotta hover:bg-terracotta hover:text-white font-semibold px-8 py-3.5 rounded-lg transition">Browse
+                    stays</a>
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-cream-dark">
+                <p class="text-sm text-terracotta-deep/60 mb-4">Or try one of these:</p>
+                <div class="flex flex-wrap gap-4 justify-center text-sm">
+                    <a href="properties.html" class="text-terracotta hover:underline">All stays</a>
+                    <span class="text-terracotta-deep/30">·</span>
+                    <a href="experiences.html" class="text-terracotta hover:underline">Experiences</a>
+                    <span class="text-terracotta-deep/30">·</span>
+                    <a href="blog.html" class="text-terracotta hover:underline">Journal</a>
+                    <span class="text-terracotta-deep/30">·</span>
+                    <a href="faq.html" class="text-terracotta hover:underline">FAQ</a>
+                    <span class="text-terracotta-deep/30">·</span>
+                    <a href="contact.html" class="text-terracotta hover:underline">Contact us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footerSlot"></div>
+    <script src="_common.js"></script>
+</body>
+
+</html>

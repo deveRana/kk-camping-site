@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Journal — LakeStay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terracotta: { DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
+                        amber: { warm: '#F2A65A', light: '#F9C89B' },
+                        cream: { DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+                    },
+                    fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #FFF8F0;
+            color: #2C1810;
+        }
+
+        .font-display {
+            font-family: 'Fraunces', Georgia, serif;
+        }
+
+        .chip {
+            display: inline-flex;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .article-card {
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 32px rgba(107, 36, 22, 0.12);
+        }
+
+        .article-card img {
+            transition: transform 0.4s;
+        }
+
+        .article-card:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="antialiased" data-page="blog">
+    <div id="navSlot"></div>
+
+    <!-- Hero -->
+    <section class="py-14 text-center">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-terracotta font-semibold uppercase tracking-widest text-xs mb-3">The journal</p>
+            <h1 class="font-display text-4xl md:text-5xl font-semibold text-terracotta-deep mb-4">Stories from the lake
+            </h1>
+            <p class="text-terracotta-deep/75">Guides, tips, and moments from Pawna Lake and beyond. Written by the
+                LakeStay team and guest writers.</p>
+        </div>
+    </section>
+
+    <!-- Category chips -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
+        <div class="flex flex-wrap gap-2 justify-center">
+            <button class="chip" style="background:#C65D3E; color:white;">All posts</button>
+            <button class="chip" style="background:white; border:1px solid #F5E9D7; color:#6B2416;">Travel
+                guides</button>
+            <button class="chip" style="background:white; border:1px solid #F5E9D7; color:#6B2416;">Camping
+                tips</button>
+            <button class="chip" style="background:white; border:1px solid #F5E9D7; color:#6B2416;">Food &amp;
+                recipes</button>
+            <button class="chip" style="background:white; border:1px solid #F5E9D7; color:#6B2416;">Local
+                culture</button>
+            <button class="chip" style="background:white; border:1px solid #F5E9D7; color:#6B2416;">Group trips</button>
+        </div>
+    </div>
+
+    <!-- Featured -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-14">
+        <a href="blog-post.html" class="block group">
+            <div
+                class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center bg-cream-dark/40 rounded-3xl overflow-hidden">
+                <div class="relative overflow-hidden lg:h-96">
+                    <img src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?auto=format&fit=crop&w=1200&q=80"
+                        class="w-full h-72 lg:h-full object-cover group-hover:scale-105 transition duration-500"
+                        alt="" />
+                    <div class="absolute top-4 left-4 chip" style="background:#C65D3E; color:white;">Featured</div>
+                </div>
+                <div class="p-6 md:p-10">
+                    <div class="chip" style="background:#F9C89B; color:#6B2416;">Travel guides</div>
+                    <h2
+                        class="font-display text-3xl md:text-4xl font-semibold text-terracotta-deep mt-4 mb-3 group-hover:text-terracotta transition">
+                        10 things to do at Pawna Lake (that aren't just camping)
+                    </h2>
+                    <p class="text-terracotta-deep/75 mb-6">From dawn treks to Tikona Fort to the tiny lakeside chai
+                        stall nobody talks about, here's our field guide to the corners of Pawna we love most.</p>
+                    <div class="flex items-center gap-3 text-sm">
+                        <div
+                            class="w-10 h-10 rounded-full bg-terracotta text-white flex items-center justify-center font-semibold text-xs">
+                            AD</div>
+                        <div>
+                            <div class="font-semibold text-terracotta-deep">Ananya Deshpande</div>
+                            <div class="text-xs text-terracotta-deep/60">14 Sept 2026 · 8 min read</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </section>
+
+    <!-- Article grid -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <a href="blog-post.html"
+                class="article-card bg-white rounded-2xl overflow-hidden border border-cream-dark block">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80"
+                        class="w-full h-full object-cover" alt="" />
+                </div>
+                <div class="p-5">
+                    <span class="chip" style="background:#F9C89B; color:#6B2416;">Camping tips</span>
+                    <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-3 mb-2">First time camping?
+                        Here's what to actually pack.</h3>
+                    <p class="text-sm text-terracotta-deep/70">The essential list, and the "don't bother" list. Learned
+                        the hard way.</p>
+                    <div class="text-xs text-terracotta-deep/60 mt-4">Rahul Joshi · 5 min read</div>
+                </div>
+            </a>
+
+            <a href="blog-post.html"
+                class="article-card bg-white rounded-2xl overflow-hidden border border-cream-dark block">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80"
+                        class="w-full h-full object-cover" alt="" />
+                </div>
+                <div class="p-5">
+                    <span class="chip" style="background:#F9C89B; color:#6B2416;">Food &amp; recipes</span>
+                    <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-3 mb-2">The bonfire BBQ
+                        marinade our host swears by</h3>
+                    <p class="text-sm text-terracotta-deep/70">Curd, ginger-garlic, kasuri methi, and the one secret
+                        ingredient. Recipe inside.</p>
+                    <div class="text-xs text-terracotta-deep/60 mt-4">Nikita Rao · 4 min read</div>
+                </div>
+            </a>
+
+            <a href="blog-post.html"
+                class="article-card bg-white rounded-2xl overflow-hidden border border-cream-dark block">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=800&q=80"
+                        class="w-full h-full object-cover" alt="" />
+                </div>
+                <div class="p-5">
+                    <span class="chip" style="background:#F9C89B; color:#6B2416;">Travel guides</span>
+                    <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-3 mb-2">Best time to visit
+                        Pawna Lake, month by month</h3>
+                    <p class="text-sm text-terracotta-deep/70">Monsoon vs winter vs summer — what each season really
+                        looks like at the lake.</p>
+                    <div class="text-xs text-terracotta-deep/60 mt-4">Ananya Deshpande · 6 min read</div>
+                </div>
+            </a>
+
+            <a href="blog-post.html"
+                class="article-card bg-white rounded-2xl overflow-hidden border border-cream-dark block">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1478827387698-1527781a4887?auto=format&fit=crop&w=800&q=80"
+                        class="w-full h-full object-cover" alt="" />
+                </div>
+                <div class="p-5">
+                    <span class="chip" style="background:#F9C89B; color:#6B2416;">Group trips</span>
+                    <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-3 mb-2">How to plan a group
+                        trip for 20 people (without losing it)</h3>
+                    <p class="text-sm text-terracotta-deep/70">Booking hacks, transport tricks, food logistics — the
+                        playbook from 200+ group trips we've hosted.</p>
+                    <div class="text-xs text-terracotta-deep/60 mt-4">Rahul Joshi · 7 min read</div>
+                </div>
+            </a>
+
+            <a href="blog-post.html"
+                class="article-card bg-white rounded-2xl overflow-hidden border border-cream-dark block">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=800&q=80"
+                        class="w-full h-full object-cover" alt="" />
+                </div>
+                <div class="p-5">
+                    <span class="chip" style="background:#F9C89B; color:#6B2416;">Local culture</span>
+                    <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-3 mb-2">Meet the families who
+                        host you at Pawna</h3>
+                    <p class="text-sm text-terracotta-deep/70">Portraits of the local hosts behind our properties —
+                        their stories, food, and villages.</p>
+                    <div class="text-xs text-terracotta-deep/60 mt-4">Nikita Rao · 9 min read</div>
+                </div>
+            </a>
+
+            <a href="blog-post.html"
+                class="article-card bg-white rounded-2xl overflow-hidden border border-cream-dark block">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1526491109672-74740652b963?auto=format&fit=crop&w=800&q=80"
+                        class="w-full h-full object-cover" alt="" />
+                </div>
+                <div class="p-5">
+                    <span class="chip" style="background:#F9C89B; color:#6B2416;">Camping tips</span>
+                    <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-3 mb-2">Kayaking on Pawna: a
+                        beginner's guide</h3>
+                    <p class="text-sm text-terracotta-deep/70">Best times, safety tips, what to wear, and why sunrise
+                        beats sunset (usually).</p>
+                    <div class="text-xs text-terracotta-deep/60 mt-4">Ananya Deshpande · 5 min read</div>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="text-center mt-12">
+            <button
+                class="border-2 border-terracotta text-terracotta hover:bg-terracotta hover:text-white font-semibold px-8 py-3 rounded-lg transition">Load
+                more articles</button>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="bg-cream-dark/50 py-14">
+        <div class="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="font-display text-3xl font-semibold text-terracotta-deep mb-3">Get lake letters</h2>
+            <p class="text-terracotta-deep/75 mb-6">One thoughtful email a month with new stories, weekend picks, and
+                quiet-season deals.</p>
+            <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                <input type="email" placeholder="you@example.com"
+                    class="flex-1 px-5 py-3 rounded-lg border border-cream-dark bg-white focus:outline-none focus:border-terracotta" />
+                <button
+                    class="bg-terracotta hover:bg-terracotta-dark text-white font-semibold px-6 py-3 rounded-lg">Subscribe</button>
+            </div>
+            <p class="text-xs text-terracotta-deep/60 mt-3">No spam. Unsubscribe with one click.</p>
+        </div>
+    </section>
+
+    <div id="footerSlot"></div>
+    <script src="_common.js"></script>
+</body>
+
+</html>

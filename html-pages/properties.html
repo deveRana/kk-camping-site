@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Stays — LakeStay | Pawna Lake Camping & Cottages</title>
+    <meta name="description"
+        content="Browse 25+ curated lakeside stays at Pawna Lake — tents, cottages, villas, and group camps." />
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+
+    <!-- Leaflet for the map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terracotta: { DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
+                        amber: { warm: '#F2A65A', light: '#F9C89B' },
+                        cream: { DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+                    },
+                    fontFamily: {
+                        display: ['Fraunces', 'Georgia', 'serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #FFF8F0;
+            color: #2C1810;
+        }
+
+        .font-display {
+            font-family: 'Fraunces', Georgia, serif;
+        }
+
+        /* Property card hover */
+        .property-card {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(107, 36, 22, 0.15);
+        }
+
+        /* Custom checkbox */
+        .filter-checkbox {
+            accent-color: #C65D3E;
+        }
+
+        /* Price range slider */
+        input[type="range"] {
+            accent-color: #C65D3E;
+        }
+
+        /* Map pin styling */
+        .price-pin {
+            background: #C65D3E;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(107, 36, 22, 0.3);
+            border: 2px solid white;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+
+        .price-pin:hover,
+        .price-pin.active {
+            background: #6B2416;
+            transform: scale(1.08);
+            z-index: 1000 !important;
+        }
+
+        /* Wishlist heart */
+        .wishlist-heart {
+            transition: transform 0.15s ease;
+        }
+
+        .wishlist-heart:hover {
+            transform: scale(1.15);
+        }
+
+        .wishlist-heart.active svg {
+            fill: #C65D3E;
+            stroke: #C65D3E;
+        }
+
+        /* Hide/show views */
+        .view-hidden {
+            display: none;
+        }
+
+        /* Mobile filter drawer */
+        .filter-drawer {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- ========== NAVBAR (solid, no hero here) ========== -->
+    <nav class="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b border-cream-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <a href="index.html"
+                    class="font-display text-2xl md:text-3xl font-semibold text-terracotta">LakeStay</a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="properties.html" class="text-terracotta font-semibold text-sm">Stays</a>
+                    <a href="index.html#experiences"
+                        class="text-terracotta-deep hover:text-terracotta text-sm font-medium">Experiences</a>
+                    <a href="index.html#how-it-works"
+                        class="text-terracotta-deep hover:text-terracotta text-sm font-medium">How it works</a>
+                    <a href="index.html#gallery"
+                        class="text-terracotta-deep hover:text-terracotta text-sm font-medium">Gallery</a>
+                    <a href="index.html#contact"
+                        class="text-terracotta-deep hover:text-terracotta text-sm font-medium">Contact</a>
+                    <a href="#"
+                        class="bg-terracotta hover:bg-terracotta-dark text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition">My
+                        Bookings</a>
+                </div>
+                <button id="mobileMenuBtn" class="md:hidden text-terracotta-deep p-2" aria-label="Menu">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== PAGE HEADER ========== -->
+    <div class="border-b border-cream-dark bg-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <a href="index.html"
+                class="text-xs text-terracotta-deep/60 hover:text-terracotta mb-2 inline-flex items-center gap-1">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+                Back to home
+            </a>
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                <div>
+                    <h1 class="font-display text-3xl md:text-4xl font-semibold text-terracotta-deep">Stays at Pawna Lake
+                    </h1>
+                    <p class="text-terracotta-deep/70 mt-1 text-sm"><span id="resultCount">10</span> curated stays ·
+                        Weekend of Sept 20-21 · 2 guests</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <!-- Sort -->
+                    <div class="relative">
+                        <select
+                            class="appearance-none bg-white border border-cream-dark rounded-lg pl-4 pr-9 py-2.5 text-sm font-medium text-terracotta-deep focus:outline-none focus:border-terracotta cursor-pointer">
+                            <option>Sort: Popular</option>
+                            <option>Price: Low to high</option>
+                            <option>Price: High to low</option>
+                            <option>Rating</option>
+                            <option>Newest</option>
+                        </select>
+                        <svg class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-terracotta-deep"
+                            width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <!-- View toggle -->
+                    <div class="bg-white border border-cream-dark rounded-lg p-1 flex">
+                        <button id="listViewBtn"
+                            class="px-3 py-1.5 rounded-md text-sm font-medium bg-terracotta text-white flex items-center gap-1.5">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                            List
+                        </button>
+                        <button id="mapViewBtn"
+                            class="px-3 py-1.5 rounded-md text-sm font-medium text-terracotta-deep hover:bg-cream-dark flex items-center gap-1.5">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                            </svg>
+                            Map
+                        </button>
+                    </div>
+                    <!-- Mobile filter button -->
+                    <button id="mobileFilterBtn"
+                        class="md:hidden bg-white border border-cream-dark rounded-lg px-3 py-2.5 text-sm font-medium text-terracotta-deep flex items-center gap-1.5">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                        </svg>
+                        Filters
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex gap-8">
+
+            <!-- ===== FILTERS SIDEBAR (desktop) ===== -->
+            <aside id="filtersDesktop" class="hidden md:block w-72 flex-shrink-0">
+                <div class="sticky top-24 space-y-6">
+
+                    <!-- Price -->
+                    <div class="bg-white rounded-xl p-5 border border-cream-dark">
+                        <h3 class="font-semibold text-terracotta-deep mb-4 text-sm uppercase tracking-wide">Price range
+                        </h3>
+                        <div class="flex items-center justify-between text-sm text-terracotta-deep mb-2">
+                            <span>₹500</span>
+                            <span class="font-semibold">up to ₹<span id="priceValue">20,000</span></span>
+                        </div>
+                        <input type="range" min="500" max="20000" value="20000" step="500" class="w-full"
+                            id="priceRange" />
+                        <p class="text-xs text-terracotta-deep/60 mt-2">Per person or per night</p>
+                    </div>
+
+                    <!-- Property Type -->
+                    <div class="bg-white rounded-xl p-5 border border-cream-dark">
+                        <h3 class="font-semibold text-terracotta-deep mb-4 text-sm uppercase tracking-wide">Property
+                            type</h3>
+                        <div class="space-y-2.5">
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="checkbox" class="filter-checkbox w-4 h-4 rounded" checked /> All types
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="checkbox" class="filter-checkbox w-4 h-4 rounded" /> Tent / Glamping <span
+                                    class="ml-auto text-xs text-terracotta-deep/50">4</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="checkbox" class="filter-checkbox w-4 h-4 rounded" /> Cottage <span
+                                    class="ml-auto text-xs text-terracotta-deep/50">3</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="checkbox" class="filter-checkbox w-4 h-4 rounded" /> Villa <span
+                                    class="ml-auto text-xs text-terracotta-deep/50">2</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="checkbox" class="filter-checkbox w-4 h-4 rounded" /> Group camp <span
+                                    class="ml-auto text-xs text-terracotta-deep/50">1</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Guests -->
+                    <div class="bg-white rounded-xl p-5 border border-cream-dark">
+                        <h3 class="font-semibold text-terracotta-deep mb-4 text-sm uppercase tracking-wide">Group size
+                        </h3>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-terracotta-deep">Guests</span>
+                            <div class="flex items-center gap-3">
+                                <button
+                                    class="w-7 h-7 rounded-full border border-cream-dark text-terracotta-deep hover:bg-cream-dark">−</button>
+                                <span class="font-semibold text-terracotta-deep w-6 text-center">2</span>
+                                <button
+                                    class="w-7 h-7 rounded-full border border-cream-dark text-terracotta-deep hover:bg-cream-dark">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Amenities -->
+                    <div class="bg-white rounded-xl p-5 border border-cream-dark">
+                        <h3 class="font-semibold text-terracotta-deep mb-4 text-sm uppercase tracking-wide">Amenities
+                        </h3>
+                        <div class="space-y-2.5">
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="checkbox" class="filter-checkbox w-4 h-4 rounded" /> Bonfire
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="checkbox" class="filter-checkbox w-4 h-4 rounded" /> BBQ dinner
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="checkbox" class="filter-checkbox w-4 h-4 rounded" /> AC
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="checkbox" class="filter-checkbox w-4 h-4 rounded" /> Attached washroom
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="checkbox" class="filter-checkbox w-4 h-4 rounded" /> Private pool
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="checkbox" class="filter-checkbox w-4 h-4 rounded" /> Kayaking
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="checkbox" class="filter-checkbox w-4 h-4 rounded" /> Kitchen
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="checkbox" class="filter-checkbox w-4 h-4 rounded" /> Pet-friendly
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- View -->
+                    <div class="bg-white rounded-xl p-5 border border-cream-dark">
+                        <h3 class="font-semibold text-terracotta-deep mb-4 text-sm uppercase tracking-wide">View</h3>
+                        <div class="space-y-2.5">
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="checkbox" class="filter-checkbox w-4 h-4 rounded" /> Lake front
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="checkbox" class="filter-checkbox w-4 h-4 rounded" /> Lake view
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="checkbox" class="filter-checkbox w-4 h-4 rounded" /> Mountain view
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Rating -->
+                    <div class="bg-white rounded-xl p-5 border border-cream-dark">
+                        <h3 class="font-semibold text-terracotta-deep mb-4 text-sm uppercase tracking-wide">Guest rating
+                        </h3>
+                        <div class="space-y-2.5">
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="radio" name="rating" class="filter-checkbox w-4 h-4" /> 4.5★ &amp; above
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="radio" name="rating" class="filter-checkbox w-4 h-4" /> 4.0★ &amp; above
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm text-terracotta-deep">
+                                <input type="radio" name="rating" class="filter-checkbox w-4 h-4" checked /> Any rating
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Clear -->
+                    <button class="w-full text-terracotta font-semibold text-sm py-2 hover:underline">Clear all
+                        filters</button>
+                </div>
+            </aside>
+
+            <!-- ===== RIGHT CONTENT AREA ===== -->
+            <div class="flex-1 min-w-0">
+
+                <!-- LIST VIEW: 2-column grid -->
+                <div id="listView" class="grid grid-cols-1 lg:grid-cols-2 gap-6" data-populate="grid"></div>
+
+                <!-- MAP VIEW: cards column + map -->
+                <div id="mapView" class="view-hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6"
+                        style="height: calc(100vh - 220px); min-height: 600px;">
+                        <!-- Cards column (scrollable) -->
+                        <div class="overflow-y-auto pr-2 space-y-4" data-populate="mapCards"></div>
+                        <!-- Map -->
+                        <div class="rounded-2xl overflow-hidden border border-cream-dark sticky top-24"
+                            style="height: calc(100vh - 220px); min-height: 600px;">
+                            <div id="map" class="w-full h-full"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div id="paginationBlock" class="flex items-center justify-center gap-2 mt-12">
+                    <button
+                        class="w-10 h-10 rounded-lg border border-cream-dark text-terracotta-deep hover:bg-cream-dark flex items-center justify-center"
+                        aria-label="Previous">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button class="w-10 h-10 rounded-lg bg-terracotta text-white font-semibold">1</button>
+                    <button
+                        class="w-10 h-10 rounded-lg border border-cream-dark text-terracotta-deep hover:bg-cream-dark font-medium">2</button>
+                    <button
+                        class="w-10 h-10 rounded-lg border border-cream-dark text-terracotta-deep hover:bg-cream-dark font-medium">3</button>
+                    <span class="text-terracotta-deep/50 px-2">…</span>
+                    <button
+                        class="w-10 h-10 rounded-lg border border-cream-dark text-terracotta-deep hover:bg-cream-dark font-medium">5</button>
+                    <button
+                        class="w-10 h-10 rounded-lg border border-cream-dark text-terracotta-deep hover:bg-cream-dark flex items-center justify-center"
+                        aria-label="Next">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MOBILE FILTER DRAWER ========== -->
+    <div id="mobileFilterBackdrop" class="view-hidden fixed inset-0 bg-terracotta-deep/50 z-50"
+        onclick="closeMobileFilters()"></div>
+    <div id="mobileFilterDrawer"
+        class="fixed inset-x-0 bottom-0 z-50 bg-cream rounded-t-2xl max-h-[85vh] overflow-y-auto md:hidden filter-drawer"
+        style="transform: translateY(100%);">
+        <div class="sticky top-0 bg-cream border-b border-cream-dark p-4 flex items-center justify-between">
+            <h3 class="font-display text-xl font-semibold text-terracotta-deep">Filters</h3>
+            <button onclick="closeMobileFilters()" class="text-terracotta-deep p-1" aria-label="Close">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div id="mobileFilterContent" class="p-4 space-y-4"></div>
+        <div class="sticky bottom-0 bg-cream border-t border-cream-dark p-4 flex gap-3">
+            <button class="flex-1 border border-terracotta text-terracotta py-3 rounded-lg font-semibold">Clear</button>
+            <button class="flex-1 bg-terracotta text-white py-3 rounded-lg font-semibold"
+                onclick="closeMobileFilters()">Show 10 stays</button>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-terracotta-deep text-cream/80 pt-12 pb-8 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+                <div class="font-display text-2xl text-white font-semibold">LakeStay</div>
+                <div class="flex gap-6">
+                    <a href="index.html" class="hover:text-amber-warm">Home</a>
+                    <a href="index.html#experiences" class="hover:text-amber-warm">Experiences</a>
+                    <a href="index.html#contact" class="hover:text-amber-warm">Contact</a>
+                </div>
+                <div>© 2026 LakeStay</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ============ PROPERTY DATA ============
+        const properties = [
+            { id: 1, name: "Lakeside Deluxe Tents", type: "Tent / Glamping", capacity: "Sleeps 2–4", amenities: ["BBQ", "Bonfire", "Attached washroom"], rating: 4.9, reviews: 342, price: 1499, unit: "person", badge: "Most Popular", badgeColor: "terracotta", img: "https://images.unsplash.com/photo-1504851149312-7a075b496cc7?auto=format&fit=crop&w=800&q=80", lat: 18.7580, lng: 73.4020, distance: "2 min from lake" },
+            { id: 2, name: "Sunset Villa", type: "Villa", capacity: "Sleeps 6–10", amenities: ["Private pool", "Kitchen", "AC"], rating: 4.8, reviews: 128, price: 12999, unit: "night", badge: "Lake front", badgeColor: "amber", img: "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=800&q=80", lat: 18.7620, lng: 73.4080, distance: "Lake front" },
+            { id: 3, name: "Woodstone Cottages", type: "Cottage", capacity: "Sleeps 4–6", amenities: ["Private deck", "AC", "Mountain view"], rating: 4.7, reviews: 89, price: 5999, unit: "night", badge: "Best Value", badgeColor: "amber", img: "https://images.unsplash.com/photo-1537565266759-34bbc16be345?auto=format&fit=crop&w=800&q=80", lat: 18.7550, lng: 73.4110, distance: "5 min from lake" },
+            { id: 4, name: "Riverbank Camp", type: "Tent / Glamping", capacity: "Sleeps 2", amenities: ["Bonfire", "Shared washroom"], rating: 4.5, reviews: 210, price: 899, unit: "person", badge: null, img: "https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?auto=format&fit=crop&w=800&q=80", lat: 18.7640, lng: 73.4040, distance: "Lake view" },
+            { id: 5, name: "Starlight Glamping", type: "Tent / Glamping", capacity: "Sleeps 2–3", amenities: ["Attached washroom", "BBQ", "Bonfire"], rating: 4.7, reviews: 156, price: 2499, unit: "person", badge: null, img: "https://images.unsplash.com/photo-1595877244574-e90ce41ce089?auto=format&fit=crop&w=800&q=80", lat: 18.7595, lng: 73.4130, distance: "3 min from lake" },
+            { id: 6, name: "Pawna Farmhouse", type: "Villa", capacity: "Sleeps 10–14", amenities: ["Private pool", "Kitchen", "AC", "Pet-friendly"], rating: 4.9, reviews: 76, price: 15999, unit: "night", badge: "Premium", badgeColor: "terracotta", img: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=800&q=80", lat: 18.7660, lng: 73.4000, distance: "Lake view" },
+            { id: 7, name: "Hillside Tent Village", type: "Tent / Glamping", capacity: "Sleeps 2", amenities: ["Bonfire", "BBQ", "Mountain view"], rating: 4.4, reviews: 298, price: 1199, unit: "person", badge: null, img: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80", lat: 18.7530, lng: 73.4090, distance: "8 min from lake" },
+            { id: 8, name: "Lakefront Studio Cottage", type: "Cottage", capacity: "Sleeps 2–3", amenities: ["AC", "Attached washroom", "Kitchen"], rating: 4.8, reviews: 92, price: 3499, unit: "night", badge: "Lake front", badgeColor: "amber", img: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80", lat: 18.7610, lng: 73.4060, distance: "Lake front" },
+            { id: 9, name: "Group Camp Basecamp", type: "Group camp", capacity: "Sleeps 20+", amenities: ["Bonfire", "BBQ", "Kayaking"], rating: 4.6, reviews: 45, price: 799, unit: "person", badge: "For groups", badgeColor: "terracotta", img: "https://images.unsplash.com/photo-1478827387698-1527781a4887?auto=format&fit=crop&w=800&q=80", lat: 18.7570, lng: 73.4150, distance: "Lake view" },
+            { id: 10, name: "Premium Lake Villa", type: "Villa", capacity: "Sleeps 8–12", amenities: ["Private pool", "AC", "Kitchen", "Kayaking"], rating: 5.0, reviews: 34, price: 18999, unit: "night", badge: "Luxury", badgeColor: "terracotta", img: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=800&q=80", lat: 18.7625, lng: 73.4025, distance: "Lake front" },
+        ];
+
+        // ============ CARD RENDERERS ============
+        function propertyCardHTML(p) {
+            const badgeHtml = p.badge
+                ? `<div class="absolute top-4 left-4 ${p.badgeColor === 'terracotta' ? 'bg-terracotta text-white' : 'bg-amber-warm text-terracotta-deep'} text-xs font-semibold px-3 py-1 rounded-full">${p.badge}</div>`
+                : '';
+            const amenityBadges = p.amenities.slice(0, 3).map(a =>
+                `<span class="text-xs bg-cream-dark text-terracotta-deep px-2 py-1 rounded-md">${a}</span>`
+            ).join('');
+            return `
+        <div class="property-card bg-white rounded-2xl overflow-hidden shadow-sm border border-cream-dark cursor-pointer" data-id="${p.id}">
+          <div class="relative h-64 overflow-hidden">
+            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover" loading="lazy" />
+            ${badgeHtml}
+            <button class="wishlist-heart absolute top-4 right-4 bg-white/90 hover:bg-white w-9 h-9 rounded-full flex items-center justify-center" aria-label="Save">
+              <svg width="18" height="18" fill="none" stroke="#6B2416" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            </button>
+            <div class="absolute bottom-4 left-4 bg-white/95 text-terracotta-deep text-xs font-semibold px-3 py-1 rounded-full">${p.distance}</div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-start justify-between mb-1 gap-3">
+              <div>
+                <h3 class="font-display text-xl font-semibold text-terracotta-deep">${p.name}</h3>
+                <p class="text-xs text-terracotta-deep/60 mt-0.5">${p.type} · ${p.capacity}</p>
+              </div>
+              <div class="flex items-center gap-1 text-sm flex-shrink-0">
+                <span class="text-amber-warm">★</span>
+                <span class="font-semibold text-terracotta-deep">${p.rating}</span>
+                <span class="text-terracotta-deep/50 text-xs">(${p.reviews})</span>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-1.5 my-3">${amenityBadges}</div>
+            <div class="flex items-end justify-between mt-4 pt-4 border-t border-cream-dark">
+              <div>
+                <span class="font-display text-2xl font-semibold text-terracotta">₹${p.price.toLocaleString('en-IN')}</span>
+                <span class="text-sm text-terracotta-deep/60">/${p.unit}</span>
+              </div>
+              <button class="bg-terracotta hover:bg-terracotta-dark text-white font-semibold text-sm px-4 py-2 rounded-lg">View details →</button>
+            </div>
+          </div>
+        </div>
+      `;
+        }
+
+        // Compact card variant for map view
+        function propertyCardCompact(p) {
+            return `
+        <div class="property-card bg-white rounded-xl overflow-hidden border border-cream-dark cursor-pointer flex" data-id="${p.id}">
+          <img src="${p.img}" alt="${p.name}" class="w-32 h-32 object-cover flex-shrink-0" loading="lazy" />
+          <div class="p-3 flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-2">
+              <h3 class="font-display text-base font-semibold text-terracotta-deep truncate">${p.name}</h3>
+              <div class="flex items-center gap-0.5 text-xs flex-shrink-0">
+                <span class="text-amber-warm">★</span>
+                <span class="font-semibold text-terracotta-deep">${p.rating}</span>
+              </div>
+            </div>
+            <p class="text-xs text-terracotta-deep/60 mt-0.5">${p.capacity}</p>
+            <p class="text-xs text-terracotta-deep/50 mt-1">${p.distance}</p>
+            <div class="mt-2">
+              <span class="font-display text-lg font-semibold text-terracotta">₹${p.price.toLocaleString('en-IN')}</span>
+              <span class="text-xs text-terracotta-deep/60">/${p.unit}</span>
+            </div>
+          </div>
+        </div>
+      `;
+        }
+
+        // ============ POPULATE ============
+        document.querySelector('[data-populate="grid"]').innerHTML = properties.map(propertyCardHTML).join('');
+        document.querySelector('[data-populate="mapCards"]').innerHTML = properties.map(propertyCardCompact).join('');
+
+        // Copy filters to mobile drawer
+        document.getElementById('mobileFilterContent').innerHTML = document.getElementById('filtersDesktop').innerHTML;
+
+        // Wishlist toggle
+        document.querySelectorAll('.wishlist-heart').forEach(btn => {
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                btn.classList.toggle('active');
+            });
+        });
+
+        // Price range
+        const priceRange = document.getElementById('priceRange');
+        priceRange && priceRange.addEventListener('input', e => {
+            document.getElementById('priceValue').textContent = parseInt(e.target.value).toLocaleString('en-IN');
+        });
+
+        // ============ VIEW TOGGLE ============
+        const listBtn = document.getElementById('listViewBtn');
+        const mapBtn = document.getElementById('mapViewBtn');
+        const listView = document.getElementById('listView');
+        const mapView = document.getElementById('mapView');
+        const pagination = document.getElementById('paginationBlock');
+        let mapInstance = null;
+
+        function activateBtn(active, inactive) {
+            active.classList.add('bg-terracotta', 'text-white');
+            active.classList.remove('text-terracotta-deep', 'hover:bg-cream-dark');
+            inactive.classList.remove('bg-terracotta', 'text-white');
+            inactive.classList.add('text-terracotta-deep', 'hover:bg-cream-dark');
+        }
+
+        listBtn.addEventListener('click', () => {
+            listView.classList.remove('view-hidden');
+            mapView.classList.add('view-hidden');
+            pagination.classList.remove('view-hidden');
+            activateBtn(listBtn, mapBtn);
+        });
+
+        mapBtn.addEventListener('click', () => {
+            listView.classList.add('view-hidden');
+            mapView.classList.remove('view-hidden');
+            pagination.classList.add('view-hidden');
+            activateBtn(mapBtn, listBtn);
+            // Init map lazily
+            if (!mapInstance) initMap();
+            else setTimeout(() => mapInstance.invalidateSize(), 100);
+        });
+
+        // ============ MAP ============
+        function initMap() {
+            mapInstance = L.map('map', {
+                center: [18.7604, 73.4070],
+                zoom: 14,
+                scrollWheelZoom: true,
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap',
+                maxZoom: 19,
+            }).addTo(mapInstance);
+
+            properties.forEach(p => {
+                const icon = L.divIcon({
+                    className: '',
+                    html: `<div class="price-pin" data-id="${p.id}">₹${(p.price / 1000).toFixed(p.price >= 10000 ? 0 : 1)}k</div>`,
+                    iconSize: [50, 26],
+                    iconAnchor: [25, 13],
+                });
+                const marker = L.marker([p.lat, p.lng], { icon }).addTo(mapInstance);
+                marker.bindPopup(`
+          <div style="min-width: 200px; font-family: Inter, sans-serif;">
+            <img src="${p.img}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 6px; margin-bottom: 8px;" />
+            <div style="font-family: Fraunces, serif; font-weight: 600; color: #6B2416; font-size: 15px;">${p.name}</div>
+            <div style="font-size: 11px; color: #6B2416; opacity: 0.6; margin: 2px 0 6px;">${p.capacity} · ★ ${p.rating}</div>
+            <div style="font-family: Fraunces, serif; font-weight: 600; font-size: 16px; color: #C65D3E;">₹${p.price.toLocaleString('en-IN')}<span style="font-size: 11px; opacity: 0.7;">/${p.unit}</span></div>
+          </div>
+        `);
+            });
+        }
+
+        // ============ MOBILE FILTERS ============
+        const filterBtn = document.getElementById('mobileFilterBtn');
+        const drawer = document.getElementById('mobileFilterDrawer');
+        const backdrop = document.getElementById('mobileFilterBackdrop');
+        filterBtn && filterBtn.addEventListener('click', () => {
+            backdrop.classList.remove('view-hidden');
+            drawer.style.transform = 'translateY(0)';
+        });
+        function closeMobileFilters() {
+            backdrop.classList.add('view-hidden');
+            drawer.style.transform = 'translateY(100%)';
+        }
+        window.closeMobileFilters = closeMobileFilters;
+    </script>
+
+</body>
+
+</html>

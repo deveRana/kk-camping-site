@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cancellation Policy — LakeStay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terracotta: { DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
+                        amber: { warm: '#F2A65A', light: '#F9C89B' },
+                        cream: { DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+                    },
+                    fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #FFF8F0;
+            color: #2C1810;
+        }
+
+        .font-display {
+            font-family: 'Fraunces', Georgia, serif;
+        }
+    </style>
+</head>
+
+<body class="antialiased" data-page="legal">
+    <div id="navSlot"></div>
+
+    <section class="py-12 border-b border-cream-dark">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="font-display text-4xl md:text-5xl font-semibold text-terracotta-deep mb-3">Cancellation Policy
+            </h1>
+            <p class="text-terracotta-deep/75">We know plans change. Here's exactly what happens when they do.</p>
+            <p class="text-xs text-terracotta-deep/60 mt-2">Last updated: 1 September 2026</p>
+        </div>
+    </section>
+
+    <!-- Refund tiers timeline -->
+    <section class="py-14 bg-cream-dark/30">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-display text-2xl md:text-3xl font-semibold text-terracotta-deep text-center mb-10">Refund
+                tiers</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+                <!-- Tier 1 -->
+                <div class="bg-white rounded-2xl p-6 border-2 border-green-200 relative">
+                    <div
+                        class="absolute -top-3 left-1/2 -translate-x-1/2 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                        FULL REFUND</div>
+                    <div class="text-center pt-3">
+                        <div class="w-12 h-12 mx-auto rounded-full bg-green-100 flex items-center justify-center mb-3">
+                            <svg width="24" height="24" fill="none" stroke="#059669" stroke-width="2.2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <div class="font-display text-2xl font-semibold text-terracotta-deep">100%</div>
+                        <div class="text-xs text-terracotta-deep/70 mt-1 font-semibold">7+ days before</div>
+                        <p class="text-xs text-terracotta-deep/60 mt-3">Cancel 7+ days before check-in and get your full
+                            amount back, no questions asked.</p>
+                    </div>
+                </div>
+
+                <!-- Tier 2 -->
+                <div class="bg-white rounded-2xl p-6 border-2 border-cream-dark relative">
+                    <div
+                        class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-warm text-terracotta-deep text-xs font-bold px-3 py-1 rounded-full">
+                        HALF REFUND</div>
+                    <div class="text-center pt-3">
+                        <div
+                            class="w-12 h-12 mx-auto rounded-full bg-amber-light flex items-center justify-center mb-3">
+                            <svg width="24" height="24" fill="none" stroke="#6B2416" stroke-width="2.2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="font-display text-2xl font-semibold text-terracotta-deep">50%</div>
+                        <div class="text-xs text-terracotta-deep/70 mt-1 font-semibold">3–7 days before</div>
+                        <p class="text-xs text-terracotta-deep/60 mt-3">Cancel 3–7 days before check-in and get half
+                            your booking amount refunded.</p>
+                    </div>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="bg-white rounded-2xl p-6 border-2 border-cream-dark relative">
+                    <div
+                        class="absolute -top-3 left-1/2 -translate-x-1/2 bg-terracotta text-white text-xs font-bold px-3 py-1 rounded-full">
+                        RESCHEDULE</div>
+                    <div class="text-center pt-3">
+                        <div
+                            class="w-12 h-12 mx-auto rounded-full bg-terracotta/10 flex items-center justify-center mb-3">
+                            <svg width="24" height="24" fill="none" stroke="#C65D3E" stroke-width="2.2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                        </div>
+                        <div class="font-display text-2xl font-semibold text-terracotta-deep">Move</div>
+                        <div class="text-xs text-terracotta-deep/70 mt-1 font-semibold">Within 72 hrs</div>
+                        <p class="text-xs text-terracotta-deep/60 mt-3">Can't cancel? Reschedule to any date within 6
+                            months. ₹200 admin fee.</p>
+                    </div>
+                </div>
+
+                <!-- Tier 4 -->
+                <div class="bg-white rounded-2xl p-6 border-2 border-cream-dark relative">
+                    <div
+                        class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                        NO REFUND</div>
+                    <div class="text-center pt-3">
+                        <div class="w-12 h-12 mx-auto rounded-full bg-red-100 flex items-center justify-center mb-3">
+                            <svg width="24" height="24" fill="none" stroke="#DC2626" stroke-width="2.2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </div>
+                        <div class="font-display text-2xl font-semibold text-terracotta-deep">0%</div>
+                        <div class="text-xs text-terracotta-deep/70 mt-1 font-semibold">No-show</div>
+                        <p class="text-xs text-terracotta-deep/60 mt-3">Not showing up without notice means no refund.
+                            But we'll always try to help — WhatsApp us.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed policy -->
+    <section class="py-14">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+
+            <div>
+                <h2 class="font-display text-2xl font-semibold text-terracotta-deep mb-3">How to cancel</h2>
+                <p class="text-terracotta-deep/80 leading-relaxed mb-3">Two ways:</p>
+                <ol class="list-decimal list-inside text-terracotta-deep/80 space-y-2">
+                    <li>Go to <a href="my-bookings.html" class="text-terracotta hover:underline">My Bookings</a> → find
+                        the trip → click "Cancel"</li>
+                    <li>WhatsApp us on +91 98765 43210 with your Booking ID</li>
+                </ol>
+                <p class="text-sm text-terracotta-deep/70 mt-3">Cancellation timestamp is when we receive your request,
+                    not when it's processed.</p>
+            </div>
+
+            <div>
+                <h2 class="font-display text-2xl font-semibold text-terracotta-deep mb-3">Refund timelines</h2>
+                <div class="bg-white rounded-xl border border-cream-dark overflow-hidden">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="bg-cream-dark/60 text-terracotta-deep">
+                                <th class="text-left px-4 py-3 font-semibold">Payment method</th>
+                                <th class="text-left px-4 py-3 font-semibold">Refund time</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-terracotta-deep/80">
+                            <tr class="border-t border-cream-dark">
+                                <td class="px-4 py-3">UPI</td>
+                                <td class="px-4 py-3">Instant to 24 hours</td>
+                            </tr>
+                            <tr class="border-t border-cream-dark">
+                                <td class="px-4 py-3">Credit / Debit card</td>
+                                <td class="px-4 py-3">3–5 business days</td>
+                            </tr>
+                            <tr class="border-t border-cream-dark">
+                                <td class="px-4 py-3">Net banking</td>
+                                <td class="px-4 py-3">3–5 business days</td>
+                            </tr>
+                            <tr class="border-t border-cream-dark">
+                                <td class="px-4 py-3">Wallet (Paytm, etc.)</td>
+                                <td class="px-4 py-3">24–48 hours</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-xs text-terracotta-deep/70 mt-3">Refunds go to your original payment method. Bank/wallet
+                    delays are outside our control.</p>
+            </div>
+
+            <div>
+                <h2 class="font-display text-2xl font-semibold text-terracotta-deep mb-3">Rescheduling</h2>
+                <p class="text-terracotta-deep/80 leading-relaxed mb-3">Change your mind? Reschedule instead of cancel —
+                    often a better deal.</p>
+                <ul class="list-disc list-inside text-terracotta-deep/80 space-y-2">
+                    <li>Free reschedule up to 3 days before check-in</li>
+                    <li>Within 3 days: one reschedule per booking with ₹200 admin fee</li>
+                    <li>New dates must be within 6 months of the original</li>
+                    <li>If new dates cost more, pay the difference. If less, we refund the difference.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="font-display text-2xl font-semibold text-terracotta-deep mb-3">Cancellation by LakeStay</h2>
+                <p class="text-terracotta-deep/80 leading-relaxed">In the rare case we cancel your booking (major
+                    weather, safety issues, property emergency), you get a 100% refund plus a ₹500 credit toward your
+                    next booking. We'll also help you find alternatives.</p>
+            </div>
+
+            <div>
+                <h2 class="font-display text-2xl font-semibold text-terracotta-deep mb-3">Special situations</h2>
+                <div class="space-y-4">
+                    <div class="bg-amber-light/40 border border-amber-warm/30 rounded-xl p-5">
+                        <h3 class="font-semibold text-terracotta-deep mb-1">Monsoon weather waivers</h3>
+                        <p class="text-sm text-terracotta-deep/80">If the Maharashtra Meteorological Department issues a
+                            red alert for your dates, we refund fully or reschedule — regardless of tier.</p>
+                    </div>
+                    <div class="bg-amber-light/40 border border-amber-warm/30 rounded-xl p-5">
+                        <h3 class="font-semibold text-terracotta-deep mb-1">Medical emergency</h3>
+                        <p class="text-sm text-terracotta-deep/80">With a hospital admission letter, we waive
+                            cancellation charges regardless of timing. Contact us within 48 hours of the emergency.</p>
+                    </div>
+                    <div class="bg-amber-light/40 border border-amber-warm/30 rounded-xl p-5">
+                        <h3 class="font-semibold text-terracotta-deep mb-1">Bereavement</h3>
+                        <p class="text-sm text-terracotta-deep/80">Full refund with a supporting document. No time
+                            limit.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="font-display text-2xl font-semibold text-terracotta-deep mb-3">Group and corporate bookings
+                </h2>
+                <p class="text-terracotta-deep/80 leading-relaxed">Groups of 10+ have a separate cancellation schedule,
+                    agreed at time of booking. Typically: full refund 21+ days before, 50% between 14–21 days, no refund
+                    inside 14 days.</p>
+            </div>
+
+            <div class="bg-terracotta-deep text-white rounded-2xl p-6 md:p-8">
+                <h2 class="font-display text-2xl font-semibold mb-3">Have questions?</h2>
+                <p class="text-white/85 mb-5">Cancellation is stressful. Talk to a human.</p>
+                <a href="https://wa.me/919876543210"
+                    class="inline-block bg-amber-warm text-terracotta-deep font-semibold px-6 py-3 rounded-lg hover:bg-amber-light">WhatsApp
+                    us →</a>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="footerSlot"></div>
+    <script src="_common.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Bookings — LakeStay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terracotta: { DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
+                        amber: { warm: '#F2A65A', light: '#F9C89B' },
+                        cream: { DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+                    },
+                    fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #FFF8F0;
+            color: #2C1810;
+        }
+
+        .font-display {
+            font-family: 'Fraunces', Georgia, serif;
+        }
+
+        .tab-btn {
+            padding: 12px 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #6B2416;
+            opacity: 0.6;
+            border-bottom: 2px solid transparent;
+            transition: all 0.15s;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            opacity: 1;
+            border-bottom-color: #C65D3E;
+            color: #C65D3E;
+            font-weight: 600;
+        }
+
+        .tab-hidden {
+            display: none;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 999px;
+        }
+    </style>
+</head>
+
+<body class="antialiased" data-page="my-bookings">
+    <div id="navSlot"></div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+            <div>
+                <h1 class="font-display text-3xl md:text-4xl font-semibold text-terracotta-deep">My bookings</h1>
+                <p class="text-sm text-terracotta-deep/70 mt-1">Manage your trips, view vouchers, and reschedule any
+                    time.</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white border border-cream-dark rounded-xl p-2 pr-4">
+                <div
+                    class="w-10 h-10 rounded-full bg-terracotta text-white flex items-center justify-center font-semibold">
+                    PS</div>
+                <div>
+                    <div class="text-sm font-semibold text-terracotta-deep">Priya Sharma</div>
+                    <div class="text-xs text-terracotta-deep/60">priya.sharma@example.com</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="border-b border-cream-dark mb-6">
+            <div class="flex gap-8">
+                <button class="tab-btn active" data-tab="upcoming">Upcoming <span
+                        class="ml-1 bg-terracotta text-white text-[10px] px-1.5 py-0.5 rounded-full">2</span></button>
+                <button class="tab-btn" data-tab="past">Past <span class="ml-1 text-xs opacity-70">7</span></button>
+                <button class="tab-btn" data-tab="cancelled">Cancelled <span
+                        class="ml-1 text-xs opacity-70">1</span></button>
+            </div>
+        </div>
+
+        <!-- UPCOMING -->
+        <div id="upcoming" class="space-y-4">
+            <!-- Booking 1 - live -->
+            <div class="bg-white rounded-2xl border border-cream-dark overflow-hidden">
+                <div class="flex flex-col md:flex-row">
+                    <img src="https://images.unsplash.com/photo-1504851149312-7a075b496cc7?auto=format&fit=crop&w=400&q=80"
+                        class="w-full md:w-56 h-48 md:h-auto object-cover" alt="" />
+                    <div class="flex-1 p-5">
+                        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-3">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="status-pill" style="background:#FBEDE1; color:#C65D3E;">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-terracotta"></span> UPCOMING · in 6
+                                        days
+                                    </span>
+                                </div>
+                                <h3 class="font-display text-xl font-semibold text-terracotta-deep">Lakeside Deluxe
+                                    Tents</h3>
+                                <p class="text-xs text-terracotta-deep/60 mt-0.5">Pawna Lake, Lonavala · Booking ID:
+                                    LS-2K26-8F4A21</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-display text-xl font-semibold text-terracotta">₹4,951</div>
+                                <div class="text-xs text-terracotta-deep/60">₹3,466 due at check-in</div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 py-3 border-t border-cream-dark text-sm">
+                            <div>
+                                <div class="text-xs text-terracotta-deep/60">Check-in</div>
+                                <div class="font-semibold text-terracotta-deep">Sat, 20 Sept</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-terracotta-deep/60">Check-out</div>
+                                <div class="font-semibold text-terracotta-deep">Sun, 21 Sept</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-terracotta-deep/60">Guests</div>
+                                <div class="font-semibold text-terracotta-deep">2 guests</div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pt-3 border-t border-cream-dark">
+                            <a href="booking-confirmed.html"
+                                class="bg-terracotta hover:bg-terracotta-dark text-white text-sm font-semibold px-4 py-2 rounded-lg">View
+                                details</a>
+                            <button
+                                class="border border-terracotta-deep/20 hover:border-terracotta text-terracotta-deep text-sm font-semibold px-4 py-2 rounded-lg">Download
+                                voucher</button>
+                            <button
+                                class="border border-terracotta-deep/20 hover:border-terracotta text-terracotta-deep text-sm font-semibold px-4 py-2 rounded-lg">Get
+                                directions</button>
+                            <button
+                                class="border border-terracotta-deep/20 hover:border-terracotta text-terracotta-deep text-sm font-semibold px-4 py-2 rounded-lg">Reschedule</button>
+                            <button
+                                class="text-terracotta-deep/50 hover:text-terracotta-deep text-sm px-4 py-2">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking 2 -->
+            <div class="bg-white rounded-2xl border border-cream-dark overflow-hidden">
+                <div class="flex flex-col md:flex-row">
+                    <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=400&q=80"
+                        class="w-full md:w-56 h-48 md:h-auto object-cover" alt="" />
+                    <div class="flex-1 p-5">
+                        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-3">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="status-pill" style="background:#F5E9D7; color:#6B2416;">CONFIRMED · in
+                                        42 days</span>
+                                </div>
+                                <h3 class="font-display text-xl font-semibold text-terracotta-deep">Sunset Villa</h3>
+                                <p class="text-xs text-terracotta-deep/60 mt-0.5">Pawna Lake · Booking ID:
+                                    LS-2K26-9D2E11</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-display text-xl font-semibold text-terracotta">₹25,998</div>
+                                <div class="text-xs text-terracotta-deep/60">Fully paid</div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 py-3 border-t border-cream-dark text-sm">
+                            <div>
+                                <div class="text-xs text-terracotta-deep/60">Check-in</div>
+                                <div class="font-semibold text-terracotta-deep">Fri, 25 Oct</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-terracotta-deep/60">Check-out</div>
+                                <div class="font-semibold text-terracotta-deep">Sun, 27 Oct</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-terracotta-deep/60">Guests</div>
+                                <div class="font-semibold text-terracotta-deep">8 guests</div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pt-3 border-t border-cream-dark">
+                            <button
+                                class="bg-terracotta hover:bg-terracotta-dark text-white text-sm font-semibold px-4 py-2 rounded-lg">View
+                                details</button>
+                            <button
+                                class="border border-terracotta-deep/20 hover:border-terracotta text-terracotta-deep text-sm font-semibold px-4 py-2 rounded-lg">Download
+                                voucher</button>
+                            <button
+                                class="border border-terracotta-deep/20 hover:border-terracotta text-terracotta-deep text-sm font-semibold px-4 py-2 rounded-lg">Reschedule</button>
+                            <button
+                                class="text-terracotta-deep/50 hover:text-terracotta-deep text-sm px-4 py-2">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAST -->
+        <div id="past" class="tab-hidden space-y-4">
+            <div class="bg-white rounded-2xl border border-cream-dark overflow-hidden opacity-95">
+                <div class="flex flex-col md:flex-row">
+                    <img src="https://images.unsplash.com/photo-1537565266759-34bbc16be345?auto=format&fit=crop&w=400&q=80"
+                        class="w-full md:w-56 h-40 md:h-auto object-cover" alt="" />
+                    <div class="flex-1 p-5">
+                        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-3">
+                            <div>
+                                <span class="status-pill" style="background:#F5E9D7; color:#6B2416;">COMPLETED · 3 weeks
+                                    ago</span>
+                                <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-1">Woodstone
+                                    Cottages</h3>
+                                <p class="text-xs text-terracotta-deep/60">LS-2K26-6A1B99 · Aug 24-25</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-semibold text-terracotta-deep">₹11,998</div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pt-3 border-t border-cream-dark">
+                            <button
+                                class="bg-terracotta hover:bg-terracotta-dark text-white text-sm font-semibold px-4 py-2 rounded-lg flex items-center gap-1.5"><span
+                                    class="text-amber-warm">★</span> Leave a review</button>
+                            <button
+                                class="border border-terracotta-deep/20 text-terracotta-deep text-sm font-semibold px-4 py-2 rounded-lg">Book
+                                again</button>
+                            <button
+                                class="border border-terracotta-deep/20 text-terracotta-deep text-sm font-semibold px-4 py-2 rounded-lg">Get
+                                invoice</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-cream-dark overflow-hidden opacity-95">
+                <div class="flex flex-col md:flex-row">
+                    <img src="https://images.unsplash.com/photo-1595877244574-e90ce41ce089?auto=format&fit=crop&w=400&q=80"
+                        class="w-full md:w-56 h-40 md:h-auto object-cover" alt="" />
+                    <div class="flex-1 p-5">
+                        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-3">
+                            <div>
+                                <span class="status-pill" style="background:#F5E9D7; color:#6B2416;">COMPLETED · 2
+                                    months ago</span>
+                                <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-1">Starlight
+                                    Glamping</h3>
+                                <p class="text-xs text-terracotta-deep/60">LS-2K26-5F2C77 · July 14-15</p>
+                                <div class="flex items-center gap-1 mt-1 text-xs">
+                                    <span class="text-amber-warm">★★★★★</span>
+                                    <span class="text-terracotta-deep/60">You reviewed this</span>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-semibold text-terracotta-deep">₹5,998</div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pt-3 border-t border-cream-dark">
+                            <button
+                                class="border border-terracotta-deep/20 text-terracotta-deep text-sm font-semibold px-4 py-2 rounded-lg">Book
+                                again</button>
+                            <button
+                                class="border border-terracotta-deep/20 text-terracotta-deep text-sm font-semibold px-4 py-2 rounded-lg">Get
+                                invoice</button>
+                            <button class="text-terracotta-deep/60 text-sm px-4 py-2">Edit your review</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center py-6">
+                <button class="text-terracotta font-semibold hover:underline text-sm">Show 5 more past bookings</button>
+            </div>
+        </div>
+
+        <!-- CANCELLED -->
+        <div id="cancelled" class="tab-hidden space-y-4">
+            <div class="bg-white rounded-2xl border border-cream-dark overflow-hidden opacity-80">
+                <div class="flex flex-col md:flex-row">
+                    <img src="https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?auto=format&fit=crop&w=400&q=80"
+                        class="w-full md:w-56 h-40 md:h-auto object-cover grayscale" alt="" />
+                    <div class="flex-1 p-5">
+                        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-3">
+                            <div>
+                                <span class="status-pill" style="background:#FEE2E2; color:#991B1B;">CANCELLED · June
+                                    2026</span>
+                                <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-1">Riverbank Camp
+                                </h3>
+                                <p class="text-xs text-terracotta-deep/60">LS-2K26-3E1D44 · Was for July 5-6</p>
+                                <p class="text-xs text-terracotta-deep/70 mt-1">Refund of ₹1,798 processed to UPI on
+                                    June 30</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-semibold text-terracotta-deep/60 line-through">₹1,798</div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pt-3 border-t border-cream-dark">
+                            <button
+                                class="border border-terracotta-deep/20 text-terracotta-deep text-sm font-semibold px-4 py-2 rounded-lg">Book
+                                again</button>
+                            <button
+                                class="border border-terracotta-deep/20 text-terracotta-deep text-sm font-semibold px-4 py-2 rounded-lg">Refund
+                                details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Empty state (hidden but present in the design) -->
+    <template id="emptyState">
+        <div class="text-center py-20">
+            <div class="w-24 h-24 rounded-full bg-cream-dark mx-auto flex items-center justify-center mb-4">
+                <svg width="40" height="40" fill="none" stroke="#6B2416" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+            </div>
+            <h3 class="font-display text-2xl font-semibold text-terracotta-deep mb-2">No trips yet</h3>
+            <p class="text-terracotta-deep/70 mb-6">Time to change that. Pawna Lake is waiting.</p>
+            <a href="properties.html"
+                class="bg-terracotta text-white font-semibold px-6 py-3 rounded-lg hover:bg-terracotta-dark inline-block">Explore
+                stays</a>
+        </div>
+    </template>
+
+    <div id="footerSlot"></div>
+
+    <script src="_common.js"></script>
+    <script>
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                ['upcoming', 'past', 'cancelled'].forEach(t => document.getElementById(t).classList.add('tab-hidden'));
+                document.getElementById(btn.dataset.tab).classList.remove('tab-hidden');
+            });
+        });
+    </script>
+</body>
+
+</html>

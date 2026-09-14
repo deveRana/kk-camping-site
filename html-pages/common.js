@@ -1,0 +1,298 @@
+< !DOCTYPE html >
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Loading states — LakeStay</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+            <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+            <script>
+                tailwind.config = {theme: {extend: {
+                    colors: {
+                    terracotta: {DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
+                amber: {warm: '#F2A65A', light: '#F9C89B' },
+                cream: {DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+      },
+                fontFamily: {display: ['Fraunces', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+    }}};
+            </script>
+            <style>
+                body {font - family: 'Inter', system-ui, sans-serif; background: #FFF8F0; color: #2C1810; }
+                .font-display {font - family: 'Fraunces', Georgia, serif; }
+
+                /* Skeleton shimmer */
+                .skel {
+                    background: linear-gradient(90deg, #F5E9D7 0%, #FBEDE1 50%, #F5E9D7 100%);
+                background-size: 200% 100%;
+                animation: shimmer 1.4s ease-in-out infinite;
+                border-radius: 6px;
+    }
+                @keyframes shimmer {
+                    0 % { background- position: 200% 0; }
+                100% {background - position: -200% 0; }
+    }
+
+                /* Spinner */
+                .spinner {width: 40px; height: 40px; border: 3px solid #F5E9D7; border-top-color: #C65D3E; border-radius: 50%; animation: spin 0.8s linear infinite; }
+                @keyframes spin {to {transform: rotate(360deg); } }
+
+                /* Bouncing dots */
+                .dot {display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #C65D3E; margin: 0 4px; animation: bounce 1.4s infinite ease-in-out both; }
+                .dot:nth-child(1) {animation - delay: -0.32s; }
+                .dot:nth-child(2) {animation - delay: -0.16s; }
+                @keyframes bounce {0 %, 80 %, 100 % { transform: scale(0.6); opacity: 0.5; } 40% {transform: scale(1); opacity: 1; } }
+
+                /* Progress bar */
+                .progress-bar {height: 4px; background: #F5E9D7; border-radius: 999px; overflow: hidden; }
+                .progress-fill {height: 100%; background: #C65D3E; border-radius: 999px; animation: progress 2s ease-in-out infinite; }
+                @keyframes progress {0 % { width: 0 %; margin- left: 0; } 50% {width: 75%; margin-left: 12%; } 100% {width: 0%; margin-left: 100%; } }
+            </style>
+        </head>
+        <body class="antialiased" data-page="loading">
+            <div id="navSlot"></div>
+
+            <!-- Page header -->
+            <section class="py-10 border-b border-cream-dark">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <p class="text-terracotta font-semibold uppercase tracking-widest text-xs mb-2">Design system · Reference page</p>
+                    <h1 class="font-display text-3xl md:text-4xl font-semibold text-terracotta-deep">Loading states</h1>
+                    <p class="text-terracotta-deep/70 mt-2 text-sm">Skeleton screens and spinners used across the app when content is loading.</p>
+                </div>
+            </section>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+                <!-- Section 1: Property Cards Skeleton -->
+                <section>
+                    <div class="mb-6">
+                        <h2 class="font-display text-2xl font-semibold text-terracotta-deep">Property card grid</h2>
+                        <p class="text-sm text-terracotta-deep/70 mt-1">Shown on Stays page while filters load or search runs.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Skeleton card 1 -->
+                        <div class="bg-white rounded-2xl overflow-hidden border border-cream-dark">
+                            <div class="skel h-56 rounded-none"></div>
+                            <div class="p-5 space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <div class="skel h-4 w-24"></div>
+                                    <div class="skel h-3 w-12"></div>
+                                </div>
+                                <div class="skel h-6 w-3/4"></div>
+                                <div class="skel h-3 w-1/2"></div>
+                                <div class="flex gap-2 pt-2">
+                                    <div class="skel h-6 w-16 rounded-full"></div>
+                                    <div class="skel h-6 w-16 rounded-full"></div>
+                                    <div class="skel h-6 w-16 rounded-full"></div>
+                                </div>
+                                <div class="flex justify-between items-center pt-3 border-t border-cream-dark">
+                                    <div class="skel h-8 w-20"></div>
+                                    <div class="skel h-9 w-24 rounded-lg"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skeleton card 2 -->
+                        <div class="bg-white rounded-2xl overflow-hidden border border-cream-dark">
+                            <div class="skel h-56 rounded-none"></div>
+                            <div class="p-5 space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <div class="skel h-4 w-24"></div>
+                                    <div class="skel h-3 w-12"></div>
+                                </div>
+                                <div class="skel h-6 w-3/4"></div>
+                                <div class="skel h-3 w-1/2"></div>
+                                <div class="flex gap-2 pt-2">
+                                    <div class="skel h-6 w-16 rounded-full"></div>
+                                    <div class="skel h-6 w-16 rounded-full"></div>
+                                    <div class="skel h-6 w-16 rounded-full"></div>
+                                </div>
+                                <div class="flex justify-between items-center pt-3 border-t border-cream-dark">
+                                    <div class="skel h-8 w-20"></div>
+                                    <div class="skel h-9 w-24 rounded-lg"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skeleton card 3 -->
+                        <div class="bg-white rounded-2xl overflow-hidden border border-cream-dark">
+                            <div class="skel h-56 rounded-none"></div>
+                            <div class="p-5 space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <div class="skel h-4 w-24"></div>
+                                    <div class="skel h-3 w-12"></div>
+                                </div>
+                                <div class="skel h-6 w-3/4"></div>
+                                <div class="skel h-3 w-1/2"></div>
+                                <div class="flex gap-2 pt-2">
+                                    <div class="skel h-6 w-16 rounded-full"></div>
+                                    <div class="skel h-6 w-16 rounded-full"></div>
+                                    <div class="skel h-6 w-16 rounded-full"></div>
+                                </div>
+                                <div class="flex justify-between items-center pt-3 border-t border-cream-dark">
+                                    <div class="skel h-8 w-20"></div>
+                                    <div class="skel h-9 w-24 rounded-lg"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Property Detail Skeleton -->
+                <section>
+                    <div class="mb-6">
+                        <h2 class="font-display text-2xl font-semibold text-terracotta-deep">Property detail page</h2>
+                        <p class="text-sm text-terracotta-deep/70 mt-1">Shown while a specific listing is being fetched.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-cream-dark p-6 md:p-8">
+                        <!-- Breadcrumb -->
+                        <div class="skel h-3 w-40 mb-4"></div>
+                        <div class="flex justify-between items-start mb-6 gap-4">
+                            <div class="flex-1 space-y-3">
+                                <div class="skel h-8 w-3/4"></div>
+                                <div class="skel h-4 w-1/2"></div>
+                            </div>
+                            <div class="flex gap-2">
+                                <div class="skel h-9 w-9 rounded-full"></div>
+                                <div class="skel h-9 w-9 rounded-full"></div>
+                            </div>
+                        </div>
+                        <!-- Gallery -->
+                        <div class="grid grid-cols-4 gap-2 mb-8" style="height:320px;">
+                            <div class="skel col-span-2 row-span-2 h-full"></div>
+                            <div class="skel"></div>
+                            <div class="skel"></div>
+                            <div class="skel"></div>
+                            <div class="skel"></div>
+                        </div>
+                        <!-- Content grid -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <div class="lg:col-span-2 space-y-5">
+                                <div class="skel h-5 w-2/3"></div>
+                                <div class="skel h-3 w-full"></div>
+                                <div class="skel h-3 w-full"></div>
+                                <div class="skel h-3 w-4/5"></div>
+                                <div class="pt-4 border-t border-cream-dark space-y-3">
+                                    <div class="skel h-5 w-1/3"></div>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div class="skel h-4 w-full"></div>
+                                        <div class="skel h-4 w-full"></div>
+                                        <div class="skel h-4 w-full"></div>
+                                        <div class="skel h-4 w-full"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="border border-cream-dark rounded-xl p-5 space-y-3">
+                                    <div class="skel h-8 w-1/2"></div>
+                                    <div class="skel h-3 w-1/3"></div>
+                                    <div class="skel h-12 w-full"></div>
+                                    <div class="skel h-12 w-full"></div>
+                                    <div class="skel h-10 w-full mt-4"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Various loaders -->
+                <section>
+                    <div class="mb-6">
+                        <h2 class="font-display text-2xl font-semibold text-terracotta-deep">Inline loaders</h2>
+                        <p class="text-sm text-terracotta-deep/70 mt-1">Micro-feedback for buttons, forms, and page transitions.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Spinner -->
+                        <div class="bg-white rounded-2xl border border-cream-dark p-8 text-center">
+                            <div class="spinner mx-auto mb-4"></div>
+                            <div class="text-sm font-semibold text-terracotta-deep">Spinner</div>
+                            <div class="text-xs text-terracotta-deep/60 mt-1">Full-page or centered content loading</div>
+                        </div>
+
+                        <!-- Dots -->
+                        <div class="bg-white rounded-2xl border border-cream-dark p-8 text-center">
+                            <div class="mb-4 py-3">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <div class="text-sm font-semibold text-terracotta-deep">Bouncing dots</div>
+                            <div class="text-xs text-terracotta-deep/60 mt-1">Chat &amp; message indicators</div>
+                        </div>
+
+                        <!-- Progress bar -->
+                        <div class="bg-white rounded-2xl border border-cream-dark p-8">
+                            <div class="progress-bar mb-6"><div class="progress-fill"></div></div>
+                            <div class="text-sm font-semibold text-terracotta-deep text-center">Progress bar</div>
+                            <div class="text-xs text-terracotta-deep/60 mt-1 text-center">Top of page during navigation</div>
+                        </div>
+
+                        <!-- Button loading state -->
+                        <div class="bg-white rounded-2xl border border-cream-dark p-8 text-center">
+                            <button class="bg-terracotta text-white font-semibold px-6 py-3 rounded-lg opacity-90 cursor-wait inline-flex items-center gap-2 mb-4" disabled>
+                                <div class="spinner" style="width:16px; height:16px; border-width:2px; border-top-color:white; border-color:rgba(255,255,255,0.3);"></div>
+                                Processing...
+                            </button>
+                            <div class="text-sm font-semibold text-terracotta-deep">Button loading</div>
+                            <div class="text-xs text-terracotta-deep/60 mt-1">Form submissions, payment</div>
+                        </div>
+
+                        <!-- Full page overlay -->
+                        <div class="bg-cream-dark/50 rounded-2xl border border-cream-dark p-8 text-center backdrop-blur">
+                            <div class="spinner mx-auto mb-4"></div>
+                            <div class="text-sm font-semibold text-terracotta-deep mb-1">Confirming your booking...</div>
+                            <div class="text-xs text-terracotta-deep/60">Please don't close this window</div>
+                        </div>
+
+                        <!-- Content pulse -->
+                        <div class="bg-white rounded-2xl border border-cream-dark p-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 rounded-full skel"></div>
+                                <div class="flex-1 space-y-2">
+                                    <div class="skel h-3 w-2/3"></div>
+                                    <div class="skel h-2 w-1/3"></div>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="skel h-3 w-full"></div>
+                                <div class="skel h-3 w-full"></div>
+                                <div class="skel h-3 w-4/5"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Empty & Error -->
+                <section>
+                    <div class="mb-6">
+                        <h2 class="font-display text-2xl font-semibold text-terracotta-deep">Empty &amp; error states</h2>
+                        <p class="text-sm text-terracotta-deep/70 mt-1">When the load finishes but there's nothing to show — or something went wrong.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <div class="bg-white rounded-2xl border border-cream-dark p-10 text-center">
+                            <div class="w-16 h-16 rounded-full bg-cream-dark mx-auto flex items-center justify-center mb-4">
+                                <svg width="30" height="30" fill="none" stroke="#6B2416" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                            </div>
+                            <h3 class="font-display text-xl font-semibold text-terracotta-deep mb-2">No stays match your filters</h3>
+                            <p class="text-sm text-terracotta-deep/70 mb-4">Try widening your search or clearing some filters.</p>
+                            <button class="bg-terracotta text-white font-semibold px-5 py-2 rounded-lg text-sm">Clear all filters</button>
+                        </div>
+
+                        <div class="bg-white rounded-2xl border border-cream-dark p-10 text-center">
+                            <div class="w-16 h-16 rounded-full bg-red-100 mx-auto flex items-center justify-center mb-4">
+                                <svg width="30" height="30" fill="none" stroke="#DC2626" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                            </div>
+                            <h3 class="font-display text-xl font-semibold text-terracotta-deep mb-2">Something went wrong</h3>
+                            <p class="text-sm text-terracotta-deep/70 mb-4">We couldn't load this page. Please try again.</p>
+                            <button class="bg-terracotta text-white font-semibold px-5 py-2 rounded-lg text-sm">Retry</button>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <div id="footerSlot"></div>
+            <script src="_common.js"></script>
+        </body>
+    </html>

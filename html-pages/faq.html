@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ — LakeStay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terracotta: { DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
+                        amber: { warm: '#F2A65A', light: '#F9C89B' },
+                        cream: { DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+                    },
+                    fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #FFF8F0;
+            color: #2C1810;
+        }
+
+        .font-display {
+            font-family: 'Fraunces', Georgia, serif;
+        }
+
+        details[open] summary .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-icon {
+            transition: transform 0.2s ease;
+        }
+
+        .side-link.active {
+            background: #FBEDE1;
+            color: #C65D3E;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body class="antialiased" data-page="faq">
+    <div id="navSlot"></div>
+
+    <!-- Hero -->
+    <section class="py-14 text-center bg-cream-dark/40">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-terracotta font-semibold uppercase tracking-widest text-xs mb-3">Help center</p>
+            <h1 class="font-display text-4xl md:text-5xl font-semibold text-terracotta-deep mb-4">How can we help?</h1>
+            <div class="relative max-w-lg mx-auto">
+                <input type="text" placeholder="Search FAQs..."
+                    class="w-full pl-12 pr-4 py-3.5 rounded-full border border-cream-dark bg-white focus:outline-none focus:border-terracotta shadow-sm" />
+                <svg class="absolute left-4 top-1/2 -translate-y-1/2 text-terracotta-deep/60" width="20" height="20"
+                    fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Category nav -->
+            <aside class="lg:col-span-1">
+                <div class="lg:sticky lg:top-24 space-y-1">
+                    <a href="#booking"
+                        class="side-link active block px-4 py-2.5 rounded-lg text-sm text-terracotta-deep hover:bg-cream-dark">Booking
+                        &amp; reservations</a>
+                    <a href="#stay"
+                        class="side-link block px-4 py-2.5 rounded-lg text-sm text-terracotta-deep hover:bg-cream-dark">The
+                        stay</a>
+                    <a href="#payment"
+                        class="side-link block px-4 py-2.5 rounded-lg text-sm text-terracotta-deep hover:bg-cream-dark">Payment
+                        &amp; pricing</a>
+                    <a href="#cancellation"
+                        class="side-link block px-4 py-2.5 rounded-lg text-sm text-terracotta-deep hover:bg-cream-dark">Cancellation
+                        &amp; refunds</a>
+                    <a href="#groups"
+                        class="side-link block px-4 py-2.5 rounded-lg text-sm text-terracotta-deep hover:bg-cream-dark">Groups
+                        &amp; corporate</a>
+                    <a href="#getting-there"
+                        class="side-link block px-4 py-2.5 rounded-lg text-sm text-terracotta-deep hover:bg-cream-dark">Getting
+                        there</a>
+                    <a href="#activities"
+                        class="side-link block px-4 py-2.5 rounded-lg text-sm text-terracotta-deep hover:bg-cream-dark">Activities
+                        &amp; add-ons</a>
+                </div>
+            </aside>
+
+            <!-- FAQ content -->
+            <div class="lg:col-span-3 space-y-10">
+
+                <section id="booking">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-terracotta-deep mb-5">Booking &amp;
+                        reservations</h2>
+                    <div class="space-y-3">
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>How do I book a stay?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">Pick a property from our <a
+                                    href="properties.html" class="text-terracotta">Stays page</a>, choose your dates and
+                                guest count, add any experiences, fill in your details, and pay. Instant confirmation.
+                                Total time: 60 seconds.</p>
+                        </details>
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>How far in advance can I book?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">Up to 4 months out. For dates further,
+                                WhatsApp us — we can usually block them off manually.</p>
+                        </details>
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>Can I book without paying online?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">Yes. For enquiries or group bookings,
+                                WhatsApp us on +91 98765 43210 and we'll block dates and share payment options.</p>
+                        </details>
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>Is my booking confirmed instantly?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">Yes for all listings marked "Instant book"
+                                (which is most of them). You'll get an SMS, WhatsApp message, and email within 60
+                                seconds with the voucher.</p>
+                        </details>
+                    </div>
+                </section>
+
+                <section id="stay">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-terracotta-deep mb-5">The stay</h2>
+                    <div class="space-y-3">
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>What's included in the price?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">Every stay includes: accommodation, evening
+                                tea &amp; snacks, BBQ dinner, bonfire, breakfast, and access to lake-view areas. Some
+                                activities are add-ons.</p>
+                        </details>
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>What are check-in and check-out times?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">Check-in from 12:00 PM. Check-out by 11:00
+                                AM. Early check-in and late check-out subject to availability — ask your host.</p>
+                        </details>
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>Do I need to carry ID?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">Yes. All adult guests need a valid
+                                government photo ID at check-in (Aadhaar, DL, PAN, Passport, or Voter ID). It's a
+                                Maharashtra regulation, not our rule.</p>
+                        </details>
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>Is alcohol allowed?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">You can bring your own. Some properties sell
+                                it, some don't — check the individual listing. Please drink responsibly around the water
+                                and bonfire.</p>
+                        </details>
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>Are pets allowed?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">Some properties are pet-friendly with a
+                                ₹500/night fee. Filter by "Pet-friendly" on the Stays page or ask us.</p>
+                        </details>
+                    </div>
+                </section>
+
+                <section id="payment">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-terracotta-deep mb-5">Payment &amp;
+                        pricing</h2>
+                    <div class="space-y-3">
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>What payment methods do you accept?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">UPI (all apps), credit/debit cards (Visa,
+                                MC, RuPay, Amex), net banking, and wallets (Paytm, Amazon Pay). Balance amount can also
+                                be paid in cash on arrival.</p>
+                        </details>
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>Can I pay in installments?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">Yes. Choose "Pay 30% now, rest on arrival"
+                                at checkout. No interest, no fees.</p>
+                        </details>
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>Are the prices per person or per night?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">Tents are usually per person per night.
+                                Villas and cottages are per night (whole property). Check the listing — it's labeled
+                                clearly on each card.</p>
+                        </details>
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>Any hidden fees?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">No. Cleaning fee (₹200) and service fee
+                                (₹150) are shown before you pay. GST (18%) applies. That's it.</p>
+                        </details>
+                    </div>
+                </section>
+
+                <section id="cancellation">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-terracotta-deep mb-5">Cancellation
+                        &amp; refunds</h2>
+                    <div class="space-y-3">
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>What's the cancellation policy?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">Free cancellation up to 7 days before
+                                check-in. 50% refund up to 3 days before. No refund within 72 hours — but you can
+                                reschedule up to 6 months out. Full details: <a href="cancellation.html"
+                                    class="text-terracotta">Cancellation Policy</a>.</p>
+                        </details>
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>How long do refunds take?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">3–5 business days to your original payment
+                                method. UPI refunds are usually instant.</p>
+                        </details>
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>Can I reschedule instead of cancel?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">Yes — usually a better option. Reschedule
+                                for free up to 3 days before check-in. After that, one reschedule per booking with ₹200
+                                fee.</p>
+                        </details>
+                    </div>
+                </section>
+
+                <section id="groups">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-terracotta-deep mb-5">Groups &amp;
+                        corporate</h2>
+                    <div class="space-y-3">
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>Do you handle corporate offsites?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">Yes — from 10 to 100+ people. Dedicated
+                                coordinator, custom pricing, team-building activities, and GST invoicing. WhatsApp us
+                                for a quote.</p>
+                        </details>
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>Can we book out a whole property?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">Yes. Whole-property bookings for villas,
+                                farmhouses, and camps are common — bulk pricing kicks in from 10+ guests.</p>
+                        </details>
+                    </div>
+                </section>
+
+                <section id="getting-there">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-terracotta-deep mb-5">Getting there
+                    </h2>
+                    <div class="space-y-3">
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>How do I reach Pawna Lake?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">From Pune (~2 hrs): via Talegaon or Kamshet.
+                                From Mumbai (~2.5 hrs): via Mumbai-Pune Expressway, exit at Kamshet. Nearest station:
+                                Kamshet. We share exact directions on WhatsApp after booking.</p>
+                        </details>
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>Do you offer pickup from the station?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">From Kamshet — yes, at cost (~₹400 one way).
+                                Ask your host after booking.</p>
+                        </details>
+                    </div>
+                </section>
+
+                <section id="activities">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-terracotta-deep mb-5">Activities
+                        &amp; add-ons</h2>
+                    <div class="space-y-3">
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>What activities are available?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">Kayaking, sunrise treks, boat rides, yoga,
+                                live music, and more. See the full list on our <a href="experiences.html"
+                                    class="text-terracotta">Experiences page</a>.</p>
+                        </details>
+                        <details class="bg-white rounded-xl p-5 border border-cream-dark">
+                            <summary
+                                class="flex items-center justify-between cursor-pointer font-semibold text-terracotta-deep list-none">
+                                <span>Can I book activities after arrival?</span><span
+                                    class="faq-icon text-terracotta text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-sm text-terracotta-deep/75">Most, yes — but book kayaking and treks in
+                                advance since spots are limited on weekends.</p>
+                        </details>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Still stuck -->
+    <section class="bg-terracotta py-12 text-center text-white">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-display text-3xl font-semibold mb-3">Still have questions?</h2>
+            <p class="mb-6 text-white/85">Our team's a WhatsApp away.</p>
+            <a href="https://wa.me/919876543210"
+                class="inline-block bg-white text-terracotta-deep font-semibold px-8 py-3 rounded-lg hover:bg-cream">WhatsApp
+                us →</a>
+        </div>
+    </section>
+
+    <div id="footerSlot"></div>
+    <script src="_common.js"></script>
+    <script>
+        document.querySelectorAll('.side-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelectorAll('.side-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
