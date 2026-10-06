@@ -9,7 +9,7 @@ export const HeroSection: React.FC = () => {
       {/* Background Hero Image (overflow-hidden scoped to image wrapper) */}
       <div className="absolute inset-0 overflow-hidden z-0">
         <img
-          src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1920&q=80"
+          src="/swiss-tent/swiss-tent-1.jpg"
           alt="Lakeside camping tent at sunset"
           className="w-full h-full object-cover"
         />

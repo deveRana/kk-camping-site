@@ -3,24 +3,24 @@ import { GalleryItem } from '@/types';
 export const MOCK_GALLERY: GalleryItem[] = [
   {
     id: 'gal-1',
-    title: 'Sunset Glamping Dome',
+    title: 'Swiss Luxury Tent',
     category: 'Campsites',
-    imageUrl: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Golden hour at Sunset Haven luxury dome tent.'
+    imageUrl: '/swiss-tent/swiss-tent-1.jpg',
+    caption: 'Luxury Swiss Tent with attached washroom, interior lighting & fan.'
   },
   {
     id: 'gal-2',
-    title: 'Pawna Lake Horizon',
-    category: 'Sunsets',
-    imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Calm water surface reflecting vibrant orange and purple sky.'
+    title: 'Machang Wooden Cottages',
+    category: 'Campsites',
+    imageUrl: '/machang-cottage-images/machang-cottage-1.jpg',
+    caption: 'Elevated machang wooden cottage with private porch overlooking lake.'
   },
   {
     id: 'gal-3',
-    title: 'Sunset Kayaking',
-    category: 'Activities',
-    imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Kayakers paddling across the open water at dusk.'
+    title: 'White Tent Camping Setup',
+    category: 'Campsites',
+    imageUrl: '/white-tent/white-tent-1.jpg',
+    caption: 'Premium white canvas dome tents with interior charging board.'
   },
   {
     id: 'gal-4',
@@ -31,10 +31,10 @@ export const MOCK_GALLERY: GalleryItem[] = [
   },
   {
     id: 'gal-5',
-    title: 'Misty Bay Pine Cottage',
+    title: 'Machang Interior & View',
     category: 'Campsites',
-    imageUrl: 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Rustic pinewood cottage enveloped by morning mountain fog.'
+    imageUrl: '/machang-cottage-images/machang-cottage-3.jpg',
+    caption: 'Spacious interior stay inside Machang Cottage at Pawna NightHunt.'
   },
   {
     id: 'gal-6',
@@ -45,10 +45,10 @@ export const MOCK_GALLERY: GalleryItem[] = [
   },
   {
     id: 'gal-7',
-    title: 'Starlit Sky Over Tent',
-    category: 'Sunsets',
-    imageUrl: 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Milky way and starry constellation view over Pawna tents.'
+    title: 'White Canvas Lakeside Tents',
+    category: 'Campsites',
+    imageUrl: '/white-tent/white-tent-2.jpg',
+    caption: 'Lakeside canvas tents surrounded by nature and hills.'
   },
   {
     id: 'gal-8',

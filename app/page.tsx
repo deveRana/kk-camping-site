@@ -6,12 +6,10 @@ import { HeroSection } from '@/components/sections/HeroSection';
 import { PropertyGrid } from '@/components/sections/PropertyGrid';
 import { TestimonialSection } from '@/components/sections/TestimonialSection';
 import { MOCK_PROPERTIES } from '@/lib/mock-data/properties';
-import { MOCK_EXPERIENCES } from '@/lib/mock-data/experiences';
 import { MOCK_TESTIMONIALS } from '@/lib/mock-data/testimonials';
 import { MOCK_FAQS } from '@/lib/mock-data/faqs';
 import { Accordion } from '@/components/ui/Accordion';
 import { Badge } from '@/components/ui/Badge';
-import { ExperienceCard } from '@/components/sections/ExperienceCard';
 
 export default function HomePage() {
   const featuredProperties = MOCK_PROPERTIES.filter((p) => p.isFeatured);
@@ -93,26 +91,6 @@ export default function HomePage() {
         <PropertyGrid properties={featuredProperties} />
       </section>
 
-      {/* Popular Experiences Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <Badge variant="amber" size="sm">
-            Unforgettable Memories
-          </Badge>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-terracotta-deep mt-2">
-            Top Lake Activities
-          </h2>
-          <p className="text-sm text-terracotta-deep/70 mt-1">
-            Elevate your campsite weekend with curated water sports and night events.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {MOCK_EXPERIENCES.slice(0, 3).map((exp) => (
-            <ExperienceCard key={exp.id} experience={exp} />
-          ))}
-        </div>
-      </section>
 
       {/* Testimonials */}
       <TestimonialSection testimonials={MOCK_TESTIMONIALS} />

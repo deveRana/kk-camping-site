@@ -133,23 +133,6 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
             </div>
           </div>
 
-          {/* Host Info Card */}
-          <div className="flex items-center gap-4 p-6 bg-white rounded-2xl border border-cream-dark">
-            <img
-              src={property.host.avatar}
-              alt={property.host.name}
-              className="w-14 h-14 rounded-full object-cover border border-cream-dark"
-            />
-            <div>
-              <div className="flex items-center gap-2">
-                <h3 className="font-display text-lg font-semibold text-terracotta-deep">
-                  Hosted by {property.host.name}
-                </h3>
-                {property.host.superhost && <Badge variant="amber">Superhost</Badge>}
-              </div>
-              <p className="text-xs text-terracotta-deep/70 mt-0.5">{property.host.joined}</p>
-            </div>
-          </div>
 
           {/* Description */}
           <div className="space-y-3">

@@ -121,3 +121,85 @@ export interface GalleryItem {
   imageUrl: string;
   caption: string;
 }
+
+export interface CampingPackage {
+  id: string;
+  slug: string;
+  name: string;
+  tagline: string;
+  pricePerPerson: number;
+  originalPricePerPerson?: number;
+  washroomType: 'Attached' | 'Common';
+  capacity: string;
+  hasAttachedWashroom: boolean;
+  hasLightFanBoard: boolean;
+  coverImage: string;
+  gallery: string[];
+  highlights: string[];
+  inclusions: string[];
+  category: 'Glamping' | 'Cottage' | 'Dome' | 'Tent Camping' | 'Villa';
+}
+
+export interface ScheduleItem {
+  time: string;
+  title: string;
+  description: string;
+  icon?: string;
+}
+
+export interface CampsiteDaySchedule {
+  day: string;
+  title: string;
+  items: ScheduleItem[];
+}
+
+export interface FoodCategoryMenu {
+  categoryName: string;
+  type: 'Snacks' | 'BBQ' | 'Dinner' | 'Breakfast';
+  timing?: string;
+  isUnlimited: boolean;
+  vegOptions: string[];
+  nonVegOptions?: string[];
+  specialNote?: string;
+}
+
+export interface TentArrangementDetails {
+  sharingTypes: string[];
+  privacyGuarantee: string;
+  beddingProvided: string[];
+  hygieneNotice: string;
+}
+
+export interface CampsiteMasterInfo {
+  name: string;
+  brandName: string;
+  tagline: string;
+  website?: string;
+  contactNumbers: string[];
+  advancePaymentPercentage: number;
+  paymentMethods: string[];
+  paymentUPI: string;
+  location: {
+    address: string;
+    landmark: string;
+    googleMapsUrl: string;
+    coordinates: {
+      lat: number;
+      lng: number;
+    };
+  };
+  checkInTime: string;
+  checkOutTime: string;
+  freeActivities: string[];
+  otherFacilities: string[];
+  additionalServices: Array<{
+    name: string;
+    included: boolean;
+    note?: string;
+  }>;
+  schedule: CampsiteDaySchedule[];
+  foodMenu: FoodCategoryMenu[];
+  tentArrangement: TentArrangementDetails;
+  packages: CampingPackage[];
+}
+
