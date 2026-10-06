@@ -15,20 +15,20 @@ export default function BlogsPage() {
       <Breadcrumbs items={[{ label: 'Blogs & Guides' }]} />
 
       <div className="text-center max-w-2xl mx-auto space-y-3">
-        <Badge variant="terracotta" size="sm">
+        <Badge variant="forest" size="sm">
           Travel Tips &amp; Stories
         </Badge>
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-terracotta-deep">
+        <h1 className="font-display text-4xl md:text-5xl font-semibold text-forest-deep">
           Pawna Lake Camping Guides
         </h1>
-        <p className="text-sm text-terracotta-deep/75 leading-relaxed">
+        <p className="text-sm text-forest-deep/75 leading-relaxed">
           Insider advice on best seasons, route directions, glamping tips, and hidden sunset spots around Lonavala.
         </p>
       </div>
 
       {/* Featured Main Post Banner */}
       {featuredPost && (
-        <div className="bg-white rounded-2xl border border-cream-dark overflow-hidden shadow-lg grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="bg-white rounded-2xl border border-mist overflow-hidden shadow-lg grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="relative h-64 lg:h-auto min-h-[300px]">
             <img
               src={featuredPost.coverImage}
@@ -36,37 +36,37 @@ export default function BlogsPage() {
               className="w-full h-full object-cover"
             />
             <div className="absolute top-4 left-4">
-              <Badge variant="terracotta">Featured Guide</Badge>
+              <Badge variant="forest">Featured Guide</Badge>
             </div>
           </div>
 
           <div className="p-8 flex flex-col justify-between space-y-4">
             <div className="space-y-3">
-              <span className="text-xs text-terracotta-deep/60">{featuredPost.publishedAt} · {featuredPost.readTime}</span>
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-terracotta-deep hover:text-terracotta transition">
+              <span className="text-xs text-forest-deep/60">{featuredPost.publishedAt} · {featuredPost.readTime}</span>
+              <h2 className="font-display text-2xl md:text-3xl font-semibold text-forest-deep hover:text-forest transition">
                 <a href={`/blogs/${featuredPost.slug}`}>{featuredPost.title}</a>
               </h2>
-              <p className="text-sm text-terracotta-deep/80 leading-relaxed">
+              <p className="text-sm text-forest-deep/80 leading-relaxed">
                 {featuredPost.excerpt}
               </p>
             </div>
 
-            <div className="flex items-center justify-between pt-4 border-t border-cream-dark">
+            <div className="flex items-center justify-between pt-4 border-t border-mist">
               <div className="flex items-center gap-3">
                 <img
                   src={featuredPost.author.avatar}
                   alt={featuredPost.author.name}
-                  className="w-10 h-10 rounded-full object-cover border border-cream-dark"
+                  className="w-10 h-10 rounded-full object-cover border border-mist"
                 />
                 <div>
-                  <p className="text-xs font-semibold text-terracotta-deep">{featuredPost.author.name}</p>
-                  <p className="text-[10px] text-terracotta-deep/60">{featuredPost.author.role}</p>
+                  <p className="text-xs font-semibold text-forest-deep">{featuredPost.author.name}</p>
+                  <p className="text-[10px] text-forest-deep/60">{featuredPost.author.role}</p>
                 </div>
               </div>
 
               <a
                 href={`/blogs/${featuredPost.slug}`}
-                className="text-xs font-semibold text-terracotta hover:underline"
+                className="text-xs font-semibold text-forest hover:underline"
               >
                 Read Full Guide →
               </a>

@@ -35,16 +35,16 @@ export const ModalRoot: React.FC = () => {
       role="dialog"
     >
       <div
-        className={`relative w-full ${sizeClass} bg-cream border border-cream-dark rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col transform transition-all animate-scaleUp`}
+        className={`relative w-full ${sizeClass} bg-paper border border-mist rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col transform transition-all animate-scaleUp`}
       >
         {modalOptions.title && (
-          <div className="flex items-center justify-between px-6 py-4 border-b border-cream-dark bg-white/50">
-            <h3 className="font-display text-xl font-semibold text-terracotta-deep">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-mist bg-white/50">
+            <h3 className="font-display text-xl font-semibold text-forest-deep">
               {modalOptions.title}
             </h3>
             <button
               onClick={closeModal}
-              className="p-1 text-terracotta-deep/60 hover:text-terracotta transition rounded-lg hover:bg-cream-dark/50"
+              className="p-1 text-forest-deep/60 hover:text-forest transition rounded-lg hover:bg-mist/50"
               aria-label="Close modal"
             >
               <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -57,7 +57,7 @@ export const ModalRoot: React.FC = () => {
         {!modalOptions.title && (
           <button
             onClick={closeModal}
-            className="absolute top-4 right-4 z-10 p-2 text-terracotta-deep/70 hover:text-terracotta bg-cream/80 backdrop-blur transition rounded-full hover:bg-white shadow"
+            className="absolute top-4 right-4 z-10 p-2 text-forest-deep/70 hover:text-forest bg-paper/80 backdrop-blur transition rounded-full hover:bg-white shadow"
             aria-label="Close modal"
           >
             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

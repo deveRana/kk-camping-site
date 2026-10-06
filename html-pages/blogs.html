@@ -4,21 +4,21 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Journal — LakeStay</title>
+    <title>Journal — Lakeora</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet" />
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        terracotta: { DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
-                        amber: { warm: '#F2A65A', light: '#F9C89B' },
-                        cream: { DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+                        terracotta: { DEFAULT: '#234B38', dark: '#1A3829', deep: '#152E21' },
+                        amber: { warm: '#A8C8A6', light: '#D3E3D1' },
+                        cream: { DEFAULT: '#F4F8F2', dark: '#E3ECDF' },
                     },
-                    fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    fontFamily: { display: ['"Cormorant Garamond"', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
                 }
             }
         };
@@ -26,12 +26,12 @@
     <style>
         body {
             font-family: 'Inter', system-ui, sans-serif;
-            background: #FFF8F0;
+            background: #F4F8F2;
             color: #2C1810;
         }
 
         .font-display {
-            font-family: 'Fraunces', Georgia, serif;
+            font-family: 'Cormorant Garamond', Georgia, serif;
         }
 
         .chip {
@@ -73,23 +73,23 @@
             <h1 class="font-display text-4xl md:text-5xl font-semibold text-terracotta-deep mb-4">Stories from the lake
             </h1>
             <p class="text-terracotta-deep/75">Guides, tips, and moments from Pawna Lake and beyond. Written by the
-                LakeStay team and guest writers.</p>
+                Lakeora team and guest writers.</p>
         </div>
     </section>
 
     <!-- Category chips -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
         <div class="flex flex-wrap gap-2 justify-center">
-            <button class="chip" style="background:#C65D3E; color:white;">All posts</button>
-            <button class="chip" style="background:white; border:1px solid #F5E9D7; color:#6B2416;">Travel
+            <button class="chip" style="background:#234B38; color:white;">All posts</button>
+            <button class="chip" style="background:white; border:1px solid #E3ECDF; color:#152E21;">Travel
                 guides</button>
-            <button class="chip" style="background:white; border:1px solid #F5E9D7; color:#6B2416;">Camping
+            <button class="chip" style="background:white; border:1px solid #E3ECDF; color:#152E21;">Camping
                 tips</button>
-            <button class="chip" style="background:white; border:1px solid #F5E9D7; color:#6B2416;">Food &amp;
+            <button class="chip" style="background:white; border:1px solid #E3ECDF; color:#152E21;">Food &amp;
                 recipes</button>
-            <button class="chip" style="background:white; border:1px solid #F5E9D7; color:#6B2416;">Local
+            <button class="chip" style="background:white; border:1px solid #E3ECDF; color:#152E21;">Local
                 culture</button>
-            <button class="chip" style="background:white; border:1px solid #F5E9D7; color:#6B2416;">Group trips</button>
+            <button class="chip" style="background:white; border:1px solid #E3ECDF; color:#152E21;">Group trips</button>
         </div>
     </div>
 
@@ -102,10 +102,10 @@
                     <img src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?auto=format&fit=crop&w=1200&q=80"
                         class="w-full h-72 lg:h-full object-cover group-hover:scale-105 transition duration-500"
                         alt="" />
-                    <div class="absolute top-4 left-4 chip" style="background:#C65D3E; color:white;">Featured</div>
+                    <div class="absolute top-4 left-4 chip" style="background:#234B38; color:white;">Featured</div>
                 </div>
                 <div class="p-6 md:p-10">
-                    <div class="chip" style="background:#F9C89B; color:#6B2416;">Travel guides</div>
+                    <div class="chip" style="background:#D3E3D1; color:#152E21;">Travel guides</div>
                     <h2
                         class="font-display text-3xl md:text-4xl font-semibold text-terracotta-deep mt-4 mb-3 group-hover:text-terracotta transition">
                         10 things to do at Pawna Lake (that aren't just camping)
@@ -137,7 +137,7 @@
                         class="w-full h-full object-cover" alt="" />
                 </div>
                 <div class="p-5">
-                    <span class="chip" style="background:#F9C89B; color:#6B2416;">Camping tips</span>
+                    <span class="chip" style="background:#D3E3D1; color:#152E21;">Camping tips</span>
                     <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-3 mb-2">First time camping?
                         Here's what to actually pack.</h3>
                     <p class="text-sm text-terracotta-deep/70">The essential list, and the "don't bother" list. Learned
@@ -153,7 +153,7 @@
                         class="w-full h-full object-cover" alt="" />
                 </div>
                 <div class="p-5">
-                    <span class="chip" style="background:#F9C89B; color:#6B2416;">Food &amp; recipes</span>
+                    <span class="chip" style="background:#D3E3D1; color:#152E21;">Food &amp; recipes</span>
                     <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-3 mb-2">The bonfire BBQ
                         marinade our host swears by</h3>
                     <p class="text-sm text-terracotta-deep/70">Curd, ginger-garlic, kasuri methi, and the one secret
@@ -169,7 +169,7 @@
                         class="w-full h-full object-cover" alt="" />
                 </div>
                 <div class="p-5">
-                    <span class="chip" style="background:#F9C89B; color:#6B2416;">Travel guides</span>
+                    <span class="chip" style="background:#D3E3D1; color:#152E21;">Travel guides</span>
                     <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-3 mb-2">Best time to visit
                         Pawna Lake, month by month</h3>
                     <p class="text-sm text-terracotta-deep/70">Monsoon vs winter vs summer — what each season really
@@ -185,7 +185,7 @@
                         class="w-full h-full object-cover" alt="" />
                 </div>
                 <div class="p-5">
-                    <span class="chip" style="background:#F9C89B; color:#6B2416;">Group trips</span>
+                    <span class="chip" style="background:#D3E3D1; color:#152E21;">Group trips</span>
                     <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-3 mb-2">How to plan a group
                         trip for 20 people (without losing it)</h3>
                     <p class="text-sm text-terracotta-deep/70">Booking hacks, transport tricks, food logistics — the
@@ -201,7 +201,7 @@
                         class="w-full h-full object-cover" alt="" />
                 </div>
                 <div class="p-5">
-                    <span class="chip" style="background:#F9C89B; color:#6B2416;">Local culture</span>
+                    <span class="chip" style="background:#D3E3D1; color:#152E21;">Local culture</span>
                     <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-3 mb-2">Meet the families who
                         host you at Pawna</h3>
                     <p class="text-sm text-terracotta-deep/70">Portraits of the local hosts behind our properties —
@@ -217,7 +217,7 @@
                         class="w-full h-full object-cover" alt="" />
                 </div>
                 <div class="p-5">
-                    <span class="chip" style="background:#F9C89B; color:#6B2416;">Camping tips</span>
+                    <span class="chip" style="background:#D3E3D1; color:#152E21;">Camping tips</span>
                     <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-3 mb-2">Kayaking on Pawna: a
                         beginner's guide</h3>
                     <p class="text-sm text-terracotta-deep/70">Best times, safety tips, what to wear, and why sunrise

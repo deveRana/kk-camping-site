@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Booking Confirmed! — LakeStay</title>
+    <title>Booking Confirmed! — Lakeora</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet" />
 
     <script>
@@ -17,12 +17,12 @@
             theme: {
                 extend: {
                     colors: {
-                        terracotta: { DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
-                        amber: { warm: '#F2A65A', light: '#F9C89B' },
-                        cream: { DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+                        terracotta: { DEFAULT: '#234B38', dark: '#1A3829', deep: '#152E21' },
+                        amber: { warm: '#A8C8A6', light: '#D3E3D1' },
+                        cream: { DEFAULT: '#F4F8F2', dark: '#E3ECDF' },
                     },
                     fontFamily: {
-                        display: ['Fraunces', 'Georgia', 'serif'],
+                        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
                         sans: ['Inter', 'system-ui', 'sans-serif'],
                     },
                 },
@@ -33,12 +33,12 @@
     <style>
         body {
             font-family: 'Inter', system-ui, sans-serif;
-            background: #FFF8F0;
+            background: #F4F8F2;
             color: #2C1810;
         }
 
         .font-display {
-            font-family: 'Fraunces', Georgia, serif;
+            font-family: 'Cormorant Garamond', Georgia, serif;
         }
 
         /* Success animation */
@@ -106,7 +106,7 @@
     <nav class="border-b border-cream-dark bg-cream/95">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <a href="index.html" class="font-display text-2xl font-semibold text-terracotta">LakeStay</a>
+                <a href="index.html" class="font-display text-2xl font-semibold text-terracotta">Lakeora</a>
                 <div class="text-sm text-terracotta-deep/70">Booking confirmed</div>
             </div>
         </div>
@@ -233,7 +233,7 @@
             <button
                 class="bg-white border border-cream-dark hover:border-terracotta rounded-xl p-4 flex items-center gap-3 transition">
                 <div class="w-10 h-10 rounded-full bg-cream-dark flex items-center justify-center flex-shrink-0">
-                    <svg width="20" height="20" fill="none" stroke="#6B2416" stroke-width="2" viewBox="0 0 24 24">
+                    <svg width="20" height="20" fill="none" stroke="#152E21" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
@@ -247,7 +247,7 @@
             <button
                 class="bg-white border border-cream-dark hover:border-terracotta rounded-xl p-4 flex items-center gap-3 transition">
                 <div class="w-10 h-10 rounded-full bg-cream-dark flex items-center justify-center flex-shrink-0">
-                    <svg width="20" height="20" fill="none" stroke="#6B2416" stroke-width="2" viewBox="0 0 24 24">
+                    <svg width="20" height="20" fill="none" stroke="#152E21" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
@@ -361,9 +361,9 @@
     <footer class="bg-terracotta-deep text-cream/80 py-8">
         <div
             class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-            <div class="font-display text-xl text-white font-semibold">LakeStay</div>
+            <div class="font-display text-xl text-white font-semibold">Lakeora</div>
             <div>Questions? <a href="#" class="text-amber-warm font-semibold hover:underline">+91 98765 43210</a></div>
-            <div class="text-xs">© 2026 LakeStay</div>
+            <div class="text-xs">© 2026 Lakeora</div>
         </div>
     </footer>
 
@@ -392,7 +392,7 @@
 
         // Confetti burst
         (function confetti() {
-            const colors = ['#C65D3E', '#F2A65A', '#F9C89B', '#FFF8F0'];
+            const colors = ['#234B38', '#A8C8A6', '#D3E3D1', '#F4F8F2'];
             for (let i = 0; i < 30; i++) {
                 setTimeout(() => {
                     const c = document.createElement('div');

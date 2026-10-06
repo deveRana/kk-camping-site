@@ -5,7 +5,7 @@ export const MOCK_FAQS: FAQItem[] = [
   {
     id: 'faq-1',
     category: 'General',
-    question: 'Where is Pawna Lake NightHunt campsite located?',
+    question: 'Where is Lakeora located?',
     answer: `Our campsite (${PAWNA_CAMPSITE_MASTER_DATA.brandName}) is located at Thakursai-Aajiwali Rd, At Gevhande Khadak, Pawna Lake, Maharashtra 410406. It takes approx 2.5 hours from Mumbai and 1.5 hours from Pune.`
   },
   {

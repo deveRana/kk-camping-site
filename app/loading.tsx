@@ -16,7 +16,7 @@ export default function Loading() {
       {/* Grid of skeleton cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {[1, 2, 3].map((n) => (
-          <div key={n} className="bg-white rounded-2xl overflow-hidden border border-cream-dark p-5 space-y-4">
+          <div key={n} className="bg-white rounded-2xl overflow-hidden border border-mist p-5 space-y-4">
             <Skeleton className="h-56 w-full rounded-xl" />
             <div className="flex justify-between items-center">
               <Skeleton className="h-4 w-28" />
@@ -29,7 +29,7 @@ export default function Loading() {
               <Skeleton className="h-6 w-16 rounded-full" />
               <Skeleton className="h-6 w-16 rounded-full" />
             </div>
-            <div className="flex justify-between items-center pt-3 border-t border-cream-dark">
+            <div className="flex justify-between items-center pt-3 border-t border-mist">
               <Skeleton className="h-8 w-24" />
               <Skeleton className="h-9 w-24 rounded-xl" />
             </div>

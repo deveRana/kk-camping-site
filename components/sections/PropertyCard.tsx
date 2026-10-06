@@ -29,9 +29,9 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
 
   return (
     <Link href={`/properties/${property.slug}`} className="group block">
-      <div className="bg-white rounded-2xl border border-cream-dark overflow-hidden transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-xl flex flex-col h-full">
+      <div className="bg-white rounded-[1.75rem] border border-mist overflow-hidden transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-2xl group-hover:shadow-forest/15 flex flex-col h-full">
         {/* Cover Image Container */}
-        <div className="relative h-56 w-full overflow-hidden bg-cream-dark">
+        <div className="relative h-64 mx-3 mt-3 overflow-hidden bg-mist rounded-t-[9rem] rounded-b-2xl">
           <img
             src={property.coverImage}
             alt={property.title}
@@ -40,8 +40,8 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
 
           {/* Category Pill */}
-          <div className="absolute top-3 left-3">
-            <Badge variant="terracotta" size="sm">
+          <div className="absolute bottom-3 left-3">
+            <Badge variant="forest" size="sm" className="!bg-white/90 shadow backdrop-blur">
               {property.category}
             </Badge>
           </div>
@@ -49,11 +49,11 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
           {/* Wishlist Heart Button */}
           <button
             onClick={toggleWishlist}
-            className="absolute top-3 right-3 p-2 rounded-full bg-white/80 backdrop-blur-md text-terracotta hover:bg-white transition-transform duration-200 hover:scale-110 shadow"
+            className="absolute bottom-3 right-3 p-2 rounded-full bg-white/80 backdrop-blur-md text-forest hover:bg-white transition-transform duration-200 hover:scale-110 shadow"
             aria-label="Toggle Wishlist"
           >
             <svg
-              className={`w-5 h-5 ${isWishlisted ? 'fill-terracotta stroke-terracotta' : 'fill-none stroke-current'}`}
+              className={`w-5 h-5 ${isWishlisted ? 'fill-forest stroke-forest' : 'fill-none stroke-current'}`}
               strokeWidth="2"
               viewBox="0 0 24 24"
             >
@@ -65,16 +65,16 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
         {/* Content Body */}
         <div className="p-5 flex flex-col justify-between flex-1 space-y-4">
           <div>
-            <div className="flex items-center justify-between text-xs text-terracotta-deep/70 mb-1.5">
+            <div className="flex items-center justify-between text-xs text-forest-deep/70 mb-1.5">
               <span>{property.location}</span>
               <Rating score={property.rating} reviewCount={property.reviewCount} />
             </div>
 
-            <h3 className="font-display text-xl font-semibold text-terracotta-deep group-hover:text-terracotta transition line-clamp-1">
+            <h3 className="font-display text-xl font-semibold text-forest-deep group-hover:text-forest transition line-clamp-1">
               {property.title}
             </h3>
 
-            <p className="text-xs text-terracotta-deep/70 mt-1 line-clamp-2 leading-relaxed">
+            <p className="text-xs text-forest-deep/70 mt-1 line-clamp-2 leading-relaxed">
               {property.tagline}
             </p>
           </div>
@@ -82,30 +82,30 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
           {/* Feature Badges */}
           <div className="flex flex-wrap gap-1.5">
             {property.features.slice(0, 3).map((feat, idx) => (
-              <Badge key={idx} variant="cream" size="sm">
+              <Badge key={idx} variant="paper" size="sm">
                 {feat}
               </Badge>
             ))}
           </div>
 
           {/* Price & Action */}
-          <div className="pt-3 border-t border-cream-dark flex items-center justify-between">
+          <div className="pt-3 border-t border-mist flex items-center justify-between">
             <div>
-              <span className="text-xs text-terracotta-deep/60 block">Starts from</span>
+              <span className="text-xs text-forest-deep/60 block">Starts from</span>
               <div className="flex items-baseline gap-1.5">
-                <span className="font-display text-xl font-bold text-terracotta">
+                <span className="font-display text-xl font-semibold text-forest">
                   ₹{property.price.toLocaleString()}
                 </span>
-                <span className="text-xs text-terracotta-deep/60">/ night</span>
+                <span className="text-xs text-forest-deep/60">/ night</span>
                 {property.originalPrice && (
-                  <span className="text-xs line-through text-terracotta-deep/40">
+                  <span className="text-xs line-through text-forest-deep/40">
                     ₹{property.originalPrice.toLocaleString()}
                   </span>
                 )}
               </div>
             </div>
 
-            <span className="bg-cream-dark group-hover:bg-terracotta group-hover:text-white text-terracotta-deep text-xs font-semibold px-3.5 py-2 rounded-xl transition duration-200">
+            <span className="bg-mist group-hover:bg-forest group-hover:text-white text-forest-deep text-xs font-semibold px-3.5 py-2 rounded-xl transition duration-200">
               View Stay
             </span>
           </div>

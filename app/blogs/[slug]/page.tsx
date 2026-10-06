@@ -36,21 +36,21 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
 
       {/* Header */}
       <div className="space-y-4">
-        <Badge variant="terracotta">{post.category}</Badge>
-        <h1 className="font-display text-3xl md:text-5xl font-bold text-terracotta-deep leading-tight">
+        <Badge variant="forest">{post.category}</Badge>
+        <h1 className="font-display text-3xl md:text-5xl font-semibold text-forest-deep leading-tight">
           {post.title}
         </h1>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-cream-dark">
+        <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-mist">
           <div className="flex items-center gap-3">
             <img
               src={post.author.avatar}
               alt={post.author.name}
-              className="w-11 h-11 rounded-full object-cover border border-cream-dark"
+              className="w-11 h-11 rounded-full object-cover border border-mist"
             />
             <div>
-              <p className="text-sm font-semibold text-terracotta-deep">{post.author.name}</p>
-              <p className="text-xs text-terracotta-deep/60">
+              <p className="text-sm font-semibold text-forest-deep">{post.author.name}</p>
+              <p className="text-xs text-forest-deep/60">
                 {post.publishedAt} · {post.readTime}
               </p>
             </div>
@@ -63,25 +63,25 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
       </div>
 
       {/* Cover Image */}
-      <div className="h-80 md:h-[450px] rounded-2xl overflow-hidden shadow-lg border border-cream-dark">
+      <div className="h-80 md:h-[450px] rounded-2xl overflow-hidden shadow-lg border border-mist">
         <img src={post.coverImage} alt={post.title} className="w-full h-full object-cover" />
       </div>
 
       {/* Article Content */}
-      <article className="bg-white rounded-2xl p-8 md:p-12 border border-cream-dark prose prose-stone max-w-none space-y-6 text-terracotta-deep/90 leading-relaxed text-base">
-        <p className="text-lg font-medium text-terracotta-deep leading-relaxed italic border-l-4 border-terracotta pl-4 bg-cream/30 py-2">
+      <article className="bg-white rounded-2xl p-8 md:p-12 border border-mist prose prose-stone max-w-none space-y-6 text-forest-deep/90 leading-relaxed text-base">
+        <p className="text-lg font-medium text-forest-deep leading-relaxed italic border-l-4 border-forest pl-4 bg-paper/30 py-2">
           {post.excerpt}
         </p>
 
         <div className="whitespace-pre-line space-y-4">{post.content}</div>
 
         {/* Tags */}
-        <div className="pt-8 border-t border-cream-dark flex flex-wrap gap-2 items-center">
-          <span className="text-xs font-semibold uppercase tracking-wider text-terracotta-deep/60 mr-2">
+        <div className="pt-8 border-t border-mist flex flex-wrap gap-2 items-center">
+          <span className="text-xs font-semibold uppercase tracking-wider text-forest-deep/60 mr-2">
             Tags:
           </span>
           {post.tags.map((tag) => (
-            <Badge key={tag} variant="cream">
+            <Badge key={tag} variant="paper">
               #{tag}
             </Badge>
           ))}

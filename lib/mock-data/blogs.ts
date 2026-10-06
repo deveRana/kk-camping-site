@@ -22,7 +22,7 @@ Pawna Lake has transformed into Maharashtra’s favorite weekend getaway. Situat
 - Warm jackets or blankets for night breeze.
 - Comfortable sports shoes for walking along rocky shorelines.
 - Power bank for keeping electronics charged.
-- Personal mosquito repellent cream.
+- Personal mosquito repellent paper.
     `,
     category: 'Travel Guide',
     coverImage: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80',
@@ -66,7 +66,7 @@ Classic tent camping focuses on authentic outdoorsiness — sleeping under doubl
     title: 'Top 5 Water Activities You Must Try at Pawna Lake',
     excerpt: 'From peaceful kayaking at sunrise to exhilarating speed boating and banana rides across the lake waters.',
     content: `
-Water sports add an extra surge of excitement to your weekend campsite stay! Here are the top five activities available at LakeStay camps.
+Water sports add an extra surge of excitement to your weekend campsite stay! Here are the top five activities available at Lakeora camps.
 
 1. **Sunset Kayaking:** Quiet single or double kayak exploration.
 2. **Speed Boating:** Thrilling lake ride with professional boat captains.

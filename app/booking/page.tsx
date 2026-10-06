@@ -80,28 +80,28 @@ export default function BookingPage({ searchParams }: { searchParams: Promise<{ 
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       <Breadcrumbs items={[{ label: 'Book Stay' }]} />
 
-      <h1 className="font-display text-3xl md:text-4xl font-bold text-terracotta-deep">
+      <h1 className="font-display text-4xl md:text-5xl font-semibold text-forest-deep">
         Complete Your Reservation
       </h1>
 
       {/* Step Indicators */}
-      <div className="flex items-center justify-between max-w-xl mx-auto border-b border-cream-dark pb-4">
+      <div className="flex items-center justify-between max-w-xl mx-auto border-b border-mist pb-4">
         {[1, 2, 3].map((s) => (
           <div key={s} className="flex items-center gap-2">
             <span
               className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
                 step === s
-                  ? 'bg-terracotta text-white'
+                  ? 'bg-forest text-white'
                   : step > s
                   ? 'bg-emerald-600 text-white'
-                  : 'bg-cream-dark text-terracotta-deep/60'
+                  : 'bg-mist text-forest-deep/60'
               }`}
             >
               {step > s ? '✓' : s}
             </span>
             <span
               className={`text-xs font-semibold ${
-                step === s ? 'text-terracotta' : 'text-terracotta-deep/60'
+                step === s ? 'text-forest' : 'text-forest-deep/60'
               }`}
             >
               {s === 1 ? 'Add-ons' : s === 2 ? 'Contact Details' : 'Payment'}
@@ -114,8 +114,8 @@ export default function BookingPage({ searchParams }: { searchParams: Promise<{ 
         {/* Left 2 Columns: Multi-step Form */}
         <div className="lg:col-span-2 space-y-8">
           {step === 1 && (
-            <div className="bg-white rounded-2xl p-6 border border-cream-dark space-y-6">
-              <h3 className="font-display text-2xl font-semibold text-terracotta-deep">
+            <div className="bg-white rounded-2xl p-6 border border-mist space-y-6">
+              <h3 className="font-display text-2xl font-semibold text-forest-deep">
                 Enhance Your Trip with Add-ons
               </h3>
 
@@ -129,8 +129,8 @@ export default function BookingPage({ searchParams }: { searchParams: Promise<{ 
                     key={addon.name}
                     className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition ${
                       selectedAddons.includes(addon.name)
-                        ? 'border-terracotta bg-terracotta/5'
-                        : 'border-cream-dark bg-white hover:bg-cream-dark/20'
+                        ? 'border-forest bg-forest/5'
+                        : 'border-mist bg-white hover:bg-mist/20'
                     }`}
                   >
                     <div className="flex items-center gap-3">
@@ -138,14 +138,14 @@ export default function BookingPage({ searchParams }: { searchParams: Promise<{ 
                         type="checkbox"
                         checked={selectedAddons.includes(addon.name)}
                         onChange={() => handleAddonToggle(addon.name)}
-                        className="accent-terracotta w-5 h-5"
+                        className="accent-forest w-5 h-5"
                       />
                       <div>
-                        <p className="font-semibold text-terracotta-deep text-sm">{addon.name}</p>
-                        <p className="text-xs text-terracotta-deep/60">{addon.desc}</p>
+                        <p className="font-semibold text-forest-deep text-sm">{addon.name}</p>
+                        <p className="text-xs text-forest-deep/60">{addon.desc}</p>
                       </div>
                     </div>
-                    <span className="font-bold text-terracotta text-sm">+₹{addon.price}</span>
+                    <span className="font-bold text-forest text-sm">+₹{addon.price}</span>
                   </label>
                 ))}
               </div>
@@ -159,8 +159,8 @@ export default function BookingPage({ searchParams }: { searchParams: Promise<{ 
           )}
 
           {step === 2 && (
-            <div className="bg-white rounded-2xl p-6 border border-cream-dark space-y-6">
-              <h3 className="font-display text-2xl font-semibold text-terracotta-deep">
+            <div className="bg-white rounded-2xl p-6 border border-mist space-y-6">
+              <h3 className="font-display text-2xl font-semibold text-forest-deep">
                 Guest Contact Details
               </h3>
 
@@ -204,8 +204,8 @@ export default function BookingPage({ searchParams }: { searchParams: Promise<{ 
           )}
 
           {step === 3 && (
-            <form onSubmit={handleSubmitBooking} className="bg-white rounded-2xl p-6 border border-cream-dark space-y-6">
-              <h3 className="font-display text-2xl font-semibold text-terracotta-deep">
+            <form onSubmit={handleSubmitBooking} className="bg-white rounded-2xl p-6 border border-mist space-y-6">
+              <h3 className="font-display text-2xl font-semibold text-forest-deep">
                 Select Payment Method
               </h3>
 
@@ -219,8 +219,8 @@ export default function BookingPage({ searchParams }: { searchParams: Promise<{ 
                     key={pm.id}
                     className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition ${
                       formData.paymentMethod === pm.id
-                        ? 'border-terracotta bg-terracotta/5'
-                        : 'border-cream-dark bg-white hover:bg-cream-dark/20'
+                        ? 'border-forest bg-forest/5'
+                        : 'border-mist bg-white hover:bg-mist/20'
                     }`}
                   >
                     <input
@@ -228,10 +228,10 @@ export default function BookingPage({ searchParams }: { searchParams: Promise<{ 
                       name="payment"
                       checked={formData.paymentMethod === pm.id}
                       onChange={() => setFormData({ ...formData, paymentMethod: pm.id })}
-                      className="accent-terracotta w-5 h-5"
+                      className="accent-forest w-5 h-5"
                     />
                     <span className="text-xl">{pm.icon}</span>
-                    <span className="font-semibold text-terracotta-deep text-sm">{pm.label}</span>
+                    <span className="font-semibold text-forest-deep text-sm">{pm.label}</span>
                   </label>
                 ))}
               </div>
@@ -250,8 +250,8 @@ export default function BookingPage({ searchParams }: { searchParams: Promise<{ 
 
         {/* Right Column: Order Summary */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-2xl p-6 border border-cream-dark shadow-md space-y-6">
-            <h3 className="font-display text-xl font-semibold text-terracotta-deep border-b border-cream-dark pb-4">
+          <div className="bg-white rounded-2xl p-6 border border-mist shadow-md space-y-6">
+            <h3 className="font-display text-xl font-semibold text-forest-deep border-b border-mist pb-4">
               Booking Summary
             </h3>
 
@@ -259,14 +259,14 @@ export default function BookingPage({ searchParams }: { searchParams: Promise<{ 
               <img
                 src={property.coverImage}
                 alt={property.title}
-                className="w-20 h-20 rounded-xl object-cover border border-cream-dark"
+                className="w-20 h-20 rounded-xl object-cover border border-mist"
               />
               <div>
-                <h4 className="font-semibold text-terracotta-deep text-sm line-clamp-1">
+                <h4 className="font-semibold text-forest-deep text-sm line-clamp-1">
                   {property.title}
                 </h4>
-                <p className="text-xs text-terracotta-deep/60 mt-0.5">{property.location}</p>
-                <span className="text-xs font-semibold text-terracotta mt-1 block">
+                <p className="text-xs text-forest-deep/60 mt-0.5">{property.location}</p>
+                <span className="text-xs font-semibold text-forest mt-1 block">
                   ₹{property.price} / night
                 </span>
               </div>
@@ -279,7 +279,7 @@ export default function BookingPage({ searchParams }: { searchParams: Promise<{ 
                 placeholder="Coupon code (PAWNA10)"
                 value={coupon}
                 onChange={(e) => setCoupon(e.target.value)}
-                className="bg-cream/40 border border-cream-dark rounded-xl px-3 py-2 text-xs uppercase flex-1 focus:outline-none focus:ring-1 focus:ring-terracotta"
+                className="bg-paper/40 border border-mist rounded-xl px-3 py-2 text-xs uppercase flex-1 focus:outline-none focus:ring-1 focus:ring-forest"
               />
               <Button type="submit" variant="outline" size="sm">
                 Apply
@@ -287,7 +287,7 @@ export default function BookingPage({ searchParams }: { searchParams: Promise<{ 
             </form>
 
             {/* Price Calculations */}
-            <div className="space-y-2 text-xs text-terracotta-deep/80 pt-4 border-t border-cream-dark">
+            <div className="space-y-2 text-xs text-forest-deep/80 pt-4 border-t border-mist">
               <div className="flex justify-between">
                 <span>Accommodation (2 nights)</span>
                 <span>₹{basePrice.toLocaleString()}</span>
@@ -304,7 +304,7 @@ export default function BookingPage({ searchParams }: { searchParams: Promise<{ 
                   <span>-₹{discount.toLocaleString()}</span>
                 </div>
               )}
-              <div className="flex justify-between text-base font-bold text-terracotta pt-2 border-t border-cream-dark">
+              <div className="flex justify-between text-base font-bold text-forest pt-2 border-t border-mist">
                 <span>Total Amount</span>
                 <span>₹{finalTotal.toLocaleString()}</span>
               </div>

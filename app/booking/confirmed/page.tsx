@@ -32,20 +32,20 @@ export default function BookingConfirmedPage({
         <div className="w-16 h-16 rounded-full bg-emerald-600 text-white mx-auto flex items-center justify-center text-3xl font-bold shadow-lg">
           ✓
         </div>
-        <h1 className="font-display text-3xl md:text-4xl font-bold text-emerald-950">
+        <h1 className="font-display text-3xl md:text-4xl font-semibold text-emerald-950">
           Booking Confirmed!
         </h1>
         <p className="text-sm text-emerald-800 max-w-lg mx-auto">
           We&apos;ve sent your confirmation receipt and property location map to your WhatsApp and email.
         </p>
         <div className="inline-block bg-white px-4 py-2 rounded-xl text-xs font-mono font-bold text-emerald-900 border border-emerald-200 shadow-sm">
-          Booking Reference: <span className="text-terracotta">{refId}</span>
+          Booking Reference: <span className="text-forest">{refId}</span>
         </div>
       </div>
 
       {/* Reservation Summary Box */}
-      <div className="bg-white rounded-2xl border border-cream-dark p-6 md:p-8 text-left space-y-6 shadow-sm">
-        <h3 className="font-display text-2xl font-semibold text-terracotta-deep border-b border-cream-dark pb-4">
+      <div className="bg-white rounded-2xl border border-mist p-6 md:p-8 text-left space-y-6 shadow-sm">
+        <h3 className="font-display text-2xl font-semibold text-forest-deep border-b border-mist pb-4">
           Reservation Details
         </h3>
 
@@ -53,29 +53,29 @@ export default function BookingConfirmedPage({
           <img
             src={property.coverImage}
             alt={property.title}
-            className="w-full sm:w-48 h-36 rounded-xl object-cover border border-cream-dark"
+            className="w-full sm:w-48 h-36 rounded-xl object-cover border border-mist"
           />
           <div className="space-y-2 flex-1">
-            <h4 className="font-display text-xl font-bold text-terracotta-deep">{property.title}</h4>
-            <p className="text-xs text-terracotta-deep/70">{property.location}</p>
+            <h4 className="font-display text-xl font-semibold text-forest-deep">{property.title}</h4>
+            <p className="text-xs text-forest-deep/70">{property.location}</p>
             <div className="grid grid-cols-2 gap-4 pt-3 text-xs">
               <div>
-                <span className="text-terracotta-deep/60 block uppercase font-semibold">Check-in</span>
-                <span className="font-bold text-terracotta-deep text-sm">4:00 PM · Oct 15, 2026</span>
+                <span className="text-forest-deep/60 block uppercase font-semibold">Check-in</span>
+                <span className="font-bold text-forest-deep text-sm">4:00 PM · Oct 15, 2026</span>
               </div>
               <div>
-                <span className="text-terracotta-deep/60 block uppercase font-semibold">Check-out</span>
-                <span className="font-bold text-terracotta-deep text-sm">11:00 AM · Oct 17, 2026</span>
+                <span className="text-forest-deep/60 block uppercase font-semibold">Check-out</span>
+                <span className="font-bold text-forest-deep text-sm">11:00 AM · Oct 17, 2026</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Host Contact Support */}
-        <div className="p-4 bg-cream/50 rounded-xl border border-cream-dark flex items-center justify-between">
+        <div className="p-4 bg-paper/50 rounded-xl border border-mist flex items-center justify-between">
           <div>
-            <p className="text-xs font-semibold text-terracotta-deep">Property Host Contact</p>
-            <p className="text-xs text-terracotta-deep/70">{property.host.name} ({property.host.phone})</p>
+            <p className="text-xs font-semibold text-forest-deep">Property Host Contact</p>
+            <p className="text-xs text-forest-deep/70">{property.host.name} ({property.host.phone})</p>
           </div>
           <a
             href={`https://wa.me/${property.host.phone.replace(/[^0-9]/g, '')}`}

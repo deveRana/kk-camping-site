@@ -65,13 +65,13 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <Badge variant="terracotta">{property.category}</Badge>
-            <span className="text-xs text-terracotta-deep/70">{property.location}</span>
+            <Badge variant="forest">{property.category}</Badge>
+            <span className="text-xs text-forest-deep/70">{property.location}</span>
           </div>
-          <h1 className="font-display text-3xl md:text-5xl font-bold text-terracotta-deep">
+          <h1 className="font-display text-3xl md:text-5xl font-semibold text-forest-deep">
             {property.title}
           </h1>
-          <p className="text-sm md:text-base text-terracotta-deep/70 mt-1">{property.tagline}</p>
+          <p className="text-sm md:text-base text-forest-deep/70 mt-1">{property.tagline}</p>
         </div>
 
         <div className="flex items-center gap-3">
@@ -83,10 +83,10 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
       </div>
 
       {/* Photo Gallery Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-3 h-[420px] rounded-2xl overflow-hidden shadow-lg border border-cream-dark">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3 h-[420px] rounded-2xl overflow-hidden shadow-lg border border-mist">
         <div
           onClick={() => handleOpenLightbox(0)}
-          className="md:col-span-2 md:row-span-2 relative h-full bg-cream-dark cursor-pointer group overflow-hidden"
+          className="md:col-span-2 md:row-span-2 relative h-full bg-mist cursor-pointer group overflow-hidden"
         >
           <img
             src={property.gallery[0]}
@@ -102,7 +102,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
           <div
             key={i}
             onClick={() => handleOpenLightbox(i + 1)}
-            className="relative h-full bg-cream-dark cursor-pointer group overflow-hidden hidden md:block"
+            className="relative h-full bg-mist cursor-pointer group overflow-hidden hidden md:block"
           >
             <img
               src={imgUrl}
@@ -118,44 +118,44 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
         {/* Left Column: Specs & Features */}
         <div className="lg:col-span-2 space-y-10">
           {/* Overview Badges */}
-          <div className="flex flex-wrap gap-4 p-5 bg-white rounded-2xl border border-cream-dark">
+          <div className="flex flex-wrap gap-4 p-5 bg-white rounded-2xl border border-mist">
             <div>
-              <span className="text-xs text-terracotta-deep/60 block uppercase font-semibold">Capacity</span>
-              <span className="text-sm font-semibold text-terracotta-deep">{property.capacity}</span>
+              <span className="text-xs text-forest-deep/60 block uppercase font-semibold">Capacity</span>
+              <span className="text-sm font-semibold text-forest-deep">{property.capacity}</span>
             </div>
-            <div className="border-l border-cream-dark pl-4">
-              <span className="text-xs text-terracotta-deep/60 block uppercase font-semibold">Distance</span>
-              <span className="text-sm font-semibold text-terracotta-deep">{property.distance}</span>
+            <div className="border-l border-mist pl-4">
+              <span className="text-xs text-forest-deep/60 block uppercase font-semibold">Distance</span>
+              <span className="text-sm font-semibold text-forest-deep">{property.distance}</span>
             </div>
-            <div className="border-l border-cream-dark pl-4">
-              <span className="text-xs text-terracotta-deep/60 block uppercase font-semibold">Rating</span>
-              <span className="text-sm font-semibold text-terracotta-deep">★ {property.rating} / 5.0</span>
+            <div className="border-l border-mist pl-4">
+              <span className="text-xs text-forest-deep/60 block uppercase font-semibold">Rating</span>
+              <span className="text-sm font-semibold text-forest-deep">★ {property.rating} / 5.0</span>
             </div>
           </div>
 
 
           {/* Description */}
           <div className="space-y-3">
-            <h3 className="font-display text-2xl font-semibold text-terracotta-deep">
+            <h3 className="font-display text-2xl font-semibold text-forest-deep">
               About this campsite
             </h3>
-            <p className="text-sm text-terracotta-deep/85 leading-relaxed">
+            <p className="text-sm text-forest-deep/85 leading-relaxed">
               {property.description}
             </p>
           </div>
 
           {/* Amenities Grid */}
-          <div className="space-y-4 pt-6 border-t border-cream-dark">
-            <h3 className="font-display text-2xl font-semibold text-terracotta-deep">
+          <div className="space-y-4 pt-6 border-t border-mist">
+            <h3 className="font-display text-2xl font-semibold text-forest-deep">
               What this stay offers
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {property.amenities.map((amenity, idx) => (
-                <div key={idx} className="flex items-center gap-3 p-3 bg-white rounded-xl border border-cream-dark">
-                  <span className="w-8 h-8 rounded-lg bg-cream-dark text-terracotta flex items-center justify-center text-sm font-bold">
+                <div key={idx} className="flex items-center gap-3 p-3 bg-white rounded-xl border border-mist">
+                  <span className="w-8 h-8 rounded-lg bg-mist text-forest flex items-center justify-center text-sm font-bold">
                     ✓
                   </span>
-                  <span className="text-xs font-medium text-terracotta-deep">{amenity.name}</span>
+                  <span className="text-xs font-medium text-forest-deep">{amenity.name}</span>
                 </div>
               ))}
             </div>
@@ -164,18 +164,18 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
 
         {/* Right Column: Sticky Booking Widget Card */}
         <div className="lg:col-span-1">
-          <div className="sticky top-24 bg-white rounded-2xl p-6 border border-cream-dark shadow-xl space-y-6">
+          <div className="sticky top-24 bg-white rounded-2xl p-6 border border-mist shadow-xl space-y-6">
             <div className="flex items-baseline justify-between">
               <div>
-                <span className="font-display text-3xl font-bold text-terracotta">
+                <span className="font-display text-3xl font-semibold text-forest">
                   ₹{property.price.toLocaleString()}
                 </span>
-                <span className="text-xs text-terracotta-deep/60 ml-1">/ night</span>
+                <span className="text-xs text-forest-deep/60 ml-1">/ night</span>
               </div>
               <Rating score={property.rating} reviewCount={property.reviewCount} />
             </div>
 
-            <div className="space-y-3 pt-4 border-t border-cream-dark">
+            <div className="space-y-3 pt-4 border-t border-mist">
               <DatePicker
                 label="Check-in Date"
                 placeholder="Select Check-in"
@@ -192,13 +192,13 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
               />
 
               <div>
-                <label className="block text-xs font-semibold text-terracotta-deep uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-semibold text-forest-deep uppercase tracking-wider mb-1.5">
                   Guests
                 </label>
                 <select
                   value={guests}
                   onChange={(e) => setGuests(e.target.value)}
-                  className="w-full bg-cream/40 border border-cream-dark rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-terracotta shadow-sm"
+                  className="w-full bg-paper/40 border border-mist rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-forest shadow-sm"
                 >
                   <option value="1">1 Guest</option>
                   <option value="2">2 Guests</option>
@@ -216,7 +216,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
               </Button>
             </Link>
 
-            <p className="text-[11px] text-center text-terracotta-deep/60">
+            <p className="text-[11px] text-center text-forest-deep/60">
               Free cancellation up to 48 hours before check-in.
             </p>
           </div>

@@ -28,10 +28,10 @@ export default function FAQPage() {
       <Breadcrumbs items={[{ label: 'FAQ' }]} />
 
       <div className="text-center space-y-3">
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-terracotta-deep">
+        <h1 className="font-display text-4xl md:text-5xl font-semibold text-forest-deep">
           Frequently Asked Questions
         </h1>
-        <p className="text-sm text-terracotta-deep/75 leading-relaxed max-w-xl mx-auto">
+        <p className="text-sm text-forest-deep/75 leading-relaxed max-w-xl mx-auto">
           Find instant answers regarding check-in timings, food options, safety guidelines, and cancellation rules.
         </p>
       </div>
@@ -43,7 +43,7 @@ export default function FAQPage() {
           placeholder="Search question or keyword (e.g. food, timing, refund)..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full bg-white border border-cream-dark rounded-xl px-5 py-3.5 text-sm text-terracotta-deep placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-terracotta shadow-sm"
+          className="w-full bg-white border border-mist rounded-xl px-5 py-3.5 text-sm text-forest-deep placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-forest shadow-sm"
         />
 
         <div className="flex flex-wrap justify-center gap-2">
@@ -53,8 +53,8 @@ export default function FAQPage() {
               onClick={() => setSelectedCategory(cat)}
               className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition ${
                 selectedCategory === cat
-                  ? 'bg-terracotta text-white shadow-sm'
-                  : 'bg-white border border-cream-dark text-terracotta-deep hover:bg-cream-dark/50'
+                  ? 'bg-forest text-white shadow-sm'
+                  : 'bg-white border border-mist text-forest-deep hover:bg-mist/50'
               }`}
             >
               {cat}
@@ -66,9 +66,9 @@ export default function FAQPage() {
       {/* Accordions */}
       <div className="space-y-4">
         {filteredFaqs.length === 0 ? (
-          <div className="text-center py-10 bg-white rounded-2xl border border-cream-dark p-6">
-            <p className="text-sm font-semibold text-terracotta-deep">No questions match &ldquo;{searchQuery}&rdquo;</p>
-            <p className="text-xs text-terracotta-deep/60 mt-1">Try searching with a broader keyword or reach out to our team.</p>
+          <div className="text-center py-10 bg-white rounded-2xl border border-mist p-6">
+            <p className="text-sm font-semibold text-forest-deep">No questions match &ldquo;{searchQuery}&rdquo;</p>
+            <p className="text-xs text-forest-deep/60 mt-1">Try searching with a broader keyword or reach out to our team.</p>
           </div>
         ) : (
           filteredFaqs.map((faq) => (
@@ -80,9 +80,9 @@ export default function FAQPage() {
       </div>
 
       {/* Still Need Help Box */}
-      <div className="bg-white rounded-2xl border border-cream-dark p-8 text-center space-y-4 shadow-sm">
-        <h3 className="font-display text-2xl font-bold text-terracotta-deep">Still Have Questions?</h3>
-        <p className="text-xs text-terracotta-deep/70 max-w-md mx-auto">
+      <div className="bg-white rounded-2xl border border-mist p-8 text-center space-y-4 shadow-sm">
+        <h3 className="font-display text-2xl font-semibold text-forest-deep">Still Have Questions?</h3>
+        <p className="text-xs text-forest-deep/70 max-w-md mx-auto">
           Our friendly support team is available on WhatsApp and phone from 9:00 AM to 9:00 PM every day.
         </p>
         <Link href="/contact" className="inline-block">

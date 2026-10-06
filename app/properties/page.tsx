@@ -59,12 +59,12 @@ export default function PropertiesPage() {
       <Breadcrumbs items={[{ label: 'All Stays' }]} />
 
       {/* Header & Controls */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-cream-dark pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-mist pb-6">
         <div>
-          <h1 className="font-display text-3xl md:text-4xl font-bold text-terracotta-deep">
+          <h1 className="font-display text-4xl md:text-5xl font-semibold text-forest-deep">
             Lakeside Stays at Pawna Lake
           </h1>
-          <p className="text-sm text-terracotta-deep/70 mt-1">
+          <p className="text-sm text-forest-deep/70 mt-1">
             Showing {filteredProperties.length} available campsites &amp; glamping domes
           </p>
         </div>
@@ -92,16 +92,16 @@ export default function PropertiesPage() {
               placeholder="Search stay or location..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white border border-cream-dark rounded-xl px-4 py-2 text-xs md:text-sm text-terracotta-deep placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-terracotta"
+              className="w-full bg-white border border-mist rounded-xl px-4 py-2 text-xs md:text-sm text-forest-deep placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-forest"
             />
           </div>
 
           {/* View Toggle */}
-          <div className="flex border border-cream-dark rounded-xl overflow-hidden bg-white p-1">
+          <div className="flex border border-mist rounded-xl overflow-hidden bg-white p-1">
             <button
               onClick={() => setViewMode('grid')}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-                viewMode === 'grid' ? 'bg-terracotta text-white' : 'text-terracotta-deep hover:bg-cream-dark/40'
+                viewMode === 'grid' ? 'bg-forest text-white' : 'text-forest-deep hover:bg-mist/40'
               }`}
             >
               Grid
@@ -109,7 +109,7 @@ export default function PropertiesPage() {
             <button
               onClick={() => setViewMode('map')}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-                viewMode === 'map' ? 'bg-terracotta text-white' : 'text-terracotta-deep hover:bg-cream-dark/40'
+                viewMode === 'map' ? 'bg-forest text-white' : 'text-forest-deep hover:bg-mist/40'
               }`}
             >
               Map
@@ -136,20 +136,20 @@ export default function PropertiesPage() {
           {viewMode === 'grid' ? (
             <PropertyGrid properties={filteredProperties} />
           ) : (
-            <div className="bg-white rounded-2xl border border-cream-dark p-8 text-center space-y-4">
-              <div className="h-96 w-full rounded-xl bg-cream-dark/60 flex flex-col items-center justify-center space-y-3">
-                <div className="w-12 h-12 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center font-bold">
+            <div className="bg-white rounded-2xl border border-mist p-8 text-center space-y-4">
+              <div className="h-96 w-full rounded-xl bg-mist/60 flex flex-col items-center justify-center space-y-3">
+                <div className="w-12 h-12 rounded-full bg-forest/10 text-forest flex items-center justify-center font-bold">
                   📍
                 </div>
-                <h3 className="font-display text-xl font-semibold text-terracotta-deep">
+                <h3 className="font-display text-xl font-semibold text-forest-deep">
                   Interactive Pawna Lake Map View
                 </h3>
-                <p className="text-xs text-terracotta-deep/70 max-w-sm">
+                <p className="text-xs text-forest-deep/70 max-w-sm">
                   Showing {filteredProperties.length} pins around Pawna Dam waterfront campsites.
                 </p>
                 <div className="flex flex-wrap justify-center gap-2 pt-2">
                   {filteredProperties.map((p) => (
-                    <span key={p.id} className="bg-terracotta text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">
+                    <span key={p.id} className="bg-forest text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">
                       {p.title.split(' ')[0]}: ₹{p.price}
                     </span>
                   ))}

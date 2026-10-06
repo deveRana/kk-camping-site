@@ -1,8 +1,8 @@
 import { CampsiteMasterInfo } from '@/types';
 
 export const PAWNA_CAMPSITE_MASTER_DATA: CampsiteMasterInfo = {
-  name: 'Pawna Lake NightHunt Campsite',
-  brandName: 'Pawna Lake NightHunt Campsite',
+  name: 'Lakeora Cafe & Camping',
+  brandName: 'Lakeora',
   tagline: 'Lakeside Camping & Glamping at Pawna Lake with Live Music & Water Views',
   website: 'https://pawnatentcamp.com/',
   contactNumbers: ['+91 74997 57607', '+91 95271 43112'],
@@ -11,7 +11,7 @@ export const PAWNA_CAMPSITE_MASTER_DATA: CampsiteMasterInfo = {
   paymentUPI: '7499757607',
   
   location: {
-    address: 'Pawna Lake NightHunt, Thakursai-Aajiwali Rd, At, Gevhande Khadak, Maharashtra 410406',
+    address: 'Lakeora, Pawna Lake, Thakursai-Aajiwali Rd, At, Gevhande Khadak, Maharashtra 410406',
     landmark: 'Gevhande Khadak, Pawna Lake, Near Lonavala / Pune',
     googleMapsUrl: 'https://maps.app.goo.gl/c6JVSxCKqkyfMrR47',
     coordinates: {

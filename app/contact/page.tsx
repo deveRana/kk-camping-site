@@ -46,10 +46,10 @@ export default function ContactPage() {
       <Breadcrumbs items={[{ label: 'Contact Us' }]} />
 
       <div className="text-center max-w-2xl mx-auto space-y-3">
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-terracotta-deep">
+        <h1 className="font-display text-4xl md:text-5xl font-semibold text-forest-deep">
           Get in Touch
         </h1>
-        <p className="text-sm text-terracotta-deep/75 leading-relaxed">
+        <p className="text-sm text-forest-deep/75 leading-relaxed">
           Planning a group camping trip or have a special event request? We are here to help.
         </p>
       </div>
@@ -57,36 +57,36 @@ export default function ContactPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         {/* Contact Info Cards */}
         <div className="space-y-6">
-          <div className="bg-white rounded-2xl p-6 border border-cream-dark shadow-sm space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-terracotta/10 text-terracotta flex items-center justify-center font-bold">
+          <div className="bg-white rounded-2xl p-6 border border-mist shadow-sm space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-forest/10 text-forest flex items-center justify-center font-bold">
               📞
             </div>
-            <h3 className="font-display text-lg font-semibold text-terracotta-deep">Phone &amp; WhatsApp</h3>
-            <p className="text-xs text-terracotta-deep/70">+91 98230 45678 / +91 97654 32109</p>
-            <p className="text-[11px] text-terracotta-deep/50">Mon – Sun: 9:00 AM – 9:00 PM</p>
+            <h3 className="font-display text-lg font-semibold text-forest-deep">Phone &amp; WhatsApp</h3>
+            <p className="text-xs text-forest-deep/70">+91 98230 45678 / +91 97654 32109</p>
+            <p className="text-[11px] text-forest-deep/50">Mon – Sun: 9:00 AM – 9:00 PM</p>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 border border-cream-dark shadow-sm space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-warm/10 text-amber-warm flex items-center justify-center font-bold">
+          <div className="bg-white rounded-2xl p-6 border border-mist shadow-sm space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-sage/30 text-forest flex items-center justify-center font-bold">
               ✉️
             </div>
-            <h3 className="font-display text-lg font-semibold text-terracotta-deep">Email Support</h3>
-            <p className="text-xs text-terracotta-deep/70">support@lakestay.in / info@lakestay.in</p>
-            <p className="text-[11px] text-terracotta-deep/50">Response within 2 hours</p>
+            <h3 className="font-display text-lg font-semibold text-forest-deep">Email Support</h3>
+            <p className="text-xs text-forest-deep/70">support@lakeora.in / info@lakeora.in</p>
+            <p className="text-[11px] text-forest-deep/50">Response within 2 hours</p>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 border border-cream-dark shadow-sm space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold">
+          <div className="bg-white rounded-2xl p-6 border border-mist shadow-sm space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-sage/30 text-forest flex items-center justify-center font-bold">
               📍
             </div>
-            <h3 className="font-display text-lg font-semibold text-terracotta-deep">Location</h3>
-            <p className="text-xs text-terracotta-deep/70">Thakurwadi, Pawna Lake, Kamshet Road, Lonavala, MH 410406</p>
+            <h3 className="font-display text-lg font-semibold text-forest-deep">Location</h3>
+            <p className="text-xs text-forest-deep/70">Thakurwadi, Pawna Lake, Kamshet Road, Lonavala, MH 410406</p>
           </div>
         </div>
 
         {/* Form */}
-        <div className="lg:col-span-2 bg-white rounded-2xl p-8 border border-cream-dark shadow-sm">
-          <h2 className="font-display text-2xl font-bold text-terracotta-deep mb-6">
+        <div className="lg:col-span-2 bg-white rounded-2xl p-8 border border-mist shadow-sm">
+          <h2 className="font-display text-2xl font-semibold text-forest-deep mb-6">
             Send Us a Message
           </h2>
 
@@ -115,13 +115,13 @@ export default function ContactPage() {
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               />
               <div className="w-full flex flex-col gap-1.5">
-                <label className="text-xs font-semibold uppercase tracking-wider text-terracotta-deep">
+                <label className="text-xs font-semibold uppercase tracking-wider text-forest-deep">
                   Subject
                 </label>
                 <select
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  className="bg-white border border-cream-dark rounded-xl px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-terracotta"
+                  className="bg-white border border-mist rounded-xl px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-forest"
                 >
                   <option>General Inquiry</option>
                   <option>Group Booking Request</option>
@@ -132,7 +132,7 @@ export default function ContactPage() {
             </div>
 
             <div className="w-full flex flex-col gap-1.5">
-              <label className="text-xs font-semibold uppercase tracking-wider text-terracotta-deep">
+              <label className="text-xs font-semibold uppercase tracking-wider text-forest-deep">
                 Your Message *
               </label>
               <textarea
@@ -140,7 +140,7 @@ export default function ContactPage() {
                 placeholder="Tell us about your trip dates or requirements..."
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="bg-white border border-cream-dark rounded-xl p-4 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-terracotta"
+                className="bg-white border border-mist rounded-xl p-4 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-forest"
               />
             </div>
 

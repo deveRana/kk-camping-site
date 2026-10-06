@@ -4,21 +4,21 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gallery — LakeStay</title>
+    <title>Gallery — Lakeora</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet" />
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        terracotta: { DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
-                        amber: { warm: '#F2A65A', light: '#F9C89B' },
-                        cream: { DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+                        terracotta: { DEFAULT: '#234B38', dark: '#1A3829', deep: '#152E21' },
+                        amber: { warm: '#A8C8A6', light: '#D3E3D1' },
+                        cream: { DEFAULT: '#F4F8F2', dark: '#E3ECDF' },
                     },
-                    fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    fontFamily: { display: ['"Cormorant Garamond"', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
                 }
             }
         };
@@ -26,12 +26,12 @@
     <style>
         body {
             font-family: 'Inter', system-ui, sans-serif;
-            background: #FFF8F0;
+            background: #F4F8F2;
             color: #2C1810;
         }
 
         .font-display {
-            font-family: 'Fraunces', Georgia, serif;
+            font-family: 'Cormorant Garamond', Georgia, serif;
         }
 
         .filter-btn {
@@ -44,18 +44,18 @@
         }
 
         .filter-btn.active {
-            background: #C65D3E;
+            background: #234B38;
             color: white;
         }
 
         .filter-btn:not(.active) {
             background: white;
-            color: #6B2416;
-            border: 1px solid #F5E9D7;
+            color: #152E21;
+            border: 1px solid #E3ECDF;
         }
 
         .filter-btn:not(.active):hover {
-            border-color: #C65D3E;
+            border-color: #234B38;
         }
 
         /* Masonry-ish grid */
@@ -124,10 +124,10 @@
     <section class="py-14 text-center">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <p class="text-terracotta font-semibold uppercase tracking-widest text-xs mb-3">The vibe</p>
-            <h1 class="font-display text-4xl md:text-5xl font-semibold text-terracotta-deep mb-4">Moments at LakeStay
+            <h1 class="font-display text-4xl md:text-5xl font-semibold text-terracotta-deep mb-4">Moments at Lakeora
             </h1>
             <p class="text-terracotta-deep/75">Every photo real, taken by us or our guests. Tag <span
-                    class="font-semibold text-terracotta">@lakestay.in</span> to be featured.</p>
+                    class="font-semibold text-terracotta">@lakeora.in</span> to be featured.</p>
         </div>
     </section>
 
@@ -168,7 +168,7 @@
                     class="absolute inset-0 bg-terracotta-deep/30 flex items-center justify-center group-hover:bg-terracotta-deep/40 transition">
                     <div
                         class="w-20 h-20 rounded-full bg-white/95 flex items-center justify-center shadow-lg group-hover:scale-110 transition">
-                        <svg width="32" height="32" fill="#C65D3E" viewBox="0 0 24 24">
+                        <svg width="32" height="32" fill="#234B38" viewBox="0 0 24 24">
                             <path d="M8 5v14l11-7z" />
                         </svg>
                     </div>
@@ -187,7 +187,7 @@
             <div class="text-center mb-10">
                 <p class="text-terracotta font-semibold uppercase tracking-widest text-xs mb-3">Follow along</p>
                 <h2 class="font-display text-3xl md:text-4xl font-semibold text-terracotta-deep mb-3">On Instagram</h2>
-                <a href="#" class="text-terracotta font-semibold hover:underline">@lakestay.in →</a>
+                <a href="#" class="text-terracotta font-semibold hover:underline">@lakeora.in →</a>
             </div>
 
             <div class="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">

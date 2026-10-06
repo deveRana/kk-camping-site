@@ -12,15 +12,15 @@ export const Accordion: React.FC<AccordionProps> = ({ title, children, defaultOp
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="bg-white rounded-2xl border border-cream-dark overflow-hidden transition">
+    <div className="bg-white rounded-2xl border border-mist overflow-hidden transition">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
         aria-expanded={isOpen}
       >
-        <span className="font-display text-lg font-semibold text-terracotta-deep">{title}</span>
+        <span className="font-display text-lg font-semibold text-forest-deep">{title}</span>
         <span
-          className={`ml-4 flex-shrink-0 text-terracotta transition-transform duration-200 ${
+          className={`ml-4 flex-shrink-0 text-forest transition-transform duration-200 ${
             isOpen ? 'rotate-45' : 'rotate-0'
           }`}
         >
@@ -30,7 +30,7 @@ export const Accordion: React.FC<AccordionProps> = ({ title, children, defaultOp
         </span>
       </button>
       {isOpen && (
-        <div className="px-6 pb-6 text-sm text-terracotta-deep/80 leading-relaxed border-t border-cream-dark/50 pt-4 animate-fadeIn">
+        <div className="px-6 pb-6 text-sm text-forest-deep/80 leading-relaxed border-t border-mist/50 pt-4 animate-fadeIn">
           {children}
         </div>
       )}

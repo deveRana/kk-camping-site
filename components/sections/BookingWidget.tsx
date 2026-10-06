@@ -24,7 +24,7 @@ export const BookingWidget: React.FC<BookingWidgetProps> = ({ className = '' }) 
   return (
     <form
       onSubmit={handleSearch}
-      className={`bg-white rounded-2xl p-4 md:p-6 shadow-2xl border border-cream-dark text-left relative z-30 ${className}`}
+      className={`bg-white rounded-2xl p-4 md:p-6 shadow-2xl border border-mist text-left relative z-30 ${className}`}
     >
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
         <div>
@@ -45,13 +45,13 @@ export const BookingWidget: React.FC<BookingWidgetProps> = ({ className = '' }) 
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-terracotta-deep uppercase tracking-wider mb-1.5">
+          <label className="block text-xs font-semibold text-forest-deep uppercase tracking-wider mb-1.5">
             Guests
           </label>
           <select
             value={guests}
             onChange={(e) => setGuests(e.target.value)}
-            className="w-full text-sm font-medium text-gray-800 bg-cream/40 border border-cream-dark rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-terracotta shadow-sm"
+            className="w-full text-sm font-medium text-gray-800 bg-paper/40 border border-mist rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-forest shadow-sm"
           >
             <option value="1">1 Guest</option>
             <option value="2">2 Guests (Couple)</option>

@@ -20,7 +20,7 @@ const TOAST_ICONS = {
     </svg>
   ),
   info: (
-    <svg className="w-5 h-5 text-terracotta flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <svg className="w-5 h-5 text-forest flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
   ),
@@ -30,7 +30,7 @@ const TOAST_BORDER = {
   success: 'border-emerald-500/30 bg-emerald-50/95 text-emerald-950',
   error: 'border-rose-500/30 bg-rose-50/95 text-rose-950',
   warning: 'border-amber-500/30 bg-amber-50/95 text-amber-950',
-  info: 'border-terracotta/30 bg-cream/95 text-terracotta-deep',
+  info: 'border-forest/30 bg-paper/95 text-forest-deep',
 };
 
 export const ToastRoot: React.FC = () => {

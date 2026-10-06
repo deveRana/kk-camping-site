@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Book Your Stay — LakeStay</title>
+    <title>Book Your Stay — Lakeora</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet" />
 
     <script>
@@ -17,12 +17,12 @@
             theme: {
                 extend: {
                     colors: {
-                        terracotta: { DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
-                        amber: { warm: '#F2A65A', light: '#F9C89B' },
-                        cream: { DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+                        terracotta: { DEFAULT: '#234B38', dark: '#1A3829', deep: '#152E21' },
+                        amber: { warm: '#A8C8A6', light: '#D3E3D1' },
+                        cream: { DEFAULT: '#F4F8F2', dark: '#E3ECDF' },
                     },
                     fontFamily: {
-                        display: ['Fraunces', 'Georgia', 'serif'],
+                        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
                         sans: ['Inter', 'system-ui', 'sans-serif'],
                     },
                 },
@@ -37,12 +37,12 @@
 
         body {
             font-family: 'Inter', system-ui, sans-serif;
-            background: #FFF8F0;
+            background: #F4F8F2;
             color: #2C1810;
         }
 
         .font-display {
-            font-family: 'Fraunces', Georgia, serif;
+            font-family: 'Cormorant Garamond', Georgia, serif;
         }
 
         /* Step visibility */
@@ -60,40 +60,40 @@
             justify-content: center;
             font-weight: 600;
             font-size: 14px;
-            background: #F5E9D7;
-            color: #6B2416;
-            border: 2px solid #F5E9D7;
+            background: #E3ECDF;
+            color: #152E21;
+            border: 2px solid #E3ECDF;
             transition: all 0.3s ease;
         }
 
         .step-circle.active {
-            background: #C65D3E;
+            background: #234B38;
             color: white;
-            border-color: #C65D3E;
+            border-color: #234B38;
         }
 
         .step-circle.completed {
-            background: #C65D3E;
+            background: #234B38;
             color: white;
-            border-color: #C65D3E;
+            border-color: #234B38;
         }
 
         .step-line {
             flex: 1;
             height: 2px;
-            background: #F5E9D7;
+            background: #E3ECDF;
             transition: background 0.3s ease;
         }
 
         .step-line.completed {
-            background: #C65D3E;
+            background: #234B38;
         }
 
         /* Form inputs */
         .input-field {
             width: 100%;
             padding: 12px 14px;
-            border: 1.5px solid #F5E9D7;
+            border: 1.5px solid #E3ECDF;
             border-radius: 10px;
             font-size: 14px;
             background: white;
@@ -103,12 +103,12 @@
 
         .input-field:focus {
             outline: none;
-            border-color: #C65D3E;
+            border-color: #234B38;
         }
 
         /* Radio card */
         .radio-card {
-            border: 1.5px solid #F5E9D7;
+            border: 1.5px solid #E3ECDF;
             border-radius: 12px;
             padding: 16px;
             cursor: pointer;
@@ -116,11 +116,11 @@
         }
 
         .radio-card:hover {
-            border-color: #C65D3E;
+            border-color: #234B38;
         }
 
         .radio-card.selected {
-            border-color: #C65D3E;
+            border-color: #234B38;
             background: #FBEDE1;
         }
 
@@ -135,7 +135,7 @@
             font-size: 10px;
             font-weight: 700;
             letter-spacing: 0.5px;
-            border: 0.5px solid #F5E9D7;
+            border: 0.5px solid #E3ECDF;
         }
     </style>
 </head>
@@ -147,7 +147,7 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-6">
-                    <a href="index.html" class="font-display text-2xl font-semibold text-terracotta">LakeStay</a>
+                    <a href="index.html" class="font-display text-2xl font-semibold text-terracotta">Lakeora</a>
                     <a href="property-detail.html"
                         class="hidden md:flex items-center gap-1 text-sm text-terracotta-deep/70 hover:text-terracotta">
                         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
@@ -272,7 +272,7 @@
                         <div class="space-y-3">
                             <label class="radio-card flex items-center gap-4 cursor-pointer">
                                 <input type="checkbox" class="w-4 h-4 rounded flex-shrink-0"
-                                    style="accent-color:#C65D3E" onchange="updatePricing()" data-price="500"
+                                    style="accent-color:#234B38" onchange="updatePricing()" data-price="500"
                                     data-per-guest="true" />
                                 <div class="flex-1">
                                     <div class="font-semibold text-terracotta-deep">Kayaking on the lake</div>
@@ -284,7 +284,7 @@
 
                             <label class="radio-card flex items-center gap-4 cursor-pointer">
                                 <input type="checkbox" class="w-4 h-4 rounded flex-shrink-0"
-                                    style="accent-color:#C65D3E" onchange="updatePricing()" data-price="300"
+                                    style="accent-color:#234B38" onchange="updatePricing()" data-price="300"
                                     data-per-guest="true" />
                                 <div class="flex-1">
                                     <div class="font-semibold text-terracotta-deep">Sunrise trek with guide</div>
@@ -296,7 +296,7 @@
 
                             <label class="radio-card flex items-center gap-4 cursor-pointer">
                                 <input type="checkbox" class="w-4 h-4 rounded flex-shrink-0"
-                                    style="accent-color:#C65D3E" onchange="updatePricing()" data-price="800"
+                                    style="accent-color:#234B38" onchange="updatePricing()" data-price="800"
                                     data-per-guest="false" />
                                 <div class="flex-1">
                                     <div class="font-semibold text-terracotta-deep">Romantic tent decor</div>
@@ -308,7 +308,7 @@
 
                             <label class="radio-card flex items-center gap-4 cursor-pointer">
                                 <input type="checkbox" class="w-4 h-4 rounded flex-shrink-0"
-                                    style="accent-color:#C65D3E" onchange="updatePricing()" data-price="1200"
+                                    style="accent-color:#234B38" onchange="updatePricing()" data-price="1200"
                                     data-per-guest="false" />
                                 <div class="flex-1">
                                     <div class="font-semibold text-terracotta-deep">Live acoustic music</div>
@@ -371,7 +371,7 @@
                         </div>
 
                         <label class="flex items-center gap-2 mt-4 cursor-pointer">
-                            <input type="checkbox" class="w-4 h-4 rounded" style="accent-color:#C65D3E" checked />
+                            <input type="checkbox" class="w-4 h-4 rounded" style="accent-color:#234B38" checked />
                             <span class="text-sm text-terracotta-deep">Send booking updates on WhatsApp</span>
                         </label>
                     </div>
@@ -415,7 +415,7 @@
                     </div>
 
                     <div class="bg-amber-light/40 border border-amber-warm/30 rounded-xl p-4 flex gap-3">
-                        <svg width="20" height="20" fill="none" stroke="#6B2416" stroke-width="2" viewBox="0 0 24 24"
+                        <svg width="20" height="20" fill="none" stroke="#152E21" stroke-width="2" viewBox="0 0 24 24"
                             class="flex-shrink-0 mt-0.5">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -451,7 +451,7 @@
                             <label class="radio-card selected flex items-start gap-3 cursor-pointer"
                                 onclick="pickPlan(this, 'partial')">
                                 <input type="radio" name="plan" class="w-4 h-4 mt-1 flex-shrink-0"
-                                    style="accent-color:#C65D3E" checked />
+                                    style="accent-color:#234B38" checked />
                                 <div class="flex-1">
                                     <div class="flex items-start justify-between gap-3">
                                         <div>
@@ -471,7 +471,7 @@
                             <label class="radio-card flex items-start gap-3 cursor-pointer"
                                 onclick="pickPlan(this, 'full')">
                                 <input type="radio" name="plan" class="w-4 h-4 mt-1 flex-shrink-0"
-                                    style="accent-color:#C65D3E" />
+                                    style="accent-color:#234B38" />
                                 <div class="flex-1">
                                     <div class="flex items-start justify-between gap-3">
                                         <div>
@@ -496,7 +496,7 @@
                             <label class="radio-card selected flex items-center gap-3 cursor-pointer"
                                 onclick="pickMethod(this)">
                                 <input type="radio" name="method" class="w-4 h-4 flex-shrink-0"
-                                    style="accent-color:#C65D3E" checked />
+                                    style="accent-color:#234B38" checked />
                                 <div class="flex-1 flex items-center justify-between">
                                     <div>
                                         <div class="font-semibold text-terracotta-deep">UPI</div>
@@ -512,7 +512,7 @@
 
                             <label class="radio-card flex items-center gap-3 cursor-pointer" onclick="pickMethod(this)">
                                 <input type="radio" name="method" class="w-4 h-4 flex-shrink-0"
-                                    style="accent-color:#C65D3E" />
+                                    style="accent-color:#234B38" />
                                 <div class="flex-1 flex items-center justify-between">
                                     <div>
                                         <div class="font-semibold text-terracotta-deep">Credit / Debit Card</div>
@@ -527,7 +527,7 @@
 
                             <label class="radio-card flex items-center gap-3 cursor-pointer" onclick="pickMethod(this)">
                                 <input type="radio" name="method" class="w-4 h-4 flex-shrink-0"
-                                    style="accent-color:#C65D3E" />
+                                    style="accent-color:#234B38" />
                                 <div class="flex-1">
                                     <div class="font-semibold text-terracotta-deep">Net Banking</div>
                                     <div class="text-xs text-terracotta-deep/70">All major Indian banks</div>
@@ -536,7 +536,7 @@
 
                             <label class="radio-card flex items-center gap-3 cursor-pointer" onclick="pickMethod(this)">
                                 <input type="radio" name="method" class="w-4 h-4 flex-shrink-0"
-                                    style="accent-color:#C65D3E" />
+                                    style="accent-color:#234B38" />
                                 <div class="flex-1">
                                     <div class="font-semibold text-terracotta-deep">Wallet</div>
                                     <div class="text-xs text-terracotta-deep/70">Paytm, Amazon Pay, Mobikwik</div>
@@ -580,8 +580,8 @@
                     <!-- Terms -->
                     <label class="flex items-start gap-3 cursor-pointer">
                         <input type="checkbox" id="agreeTerms" class="w-4 h-4 rounded mt-1 flex-shrink-0"
-                            style="accent-color:#C65D3E" />
-                        <span class="text-sm text-terracotta-deep">I agree to LakeStay's <a href="#"
+                            style="accent-color:#234B38" />
+                        <span class="text-sm text-terracotta-deep">I agree to Lakeora's <a href="#"
                                 class="text-terracotta font-semibold hover:underline">Terms of Service</a>, <a href="#"
                                 class="text-terracotta font-semibold hover:underline">Cancellation Policy</a>, and House
                             Rules. I confirm all guests are 18+ or accompanied by an adult.</span>
@@ -676,14 +676,14 @@
     <footer class="bg-terracotta-deep text-cream/80 py-8 mt-12">
         <div
             class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-            <div class="font-display text-xl text-white font-semibold">LakeStay</div>
+            <div class="font-display text-xl text-white font-semibold">Lakeora</div>
             <div class="flex gap-6 text-xs">
                 <a href="#" class="hover:text-amber-warm">Terms</a>
                 <a href="#" class="hover:text-amber-warm">Privacy</a>
                 <a href="#" class="hover:text-amber-warm">Cancellation</a>
                 <a href="index.html#contact" class="hover:text-amber-warm">Contact</a>
             </div>
-            <div class="text-xs">© 2026 LakeStay · Secured by Razorpay</div>
+            <div class="text-xs">© 2026 Lakeora · Secured by Razorpay</div>
         </div>
     </footer>
 
@@ -697,7 +697,7 @@
                 for (let inp of inputs) {
                     if (!inp.value.trim()) {
                         inp.focus();
-                        inp.style.borderColor = '#C65D3E';
+                        inp.style.borderColor = '#234B38';
                         inp.style.background = '#FBEDE1';
                         setTimeout(() => { inp.style.background = 'white'; }, 800);
                         return;

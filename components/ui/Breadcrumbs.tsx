@@ -14,19 +14,19 @@ export interface BreadcrumbsProps {
 
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
   return (
-    <nav className="flex items-center text-xs md:text-sm text-terracotta-deep/70 gap-2 mb-4">
-      <Link href="/" className="hover:text-terracotta transition">
+    <nav className="flex items-center text-xs md:text-sm text-forest-deep/70 gap-2 mb-4">
+      <Link href="/" className="hover:text-forest transition">
         Home
       </Link>
       {items.map((item, index) => (
         <React.Fragment key={index}>
           <span>/</span>
           {item.href ? (
-            <Link href={item.href} className="hover:text-terracotta transition">
+            <Link href={item.href} className="hover:text-forest transition">
               {item.label}
             </Link>
           ) : (
-            <span className="font-semibold text-terracotta-deep truncate max-w-[200px] md:max-w-none">
+            <span className="font-semibold text-forest-deep truncate max-w-[200px] md:max-w-none">
               {item.label}
             </span>
           )}

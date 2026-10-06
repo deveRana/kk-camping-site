@@ -20,7 +20,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="px-3 py-2 rounded-lg border border-cream-dark text-sm font-medium text-terracotta-deep disabled:opacity-40 disabled:cursor-not-allowed hover:bg-cream-dark/50 transition"
+        className="px-3 py-2 rounded-lg border border-mist text-sm font-medium text-forest-deep disabled:opacity-40 disabled:cursor-not-allowed hover:bg-mist/50 transition"
       >
         Previous
       </button>
@@ -30,8 +30,8 @@ export const Pagination: React.FC<PaginationProps> = ({
           onClick={() => onPageChange(page)}
           className={`w-10 h-10 rounded-lg text-sm font-semibold transition ${
             currentPage === page
-              ? 'bg-terracotta text-white'
-              : 'bg-white border border-cream-dark text-terracotta-deep hover:bg-cream-dark/50'
+              ? 'bg-forest text-white'
+              : 'bg-white border border-mist text-forest-deep hover:bg-mist/50'
           }`}
         >
           {page}
@@ -40,7 +40,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-3 py-2 rounded-lg border border-cream-dark text-sm font-medium text-terracotta-deep disabled:opacity-40 disabled:cursor-not-allowed hover:bg-cream-dark/50 transition"
+        className="px-3 py-2 rounded-lg border border-mist text-sm font-medium text-forest-deep disabled:opacity-40 disabled:cursor-not-allowed hover:bg-mist/50 transition"
       >
         Next
       </button>

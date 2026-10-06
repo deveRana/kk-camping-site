@@ -4,21 +4,21 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Bookings — LakeStay</title>
+    <title>My Bookings — Lakeora</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet" />
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        terracotta: { DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
-                        amber: { warm: '#F2A65A', light: '#F9C89B' },
-                        cream: { DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+                        terracotta: { DEFAULT: '#234B38', dark: '#1A3829', deep: '#152E21' },
+                        amber: { warm: '#A8C8A6', light: '#D3E3D1' },
+                        cream: { DEFAULT: '#F4F8F2', dark: '#E3ECDF' },
                     },
-                    fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    fontFamily: { display: ['"Cormorant Garamond"', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
                 }
             }
         };
@@ -26,19 +26,19 @@
     <style>
         body {
             font-family: 'Inter', system-ui, sans-serif;
-            background: #FFF8F0;
+            background: #F4F8F2;
             color: #2C1810;
         }
 
         .font-display {
-            font-family: 'Fraunces', Georgia, serif;
+            font-family: 'Cormorant Garamond', Georgia, serif;
         }
 
         .tab-btn {
             padding: 12px 6px;
             font-size: 14px;
             font-weight: 500;
-            color: #6B2416;
+            color: #152E21;
             opacity: 0.6;
             border-bottom: 2px solid transparent;
             transition: all 0.15s;
@@ -47,8 +47,8 @@
 
         .tab-btn.active {
             opacity: 1;
-            border-bottom-color: #C65D3E;
-            color: #C65D3E;
+            border-bottom-color: #234B38;
+            color: #234B38;
             font-weight: 600;
         }
 
@@ -112,7 +112,7 @@
                         <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-3">
                             <div>
                                 <div class="flex items-center gap-2 mb-1">
-                                    <span class="status-pill" style="background:#FBEDE1; color:#C65D3E;">
+                                    <span class="status-pill" style="background:#FBEDE1; color:#234B38;">
                                         <span class="w-1.5 h-1.5 rounded-full bg-terracotta"></span> UPCOMING · in 6
                                         days
                                     </span>
@@ -169,7 +169,7 @@
                         <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-3">
                             <div>
                                 <div class="flex items-center gap-2 mb-1">
-                                    <span class="status-pill" style="background:#F5E9D7; color:#6B2416;">CONFIRMED · in
+                                    <span class="status-pill" style="background:#E3ECDF; color:#152E21;">CONFIRMED · in
                                         42 days</span>
                                 </div>
                                 <h3 class="font-display text-xl font-semibold text-terracotta-deep">Sunset Villa</h3>
@@ -221,7 +221,7 @@
                     <div class="flex-1 p-5">
                         <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-3">
                             <div>
-                                <span class="status-pill" style="background:#F5E9D7; color:#6B2416;">COMPLETED · 3 weeks
+                                <span class="status-pill" style="background:#E3ECDF; color:#152E21;">COMPLETED · 3 weeks
                                     ago</span>
                                 <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-1">Woodstone
                                     Cottages</h3>
@@ -253,7 +253,7 @@
                     <div class="flex-1 p-5">
                         <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-3">
                             <div>
-                                <span class="status-pill" style="background:#F5E9D7; color:#6B2416;">COMPLETED · 2
+                                <span class="status-pill" style="background:#E3ECDF; color:#152E21;">COMPLETED · 2
                                     months ago</span>
                                 <h3 class="font-display text-xl font-semibold text-terracotta-deep mt-1">Starlight
                                     Glamping</h3>
@@ -325,7 +325,7 @@
     <template id="emptyState">
         <div class="text-center py-20">
             <div class="w-24 h-24 rounded-full bg-cream-dark mx-auto flex items-center justify-center mb-4">
-                <svg width="40" height="40" fill="none" stroke="#6B2416" stroke-width="1.5" viewBox="0 0 24 24">
+                <svg width="40" height="40" fill="none" stroke="#152E21" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>

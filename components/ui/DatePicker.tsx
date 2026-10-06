@@ -112,7 +112,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   return (
     <div ref={containerRef} className={`relative w-full ${isOpen ? 'z-40' : 'z-10'} ${className}`}>
       {label && (
-        <label className="block text-xs font-semibold text-terracotta-deep uppercase tracking-wider mb-1.5">
+        <label className="block text-xs font-semibold text-forest-deep uppercase tracking-wider mb-1.5">
           {label}
         </label>
       )}
@@ -121,13 +121,13 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full bg-cream/40 border border-cream-dark rounded-xl px-3.5 py-2.5 text-left text-sm font-medium text-terracotta-deep flex items-center justify-between hover:bg-cream-dark/40 focus:outline-none focus:ring-2 focus:ring-terracotta transition shadow-sm"
+        className="w-full bg-paper/40 border border-mist rounded-xl px-3.5 py-2.5 text-left text-sm font-medium text-forest-deep flex items-center justify-between hover:bg-mist/40 focus:outline-none focus:ring-2 focus:ring-forest transition shadow-sm"
       >
-        <span className={value ? 'font-semibold text-terracotta-deep' : 'text-gray-400'}>
+        <span className={value ? 'font-semibold text-forest-deep' : 'text-gray-400'}>
           {value ? formatDisplayDate(value) : placeholder}
         </span>
         <svg
-          className="w-5 h-5 text-terracotta flex-shrink-0"
+          className="w-5 h-5 text-forest flex-shrink-0"
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
@@ -143,24 +143,24 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 
       {/* Custom Calendar Popover Menu */}
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 z-50 w-72 bg-white border border-cream-dark rounded-2xl shadow-2xl p-4 animate-scaleUp">
+        <div className="absolute top-full left-0 mt-2 z-50 w-72 bg-white border border-mist rounded-2xl shadow-2xl p-4 animate-scaleUp">
           {/* Calendar Header */}
-          <div className="flex items-center justify-between pb-3 mb-3 border-b border-cream-dark">
+          <div className="flex items-center justify-between pb-3 mb-3 border-b border-mist">
             <button
               onClick={handlePrevMonth}
-              className="p-1 text-terracotta-deep hover:bg-cream-dark/50 rounded-lg transition"
+              className="p-1 text-forest-deep hover:bg-mist/50 rounded-lg transition"
               aria-label="Previous Month"
             >
               <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
               </svg>
             </button>
-            <span className="font-display font-bold text-terracotta-deep text-sm">
+            <span className="font-display font-semibold text-forest-deep text-sm">
               {MONTH_NAMES[currentMonth]} {currentYear}
             </span>
             <button
               onClick={handleNextMonth}
-              className="p-1 text-terracotta-deep hover:bg-cream-dark/50 rounded-lg transition"
+              className="p-1 text-forest-deep hover:bg-mist/50 rounded-lg transition"
               aria-label="Next Month"
             >
               <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -172,7 +172,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           {/* Weekday Names */}
           <div className="grid grid-cols-7 text-center mb-1">
             {WEEKDAYS.map((wd) => (
-              <span key={wd} className="text-[11px] font-bold text-terracotta-deep/60 py-1">
+              <span key={wd} className="text-[11px] font-bold text-forest-deep/60 py-1">
                 {wd}
               </span>
             ))}
@@ -198,10 +198,10 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                   onClick={() => handleSelectDay(day)}
                   className={`h-8 rounded-xl text-xs font-semibold flex items-center justify-center transition ${
                     selected
-                      ? 'bg-terracotta text-white shadow-md'
+                      ? 'bg-forest text-white shadow-md'
                       : today
-                      ? 'bg-amber-warm/20 text-terracotta font-bold border border-amber-warm'
-                      : 'text-terracotta-deep hover:bg-cream-dark/60'
+                      ? 'bg-sage/20 text-forest font-bold border border-sage'
+                      : 'text-forest-deep hover:bg-mist/60'
                   } ${disabled ? 'opacity-30 cursor-not-allowed hover:bg-transparent' : ''}`}
                 >
                   {day}

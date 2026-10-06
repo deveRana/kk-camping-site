@@ -10,16 +10,16 @@ export interface TestimonialSectionProps {
 
 export const TestimonialSection: React.FC<TestimonialSectionProps> = ({ testimonials }) => {
   return (
-    <section className="py-16 bg-cream border-y border-cream-dark">
+    <section className="py-20 bg-forest-deep text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <p className="text-terracotta font-semibold uppercase tracking-widest text-xs mb-2">
+          <p className="eyebrow text-sage mb-2">
             Guest Reviews
           </p>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-terracotta-deep">
+          <h2 className="font-display text-3xl md:text-5xl font-medium text-white">
             Loved by 10,000+ Campers
           </h2>
-          <p className="text-sm text-terracotta-deep/70 mt-2">
+          <p className="text-sm text-white/70 mt-2">
             Real experiences shared by couples, families, and friend groups who stayed at Pawna Lake.
           </p>
         </div>
@@ -28,24 +28,24 @@ export const TestimonialSection: React.FC<TestimonialSectionProps> = ({ testimon
           {testimonials.map((test) => (
             <div
               key={test.id}
-              className="bg-white rounded-2xl p-6 border border-cream-dark shadow-sm flex flex-col justify-between"
+              className="bg-white text-forest-deep arch-lg pt-10 px-7 pb-7 shadow-xl flex flex-col justify-between"
             >
               <div className="space-y-3">
                 <Rating score={test.rating} showText={false} size="md" />
-                <p className="text-sm text-terracotta-deep/85 italic leading-relaxed">
+                <p className="text-sm text-forest-deep/85 italic leading-relaxed">
                   &ldquo;{test.comment}&rdquo;
                 </p>
               </div>
 
-              <div className="pt-4 mt-4 border-t border-cream-dark flex items-center gap-3">
+              <div className="pt-4 mt-4 border-t border-mist flex items-center gap-3">
                 <img
                   src={test.avatar}
                   alt={test.name}
-                  className="w-10 h-10 rounded-full object-cover border border-cream-dark"
+                  className="w-10 h-10 rounded-full object-cover border border-mist"
                 />
                 <div>
-                  <h4 className="text-sm font-semibold text-terracotta-deep">{test.name}</h4>
-                  <p className="text-xs text-terracotta-deep/60">
+                  <h4 className="text-sm font-semibold text-forest-deep">{test.name}</h4>
+                  <p className="text-xs text-forest-deep/60">
                     {test.location} · {test.stayType}
                   </p>
                 </div>

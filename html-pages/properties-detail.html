@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lakeside Deluxe Tents — LakeStay</title>
+    <title>Lakeside Deluxe Tents — Lakeora</title>
     <meta name="description"
         content="Book Lakeside Deluxe Tents at Pawna Lake — luxury glamping with attached washroom, bonfire, BBQ dinner. 2 min walk from the lake." />
 
@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -22,12 +22,12 @@
             theme: {
                 extend: {
                     colors: {
-                        terracotta: { DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
-                        amber: { warm: '#F2A65A', light: '#F9C89B' },
-                        cream: { DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+                        terracotta: { DEFAULT: '#234B38', dark: '#1A3829', deep: '#152E21' },
+                        amber: { warm: '#A8C8A6', light: '#D3E3D1' },
+                        cream: { DEFAULT: '#F4F8F2', dark: '#E3ECDF' },
                     },
                     fontFamily: {
-                        display: ['Fraunces', 'Georgia', 'serif'],
+                        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
                         sans: ['Inter', 'system-ui', 'sans-serif'],
                     },
                 },
@@ -42,12 +42,12 @@
 
         body {
             font-family: 'Inter', system-ui, sans-serif;
-            background: #FFF8F0;
+            background: #F4F8F2;
             color: #2C1810;
         }
 
         .font-display {
-            font-family: 'Fraunces', Georgia, serif;
+            font-family: 'Cormorant Garamond', Georgia, serif;
         }
 
         /* Calendar */
@@ -63,7 +63,7 @@
         }
 
         .cal-cell:hover:not(.disabled):not(.selected) {
-            background: #F5E9D7;
+            background: #E3ECDF;
         }
 
         .cal-cell.disabled {
@@ -73,14 +73,14 @@
         }
 
         .cal-cell.selected {
-            background: #C65D3E;
+            background: #234B38;
             color: white;
             font-weight: 600;
         }
 
         .cal-cell.in-range {
             background: #FBEDE1;
-            color: #6B2416;
+            color: #152E21;
         }
 
         .cal-cell.faded {
@@ -91,14 +91,14 @@
         /* Rating bar */
         .rating-bar {
             height: 6px;
-            background: #F5E9D7;
+            background: #E3ECDF;
             border-radius: 3px;
             overflow: hidden;
         }
 
         .rating-bar-fill {
             height: 100%;
-            background: #C65D3E;
+            background: #234B38;
             border-radius: 3px;
         }
 
@@ -118,7 +118,7 @@
 
         /* Rating stars */
         .stars {
-            color: #F2A65A;
+            color: #A8C8A6;
         }
     </style>
 </head>
@@ -130,7 +130,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 md:h-20">
                 <a href="index.html"
-                    class="font-display text-2xl md:text-3xl font-semibold text-terracotta">LakeStay</a>
+                    class="font-display text-2xl md:text-3xl font-semibold text-terracotta">Lakeora</a>
                 <div class="hidden md:flex items-center gap-8">
                     <a href="properties.html"
                         class="text-terracotta-deep hover:text-terracotta text-sm font-medium">Stays</a>
@@ -274,7 +274,7 @@
                     <div class="flex items-start gap-4">
                         <div
                             class="w-11 h-11 rounded-full bg-cream-dark flex items-center justify-center flex-shrink-0">
-                            <svg width="20" height="20" fill="none" stroke="#6B2416" stroke-width="1.8"
+                            <svg width="20" height="20" fill="none" stroke="#152E21" stroke-width="1.8"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -289,7 +289,7 @@
                     <div class="flex items-start gap-4">
                         <div
                             class="w-11 h-11 rounded-full bg-cream-dark flex items-center justify-center flex-shrink-0">
-                            <svg width="20" height="20" fill="none" stroke="#6B2416" stroke-width="1.8"
+                            <svg width="20" height="20" fill="none" stroke="#152E21" stroke-width="1.8"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -304,7 +304,7 @@
                     <div class="flex items-start gap-4">
                         <div
                             class="w-11 h-11 rounded-full bg-cream-dark flex items-center justify-center flex-shrink-0">
-                            <svg width="20" height="20" fill="none" stroke="#6B2416" stroke-width="1.8"
+                            <svg width="20" height="20" fill="none" stroke="#152E21" stroke-width="1.8"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
@@ -664,19 +664,19 @@
                                 experiences</div>
                             <label class="flex items-center justify-between py-2 cursor-pointer">
                                 <div class="flex items-center gap-2 text-sm text-terracotta-deep"><input type="checkbox"
-                                        class="w-4 h-4 rounded" style="accent-color:#C65D3E" onchange="calc()"
+                                        class="w-4 h-4 rounded" style="accent-color:#234B38" onchange="calc()"
                                         data-price="500" data-per-guest="true" /> Kayaking</div>
                                 <span class="text-sm text-terracotta-deep/70">₹500/pp</span>
                             </label>
                             <label class="flex items-center justify-between py-2 cursor-pointer">
                                 <div class="flex items-center gap-2 text-sm text-terracotta-deep"><input type="checkbox"
-                                        class="w-4 h-4 rounded" style="accent-color:#C65D3E" onchange="calc()"
+                                        class="w-4 h-4 rounded" style="accent-color:#234B38" onchange="calc()"
                                         data-price="300" data-per-guest="true" /> Sunrise trek (guided)</div>
                                 <span class="text-sm text-terracotta-deep/70">₹300/pp</span>
                             </label>
                             <label class="flex items-center justify-between py-2 cursor-pointer">
                                 <div class="flex items-center gap-2 text-sm text-terracotta-deep"><input type="checkbox"
-                                        class="w-4 h-4 rounded" style="accent-color:#C65D3E" onchange="calc()"
+                                        class="w-4 h-4 rounded" style="accent-color:#234B38" onchange="calc()"
                                         data-price="800" data-per-guest="false" /> Anniversary decor</div>
                                 <span class="text-sm text-terracotta-deep/70">₹800 flat</span>
                             </label>
@@ -805,13 +805,13 @@
     <footer class="bg-terracotta-deep text-cream/80 py-10">
         <div
             class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-            <div class="font-display text-2xl text-white font-semibold">LakeStay</div>
+            <div class="font-display text-2xl text-white font-semibold">Lakeora</div>
             <div class="flex gap-6">
                 <a href="index.html" class="hover:text-amber-warm">Home</a>
                 <a href="properties.html" class="hover:text-amber-warm">All stays</a>
                 <a href="index.html#contact" class="hover:text-amber-warm">Contact</a>
             </div>
-            <div>© 2026 LakeStay</div>
+            <div>© 2026 Lakeora</div>
         </div>
     </footer>
 
@@ -1020,10 +1020,10 @@
         // ============ MAP ============
         const map = L.map('propertyMap', { center: [18.7604, 73.4070], zoom: 14, scrollWheelZoom: false });
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
-        L.circle([18.7604, 73.4070], { color: '#C65D3E', fillColor: '#C65D3E', fillOpacity: 0.15, radius: 400 }).addTo(map);
+        L.circle([18.7604, 73.4070], { color: '#234B38', fillColor: '#234B38', fillOpacity: 0.15, radius: 400 }).addTo(map);
         const propIcon = L.divIcon({
             className: '',
-            html: '<div style="background:#C65D3E;color:white;padding:6px 12px;border-radius:20px;font-family:Inter;font-size:12px;font-weight:600;box-shadow:0 2px 8px rgba(107,36,22,0.3);border:2px solid white;">Lakeside Deluxe Tents</div>',
+            html: '<div style="background:#234B38;color:white;padding:6px 12px;border-radius:20px;font-family:Inter;font-size:12px;font-weight:600;box-shadow:0 2px 8px rgba(107,36,22,0.3);border:2px solid white;">Lakeside Deluxe Tents</div>',
             iconSize: [180, 32], iconAnchor: [90, 16],
         });
         L.marker([18.7604, 73.4070], { icon: propIcon }).addTo(map);

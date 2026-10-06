@@ -1,28 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --color-terracotta: #C65D3E;
-  --color-terracotta-dark: #A54A2E;
-  --color-terracotta-deep: #6B2416;
-  --color-amber-warm: #F2A65A;
-  --color-amber-light: #F9C89B;
-  --color-cream: #FFF8F0;
-  --color-cream-dark: #F5E9D7;
+  --color-forest: #234B37;
+  --color-forest-dark: #1A3A2A;
+  --color-forest-deep: #14281E;
+  --color-sage: #A8C8A6;
+  --color-sage-light: #D3E4D1;
+  --color-paper: #F7F9F5;
+  --color-mist: #E3EDE0;
 
-  --background: #FFF8F0;
-  --foreground: #2C1810;
+  --background: #F7F9F5;
+  --foreground: #14281E;
 }
 
 @theme {
-  --color-terracotta: #C65D3E;
-  --color-terracotta-dark: #A54A2E;
-  --color-terracotta-deep: #6B2416;
-  --color-amber-warm: #F2A65A;
-  --color-amber-light: #F9C89B;
-  --color-cream: #FFF8F0;
-  --color-cream-dark: #F5E9D7;
+  --color-forest: #234B37;
+  --color-forest-dark: #1A3A2A;
+  --color-forest-deep: #14281E;
+  --color-sage: #A8C8A6;
+  --color-sage-light: #D3E4D1;
+  --color-paper: #F7F9F5;
+  --color-mist: #E3EDE0;
 
-  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-display: var(--font-cormorant), Georgia, serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 
@@ -42,7 +42,7 @@ body {
 
 /* Skeleton shimmer */
 .skel {
-  background: linear-gradient(90deg, #F5E9D7 0%, #FBEDE1 50%, #F5E9D7 100%);
+  background: linear-gradient(90deg, #E3EDE0 0%, #F1F7EF 50%, #E3EDE0 100%);
   background-size: 200% 100%;
   animation: shimmer 1.4s ease-in-out infinite;
   border-radius: 6px;
@@ -57,8 +57,8 @@ body {
 .spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid #F5E9D7;
-  border-top-color: #C65D3E;
+  border: 3px solid #E3EDE0;
+  border-top-color: #234B37;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -73,7 +73,7 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #C65D3E;
+  background: #234B37;
   margin: 0 4px;
   animation: bounce 1.4s infinite ease-in-out both;
 }
@@ -88,13 +88,13 @@ body {
 /* Progress bar */
 .progress-bar {
   height: 4px;
-  background: #F5E9D7;
+  background: #E3EDE0;
   border-radius: 999px;
   overflow: hidden;
 }
 .progress-fill {
   height: 100%;
-  background: #C65D3E;
+  background: #234B37;
   border-radius: 999px;
   animation: progress 2s ease-in-out infinite;
 }
@@ -114,3 +114,19 @@ body {
 .wa-float {
   animation: pulse-ring 2s infinite;
 }
+
+/* Lakeora motifs */
+.arch { border-radius: 9999px 9999px 0 0; }
+.arch-lg { border-radius: 200px 200px 16px 16px; }
+.text-shadow-soft { text-shadow: 0 2px 20px rgba(20, 40, 30, 0.45); }
+.eyebrow { letter-spacing: 0.28em; text-transform: uppercase; font-size: 0.72rem; font-weight: 600; }
+.window-divider { position: relative; height: 1px; background: rgba(35, 75, 55, 0.2); }
+.window-divider::after {
+  content: ''; position: absolute; left: 50%; top: -5px; width: 11px; height: 11px;
+  transform: translateX(-50%) rotate(45deg); background: #A8C8A6; border: 1px solid #234B37;
+}
+@keyframes float-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.reveal { animation: float-up 0.9s ease-out both; }
+.reveal-2 { animation: float-up 0.9s 0.15s ease-out both; }
+.reveal-3 { animation: float-up 0.9s 0.3s ease-out both; }
+::selection { background: #A8C8A6; color: #14281E; }

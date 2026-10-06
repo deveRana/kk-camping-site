@@ -24,10 +24,10 @@ export const Button: React.FC<ButtonProps> = ({
   const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none';
 
   const variants = {
-    primary: 'bg-terracotta hover:bg-terracotta-dark text-white focus:ring-terracotta shadow-md hover:shadow-lg active:scale-[0.98]',
-    secondary: 'bg-cream-dark hover:bg-cream-dark/80 text-terracotta-deep focus:ring-terracotta-deep active:scale-[0.98]',
-    outline: 'border-2 border-terracotta text-terracotta hover:bg-terracotta hover:text-white focus:ring-terracotta active:scale-[0.98]',
-    ghost: 'text-terracotta-deep hover:bg-cream-dark/40 focus:ring-terracotta-deep',
+    primary: 'bg-forest hover:bg-forest-dark text-white focus:ring-forest shadow-md hover:shadow-lg active:scale-[0.98]',
+    secondary: 'bg-mist hover:bg-mist/80 text-forest-deep focus:ring-forest-deep active:scale-[0.98]',
+    outline: 'border-2 border-forest text-forest hover:bg-forest hover:text-white focus:ring-forest active:scale-[0.98]',
+    ghost: 'text-forest-deep hover:bg-mist/40 focus:ring-forest-deep',
     danger: 'bg-red-600 hover:bg-red-700 text-white focus:ring-red-500 shadow-md active:scale-[0.98]',
   };
 

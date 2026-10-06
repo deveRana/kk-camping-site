@@ -11,7 +11,7 @@ export interface CardProps {
 export const Card: React.FC<CardProps> = ({ children, className = '', hoverable = false }) => {
   return (
     <div
-      className={`bg-white rounded-2xl border border-cream-dark overflow-hidden transition-all duration-300 ${
+      className={`bg-white rounded-2xl border border-mist overflow-hidden transition-all duration-300 ${
         hoverable ? 'hover:-translate-y-1 hover:shadow-xl' : ''
       } ${className}`}
     >

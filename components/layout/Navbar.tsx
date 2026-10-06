@@ -26,21 +26,26 @@ export const Navbar: React.FC = () => {
   // Determine styling based on page and scroll
   const navBg = isHome
     ? isScrolled
-      ? 'bg-cream/95 backdrop-blur-md shadow-sm border-b border-cream-dark'
+      ? 'bg-paper/95 backdrop-blur-md shadow-sm border-b border-mist'
       : 'bg-transparent'
-    : 'bg-cream/95 backdrop-blur-md shadow-sm border-b border-cream-dark sticky top-0';
+    : 'bg-paper/95 backdrop-blur-md shadow-sm border-b border-mist sticky top-0';
 
-  const logoColor = isHome && !isScrolled ? 'text-white' : 'text-terracotta';
-  const linkColor = isHome && !isScrolled ? 'text-white/90 hover:text-amber-warm' : 'text-terracotta-deep hover:text-terracotta';
-  const menuIconColor = isHome && !isScrolled ? 'text-white' : 'text-terracotta-deep';
+  const logoColor = isHome && !isScrolled ? 'text-white' : 'text-forest';
+  const linkColor = isHome && !isScrolled ? 'text-white/90 hover:text-sage' : 'text-forest-deep hover:text-forest';
+  const menuIconColor = isHome && !isScrolled ? 'text-white' : 'text-forest-deep';
 
   return (
     <header className={`${isHome ? 'fixed top-0 left-0 right-0' : 'sticky top-0'} z-40 transition-all duration-300 ${navBg}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className={`font-display text-2xl md:text-3xl font-bold tracking-tight ${logoColor} transition`}>
-            LakeStay
+          <Link href="/" className={`flex items-center gap-2.5 font-display text-3xl md:text-4xl font-semibold tracking-wide ${logoColor} transition`}>
+            <img
+              src={isHome && !isScrolled ? '/logos/lakeora-mark-light.png' : '/logos/lakeora-mark-dark.png'}
+              alt="Lakeora logo"
+              className="h-10 md:h-12 w-auto"
+            />
+            Lakeora
           </Link>
 
           {/* Desktop Links */}
@@ -51,24 +56,12 @@ export const Navbar: React.FC = () => {
             <Link href="/gallery" className={`${linkColor} transition`}>
               Gallery
             </Link>
-            <Link href="/about" className={`${linkColor} transition`}>
-              About Us
-            </Link>
-            <Link href="/blogs" className={`${linkColor} transition`}>
-              Blogs
-            </Link>
-            <Link href="/faq" className={`${linkColor} transition`}>
-              FAQ
-            </Link>
-            <Link href="/contact" className={`${linkColor} transition`}>
-              Contact
-            </Link>
             <Link href="/my-bookings" className={`${linkColor} transition`}>
               My Bookings
             </Link>
             <Link
               href="/properties"
-              className="bg-terracotta hover:bg-terracotta-dark text-white px-5 py-2.5 rounded-xl font-semibold shadow transition active:scale-95"
+              className="bg-forest hover:bg-forest-dark text-white px-5 py-2.5 rounded-xl font-semibold shadow transition active:scale-95"
             >
               Book Now
             </Link>
@@ -92,11 +85,11 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile Navigation Drawer */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-cream border-t border-cream-dark px-4 py-4 space-y-3 rounded-b-2xl shadow-xl animate-fadeIn">
+          <div className="md:hidden bg-paper border-t border-mist px-4 py-4 space-y-3 rounded-b-2xl shadow-xl animate-fadeIn">
             <Link
               href="/properties"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block py-2 text-terracotta-deep font-semibold"
+              className="block py-2 text-forest-deep font-semibold"
             >
               Stays
             </Link>
@@ -104,49 +97,21 @@ export const Navbar: React.FC = () => {
             <Link
               href="/gallery"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block py-2 text-terracotta-deep font-semibold"
+              className="block py-2 text-forest-deep font-semibold"
             >
               Gallery
             </Link>
             <Link
-              href="/about"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block py-2 text-terracotta-deep font-semibold"
-            >
-              About Us
-            </Link>
-            <Link
-              href="/blogs"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block py-2 text-terracotta-deep font-semibold"
-            >
-              Blogs
-            </Link>
-            <Link
-              href="/faq"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block py-2 text-terracotta-deep font-semibold"
-            >
-              FAQ
-            </Link>
-            <Link
-              href="/contact"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block py-2 text-terracotta-deep font-semibold"
-            >
-              Contact
-            </Link>
-            <Link
               href="/my-bookings"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block py-2 text-terracotta-deep font-semibold"
+              className="block py-2 text-forest-deep font-semibold"
             >
               My Bookings
             </Link>
             <Link
               href="/properties"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block w-full text-center bg-terracotta text-white py-3 rounded-xl font-semibold shadow mt-2"
+              className="block w-full text-center bg-forest text-white py-3 rounded-xl font-semibold shadow mt-2"
             >
               Book Now
             </Link>

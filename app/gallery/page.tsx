@@ -28,10 +28,10 @@ export default function GalleryPage() {
       <Breadcrumbs items={[{ label: 'Photo Gallery' }]} />
 
       <div className="text-center max-w-2xl mx-auto space-y-3">
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-terracotta-deep">
+        <h1 className="font-display text-4xl md:text-5xl font-semibold text-forest-deep">
           Pawna Lake Moments
         </h1>
-        <p className="text-sm text-terracotta-deep/75 leading-relaxed">
+        <p className="text-sm text-forest-deep/75 leading-relaxed">
           Real guest photos capturing sunset colors, cozy campfire evenings, kayaking waters, and delicious barbecue meals.
         </p>
       </div>
@@ -44,8 +44,8 @@ export default function GalleryPage() {
             onClick={() => setSelectedCategory(cat)}
             className={`px-4 py-2 rounded-full text-xs font-semibold transition ${
               selectedCategory === cat
-                ? 'bg-terracotta text-white shadow-md'
-                : 'bg-white border border-cream-dark text-terracotta-deep hover:bg-cream-dark/50'
+                ? 'bg-forest text-white shadow-md'
+                : 'bg-white border border-mist text-forest-deep hover:bg-mist/50'
             }`}
           >
             {cat}
@@ -59,7 +59,7 @@ export default function GalleryPage() {
           <div
             key={item.id}
             onClick={() => handleOpenLightbox(idx)}
-            className="group relative h-64 bg-cream-dark rounded-2xl overflow-hidden cursor-pointer shadow-sm border border-cream-dark hover:shadow-xl transition duration-300"
+            className="group relative h-64 bg-mist rounded-2xl overflow-hidden cursor-pointer shadow-sm border border-mist hover:shadow-xl transition duration-300"
           >
             <img
               src={item.imageUrl}
@@ -67,7 +67,7 @@ export default function GalleryPage() {
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4 text-white">
-              <p className="font-display text-lg font-bold">{item.title}</p>
+              <p className="font-display text-lg font-semibold">{item.title}</p>
               <p className="text-xs text-white/80 line-clamp-1">{item.caption}</p>
             </div>
           </div>

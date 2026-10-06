@@ -4,21 +4,21 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Loading states — LakeStay</title>
+    <title>Loading states — Lakeora</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet" />
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        terracotta: { DEFAULT: '#C65D3E', dark: '#A54A2E', deep: '#6B2416' },
-                        amber: { warm: '#F2A65A', light: '#F9C89B' },
-                        cream: { DEFAULT: '#FFF8F0', dark: '#F5E9D7' },
+                        terracotta: { DEFAULT: '#234B38', dark: '#1A3829', deep: '#152E21' },
+                        amber: { warm: '#A8C8A6', light: '#D3E3D1' },
+                        cream: { DEFAULT: '#F4F8F2', dark: '#E3ECDF' },
                     },
-                    fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    fontFamily: { display: ['"Cormorant Garamond"', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
                 }
             }
         };
@@ -26,17 +26,17 @@
     <style>
         body {
             font-family: 'Inter', system-ui, sans-serif;
-            background: #FFF8F0;
+            background: #F4F8F2;
             color: #2C1810;
         }
 
         .font-display {
-            font-family: 'Fraunces', Georgia, serif;
+            font-family: 'Cormorant Garamond', Georgia, serif;
         }
 
         /* Skeleton shimmer */
         .skel {
-            background: linear-gradient(90deg, #F5E9D7 0%, #FBEDE1 50%, #F5E9D7 100%);
+            background: linear-gradient(90deg, #E3ECDF 0%, #FBEDE1 50%, #E3ECDF 100%);
             background-size: 200% 100%;
             animation: shimmer 1.4s ease-in-out infinite;
             border-radius: 6px;
@@ -56,8 +56,8 @@
         .spinner {
             width: 40px;
             height: 40px;
-            border: 3px solid #F5E9D7;
-            border-top-color: #C65D3E;
+            border: 3px solid #E3ECDF;
+            border-top-color: #234B38;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -74,7 +74,7 @@
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: #C65D3E;
+            background: #234B38;
             margin: 0 4px;
             animation: bounce 1.4s infinite ease-in-out both;
         }
@@ -105,14 +105,14 @@
         /* Progress bar */
         .progress-bar {
             height: 4px;
-            background: #F5E9D7;
+            background: #E3ECDF;
             border-radius: 999px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: #C65D3E;
+            background: #234B38;
             border-radius: 999px;
             animation: progress 2s ease-in-out infinite;
         }
@@ -371,7 +371,7 @@
 
                 <div class="bg-white rounded-2xl border border-cream-dark p-10 text-center">
                     <div class="w-16 h-16 rounded-full bg-cream-dark mx-auto flex items-center justify-center mb-4">
-                        <svg width="30" height="30" fill="none" stroke="#6B2416" stroke-width="1.5" viewBox="0 0 24 24">
+                        <svg width="30" height="30" fill="none" stroke="#152E21" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>

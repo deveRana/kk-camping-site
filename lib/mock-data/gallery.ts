@@ -34,7 +34,7 @@ export const MOCK_GALLERY: GalleryItem[] = [
     title: 'Machang Interior & View',
     category: 'Campsites',
     imageUrl: '/machang-cottage-images/machang-cottage-3.jpg',
-    caption: 'Spacious interior stay inside Machang Cottage at Pawna NightHunt.'
+    caption: 'Spacious interior stay inside Machang Cottage at Lakeora.'
   },
   {
     id: 'gal-6',

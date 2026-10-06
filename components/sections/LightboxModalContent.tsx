@@ -37,7 +37,7 @@ export const LightboxModalContent: React.FC<LightboxModalContentProps> = ({
         {/* Prev Button */}
         <button
           onClick={handlePrev}
-          className="absolute left-3 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 text-white hover:bg-terracotta transition"
+          className="absolute left-3 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 text-white hover:bg-forest transition"
           aria-label="Previous Image"
         >
           <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -48,7 +48,7 @@ export const LightboxModalContent: React.FC<LightboxModalContentProps> = ({
         {/* Next Button */}
         <button
           onClick={handleNext}
-          className="absolute right-3 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 text-white hover:bg-terracotta transition"
+          className="absolute right-3 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 text-white hover:bg-forest transition"
           aria-label="Next Image"
         >
           <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -58,9 +58,9 @@ export const LightboxModalContent: React.FC<LightboxModalContentProps> = ({
       </div>
 
       <div>
-        <h4 className="font-display text-xl font-semibold text-terracotta-deep">{currentItem.title}</h4>
-        <p className="text-sm text-terracotta-deep/70 mt-1">{currentItem.caption}</p>
-        <p className="text-xs text-terracotta-deep/50 mt-2">
+        <h4 className="font-display text-xl font-semibold text-forest-deep">{currentItem.title}</h4>
+        <p className="text-sm text-forest-deep/70 mt-1">{currentItem.caption}</p>
+        <p className="text-xs text-forest-deep/50 mt-2">
           Image {currentIndex + 1} of {items.length}
         </p>
       </div>

@@ -16,7 +16,7 @@ export const MOCK_PROPERTIES: Property[] = PAWNA_CAMPSITE_MASTER_DATA.packages.m
   capacity: pkg.capacity,
   coverImage: pkg.coverImage,
   gallery: pkg.gallery,
-  description: `${pkg.tagline}. Located at Pawna Lake NightHunt. Separate private setup for your group with unlimited evening tea, limited BBQ, unlimited veg/non-veg dinner, campfire live acoustic music, morning breakfast, and free sports activities included.`,
+  description: `${pkg.tagline}. Located at Lakeora, Pawna Lake. Separate private setup for your group with unlimited evening tea, limited BBQ, unlimited veg/non-veg dinner, campfire live acoustic music, morning breakfast, and free sports activities included.`,
   features: pkg.highlights,
   amenities: [
     ...(pkg.hasAttachedWashroom ? [{ icon: 'shower', name: 'Attached Washroom' }] : [{ icon: 'toilet', name: 'Common Clean Toilets' }]),
@@ -27,7 +27,7 @@ export const MOCK_PROPERTIES: Property[] = PAWNA_CAMPSITE_MASTER_DATA.packages.m
     { icon: 'parking', name: 'Free Secure Parking' }
   ],
   host: {
-    name: 'Pawna Lake NightHunt',
+    name: 'Lakeora, Pawna Lake',
     avatar: '/logos/logo.PNG',
     superhost: false,
     joined: 'Verified Lakeside Campsite',
