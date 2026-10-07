@@ -97,7 +97,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom copyright bar */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-paper/60">
-          <p>© {new Date().getFullYear()} Lakeora Campsites. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Lakeora Stays. All rights reserved.</p>
           <div className="flex gap-6">
             <span>Pawna Lake · Lonavala · Maharashtra</span>
           </div>
