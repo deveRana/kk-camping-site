@@ -15,6 +15,7 @@ export interface Property {
   gallery: string[];
   description: string;
   features: string[];
+  inclusions?: string[];
   amenities: Array<{
     icon: string;
     name: string;

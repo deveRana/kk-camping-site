@@ -96,7 +96,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
                 <span className="font-display text-xl font-semibold text-forest">
                   ₹{property.price.toLocaleString()}
                 </span>
-                <span className="text-xs text-forest-deep/60">/ night</span>
+                <span className="text-xs text-forest-deep/60">/ person</span>
                 {property.originalPrice && (
                   <span className="text-xs line-through text-forest-deep/40">
                     ₹{property.originalPrice.toLocaleString()}

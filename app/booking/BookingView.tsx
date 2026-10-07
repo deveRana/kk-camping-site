@@ -8,7 +8,15 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { useToast } from '@/components/toast/useToast';
 
-export function BookingView({ property }: { property: Property }) {
+export function BookingView({
+  property,
+  guests,
+  advancePercent,
+}: {
+  property: Property;
+  guests: number;
+  advancePercent: number;
+}) {
   const router = useRouter();
   const propertyId = property.id;
 
@@ -27,23 +35,24 @@ export function BookingView({ property }: { property: Property }) {
 
   const { showToast } = useToast();
 
-  const basePrice = property.price * 2; // 2 nights default assumption
+  const basePrice = property.price * guests; // packages are priced per person
   const addonTotal = selectedAddons.length * 499;
   const totalBeforeDiscount = basePrice + addonTotal;
   const finalTotal = Math.max(0, totalBeforeDiscount - discount);
+  const advanceDue = Math.round((finalTotal * advancePercent) / 100);
 
   const handleApplyCoupon = (e: React.FormEvent) => {
     e.preventDefault();
-    if (coupon.toUpperCase() === 'PAWNA10') {
+    if (coupon.toUpperCase() === 'LAKEORA10') {
       setDiscount(Math.round(totalBeforeDiscount * 0.1));
       showToast({
         type: 'success',
-        message: 'Coupon PAWNA10 applied! You saved 10%.',
+        message: 'Coupon LAKEORA10 applied! You saved 10%.',
       });
     } else {
       showToast({
         type: 'error',
-        message: 'Invalid coupon code. Try "PAWNA10".',
+        message: 'Invalid coupon code. Try "LAKEORA10".',
       });
     }
   };
@@ -265,7 +274,7 @@ export function BookingView({ property }: { property: Property }) {
                 </h4>
                 <p className="text-xs text-forest-deep/60 mt-0.5">{property.location}</p>
                 <span className="text-xs font-semibold text-forest mt-1 block">
-                  ₹{property.price} / night
+                  ₹{property.price.toLocaleString()} / person
                 </span>
               </div>
             </div>
@@ -274,7 +283,7 @@ export function BookingView({ property }: { property: Property }) {
             <form onSubmit={handleApplyCoupon} className="flex gap-2">
               <input
                 type="text"
-                placeholder="Coupon code (PAWNA10)"
+                placeholder="Coupon code (LAKEORA10)"
                 value={coupon}
                 onChange={(e) => setCoupon(e.target.value)}
                 className="bg-paper/40 border border-mist rounded-xl px-3 py-2 text-xs uppercase flex-1 focus:outline-none focus:ring-1 focus:ring-forest"
@@ -287,7 +296,9 @@ export function BookingView({ property }: { property: Property }) {
             {/* Price Calculations */}
             <div className="space-y-2 text-xs text-forest-deep/80 pt-4 border-t border-mist">
               <div className="flex justify-between">
-                <span>Accommodation (2 nights)</span>
+                <span>
+                  {guests} {guests === 1 ? 'guest' : 'guests'} × ₹{property.price.toLocaleString()}
+                </span>
                 <span>₹{basePrice.toLocaleString()}</span>
               </div>
               {selectedAddons.length > 0 && (
@@ -298,13 +309,21 @@ export function BookingView({ property }: { property: Property }) {
               )}
               {discount > 0 && (
                 <div className="flex justify-between text-emerald-600 font-semibold">
-                  <span>Discount (PAWNA10)</span>
+                  <span>Discount (LAKEORA10)</span>
                   <span>-₹{discount.toLocaleString()}</span>
                 </div>
               )}
               <div className="flex justify-between text-base font-bold text-forest pt-2 border-t border-mist">
                 <span>Total Amount</span>
                 <span>₹{finalTotal.toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between text-forest-deep font-semibold">
+                <span>Pay now ({advancePercent}% advance)</span>
+                <span>₹{advanceDue.toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between text-forest-deep/60">
+                <span>Balance at check-in</span>
+                <span>₹{(finalTotal - advanceDue).toLocaleString()}</span>
               </div>
             </div>
           </div>

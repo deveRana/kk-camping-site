@@ -3,18 +3,20 @@ import Link from 'next/link';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { PropertyGrid } from '@/components/sections/PropertyGrid';
 import { TestimonialSection } from '@/components/sections/TestimonialSection';
-import { getFaqs, getProperties, getTestimonials } from '@/lib/sanity/data';
+import { getFaqs, getGallery, getProperties, getTestimonials } from '@/lib/sanity/data';
 import { Accordion } from '@/components/ui/Accordion';
 import { Badge } from '@/components/ui/Badge';
 
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const [properties, testimonials, faqs] = await Promise.all([
+  const [properties, testimonials, faqs, gallery] = await Promise.all([
     getProperties(),
     getTestimonials(),
     getFaqs(),
+    getGallery(),
   ]);
+  const mosaic = gallery.slice(0, 5);
   const featuredProperties = properties.filter((p) => p.isFeatured);
 
   return (
@@ -91,7 +93,7 @@ export default async function HomePage() {
           </Link>
         </div>
 
-        <PropertyGrid properties={featuredProperties} />
+        <PropertyGrid properties={featuredProperties} layout="wide" />
       </section>
 
 
@@ -118,6 +120,64 @@ export default async function HomePage() {
               </div>
               <h3 className="font-display text-2xl font-semibold text-forest-deep">{m.t}</h3>
               <p className="text-sm text-forest-deep/70 mt-2 leading-relaxed">{m.d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Gallery mosaic */}
+      {mosaic.length >= 5 && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-end justify-between mb-8 gap-4">
+            <div>
+              <p className="eyebrow text-forest mb-2">Life at Lakeora</p>
+              <h2 className="font-display text-4xl md:text-5xl font-medium text-forest-deep">
+                See the lake for yourself
+              </h2>
+            </div>
+            <Link href="/gallery" className="text-sm font-semibold text-forest hover:text-forest-dark group whitespace-nowrap">
+              View gallery <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-3 md:gap-4 h-[520px] md:h-[560px]">
+            {mosaic.map((g, i) => (
+              <Link
+                key={g.id}
+                href="/gallery"
+                className={`group relative overflow-hidden rounded-3xl ${i === 0 ? 'col-span-2 row-span-2 md:rounded-t-[10rem]' : ''}`}
+              >
+                <img
+                  src={g.imageUrl}
+                  alt={g.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/70 via-transparent to-transparent opacity-80" />
+                <span className="absolute bottom-3 left-4 right-4 text-white text-sm font-medium drop-shadow">{g.title}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* How booking works */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <p className="eyebrow text-forest mb-3">Simple &amp; quick</p>
+          <h2 className="font-display text-4xl md:text-5xl font-medium text-forest-deep">Book in three easy steps</h2>
+        </div>
+        <div className="grid md:grid-cols-3 gap-8 relative">
+          <div className="hidden md:block absolute top-9 left-[16%] right-[16%] border-t-2 border-dashed border-sage" />
+          {[
+            { n: '1', t: 'Choose your stay', d: 'Pick a tent, dome or cottage that fits your group.' },
+            { n: '2', t: 'Pay 50% advance', d: 'Secure your dates by UPI — Google Pay, Paytm or PhonePe.' },
+            { n: '3', t: 'Arrive & unwind', d: 'Check in at 4 PM. Tea, music and sunset are waiting.' },
+          ].map((st) => (
+            <div key={st.n} className="relative text-center">
+              <div className="mx-auto w-[4.5rem] h-[4.5rem] rounded-full bg-forest text-sage font-display text-3xl flex items-center justify-center shadow-lg ring-8 ring-paper">
+                {st.n}
+              </div>
+              <h3 className="font-display text-2xl font-semibold text-forest-deep mt-5">{st.t}</h3>
+              <p className="text-sm text-forest-deep/70 mt-2 max-w-xs mx-auto leading-relaxed">{st.d}</p>
             </div>
           ))}
         </div>

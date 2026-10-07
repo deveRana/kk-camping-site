@@ -28,9 +28,9 @@ export const TestimonialSection: React.FC<TestimonialSectionProps> = ({ testimon
           {testimonials.map((test) => (
             <div
               key={test.id}
-              className="bg-white text-forest-deep arch-lg pt-10 px-7 pb-7 shadow-xl flex flex-col justify-between"
+              className="bg-white text-forest-deep rounded-t-[6rem] rounded-b-3xl pt-16 px-8 pb-7 shadow-xl text-center flex flex-col justify-between"
             >
-              <div className="space-y-3">
+              <div className="space-y-3 flex flex-col items-center">
                 <Rating score={test.rating} showText={false} size="md" />
                 <p className="text-sm text-forest-deep/85 italic leading-relaxed">
                   &ldquo;{test.comment}&rdquo;

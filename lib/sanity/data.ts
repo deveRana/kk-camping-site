@@ -83,6 +83,7 @@ function mapProperty(p: any, s: SiteSettings): Property {
     gallery: (p.gallery ?? []).map((g: any) => urlFor(g, 1600)).filter(Boolean),
     description: p.description ?? '',
     features: p.features ?? [],
+    inclusions: p.inclusions ?? [],
     amenities: (p.amenities ?? []).map((a: any) => ({ icon: a.icon ?? '', name: a.name })),
     host: {
       name: `${s.brandName}, Pawna Lake`,

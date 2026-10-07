@@ -6,9 +6,11 @@ import { PropertyCard } from './PropertyCard';
 
 export interface PropertyGridProps {
   properties: Property[];
+  /** 'wide' = four across on large screens (home); default fits next to the filter sidebar. */
+  layout?: 'default' | 'wide';
 }
 
-export const PropertyGrid: React.FC<PropertyGridProps> = ({ properties }) => {
+export const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, layout = 'default' }) => {
   if (properties.length === 0) {
     return (
       <div className="bg-white rounded-2xl border border-mist p-12 text-center my-8">
@@ -26,7 +28,7 @@ export const PropertyGrid: React.FC<PropertyGridProps> = ({ properties }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className={`grid grid-cols-1 md:grid-cols-2 ${layout === 'wide' ? 'xl:grid-cols-4' : ''} gap-6`}>
       {properties.map((prop) => (
         <PropertyCard key={prop.id} property={prop} />
       ))}
