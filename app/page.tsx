@@ -1,18 +1,21 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { PropertyGrid } from '@/components/sections/PropertyGrid';
 import { TestimonialSection } from '@/components/sections/TestimonialSection';
-import { MOCK_PROPERTIES } from '@/lib/mock-data/properties';
-import { MOCK_TESTIMONIALS } from '@/lib/mock-data/testimonials';
-import { MOCK_FAQS } from '@/lib/mock-data/faqs';
+import { getFaqs, getProperties, getTestimonials } from '@/lib/sanity/data';
 import { Accordion } from '@/components/ui/Accordion';
 import { Badge } from '@/components/ui/Badge';
 
-export default function HomePage() {
-  const featuredProperties = MOCK_PROPERTIES.filter((p) => p.isFeatured);
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const [properties, testimonials, faqs] = await Promise.all([
+    getProperties(),
+    getTestimonials(),
+    getFaqs(),
+  ]);
+  const featuredProperties = properties.filter((p) => p.isFeatured);
 
   return (
     <div className="space-y-16 pb-16">
@@ -121,7 +124,7 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <TestimonialSection testimonials={MOCK_TESTIMONIALS} />
+      <TestimonialSection testimonials={testimonials} />
 
 
       {/* Registration CTA */}
@@ -162,7 +165,7 @@ export default function HomePage() {
         </div>
 
         <div className="space-y-4">
-          {MOCK_FAQS.slice(0, 4).map((faq) => (
+          {faqs.slice(0, 4).map((faq) => (
             <Accordion key={faq.id} title={faq.question}>
               {faq.answer}
             </Accordion>

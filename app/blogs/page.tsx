@@ -1,14 +1,15 @@
-'use client';
-
 import React from 'react';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { BlogCard } from '@/components/sections/BlogCard';
-import { MOCK_BLOGS } from '@/lib/mock-data/blogs';
+import { getBlogs } from '@/lib/sanity/data';
 import { Badge } from '@/components/ui/Badge';
 
-export default function BlogsPage() {
-  const featuredPost = MOCK_BLOGS[0];
-  const regularPosts = MOCK_BLOGS.slice(1);
+export const revalidate = 60;
+
+export default async function BlogsPage() {
+  const blogs = await getBlogs();
+  const featuredPost = blogs[0];
+  const regularPosts = blogs.slice(1);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">

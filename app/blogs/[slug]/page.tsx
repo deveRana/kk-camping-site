@@ -1,29 +1,30 @@
-'use client';
-
-import React, { use } from 'react';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { MOCK_BLOGS } from '@/lib/mock-data/blogs';
+import { PortableText } from 'next-sanity';
+import { getBlogBySlug } from '@/lib/sanity/data';
+import { ShareButton } from '@/components/ui/ShareButton';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
-import { useToast } from '@/components/toast/useToast';
 
-export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
-  const resolvedParams = use(params);
-  const post = MOCK_BLOGS.find((b) => b.slug === resolvedParams.slug);
-  const { showToast } = useToast();
+export const revalidate = 60;
 
-  if (!post) {
-    return notFound();
-  }
+type Props = { params: Promise<{ slug: string }> };
 
-  const handleShare = () => {
-    navigator.clipboard?.writeText(window.location.href);
-    showToast({
-      type: 'success',
-      message: 'Article link copied to clipboard!',
-    });
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getBlogBySlug(slug);
+  if (!post) return {};
+  return {
+    title: `${post.title} — Lakeora`,
+    description: post.excerpt,
+    openGraph: post.coverImage ? { images: [post.coverImage] } : undefined,
   };
+}
+
+export default async function BlogPostPage({ params }: Props) {
+  const { slug } = await params;
+  const post = await getBlogBySlug(slug);
+  if (!post) notFound();
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
@@ -56,9 +57,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
             </div>
           </div>
 
-          <Button onClick={handleShare} variant="outline" size="sm">
-            Share Article
-          </Button>
+          <ShareButton />
         </div>
       </div>
 
@@ -73,7 +72,9 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
           {post.excerpt}
         </p>
 
-        <div className="whitespace-pre-line space-y-4">{post.content}</div>
+        <div className="space-y-4 [&_h3]:font-display [&_h3]:text-2xl [&_h3]:font-semibold [&_h3]:text-forest-deep [&_h3]:mt-6 [&_ul]:list-disc [&_ol]:list-decimal [&_ul]:pl-6 [&_ol]:pl-6 [&_li]:my-1">
+          <PortableText value={post.body} />
+        </div>
 
         {/* Tags */}
         <div className="pt-8 border-t border-mist flex flex-wrap gap-2 items-center">
