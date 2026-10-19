@@ -274,7 +274,7 @@ export function CafeView({ menuItems }: { menuItems?: CafeMenuItem[] }) {
       <section className="relative h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/swiss-tent/swiss-tent-1.svg"
+            src="/swiss-tent/swiss-tent-1.jpg"
             alt="Lakeora Cafe"
             className="w-full h-full object-cover"
           />
