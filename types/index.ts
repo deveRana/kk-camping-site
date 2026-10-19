@@ -123,6 +123,18 @@ export interface GalleryItem {
   caption: string;
 }
 
+export interface CafeMenuItem {
+  id: string;
+  name: string;
+  category: 'Breakfast' | 'Lunch' | 'Snacks' | 'Dinner' | 'Beverages' | 'Desserts';
+  price: number;
+  description: string;
+  isVeg: boolean;
+  isSpecial?: boolean;
+  imageUrl: string;
+  order?: number;
+}
+
 export interface CampingPackage {
   id: string;
   slug: string;

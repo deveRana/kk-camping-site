@@ -34,6 +34,12 @@ export const HeroSection: React.FC = () => {
             Reserve Your Stay
           </Link>
           <Link
+            href="/cafe"
+            className="bg-forest-dark hover:bg-forest text-white font-semibold px-8 py-3.5 rounded-full shadow-xl transition active:scale-95"
+          >
+            ☕ Visit Cafe
+          </Link>
+          <Link
             href="/gallery"
             className="border border-white/60 hover:bg-white/10 text-white font-medium px-8 py-3.5 rounded-full backdrop-blur transition"
           >

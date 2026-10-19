@@ -28,6 +28,11 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/cafe" className="hover:text-sage transition">
+                  ☕ Lakeside Cafe
+                </Link>
+              </li>
+              <li>
                 <Link href="/gallery" className="hover:text-sage transition">
                   Photo Gallery
                 </Link>

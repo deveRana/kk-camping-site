@@ -125,6 +125,168 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Activities Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <Badge variant="forest" size="sm">
+            Adventures & Activities
+          </Badge>
+          <h2 className="font-display text-4xl md:text-5xl font-medium text-forest-deep mt-3">
+            More than just camping
+          </h2>
+          <p className="text-sm text-forest-deep/70 mt-2">
+            Water sports, trekking, bonfires & stargazing — there&apos;s something for everyone
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {[
+            {
+              title: 'Water Adventures',
+              items: ['Kayaking', 'Boating', 'Swimming', 'Fishing'],
+              icon: '🚣',
+              color: 'from-blue-500 to-cyan-500',
+            },
+            {
+              title: 'Land Activities',
+              items: ['Trekking', 'Cycling', 'Archery', 'Badminton'],
+              icon: '⛰️',
+              color: 'from-green-500 to-emerald-500',
+            },
+            {
+              title: 'Evening Experiences',
+              items: ['Bonfire', 'BBQ Night', 'Live Music', 'Stargazing'],
+              icon: '🔥',
+              color: 'from-orange-500 to-red-500',
+            },
+          ].map((activity) => (
+            <div
+              key={activity.title}
+              className="group bg-white rounded-2xl border border-mist p-8 hover:shadow-2xl transition-all duration-300"
+            >
+              <div className="text-5xl mb-4">{activity.icon}</div>
+              <h3 className="font-display text-2xl font-semibold text-forest-deep mb-4">
+                {activity.title}
+              </h3>
+              <ul className="space-y-2">
+                {activity.items.map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-forest-deep/80">
+                    <span className="w-1.5 h-1.5 rounded-full bg-forest" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Best Time to Visit */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-br from-sage/20 to-forest/10 rounded-3xl p-8 md:p-12 border border-mist">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <Badge variant="forest" size="sm" className="mb-4">
+                Plan Your Visit
+              </Badge>
+              <h2 className="font-display text-3xl md:text-4xl font-semibold text-forest-deep mb-4">
+                Best time to visit Pawna Lake
+              </h2>
+              <div className="space-y-4 text-forest-deep/80">
+                <div>
+                  <h4 className="font-semibold text-forest-deep mb-1">🌞 October to February (Peak Season)</h4>
+                  <p className="text-sm">Perfect weather, cool nights, ideal for camping. Book early!</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-forest-deep mb-1">🌧️ June to September (Monsoon)</h4>
+                  <p className="text-sm">Lush green surroundings, full dam. Limited camping available.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-forest-deep mb-1">☀️ March to May (Summer)</h4>
+                  <p className="text-sm">Lower crowd, good discounts. Hot during the day, pleasant evenings.</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white rounded-2xl p-6 border border-mist shadow-lg">
+              <h3 className="font-display text-xl font-semibold text-forest-deep mb-4">
+                Quick Facts
+              </h3>
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between items-center pb-2 border-b border-mist">
+                  <span className="text-forest-deep/70">From Mumbai</span>
+                  <span className="font-semibold text-forest-deep">2.5 hours</span>
+                </div>
+                <div className="flex justify-between items-center pb-2 border-b border-mist">
+                  <span className="text-forest-deep/70">From Pune</span>
+                  <span className="font-semibold text-forest-deep">1.5 hours</span>
+                </div>
+                <div className="flex justify-between items-center pb-2 border-b border-mist">
+                  <span className="text-forest-deep/70">Nearest Station</span>
+                  <span className="font-semibold text-forest-deep">Lonavala</span>
+                </div>
+                <div className="flex justify-between items-center pb-2 border-b border-mist">
+                  <span className="text-forest-deep/70">Altitude</span>
+                  <span className="font-semibold text-forest-deep">2,100 ft</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-forest-deep/70">Check-in / Check-out</span>
+                  <span className="font-semibold text-forest-deep">4 PM / 11 AM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Cafe Highlight */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="p-8 md:p-12">
+              <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-900 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                ☕ Now Open
+              </div>
+              <h2 className="font-display text-4xl md:text-5xl font-semibold text-forest-deep mb-4">
+                Lakeora Cafe
+              </h2>
+              <p className="text-forest-deep/80 leading-relaxed mb-6">
+                Start your day with fresh filter coffee and a view of the lake. Our cafe serves delicious
+                breakfast, lunch, snacks, and dinner — all made with local ingredients. Open to both
+                guests and walk-in visitors.
+              </p>
+              <div className="space-y-2 mb-6">
+                {[
+                  'Fresh Coffee & Chai',
+                  'All-day Dining Menu',
+                  'Lake View Seating',
+                  'Veg & Non-veg Options',
+                ].map((feature) => (
+                  <div key={feature} className="flex items-center gap-2">
+                    <span className="text-forest">✓</span>
+                    <span className="text-forest-deep/80">{feature}</span>
+                  </div>
+                ))}
+              </div>
+              <Link
+                href="/cafe"
+                className="inline-flex items-center gap-2 bg-forest hover:bg-forest-dark text-white font-semibold px-8 py-3.5 rounded-full shadow-xl transition active:scale-95"
+              >
+                View Menu & Timings
+                <span className="text-lg">→</span>
+              </Link>
+            </div>
+            <div className="relative h-[400px] md:h-full">
+              <img
+                src="/swiss-tent/swiss-tent-1.jpg"
+                alt="Lakeora Cafe"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-l from-transparent to-amber-50/50 md:to-transparent" />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Gallery mosaic */}
       {mosaic.length >= 5 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

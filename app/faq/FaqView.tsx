@@ -21,7 +21,7 @@ export function FaqView({ faqs }: { faqs: FAQItem[] }) {
         faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [faqs, selectedCategory, searchQuery]);
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">

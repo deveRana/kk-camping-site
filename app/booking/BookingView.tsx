@@ -18,7 +18,6 @@ export function BookingView({
   advancePercent: number;
 }) {
   const router = useRouter();
-  const propertyId = property.id;
 
   const [step, setStep] = useState(1);
   const [coupon, setCoupon] = useState('');

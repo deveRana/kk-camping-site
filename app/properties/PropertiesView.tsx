@@ -25,7 +25,7 @@ export function PropertiesView({ properties }: { properties: Property[] }) {
         prop.location.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesPrice && matchesSearch;
     });
-  }, [selectedCategory, maxPrice, searchQuery]);
+  }, [properties, selectedCategory, maxPrice, searchQuery]);
 
   const handleResetFilters = () => {
     setSelectedCategory('All');

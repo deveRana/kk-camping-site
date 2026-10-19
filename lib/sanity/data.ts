@@ -1,8 +1,10 @@
 import { defineQuery } from 'next-sanity';
 import { client } from './client';
 import { urlFor } from './image';
+import type { SanityImageSource } from '@sanity/image-url';
 import type {
   BlogPost,
+  CafeMenuItem,
   FAQItem,
   GalleryItem,
   Property,
@@ -10,6 +12,85 @@ import type {
 } from '@/types';
 
 const REVALIDATE = { next: { revalidate: 60 } };
+
+/* ---------- Sanity raw data types ---------- */
+
+interface SanityProperty {
+  _id: string;
+  slug: string;
+  title: string;
+  tagline?: string;
+  category: string;
+  price: number;
+  originalPrice?: number;
+  rating?: number;
+  reviewCount?: number;
+  location?: string;
+  distance?: string;
+  capacity?: string;
+  coverImage: SanityImageSource;
+  gallery?: SanityImageSource[];
+  description?: string;
+  features?: string[];
+  inclusions?: string[];
+  amenities?: Array<{ icon?: string; name: string }>;
+  isPopular?: boolean;
+  isFeatured?: boolean;
+}
+
+interface SanityBlog {
+  _id: string;
+  slug: string;
+  title: string;
+  excerpt?: string;
+  body?: Record<string, unknown>[];
+  category?: string;
+  coverImage: SanityImageSource;
+  authorName?: string;
+  authorAvatar?: SanityImageSource;
+  authorRole?: string;
+  publishedAt?: string;
+  readTime?: string;
+  tags?: string[];
+}
+
+interface SanityFAQ {
+  _id: string;
+  question: string;
+  answer: string;
+  category?: string;
+}
+
+interface SanityTestimonial {
+  _id: string;
+  name: string;
+  location?: string;
+  avatar?: SanityImageSource;
+  rating?: number;
+  stayType?: string;
+  comment: string;
+  date?: string;
+}
+
+interface SanityGalleryItem {
+  _id: string;
+  title: string;
+  category: string;
+  image: SanityImageSource;
+  caption?: string;
+}
+
+interface SanityCafeMenuItem {
+  _id: string;
+  name: string;
+  category: string;
+  price: number;
+  description: string;
+  isVeg: boolean;
+  isSpecial?: boolean;
+  image: SanityImageSource;
+  order?: number;
+}
 
 /* ---------- Site settings ---------- */
 
@@ -65,13 +146,13 @@ const PROPERTY_QUERY = defineQuery(
   `*[_type == "property" && slug.current == $slug][0]{ ${PROPERTY_FIELDS} }`,
 );
 
-function mapProperty(p: any, s: SiteSettings): Property {
+function mapProperty(p: SanityProperty, s: SiteSettings): Property {
   return {
     id: p._id,
     slug: p.slug,
     title: p.title,
     tagline: p.tagline ?? '',
-    category: p.category,
+    category: p.category as Property['category'],
     price: p.price,
     originalPrice: p.originalPrice ?? undefined,
     rating: p.rating ?? 4.9,
@@ -80,11 +161,11 @@ function mapProperty(p: any, s: SiteSettings): Property {
     distance: p.distance ?? '',
     capacity: p.capacity ?? '',
     coverImage: urlFor(p.coverImage, 1400),
-    gallery: (p.gallery ?? []).map((g: any) => urlFor(g, 1600)).filter(Boolean),
+    gallery: (p.gallery ?? []).map((g) => urlFor(g, 1600)).filter(Boolean),
     description: p.description ?? '',
     features: p.features ?? [],
     inclusions: p.inclusions ?? [],
-    amenities: (p.amenities ?? []).map((a: any) => ({ icon: a.icon ?? '', name: a.name })),
+    amenities: (p.amenities ?? []).map((a) => ({ icon: a.icon ?? '', name: a.name })),
     host: {
       name: `${s.brandName}, Pawna Lake`,
       avatar: '/logos/logo.PNG',
@@ -103,7 +184,7 @@ export async function getProperties(): Promise<Property[]> {
     client.fetch(PROPERTIES_QUERY, {}, REVALIDATE),
     getSiteSettings(),
   ]);
-  return rows.map((p: any) => mapProperty(p, settings));
+  return rows.map((p: SanityProperty) => mapProperty(p, settings));
 }
 
 export async function getPropertyBySlug(slug: string): Promise<Property | null> {
@@ -116,7 +197,8 @@ export async function getPropertyBySlug(slug: string): Promise<Property | null> 
 
 /* ---------- Blogs ---------- */
 
-export type PortableTextValue = any[];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type PortableTextValue = any;
 export interface BlogPostWithBody extends BlogPost {
   body: PortableTextValue;
 }
@@ -126,7 +208,7 @@ const BLOG_FIELDS = `
   authorRole, authorAvatar, publishedAt, readTime, tags
 `;
 
-function mapBlog(b: any): BlogPostWithBody {
+function mapBlog(b: SanityBlog): BlogPostWithBody {
   return {
     id: b._id,
     slug: b.slug,
@@ -174,7 +256,7 @@ const FAQS_QUERY = defineQuery(
 
 export async function getFaqs(): Promise<FAQItem[]> {
   const rows = await client.fetch(FAQS_QUERY, {}, REVALIDATE);
-  return rows.map((f: any) => ({
+  return rows.map((f: SanityFAQ) => ({
     id: f._id,
     question: f.question,
     answer: f.answer,
@@ -188,7 +270,7 @@ const TESTIMONIALS_QUERY = defineQuery(
 
 export async function getTestimonials(): Promise<Testimonial[]> {
   const rows = await client.fetch(TESTIMONIALS_QUERY, {}, REVALIDATE);
-  return rows.map((t: any) => ({
+  return rows.map((t: SanityTestimonial) => ({
     id: t._id,
     name: t.name,
     location: t.location ?? '',
@@ -206,11 +288,32 @@ const GALLERY_QUERY = defineQuery(
 
 export async function getGallery(): Promise<GalleryItem[]> {
   const rows = await client.fetch(GALLERY_QUERY, {}, REVALIDATE);
-  return rows.map((g: any) => ({
+  return rows.map((g: SanityGalleryItem) => ({
     id: g._id,
     title: g.title,
     category: g.category,
     imageUrl: urlFor(g.image, 1600),
     caption: g.caption ?? '',
+  }));
+}
+
+/* ---------- Cafe Menu ---------- */
+
+const CAFE_MENU_QUERY = defineQuery(
+  `*[_type == "cafeMenuItem"] | order(order asc, category asc){ _id, name, category, price, description, isVeg, isSpecial, image, order }`,
+);
+
+export async function getCafeMenu(): Promise<CafeMenuItem[]> {
+  const rows = await client.fetch(CAFE_MENU_QUERY, {}, REVALIDATE);
+  return rows.map((item: SanityCafeMenuItem) => ({
+    id: item._id,
+    name: item.name,
+    category: item.category as CafeMenuItem['category'],
+    price: item.price,
+    description: item.description ?? '',
+    isVeg: item.isVeg ?? true,
+    isSpecial: item.isSpecial ?? false,
+    imageUrl: urlFor(item.image, 800),
+    order: item.order ?? 0,
   }));
 }
