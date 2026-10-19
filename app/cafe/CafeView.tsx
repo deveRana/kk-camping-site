@@ -247,7 +247,17 @@ export function CafeView({ menuItems }: { menuItems?: CafeMenuItem[] }) {
   const categories: MenuCategory[] = ['All', 'Breakfast', 'Lunch', 'Snacks', 'Dinner', 'Beverages', 'Desserts'];
 
   // Use fallback if no menu items from Sanity
-  const items = menuItems && menuItems.length > 0 ? menuItems : fallbackMenuItems;
+  let items = menuItems && menuItems.length > 0 ? menuItems : fallbackMenuItems;
+
+  // Deduplicate items by ID (in case of any caching issues)
+  const seenIds = new Set<string>();
+  items = items.filter(item => {
+    if (seenIds.has(item.id)) {
+      return false;
+    }
+    seenIds.add(item.id);
+    return true;
+  });
 
   const filteredMenu = selectedCategory === 'All'
     ? items
@@ -517,10 +527,6 @@ export function CafeView({ menuItems }: { menuItems?: CafeMenuItem[] }) {
                     <Badge variant="paper" size="sm">
                       {item.category}
                     </Badge>
-                    <button className="text-xs font-semibold text-forest hover:text-forest-dark transition flex items-center gap-1 group-hover:gap-2">
-                      Order Now
-                      <span className="transition-all">→</span>
-                    </button>
                   </div>
                 </div>
               </div>
