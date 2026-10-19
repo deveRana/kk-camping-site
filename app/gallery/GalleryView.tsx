@@ -59,14 +59,38 @@ export function GalleryView({ gallery }: { gallery: GalleryItem[] }) {
           <div
             key={item.id}
             onClick={() => handleOpenLightbox(idx)}
-            className="group relative h-64 bg-mist rounded-2xl overflow-hidden cursor-pointer shadow-sm border border-mist hover:shadow-xl transition duration-300"
+            className="group relative h-64 bg-gradient-to-br from-mist to-gray-100 rounded-2xl overflow-hidden cursor-pointer shadow-sm border border-mist hover:shadow-xl transition duration-300"
           >
-            <img
-              src={item.imageUrl}
-              alt={item.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4 text-white">
+            {item.imageUrl ? (
+              <>
+                <img
+                  src={item.imageUrl}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const placeholder = target.nextElementSibling as HTMLElement;
+                    if (placeholder && placeholder.classList.contains('image-placeholder')) {
+                      placeholder.style.display = 'flex';
+                    }
+                  }}
+                />
+                <div
+                  className="image-placeholder absolute inset-0 flex flex-col items-center justify-center"
+                  style={{ display: 'none' }}
+                >
+                  <span className="text-6xl mb-2 opacity-30">📸</span>
+                  <span className="text-sm text-forest-deep/70 font-semibold px-4 text-center">{item.title}</span>
+                </div>
+              </>
+            ) : (
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <span className="text-6xl mb-2 opacity-30">📸</span>
+                <span className="text-sm text-forest-deep/70 font-semibold px-4 text-center">{item.title}</span>
+              </div>
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4 text-white pointer-events-none">
               <p className="font-display text-lg font-semibold">{item.title}</p>
               <p className="text-xs text-white/80 line-clamp-1">{item.caption}</p>
             </div>

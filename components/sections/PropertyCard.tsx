@@ -31,13 +31,35 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
     <Link href={`/properties/${property.slug}`} className="group block">
       <div className="bg-white rounded-[1.75rem] border border-mist overflow-hidden transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-2xl group-hover:shadow-forest/15 flex flex-col h-full">
         {/* Cover Image Container */}
-        <div className="relative h-64 mx-3 mt-3 overflow-hidden bg-mist rounded-t-[9rem] rounded-b-2xl">
-          <img
-            src={property.coverImage}
-            alt={property.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
+        <div className="relative h-64 mx-3 mt-3 overflow-hidden bg-gradient-to-br from-mist to-gray-100 rounded-t-[9rem] rounded-b-2xl">
+          {property.coverImage ? (
+            <>
+              <img
+                src={property.coverImage}
+                alt={property.title}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const placeholder = target.nextElementSibling as HTMLElement;
+                  if (placeholder) placeholder.style.display = 'flex';
+                }}
+              />
+              <div
+                className="absolute inset-0 flex flex-col items-center justify-center"
+                style={{ display: 'none' }}
+              >
+                <span className="text-7xl mb-3 opacity-30">🏕️</span>
+                <span className="text-lg text-forest-deep/70 font-semibold px-4 text-center">{property.title}</span>
+              </div>
+            </>
+          ) : (
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <span className="text-7xl mb-3 opacity-30">🏕️</span>
+              <span className="text-lg text-forest-deep/70 font-semibold px-4 text-center">{property.title}</span>
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 pointer-events-none" />
 
           {/* Category Pill */}
           <div className="absolute bottom-3 left-3">

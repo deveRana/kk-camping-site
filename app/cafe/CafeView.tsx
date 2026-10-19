@@ -19,7 +19,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     description: 'Traditional Indian spiced tea',
     isVeg: true,
     isSpecial: true,
-    imageUrl: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=500&q=80'
+    imageUrl: '/cafe-images/chai.svg'
   },
   {
     id: '2',
@@ -28,7 +28,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 40,
     description: 'South Indian style filter coffee',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500&q=80'
+    imageUrl: '/cafe-images/coffee.svg'
   },
   {
     id: '3',
@@ -37,7 +37,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 80,
     description: 'Maharashtrian style flattened rice',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=500&q=80'
+    imageUrl: '/cafe-images/poha.svg'
   },
   {
     id: '4',
@@ -46,7 +46,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 60,
     description: 'Two eggs with onions, tomatoes & spices',
     isVeg: false,
-    imageUrl: 'https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=500&q=80'
+    imageUrl: '/cafe-images/omelette.svg'
   },
   {
     id: '5',
@@ -55,7 +55,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 100,
     description: 'Stuffed potato flatbread with curd & pickle',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1626776876729-bab4369a5a5a?w=500&q=80'
+    imageUrl: '/cafe-images/paratha.svg'
   },
   {
     id: '6',
@@ -64,7 +64,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 120,
     description: 'Classic breakfast with maple syrup',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=500&q=80'
+    imageUrl: '/cafe-images/toast.svg'
   },
 
   // Lunch & Dinner
@@ -76,7 +76,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     description: 'Cottage cheese in rich tomato gravy',
     isVeg: true,
     isSpecial: true,
-    imageUrl: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=500&q=80'
+    imageUrl: '/cafe-images/paneer-masala.svg'
   },
   {
     id: '8',
@@ -85,7 +85,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 150,
     description: 'Yellow lentils tempered with spices',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=500&q=80'
+    imageUrl: '/cafe-images/dal.svg'
   },
   {
     id: '9',
@@ -95,7 +95,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     description: 'Home-style chicken curry',
     isVeg: false,
     isSpecial: true,
-    imageUrl: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=500&q=80'
+    imageUrl: '/cafe-images/chicken-curry.svg'
   },
   {
     id: '10',
@@ -104,7 +104,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 200,
     description: 'Aromatic rice with mixed vegetables',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500&q=80'
+    imageUrl: '/cafe-images/veg-biryani.svg'
   },
   {
     id: '11',
@@ -113,7 +113,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 280,
     description: 'Hyderabadi style chicken biryani',
     isVeg: false,
-    imageUrl: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500&q=80'
+    imageUrl: '/cafe-images/chicken-biryani.svg'
   },
   {
     id: '12',
@@ -122,7 +122,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 100,
     description: 'Cumin flavored basmati rice',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=500&q=80'
+    imageUrl: '/cafe-images/rice.svg'
   },
 
   // Snacks
@@ -133,7 +133,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 100,
     description: 'Mixed vegetable fritters',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&q=80'
+    imageUrl: '/cafe-images/pakora.svg'
   },
   {
     id: '14',
@@ -142,7 +142,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 80,
     description: 'Sweet corn chaat',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=500&q=80'
+    imageUrl: '/cafe-images/bhel.svg'
   },
   {
     id: '15',
@@ -151,7 +151,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 60,
     description: 'Classic instant noodles',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=500&q=80'
+    imageUrl: '/cafe-images/maggi.svg'
   },
   {
     id: '16',
@@ -160,7 +160,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 100,
     description: 'Grilled cheese sandwich',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=500&q=80'
+    imageUrl: '/cafe-images/sandwich.svg'
   },
   {
     id: '17',
@@ -169,7 +169,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 40,
     description: 'Mumbai street food special',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=500&q=80'
+    imageUrl: '/cafe-images/vada-pav.svg'
   },
 
   // Beverages
@@ -180,7 +180,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 80,
     description: 'Chilled coffee with ice cream',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=500&q=80'
+    imageUrl: '/cafe-images/cold-coffee.svg'
   },
   {
     id: '19',
@@ -189,7 +189,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 50,
     description: 'Sweet/salt/plain',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=500&q=80'
+    imageUrl: '/cafe-images/lime-soda.svg'
   },
   {
     id: '20',
@@ -199,7 +199,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     description: 'Thick and creamy',
     isVeg: true,
     isSpecial: true,
-    imageUrl: 'https://images.unsplash.com/photo-1577805947697-89e18249d767?w=500&q=80'
+    imageUrl: '/cafe-images/mango-shake.svg'
   },
   {
     id: '21',
@@ -208,7 +208,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 40,
     description: 'Spiced yogurt drink',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=500&q=80'
+    imageUrl: '/cafe-images/buttermilk.svg'
   },
   {
     id: '22',
@@ -217,7 +217,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 60,
     description: 'Natural and refreshing',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1585681805461-27c70606042f?w=500&q=80'
+    imageUrl: '/cafe-images/coconut.svg'
   },
 
   // Desserts
@@ -228,7 +228,7 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 60,
     description: '2 pieces - milk solid dumplings in sugar syrup',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=500&q=80'
+    imageUrl: '/cafe-images/gulab-jamun.svg'
   },
   {
     id: '24',
@@ -237,18 +237,21 @@ const fallbackMenuItems: CafeMenuItem[] = [
     price: 80,
     description: 'Vanilla/Chocolate/Strawberry',
     isVeg: true,
-    imageUrl: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500&q=80'
+    imageUrl: '/cafe-images/ice-cream.svg'
   },
 ];
 
-export function CafeView({ menuItems = fallbackMenuItems }: { menuItems?: CafeMenuItem[] }) {
+export function CafeView({ menuItems }: { menuItems?: CafeMenuItem[] }) {
   const [selectedCategory, setSelectedCategory] = useState<MenuCategory>('All');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const categories: MenuCategory[] = ['All', 'Breakfast', 'Lunch', 'Snacks', 'Dinner', 'Beverages', 'Desserts'];
 
+  // Use fallback if no menu items from Sanity
+  const items = menuItems && menuItems.length > 0 ? menuItems : fallbackMenuItems;
+
   const filteredMenu = selectedCategory === 'All'
-    ? menuItems
-    : menuItems.filter(item => {
+    ? items
+    : items.filter(item => {
         if (selectedCategory === 'Lunch' || selectedCategory === 'Dinner') {
           return item.category === 'Lunch';
         }
@@ -261,7 +264,7 @@ export function CafeView({ menuItems = fallbackMenuItems }: { menuItems?: CafeMe
       <section className="relative h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/swiss-tent/swiss-tent-1.jpg"
+            src="/swiss-tent/swiss-tent-1.svg"
             alt="Lakeora Cafe"
             className="w-full h-full object-cover"
           />
@@ -312,7 +315,7 @@ export function CafeView({ menuItems = fallbackMenuItems }: { menuItems?: CafeMe
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 mb-16">
-            {menuItems
+            {items
               .filter((item) => item.isSpecial)
               .slice(0, 3)
               .map((item) => (
@@ -320,14 +323,36 @@ export function CafeView({ menuItems = fallbackMenuItems }: { menuItems?: CafeMe
                   key={item.id}
                   className="group bg-white rounded-3xl overflow-hidden border-2 border-amber-200 hover:border-amber-400 shadow-lg hover:shadow-2xl transition-all duration-300"
                 >
-                  <div className="relative h-56 overflow-hidden">
-                    <img
-                      src={item.imageUrl}
-                      alt={item.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4">
+                  <div className="relative h-56 overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50">
+                    {item.imageUrl ? (
+                      <>
+                        <img
+                          src={item.imageUrl}
+                          alt={item.name}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 absolute inset-0"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            const placeholder = target.parentElement?.querySelector('.image-placeholder') as HTMLElement;
+                            if (placeholder) placeholder.style.display = 'flex';
+                          }}
+                        />
+                        <div
+                          className="image-placeholder absolute inset-0 flex flex-col items-center justify-center"
+                          style={{ display: 'none' }}
+                        >
+                          <span className="text-7xl mb-3">🍽️</span>
+                          <span className="text-lg text-forest-deep/70 font-semibold px-4 text-center">{item.name}</span>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center">
+                        <span className="text-7xl mb-3">🍽️</span>
+                        <span className="text-lg text-forest-deep/70 font-semibold px-4 text-center">{item.name}</span>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none z-10" />
+                    <div className="absolute bottom-4 left-4 right-4 z-20">
                       <h3 className="font-display text-2xl font-bold text-white mb-1">
                         {item.name}
                       </h3>
@@ -338,7 +363,7 @@ export function CafeView({ menuItems = fallbackMenuItems }: { menuItems?: CafeMe
                         <span className="text-white/80 text-sm">· {item.category}</span>
                       </div>
                     </div>
-                    <div className="absolute top-4 right-4">
+                    <div className="absolute top-4 right-4 z-20">
                       <span className="bg-amber-500 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-xl">
                         ⭐ Special
                       </span>
@@ -432,22 +457,28 @@ export function CafeView({ menuItems = fallbackMenuItems }: { menuItems?: CafeMe
                 }`}
               >
                 {/* Image */}
-                <div className={`relative overflow-hidden bg-mist ${
+                <div className={`relative overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50 ${
                   viewMode === 'grid' ? 'h-48' : 'w-48 h-48 flex-shrink-0'
                 }`}>
-                  {item.imageUrl ? (
+                  {item.imageUrl && (
                     <img
                       src={item.imageUrl}
                       alt={item.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 absolute inset-0"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                      }}
                     />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-forest-deep/30">
-                      <span className="text-5xl">🍽️</span>
+                  )}
+                  {!item.imageUrl && (
+                    <div className="w-full h-full flex flex-col items-center justify-center absolute inset-0">
+                      <span className="text-6xl mb-2">🍽️</span>
+                      <span className="text-xs text-forest-deep/50 font-medium px-2 text-center">{item.name}</span>
                     </div>
                   )}
                   {/* Badges Overlay */}
-                  <div className="absolute top-3 left-3 right-3 flex items-start justify-between">
+                  <div className="absolute top-3 left-3 right-3 flex items-start justify-between z-10">
                     <div className="flex gap-2">
                       {item.isSpecial && (
                         <span className="bg-amber-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg backdrop-blur">
