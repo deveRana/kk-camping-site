@@ -85,9 +85,9 @@ export function BookingConfirmedView({ property, refId }: { property: Property; 
         <Button onClick={handleDownloadInvoice} variant="outline" size="md">
           📄 Download PDF Invoice
         </Button>
-        <Link href="/my-bookings">
+        <Link href="/">
           <Button variant="primary" size="md">
-            View My Bookings Dashboard →
+            Return to Home →
           </Button>
         </Link>
       </div>

@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { writeClient } from '@/lib/sanity/client';
+import { sendBookingEmails } from '@/lib/email/client';
+import { generateGuestConfirmationEmail, generateAdminNotificationEmail } from '@/lib/email/templates';
 
 export async function POST(request: NextRequest) {
   try {
@@ -110,6 +112,42 @@ export async function POST(request: NextRequest) {
       notes: `Advance payment for booking ${referenceId}`,
     });
 
+    // Prepare booking details for email templates
+    const bookingDetails = {
+      referenceId,
+      guestName,
+      guestEmail,
+      guestPhone,
+      guestCity,
+      propertyName,
+      propertyCategory,
+      numberOfGuests,
+      checkInDate,
+      checkOutDate,
+      addons: addons || [],
+      basePrice,
+      addonTotal: addonTotal || 0,
+      discount: discount || 0,
+      couponCode,
+      totalAmount,
+      advanceAmount,
+      balanceAmount,
+      paymentMethod,
+      bookingDate: booking.bookingDate,
+    };
+
+    // Generate email templates
+    const guestEmailHtml = generateGuestConfirmationEmail(bookingDetails);
+    const adminEmailHtml = generateAdminNotificationEmail(bookingDetails);
+
+    // Send emails to both guest and admin
+    const emailResults = await sendBookingEmails(
+      guestEmail,
+      guestEmailHtml,
+      adminEmailHtml,
+      referenceId
+    );
+
     return NextResponse.json({
       success: true,
       booking: {
@@ -119,6 +157,10 @@ export async function POST(request: NextRequest) {
       payment: {
         _id: payment._id,
         transactionId: payment.transactionId,
+      },
+      emails: {
+        guestEmailSent: emailResults.guestEmailSent,
+        adminEmailSent: emailResults.adminEmailSent,
       },
     });
   } catch (error) {

@@ -59,9 +59,6 @@ export const Navbar: React.FC = () => {
             <Link href="/gallery" className={`${linkColor} transition`}>
               Gallery
             </Link>
-            <Link href="/my-bookings" className={`${linkColor} transition`}>
-              My Bookings
-            </Link>
             <Link
               href="/properties"
               className="bg-forest hover:bg-forest-dark text-white px-5 py-2.5 rounded-xl font-semibold shadow transition active:scale-95"
@@ -109,13 +106,6 @@ export const Navbar: React.FC = () => {
               className="block py-2 text-forest-deep font-semibold"
             >
               Gallery
-            </Link>
-            <Link
-              href="/my-bookings"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block py-2 text-forest-deep font-semibold"
-            >
-              My Bookings
             </Link>
             <Link
               href="/properties"

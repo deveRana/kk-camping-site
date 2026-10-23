@@ -14,7 +14,8 @@
     "next": "16.3.5",
     "next-sanity": "^13.3.4",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "resend": "^4.0.1"
   },
   "devDependencies": {
     "@sanity/client": "^8.9.0",

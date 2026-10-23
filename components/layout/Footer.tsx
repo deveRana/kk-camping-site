@@ -55,11 +55,6 @@ export const Footer: React.FC = () => {
             <h4 className="font-display text-lg font-semibold text-sage mb-4">Customer Care</h4>
             <ul className="space-y-2.5 text-sm text-paper/80">
               <li>
-                <Link href="/my-bookings" className="hover:text-sage transition">
-                  Manage Bookings
-                </Link>
-              </li>
-              <li>
                 <Link href="/faq" className="hover:text-sage transition">
                   FAQs & Help
                 </Link>
