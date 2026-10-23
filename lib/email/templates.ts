@@ -386,7 +386,7 @@ export function generateGuestConfirmationEmail(booking: BookingDetails): string 
       <!-- Contact Information -->
       <h3 class="section-title">Need Help?</h3>
       <p style="color: #374151; font-size: 14px; line-height: 1.8;">
-        📞 <strong>Call us:</strong> +91 74997 57607 | +91 95271 43112<br>
+        📞 <strong>Call us:</strong> +91 74997 57607<br>
         📧 <strong>Email:</strong> booking@lakeora.com<br>
         📍 <strong>Location:</strong> Lakeora, Pawna Lake, Gevhande Khadak, Maharashtra 410406
       </p>

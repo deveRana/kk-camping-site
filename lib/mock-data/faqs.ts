@@ -15,12 +15,6 @@ export const MOCK_FAQS: FAQItem[] = [
     answer: `${PAWNA_CAMPSITE_MASTER_DATA.tentArrangement.privacyGuarantee} Tents come equipped with foam mattresses, clean bed-sheets, pillows, and blankets. (We do not provide sleeping bags for hygiene reasons).`
   },
   {
-    id: 'faq-3',
-    category: 'Food & Activities',
-    question: 'What is included in the food menu? Is Jain food available?',
-    answer: 'High Tea (Tea/Coffee & Unlimited Pakodas), Limited Veg Paneer BBQ / Non-Veg Chicken BBQ (5-6 pcs), Unlimited Veg Dinner (Paneer, Potato Sabji, Dal, Chapati, Rice, Salad, Sweet) & Non-Veg Dinner (Egg Curry, Chicken Sukha, Roti, Rice, Salad, Sweet), and Breakfast (Poha, Tea/Coffee, Bread Butter Jam). Jain food is available upon request during booking!'
-  },
-  {
     id: 'faq-4',
     category: 'Booking & Payment',
     question: 'What is the booking payment process?',

@@ -5,7 +5,7 @@ export const PAWNA_CAMPSITE_MASTER_DATA: CampsiteMasterInfo = {
   brandName: 'Lakeora',
   tagline: 'Lakeside Camping & Glamping at Pawna Lake with Live Music & Water Views',
   website: 'https://pawnatentcamp.com/',
-  contactNumbers: ['+91 74997 57607', '+91 95271 43112'],
+  contactNumbers: ['+91 74997 57607'],
   paymentMethods: ['UPI', 'Credit Card', 'Debit Card', 'Net Banking'],
   paymentGateway: 'Razorpay',
   
