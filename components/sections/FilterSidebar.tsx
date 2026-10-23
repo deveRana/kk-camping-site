@@ -17,7 +17,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
   onPriceChange,
   onReset,
 }) => {
-  const categories = ['All', 'Glamping', 'Cottage', 'Tent Camping', 'Villa'];
+  const categories = ['All', 'Glamping', 'Cottage', 'Tent Camping'];
 
   return (
     <div className="bg-white rounded-2xl border border-mist p-6 space-y-6">

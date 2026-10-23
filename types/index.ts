@@ -3,7 +3,7 @@ export interface Property {
   slug: string;
   title: string;
   tagline: string;
-  category: 'Glamping' | 'Cottage' | 'Dome' | 'Tent Camping' | 'Villa';
+  category: 'Glamping' | 'Cottage' | 'Dome' | 'Tent Camping';
   price: number;
   originalPrice?: number;
   rating: number;
@@ -118,7 +118,7 @@ export interface Testimonial {
 export interface GalleryItem {
   id: string;
   title: string;
-  category: 'All' | 'Campsites' | 'Sunsets' | 'Activities' | 'Food';
+  category: 'All' | 'Campsites' | 'Food' | 'Guests' | 'Night View' | 'Interiors';
   imageUrl: string;
   caption: string;
 }
@@ -150,7 +150,7 @@ export interface CampingPackage {
   gallery: string[];
   highlights: string[];
   inclusions: string[];
-  category: 'Glamping' | 'Cottage' | 'Dome' | 'Tent Camping' | 'Villa';
+  category: 'Glamping' | 'Cottage' | 'Dome' | 'Tent Camping';
 }
 
 export interface ScheduleItem {

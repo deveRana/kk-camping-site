@@ -309,10 +309,11 @@ export const PAWNA_CAMPSITE_MASTER_DATA: CampsiteMasterInfo = {
       hasAttachedWashroom: false,
       hasLightFanBoard: false,
       category: 'Tent Camping',
-      coverImage: '/normal-tent/normal-tent-1.jpg',
+      coverImage: '/normal-tent/normal-tent-1.jpeg',
       gallery: [
-        '/normal-tent/normal-tent-1.jpg',
-        '/normal-tent/normal-tent-2.jpg'
+        '/normal-tent/normal-tent-1.jpeg',
+        '/normal-tent/normal-tent-2.jpeg',
+        '/normal-tent/normal-tent-3.jpeg'
       ],
       highlights: [
         'Waterproof Double-Layer Tent',
