@@ -118,7 +118,7 @@ export function PropertyDetailView({
           const count = photos.length;
           const rest = photos.slice(1, 5);
           const tile = 'relative bg-mist group overflow-hidden';
-          const img = 'w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105';
+          const img = 'w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 bg-mist';
           const label = (
             <span className="absolute bottom-4 left-4 bg-white/90 text-forest-deep text-xs font-semibold px-4 py-2 rounded-full shadow backdrop-blur">
               {count > 1 ? `View all ${count} photos` : 'View photo'}
