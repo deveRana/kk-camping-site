@@ -89,6 +89,28 @@ export default defineType({
       type: 'string',
     }),
 
+    // DPDPA Compliance - Consent Fields
+    defineField({
+      name: 'dataConsent',
+      title: 'Data Collection Consent',
+      type: 'boolean',
+      description: 'Guest consent for data collection and processing (DPDPA compliance)',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'consentTimestamp',
+      title: 'Consent Timestamp',
+      type: 'datetime',
+      description: 'When the guest gave consent',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'consentIpAddress',
+      title: 'Consent IP Address',
+      type: 'string',
+      description: 'IP address from where consent was given',
+    }),
+
     // Booking Details
     defineField({
       name: 'numberOfGuests',

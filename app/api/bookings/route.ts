@@ -37,12 +37,29 @@ export async function POST(request: NextRequest) {
       totalAmount,
       paymentMethod,
       notes,
+      dataConsent,
+      consentTimestamp,
     } = body;
 
     // Validate required fields
     if (!referenceId || !propertyId || !propertyName || !guestName || !guestEmail || !guestPhone || !numberOfGuests || !totalAmount) {
       return NextResponse.json(
         { error: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
+
+    // DPDPA Compliance - Validate consent
+    if (!dataConsent || dataConsent !== true) {
+      return NextResponse.json(
+        { error: 'Data collection consent is required as per DPDPA 2023' },
+        { status: 400 }
+      );
+    }
+
+    if (!consentTimestamp) {
+      return NextResponse.json(
+        { error: 'Consent timestamp is required' },
         { status: 400 }
       );
     }
@@ -96,6 +113,11 @@ export async function POST(request: NextRequest) {
 
       // Notes (sanitized)
       notes: sanitizedData.notes,
+
+      // DPDPA Compliance - Consent
+      dataConsent: true,
+      consentTimestamp,
+      consentIpAddress: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown',
     });
 
     // Create payment record

@@ -28,6 +28,7 @@ export function BookingView({
     phone: '',
     city: '',
     paymentMethod: 'razorpay',
+    dataConsent: false,
   });
 
   const { showToast } = useToast();
@@ -65,6 +66,14 @@ export function BookingView({
       showToast({
         type: 'error',
         message: 'Number of guests must be at least 1.',
+      });
+      return false;
+    }
+
+    if (!formData.dataConsent) {
+      showToast({
+        type: 'error',
+        message: 'Please accept the data collection consent to proceed.',
       });
       return false;
     }
@@ -125,6 +134,14 @@ export function BookingView({
       return;
     }
 
+    if (!formData.dataConsent) {
+      showToast({
+        type: 'error',
+        message: 'Please accept the data collection consent to proceed.',
+      });
+      return;
+    }
+
     const refId = `LS-2026-${Math.floor(1000 + Math.random() * 9000)}`;
 
     try {
@@ -156,6 +173,8 @@ export function BookingView({
           couponCode: coupon,
           totalAmount: finalTotal,
           paymentMethod: formData.paymentMethod,
+          dataConsent: formData.dataConsent,
+          consentTimestamp: new Date().toISOString(),
         }),
       });
 
@@ -260,6 +279,32 @@ export function BookingView({
                     setNumberOfGuests(Math.min(50, Math.max(1, val)));
                   }}
                 />
+              </div>
+
+              {/* DPDPA Consent */}
+              <div className="bg-gradient-to-br from-blue-50 to-sky-50 rounded-xl p-5 border border-blue-200">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={formData.dataConsent}
+                    onChange={(e) => setFormData({ ...formData, dataConsent: e.target.checked })}
+                    className="mt-1 w-5 h-5 accent-forest cursor-pointer"
+                  />
+                  <div className="flex-1">
+                    <p className="text-sm text-forest-deep leading-relaxed">
+                      <strong className="font-semibold">Data Collection Consent *</strong>
+                      <br />
+                      <span className="text-forest-deep/80">
+                        I consent to Lakeora collecting and processing my personal data (name, email, phone, city)
+                        for booking management, communication, and service delivery. This data will be stored securely
+                        and used only for legitimate business purposes as per India's Digital Personal Data Protection Act (DPDPA), 2023.
+                      </span>
+                    </p>
+                    <p className="text-xs text-forest-deep/60 mt-2">
+                      Read our <a href="/privacy" className="text-forest underline hover:no-underline" target="_blank">Privacy Policy</a> for details.
+                    </p>
+                  </div>
+                </label>
               </div>
 
               <div className="flex justify-end pt-4">

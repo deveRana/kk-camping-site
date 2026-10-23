@@ -17,6 +17,7 @@ export function ContactView({ settings }: { settings: SiteSettings }) {
     subject: 'General Inquiry',
     message: '',
     website: '',
+    dataConsent: false,
   });
 
   const { showToast } = useToast();
@@ -25,6 +26,11 @@ export function ContactView({ settings }: { settings: SiteSettings }) {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
       showToast({ type: 'error', message: 'Please fill in all required fields.' });
+      return;
+    }
+
+    if (!formData.dataConsent) {
+      showToast({ type: 'error', message: 'Please accept the data collection consent to proceed.' });
       return;
     }
 
@@ -41,7 +47,7 @@ export function ContactView({ settings }: { settings: SiteSettings }) {
       type: 'success',
       message: 'Thank you! Your message has been sent. We will contact you shortly.',
     });
-    setFormData({ name: '', email: '', phone: '', subject: 'General Inquiry', message: '', website: '' });
+    setFormData({ name: '', email: '', phone: '', subject: 'General Inquiry', message: '', website: '', dataConsent: false });
   };
 
   return (
@@ -146,6 +152,31 @@ export function ContactView({ settings }: { settings: SiteSettings }) {
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 className="bg-white border border-mist rounded-xl p-4 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-forest"
               />
+            </div>
+
+            {/* DPDPA Consent */}
+            <div className="bg-gradient-to-br from-blue-50 to-sky-50 rounded-xl p-5 border border-blue-200">
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={formData.dataConsent}
+                  onChange={(e) => setFormData({ ...formData, dataConsent: e.target.checked })}
+                  className="mt-1 w-5 h-5 accent-forest cursor-pointer"
+                />
+                <div className="flex-1">
+                  <p className="text-sm text-forest-deep leading-relaxed">
+                    <strong className="font-semibold">Data Collection Consent *</strong>
+                    <br />
+                    <span className="text-forest-deep/80">
+                      I consent to Lakeora collecting and processing my personal data for communication purposes
+                      as per India's Digital Personal Data Protection Act (DPDPA), 2023.
+                    </span>
+                  </p>
+                  <p className="text-xs text-forest-deep/60 mt-2">
+                    Read our <a href="/privacy" className="text-forest underline hover:no-underline" target="_blank">Privacy Policy</a> for details.
+                  </p>
+                </div>
+              </label>
             </div>
 
             <Button type="submit" variant="primary" size="lg" isLoading={sending}>
