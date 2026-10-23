@@ -11,11 +11,9 @@ import { useToast } from '@/components/toast/useToast';
 export function BookingView({
   property,
   guests,
-  advancePercent,
 }: {
   property: Property;
   guests: number;
-  advancePercent: number;
 }) {
   const router = useRouter();
 
@@ -38,7 +36,6 @@ export function BookingView({
   const addonTotal = selectedAddons.length * 499;
   const totalBeforeDiscount = basePrice + addonTotal;
   const finalTotal = Math.max(0, totalBeforeDiscount - discount);
-  const advanceDue = Math.round((finalTotal * advancePercent) / 100);
 
   const handleApplyCoupon = (e: React.FormEvent) => {
     e.preventDefault();
@@ -104,9 +101,6 @@ export function BookingView({
           discount,
           couponCode: coupon,
           totalAmount: finalTotal,
-          advancePercentage: advancePercent,
-          advanceAmount: advanceDue,
-          balanceAmount: finalTotal - advanceDue,
           paymentMethod: formData.paymentMethod,
         }),
       });
@@ -296,7 +290,7 @@ export function BookingView({
                   ← Back
                 </Button>
                 <Button type="submit" variant="primary" size="lg">
-                  Pay ₹{finalTotal.toLocaleString()} &amp; Confirm Booking
+                  Pay Full Amount ₹{finalTotal.toLocaleString()}
                 </Button>
               </div>
             </form>
@@ -365,13 +359,9 @@ export function BookingView({
                 <span>Total Amount</span>
                 <span>₹{finalTotal.toLocaleString()}</span>
               </div>
-              <div className="flex justify-between text-forest-deep font-semibold">
-                <span>Pay now ({advancePercent}% advance)</span>
-                <span>₹{advanceDue.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between text-forest-deep/60">
-                <span>Balance at check-in</span>
-                <span>₹{(finalTotal - advanceDue).toLocaleString()}</span>
+              <div className="flex justify-between text-emerald-600 font-bold text-lg mt-3 pt-3 border-t-2 border-emerald-200">
+                <span>✓ Pay Full Amount Now</span>
+                <span>₹{finalTotal.toLocaleString()}</span>
               </div>
             </div>
           </div>

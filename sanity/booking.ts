@@ -148,25 +148,6 @@ export default defineType({
       description: 'Final total after discounts',
       validation: (Rule) => Rule.required().positive(),
     }),
-    defineField({
-      name: 'advancePercentage',
-      title: 'Advance Percentage',
-      type: 'number',
-      description: 'Percentage paid as advance (e.g., 50)',
-      validation: (Rule) => Rule.min(0).max(100),
-    }),
-    defineField({
-      name: 'advanceAmount',
-      title: 'Advance Amount Paid',
-      type: 'number',
-      validation: (Rule) => Rule.positive(),
-    }),
-    defineField({
-      name: 'balanceAmount',
-      title: 'Balance Amount',
-      type: 'number',
-      description: 'Amount to be paid at check-in',
-    }),
 
     // Payment Info
     defineField({

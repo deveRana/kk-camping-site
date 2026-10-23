@@ -25,9 +25,6 @@ export async function POST(request: NextRequest) {
       discount,
       couponCode,
       totalAmount,
-      advancePercentage,
-      advanceAmount,
-      balanceAmount,
       paymentMethod,
       notes,
     } = body;
@@ -70,9 +67,6 @@ export async function POST(request: NextRequest) {
       discount: discount || 0,
       couponCode,
       totalAmount,
-      advancePercentage: advancePercentage || 50,
-      advanceAmount,
-      balanceAmount,
 
       // Payment
       paymentMethod,
@@ -101,15 +95,15 @@ export async function POST(request: NextRequest) {
       customerPhone: guestPhone,
 
       // Payment details
-      amount: advanceAmount,
-      paymentType: 'advance',
+      amount: totalAmount,
+      paymentType: 'full',
       paymentMethod,
       paymentStatus: 'success',
       currency: 'INR',
 
       // Additional
       paymentGateway: 'Manual',
-      notes: `Advance payment for booking ${referenceId}`,
+      notes: `Full payment for booking ${referenceId}`,
     });
 
     // Prepare booking details for email templates
@@ -130,8 +124,6 @@ export async function POST(request: NextRequest) {
       discount: discount || 0,
       couponCode,
       totalAmount,
-      advanceAmount,
-      balanceAmount,
       paymentMethod,
       bookingDate: booking.bookingDate,
     };

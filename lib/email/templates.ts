@@ -20,8 +20,6 @@ interface BookingDetails {
   discount: number;
   couponCode?: string;
   totalAmount: number;
-  advanceAmount: number;
-  balanceAmount: number;
   paymentMethod: string;
   bookingDate: string;
 }
@@ -356,23 +354,19 @@ export function generateGuestConfirmationEmail(booking: BookingDetails): string 
           <span>₹${booking.totalAmount.toLocaleString()}</span>
         </div>
         <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #d1d5db;">
-          <div class="price-row" style="color: #16a34a; font-weight: 600;">
-            <span>✓ Advance Paid (${booking.paymentMethod.toUpperCase()})</span>
-            <span>₹${booking.advanceAmount.toLocaleString()}</span>
-          </div>
-          <div class="price-row" style="color: #dc2626; font-weight: 600;">
-            <span>Balance Due at Check-in</span>
-            <span>₹${booking.balanceAmount.toLocaleString()}</span>
+          <div class="price-row" style="color: #16a34a; font-weight: 600; font-size: 16px;">
+            <span>✓ Payment Received (${booking.paymentMethod.toUpperCase()})</span>
+            <span>₹${booking.totalAmount.toLocaleString()}</span>
           </div>
         </div>
       </div>
 
-      <!-- Important Information -->
-      <div class="highlight-box">
-        <p class="highlight-title">⚠️ Important - Balance Payment</p>
-        <p class="highlight-text">
-          Please pay the remaining balance of <strong>₹${booking.balanceAmount.toLocaleString()}</strong> at check-in.
-          We accept cash, UPI, and card payments.
+      <!-- Payment Confirmation -->
+      <div class="highlight-box" style="background: #f0fdf4; border-color: #22c55e;">
+        <p class="highlight-title" style="color: #166534;">✓ Payment Complete</p>
+        <p class="highlight-text" style="color: #15803d;">
+          Your payment of <strong>₹${booking.totalAmount.toLocaleString()}</strong> has been received successfully.
+          No additional payment required at check-in.
         </p>
       </div>
 
@@ -551,13 +545,9 @@ export function generateAdminNotificationEmail(booking: BookingDetails): string 
           <span>₹${booking.totalAmount.toLocaleString()}</span>
         </div>
         <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #d1d5db;">
-          <div class="price-row" style="color: #16a34a; font-weight: 600;">
-            <span>✓ Advance Received (${booking.paymentMethod.toUpperCase()})</span>
-            <span>₹${booking.advanceAmount.toLocaleString()}</span>
-          </div>
-          <div class="price-row" style="color: #dc2626; font-weight: 600;">
-            <span>⚠️ Balance to Collect</span>
-            <span>₹${booking.balanceAmount.toLocaleString()}</span>
+          <div class="price-row" style="color: #16a34a; font-weight: 600; font-size: 16px;">
+            <span>✓ Full Payment Received (${booking.paymentMethod.toUpperCase()})</span>
+            <span>₹${booking.totalAmount.toLocaleString()}</span>
           </div>
         </div>
       </div>
@@ -569,7 +559,7 @@ export function generateAdminNotificationEmail(booking: BookingDetails): string 
           ✓ Check availability and prepare ${booking.propertyName}<br>
           ✓ Contact guest: <strong><a href="tel:${booking.guestPhone}" style="color: #92400e;">${booking.guestPhone}</a></strong><br>
           ✓ Arrange add-ons: ${booking.addons.length > 0 ? booking.addons.join(', ') : 'None'}<br>
-          ✓ Collect balance: ₹${booking.balanceAmount.toLocaleString()} at check-in
+          ✓ Full payment received: ₹${booking.totalAmount.toLocaleString()} ✅
         </p>
       </div>
 
