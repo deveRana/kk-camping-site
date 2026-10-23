@@ -103,7 +103,7 @@ export default async function HomePage() {
                 <img
                   src={property.coverImage}
                   alt={property.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
                 />
                 {property.isPopular && (
                   <span className="absolute top-4 left-4 bg-forest text-white text-xs font-bold px-3 py-1 rounded-full">

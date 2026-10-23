@@ -24,34 +24,47 @@ interface PropertyImageMapping {
   propertySlug: string;
   propertyTitle: string;
   imagePath: string;
-  filename: string;
+  coverImage: string;
+  galleryImages: string[];
 }
 
-// Map property slugs to their cover images
+// Map property slugs to their images
 const propertyImages: PropertyImageMapping[] = [
   {
     propertySlug: 'machang-cottages',
     propertyTitle: 'Machang Cottages',
     imagePath: 'public/machang-cottage-images',
-    filename: 'machang-cottage-1.jpg',
+    coverImage: 'machang-cottage-1.jpg',
+    galleryImages: [
+      'machang-cottage-1.jpg',
+      'machang-cottage-2.jpg',
+      'machang-cottage-3.jpg',
+    ],
   },
   {
     propertySlug: 'swiss-tent',
     propertyTitle: 'Swiss Tent (Attached Washroom)',
     imagePath: 'public/swiss-tent',
-    filename: 'swiss-tent-1.jpg',
+    coverImage: 'swiss-tent-1.jpg',
+    galleryImages: ['swiss-tent-1.jpg'],
   },
   {
     propertySlug: 'white-tent',
     propertyTitle: 'White Tent (With Light, Fan & Board)',
     imagePath: 'public/white-tent',
-    filename: 'white-tent-1.jpg',
+    coverImage: 'white-tent-1.jpg',
+    galleryImages: ['white-tent-1.jpg'],
   },
   {
     propertySlug: 'normal-waterproof-tent',
     propertyTitle: 'Normal Waterproof Tent',
     imagePath: 'public/normal-tent',
-    filename: 'normal-tent-1.jpeg',
+    coverImage: 'normal-tent-1.jpeg',
+    galleryImages: [
+      'normal-tent-1.jpeg',
+      'normal-tent-2.jpeg',
+      'normal-tent-3.jpeg',
+    ],
   },
 ];
 
@@ -73,17 +86,41 @@ async function uploadPropertyImage(mapping: PropertyImageMapping) {
 
     console.log(`   ✓ Found property: ${property.title} (${property._id})`);
 
-    // Upload image to Sanity
-    const imagePath = resolve(process.cwd(), mapping.imagePath, mapping.filename);
-    console.log(`   📤 Uploading image: ${mapping.filename}...`);
+    // Upload cover image
+    const coverImagePath = resolve(process.cwd(), mapping.imagePath, mapping.coverImage);
+    console.log(`   📤 Uploading cover image: ${mapping.coverImage}...`);
 
-    const asset = await client.assets.upload('image', createReadStream(imagePath), {
-      filename: mapping.filename,
+    const coverAsset = await client.assets.upload('image', createReadStream(coverImagePath), {
+      filename: mapping.coverImage,
     });
 
-    console.log(`   ✓ Image uploaded: ${asset._id}`);
+    console.log(`   ✓ Cover image uploaded: ${coverAsset._id}`);
 
-    // Update property with the cover image
+    // Upload gallery images
+    const galleryAssets = [];
+    for (const galleryImage of mapping.galleryImages) {
+      const galleryImagePath = resolve(process.cwd(), mapping.imagePath, galleryImage);
+      console.log(`   📤 Uploading gallery image: ${galleryImage}...`);
+
+      const galleryAsset = await client.assets.upload('image', createReadStream(galleryImagePath), {
+        filename: galleryImage,
+      });
+
+      console.log(`   ✓ Gallery image uploaded: ${galleryAsset._id}`);
+      galleryAssets.push({
+        _type: 'image',
+        _key: galleryAsset._id,
+        asset: {
+          _type: 'reference',
+          _ref: galleryAsset._id,
+        },
+      });
+
+      // Small delay between uploads
+      await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    // Update property with cover image and gallery
     await client
       .patch(property._id)
       .set({
@@ -91,13 +128,14 @@ async function uploadPropertyImage(mapping: PropertyImageMapping) {
           _type: 'image',
           asset: {
             _type: 'reference',
-            _ref: asset._id,
+            _ref: coverAsset._id,
           },
         },
+        gallery: galleryAssets,
       })
       .commit();
 
-    console.log(`   ✓ Property updated with cover image`);
+    console.log(`   ✓ Property updated with cover image and ${galleryAssets.length} gallery images`);
     return { success: true };
   } catch (error) {
     console.error(`   ✗ Failed to process ${mapping.propertyTitle}:`, error);
