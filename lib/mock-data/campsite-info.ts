@@ -330,6 +330,45 @@ export const PAWNA_CAMPSITE_MASTER_DATA: CampsiteMasterInfo = {
         'Archery, Cricket, Volleyball, Carrom, Chess',
         'Common Clean Toilets & First Aid'
       ]
+    },
+    {
+      id: 'pkg-maitri-camping',
+      slug: 'maitri-camping',
+      name: 'Maitri Camping',
+      tagline: 'Affordable lakeside camping with complete meals, BBQ, and free activities for couples & families',
+      pricePerPerson: 1500,
+      washroomType: 'Common (Western)',
+      capacity: '2/3/4 Guests sharing',
+      hasAttachedWashroom: false,
+      hasLightFanBoard: true,
+      category: 'Tent Camping',
+      coverImage: '/normal-tent/normal-tent-2.jpeg',
+      gallery: [
+        '/normal-tent/normal-tent-2.jpeg',
+        '/normal-tent/normal-tent-1.jpeg',
+        '/normal-tent/normal-tent-3.jpeg'
+      ],
+      highlights: [
+        'Western Toilet Facility',
+        'Free Sports Activities (Badminton, Cricket, Volleyball, Archery)',
+        'Complete Meal Plan with BBQ',
+        'Music System & Entertainment'
+      ],
+      inclusions: [
+        '2/3/4 Person Sharing Waterproof Tents',
+        'Western Toilet Access',
+        'Free Parking',
+        'Evening Snacks & High Tea',
+        'Free Activities: Badminton, Football, Volleyball, Cricket, Archery 🏏🏹⚽',
+        'Music System for Entertainment 🎼',
+        'Limited Veg / Non-Veg BBQ (7:00 PM - 8:30 PM) 🍢',
+        'Unlimited Dinner Buffet (9:30 PM - 11:00 PM)',
+        'Veg: Paneer Masala, Dal, Roti, Rice, Aalu Sabji, Salad, Sweet',
+        'Non-Veg: Chicken Masala, Chicken Curry, Roti, Rice, Salad, Sweet',
+        'Morning Breakfast: Poha & Tea',
+        'Check-in: 4:00 PM | Check-out: 11:00 AM',
+        'Contact: +91 95271 43112'
+      ]
     }
   ]
 };
