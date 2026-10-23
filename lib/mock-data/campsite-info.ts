@@ -94,7 +94,7 @@ export const PAWNA_CAMPSITE_MASTER_DATA: CampsiteMasterInfo = {
         {
           time: '09:30 PM - 11:00 PM',
           title: 'Unlimited Dinner',
-          description: 'Delicious buffet featuring Paneer, Chicken Curry, Chapati, Rice, Salad & Sweets. (Jain meals available).',
+          description: 'Delicious buffet featuring Paneer, Chicken Curry, Chapati, Rice, Salad & Sweets.',
           icon: 'food'
         },
         {
@@ -176,7 +176,6 @@ export const PAWNA_CAMPSITE_MASTER_DATA: CampsiteMasterInfo = {
         'Fresh Roti / Chapati',
         'Salad & Sweet Dish'
       ],
-      specialNote: 'Jain food available upon request during booking!'
     },
     {
       categoryName: 'Morning Breakfast',
@@ -217,7 +216,7 @@ export const PAWNA_CAMPSITE_MASTER_DATA: CampsiteMasterInfo = {
         'Attached Clean Washroom',
         'Evening High Tea & Hot Pakodas',
         'Barbeque (Veg / Non-Veg)',
-        'Unlimited Dinner Buffet (Veg / Non-Veg / Jain)',
+        'Unlimited Dinner Buffet (Veg / Non-Veg)',
         'Live Acoustic Music Campfire',
         'Morning Breakfast & Tea',
         'Free Outdoor & Indoor Games Access',
@@ -253,7 +252,7 @@ export const PAWNA_CAMPSITE_MASTER_DATA: CampsiteMasterInfo = {
         'Attached Light, Fan & Charging Board',
         'Evening High Tea with Pakoda',
         'Limited Veg / Non-Veg Barbeque',
-        'Unlimited Dinner Buffet (Veg / Non-Veg / Jain)',
+        'Unlimited Dinner Buffet (Veg / Non-Veg)',
         'Campfire with Acoustic Live Music',
         'Morning Sunrise & Breakfast',
         'All Free Sports & Activities',
@@ -290,7 +289,7 @@ export const PAWNA_CAMPSITE_MASTER_DATA: CampsiteMasterInfo = {
         'Mattress, Pillow, Sheet & Blanket',
         'Evening High Tea & Pakoda',
         'Veg / Non-Veg BBQ',
-        'Unlimited Dinner (Veg / Non-Veg / Jain)',
+        'Unlimited Dinner (Veg / Non-Veg)',
         'Live Music & Campfire',
         'Morning Breakfast',
         'Free Outdoor & Indoor Games',
