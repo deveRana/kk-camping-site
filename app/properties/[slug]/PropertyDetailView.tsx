@@ -297,6 +297,88 @@ export function PropertyDetailView({
         </div>
       </div>
 
+      {/* Location Map */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="space-y-6">
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="font-display text-4xl md:text-5xl font-medium text-forest-deep mb-3">
+              How to Reach
+            </h2>
+            <p className="text-sm text-forest-deep/70">
+              We're located at Pawna Lake, easily accessible from Mumbai and Pune
+            </p>
+          </div>
+
+          <div className="bg-white rounded-3xl border border-mist overflow-hidden shadow-xl">
+            {/* Map Embed */}
+            <div className="relative w-full h-[400px] md:h-[500px]">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d376.097023599811!2d73.49601918122337!3d18.64128502032591!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2a9eab3ca531b%3A0xcbb693c085173e98!2sLakeora%20Cafe%20Pawna%20Lake!5e0!3m2!1sen!2sin!4v1792746933973!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="absolute inset-0"
+                title="Lakeora Cafe Pawna Lake Location"
+              />
+            </div>
+
+            {/* Map Info Footer */}
+            <div className="bg-gradient-to-br from-forest to-forest-dark text-white p-6">
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-5 h-5 text-sage" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span className="font-semibold text-sage text-sm">Address</span>
+                  </div>
+                  <p className="text-xs text-white/80 leading-relaxed">
+                    Lakeora, Pawna Lake, Thakursai-Aajiwali Rd, Gevhande Khadak, Maharashtra 410406
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-5 h-5 text-sage" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span className="font-semibold text-sage text-sm">Travel Time</span>
+                  </div>
+                  <p className="text-xs text-white/80">
+                    From Mumbai: 2.5 hours<br />
+                    From Pune: 1.5 hours
+                  </p>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-5 h-5 text-sage" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                    </svg>
+                    <span className="font-semibold text-sage text-sm">Get Directions</span>
+                  </div>
+                  <a
+                    href="https://maps.app.goo.gl/jqCWfXeDt9qb61Qr6"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-white text-forest hover:bg-sage hover:text-forest-deep px-6 py-2.5 rounded-full text-sm font-semibold transition shadow-lg group"
+                  >
+                    Open in Google Maps
+                    <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* More stays */}
       {related.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
