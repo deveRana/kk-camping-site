@@ -19,8 +19,6 @@ export function BookingView({
 
   const [step, setStep] = useState(1);
   const [numberOfGuests, setNumberOfGuests] = useState(initialGuests);
-  const [coupon, setCoupon] = useState('');
-  const [discount, setDiscount] = useState(0);
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -34,8 +32,7 @@ export function BookingView({
   const { showToast } = useToast();
 
   const basePrice = property.price * numberOfGuests;
-  const totalBeforeDiscount = basePrice;
-  const finalTotal = Math.max(0, totalBeforeDiscount - discount);
+  const finalTotal = basePrice;
 
   const validateStep1 = () => {
     if (!formData.fullName.trim()) {
@@ -81,21 +78,6 @@ export function BookingView({
     return true;
   };
 
-  const handleApplyCoupon = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (coupon.toUpperCase() === 'LAKEORA10') {
-      setDiscount(Math.round(totalBeforeDiscount * 0.1));
-      showToast({
-        type: 'success',
-        message: 'Coupon LAKEORA10 applied! You saved 10%.',
-      });
-    } else {
-      showToast({
-        type: 'error',
-        message: 'Invalid coupon code. Try "LAKEORA10".',
-      });
-    }
-  };
 
 
   const handleSubmitBooking = async (e: React.FormEvent) => {
@@ -169,8 +151,8 @@ export function BookingView({
           addons: [],
           basePrice,
           addonTotal: 0,
-          discount,
-          couponCode: coupon,
+          discount: 0,
+          couponCode: '',
           totalAmount: finalTotal,
           paymentMethod: formData.paymentMethod,
           dataConsent: formData.dataConsent,
@@ -382,20 +364,6 @@ export function BookingView({
               </div>
             </div>
 
-            {/* Coupon input */}
-            <form onSubmit={handleApplyCoupon} className="flex gap-2">
-              <input
-                type="text"
-                placeholder="Coupon code (LAKEORA10)"
-                value={coupon}
-                onChange={(e) => setCoupon(e.target.value)}
-                className="bg-paper/40 border border-mist rounded-xl px-3 py-2 text-xs uppercase flex-1 focus:outline-none focus:ring-1 focus:ring-forest"
-              />
-              <Button type="submit" variant="outline" size="sm">
-                Apply
-              </Button>
-            </form>
-
             {/* Price Calculations */}
             <div className="space-y-2 text-xs text-forest-deep/80 pt-4 border-t border-mist">
               <div className="flex justify-between">
@@ -404,12 +372,6 @@ export function BookingView({
                 </span>
                 <span>₹{basePrice.toLocaleString()}</span>
               </div>
-              {discount > 0 && (
-                <div className="flex justify-between text-emerald-600 font-semibold">
-                  <span>Discount (LAKEORA10)</span>
-                  <span>-₹{discount.toLocaleString()}</span>
-                </div>
-              )}
               <div className="flex justify-between text-base font-bold text-forest pt-2 border-t border-mist">
                 <span>Total Amount</span>
                 <span>₹{finalTotal.toLocaleString()}</span>
