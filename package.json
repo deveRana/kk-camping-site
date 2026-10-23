@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "upload-gallery": "tsx scripts/upload-gallery-to-sanity.ts"
+    "upload-gallery": "tsx scripts/upload-gallery-to-sanity.ts",
+    "upload-property-images": "tsx scripts/upload-property-images.ts"
   },
   "dependencies": {
     "@sanity/image-url": "^2.1.1",
