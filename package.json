@@ -10,7 +10,9 @@
     "upload-gallery": "tsx scripts/upload-gallery-to-sanity.ts",
     "upload-property-images": "tsx scripts/upload-property-images.ts",
     "add-maitri-package": "tsx scripts/add-maitri-to-sanity.ts",
-    "check-properties": "tsx scripts/check-properties.ts"
+    "check-properties": "tsx scripts/check-properties.ts",
+    "sanity:deploy": "sanity deploy",
+    "sanity:studio": "sanity start"
   },
   "dependencies": {
     "@sanity/image-url": "^2.1.1",
@@ -23,6 +25,7 @@
   },
   "devDependencies": {
     "@sanity/client": "^8.9.0",
+    "@sanity/vision": "^3.62.4",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -30,6 +33,7 @@
     "dotenv": "^18.0.8",
     "eslint": "^9",
     "eslint-config-next": "16.3.5",
+    "sanity": "^3.62.4",
     "tailwindcss": "^4",
     "tsx": "^4.19.2",
     "typescript": "^5"
