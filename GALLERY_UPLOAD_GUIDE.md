@@ -25,19 +25,22 @@ npm run upload-gallery
 ```
 
 That's it! The script will:
-- ✅ Upload all 37 images to Sanity
+- ✅ Upload all 37 gallery images to Sanity
+- ✅ Upload 3 normal tent images to Sanity
 - ✅ Set proper categories (Campsites, Food, Guests, Activities, Interiors)
 - ✅ Add titles and captions
 - ✅ Set display order
 - ✅ Create gallery items automatically
+- ✅ Total: 40 images uploaded!
 
 ## 📊 What Gets Uploaded
 
 The script uploads and categorizes:
 
-**Campsites (10 images):**
+**Campsites (13 images):**
 - White tents
 - Grey tents
+- Normal waterproof tents (3 images)
 - Campsite views
 
 **Food (4 images):**
@@ -63,8 +66,11 @@ The script uploads and categorizes:
 ```
 🚀 Starting gallery upload to Sanity...
 
-📁 Gallery directory: /home/user/project/public/gallery-images
-📊 Total images to upload: 37
+📁 Gallery images directory: /home/user/project/public/gallery-images
+📁 Normal tent directory: /home/user/project/public/normal-tent
+📊 Total images to upload: 40
+
+📤 Uploading gallery images...
 
 📤 Uploading: White Tents with Cottages...
    ✓ Image uploaded: image-abc123
@@ -76,11 +82,19 @@ The script uploads and categorizes:
 
 ...
 
+📤 Uploading normal tent images...
+
+📤 Uploading: Normal Waterproof Tent View 1...
+   ✓ Image uploaded: image-ghi789
+   ✓ Gallery item created: gallery-rst345
+
+...
+
 ============================================================
 📊 Upload Summary:
-   ✓ Successfully uploaded: 37
+   ✓ Successfully uploaded: 40
    ✗ Failed: 0
-   📁 Total: 37
+   📁 Total: 40
 ============================================================
 
 ✨ Gallery images uploaded successfully!

@@ -290,6 +290,31 @@ const galleryMapping: GalleryImageData[] = [
   },
 ];
 
+// Normal tent images (separate folder)
+const normalTentMapping: GalleryImageData[] = [
+  {
+    filename: 'normal-tent-1.jpeg',
+    title: 'Normal Waterproof Tent View 1',
+    category: 'Campsites',
+    caption: 'Budget-friendly waterproof tents perfect for groups and couples.',
+    order: 6,
+  },
+  {
+    filename: 'normal-tent-2.jpeg',
+    title: 'Normal Waterproof Tent View 2',
+    category: 'Campsites',
+    caption: 'Classic waterproof camping tent by the lakeside.',
+    order: 7,
+  },
+  {
+    filename: 'normal-tent-3.jpeg',
+    title: 'Normal Waterproof Tent View 3',
+    category: 'Campsites',
+    caption: 'Comfortable waterproof tents for authentic camping experience.',
+    order: 8,
+  },
+];
+
 async function uploadImage(imageData: GalleryImageData, imagePath: string) {
   try {
     console.log(`📤 Uploading: ${imageData.title}...`);
@@ -335,16 +360,37 @@ async function main() {
   }
 
   const galleryDir = resolve(process.cwd(), 'public', 'gallery-images');
+  const normalTentDir = resolve(process.cwd(), 'public', 'normal-tent');
 
-  console.log(`📁 Gallery directory: ${galleryDir}`);
-  console.log(`📊 Total images to upload: ${galleryMapping.length}\n`);
+  const totalImages = galleryMapping.length + normalTentMapping.length;
+
+  console.log(`📁 Gallery images directory: ${galleryDir}`);
+  console.log(`📁 Normal tent directory: ${normalTentDir}`);
+  console.log(`📊 Total images to upload: ${totalImages}\n`);
 
   let successCount = 0;
   let failCount = 0;
 
-  // Upload each image
+  // Upload gallery images
+  console.log('📤 Uploading gallery images...\n');
   for (const imageData of galleryMapping) {
     const imagePath = resolve(galleryDir, imageData.filename);
+    const result = await uploadImage(imageData, imagePath);
+
+    if (result.success) {
+      successCount++;
+    } else {
+      failCount++;
+    }
+
+    // Small delay to avoid rate limiting
+    await new Promise(resolve => setTimeout(resolve, 500));
+  }
+
+  // Upload normal tent images
+  console.log('\n📤 Uploading normal tent images...\n');
+  for (const imageData of normalTentMapping) {
+    const imagePath = resolve(normalTentDir, imageData.filename);
     const result = await uploadImage(imageData, imagePath);
 
     if (result.success) {
@@ -361,7 +407,7 @@ async function main() {
   console.log('📊 Upload Summary:');
   console.log(`   ✓ Successfully uploaded: ${successCount}`);
   console.log(`   ✗ Failed: ${failCount}`);
-  console.log(`   📁 Total: ${galleryMapping.length}`);
+  console.log(`   📁 Total: ${totalImages}`);
   console.log('='.repeat(60));
 
   if (successCount > 0) {
