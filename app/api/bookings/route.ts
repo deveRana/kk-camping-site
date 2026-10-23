@@ -2,9 +2,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import { writeClient } from '@/lib/sanity/client';
 import { sendBookingEmails } from '@/lib/email/client';
 import { generateGuestConfirmationEmail, generateAdminNotificationEmail } from '@/lib/email/templates';
+import { validateBookingData, sanitizeBookingData } from '@/lib/validation';
 
 export async function POST(request: NextRequest) {
   try {
+    // Validate content-type
+    const contentType = request.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      return NextResponse.json(
+        { error: 'Invalid content-type. Expected application/json' },
+        { status: 400 }
+      );
+    }
+
     const body = await request.json();
 
     const {
@@ -37,6 +47,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Validate and sanitize input data
+    const validation = validateBookingData(body);
+    if (!validation.isValid) {
+      return NextResponse.json(
+        { error: 'Invalid input data', details: validation.errors },
+        { status: 400 }
+      );
+    }
+
+    // Sanitize data to prevent injection attacks
+    const sanitizedData = sanitizeBookingData(body);
+
     // Create booking document in Sanity
     const booking = await writeClient.create({
       _type: 'booking',
@@ -49,11 +71,11 @@ export async function POST(request: NextRequest) {
       propertyName,
       propertyCategory,
 
-      // Guest details
-      guestName,
-      guestEmail,
-      guestPhone,
-      guestCity,
+      // Guest details (sanitized)
+      guestName: sanitizedData.guestName,
+      guestEmail: sanitizedData.guestEmail,
+      guestPhone: sanitizedData.guestPhone,
+      guestCity: sanitizedData.guestCity,
 
       // Booking details
       numberOfGuests,
@@ -61,19 +83,19 @@ export async function POST(request: NextRequest) {
       checkOutDate,
       addons: addons || [],
 
-      // Pricing
-      basePrice,
-      addonTotal: addonTotal || 0,
-      discount: discount || 0,
-      couponCode,
-      totalAmount,
+      // Pricing (sanitized)
+      basePrice: Number(basePrice),
+      addonTotal: Number(addonTotal) || 0,
+      discount: Number(discount) || 0,
+      couponCode: sanitizedData.couponCode,
+      totalAmount: Number(totalAmount),
 
       // Payment
       paymentMethod,
       paymentStatus: 'paid',
 
-      // Notes
-      notes,
+      // Notes (sanitized)
+      notes: sanitizedData.notes,
     });
 
     // Create payment record
@@ -157,36 +179,54 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Error creating booking:', error);
+    // Don't expose internal error details to client
     return NextResponse.json(
-      { error: 'Failed to create booking', details: error instanceof Error ? error.message : 'Unknown error' },
+      { error: 'Failed to create booking. Please try again or contact support.' },
       { status: 500 }
     );
   }
 }
 
-// GET endpoint to fetch bookings
+// GET endpoint to fetch bookings (SECURED - requires authentication token)
 export async function GET(request: NextRequest) {
   try {
+    // Require admin authentication
+    const authHeader = request.headers.get('authorization');
+    const adminToken = process.env.ADMIN_API_TOKEN;
+
+    if (!authHeader || !adminToken || authHeader !== `Bearer ${adminToken}`) {
+      return NextResponse.json(
+        { error: 'Unauthorized. Admin access required.' },
+        { status: 401 }
+      );
+    }
+
     const searchParams = request.nextUrl.searchParams;
     const email = searchParams.get('email');
     const phone = searchParams.get('phone');
     const referenceId = searchParams.get('referenceId');
 
+    // Use parameterized queries to prevent GROQ injection
     let query = '*[_type == "booking"';
+    const params: Record<string, string> = {};
 
     if (email) {
-      query += ` && guestEmail == "${email}"`;
+      query += ' && guestEmail == $email';
+      params.email = email;
     }
     if (phone) {
-      query += ` && guestPhone == "${phone}"`;
+      query += ' && guestPhone == $phone';
+      params.phone = phone;
     }
     if (referenceId) {
-      query += ` && referenceId == "${referenceId}"`;
+      query += ' && referenceId == $referenceId';
+      params.referenceId = referenceId;
     }
 
     query += '] | order(bookingDate desc)';
 
-    const bookings = await writeClient.fetch(query);
+    // Use parameterized query to prevent injection
+    const bookings = await writeClient.fetch(query, params);
 
     return NextResponse.json({
       success: true,
