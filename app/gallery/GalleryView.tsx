@@ -10,7 +10,7 @@ export function GalleryView({ gallery }: { gallery: GalleryItem[] }) {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const { openModal } = useModal();
 
-  const categories = ['All', 'Campsites', 'Food', 'Guests', 'Activities', 'Interiors'];
+  const categories = ['All', 'Campsites', 'Food', 'Guests', 'Activities', 'Interiors'] as const;
 
   const filteredItems = selectedCategory === 'All'
     ? gallery

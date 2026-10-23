@@ -118,7 +118,7 @@ export interface Testimonial {
 export interface GalleryItem {
   id: string;
   title: string;
-  category: 'All' | 'Campsites' | 'Food' | 'Guests' | 'Night View' | 'Interiors';
+  category: 'All' | 'Campsites' | 'Food' | 'Guests' | 'Activities' | 'Interiors';
   imageUrl: string;
   caption: string;
 }
