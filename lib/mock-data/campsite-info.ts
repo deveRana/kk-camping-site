@@ -337,7 +337,7 @@ export const PAWNA_CAMPSITE_MASTER_DATA: CampsiteMasterInfo = {
       name: 'Maitri Camping',
       tagline: 'Affordable lakeside camping with complete meals, BBQ, and free activities for couples & families',
       pricePerPerson: 1500,
-      washroomType: 'Common (Western)',
+      washroomType: 'Common',
       capacity: '2/3/4 Guests sharing',
       hasAttachedWashroom: false,
       hasLightFanBoard: true,
