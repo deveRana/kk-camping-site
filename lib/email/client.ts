@@ -1,11 +1,22 @@
 import { Resend } from 'resend';
 
-// Initialize Resend client
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // Email configuration
 const FROM_EMAIL = process.env.EMAIL_FROM || 'Lakeora <bookings@lakeora.com>';
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@lakeora.com';
+
+// Lazy initialization - only create when needed (not at build time)
+let resend: Resend | null = null;
+
+function getResendClient(): Resend {
+  if (!resend) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY environment variable is not set');
+    }
+    resend = new Resend(apiKey);
+  }
+  return resend;
+}
 
 interface SendEmailParams {
   to: string | string[];
@@ -19,7 +30,8 @@ interface SendEmailParams {
  */
 export async function sendEmail({ to, subject, html, replyTo }: SendEmailParams) {
   try {
-    const result = await resend.emails.send({
+    const client = getResendClient();
+    const result = await client.emails.send({
       from: FROM_EMAIL,
       to: Array.isArray(to) ? to : [to],
       subject,
