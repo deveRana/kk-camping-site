@@ -64,7 +64,7 @@ export function BookingView({
     }
   };
 
-  const handleSubmitBooking = (e: React.FormEvent) => {
+  const handleSubmitBooking = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.fullName || !formData.phone || !formData.email) {
       showToast({
@@ -75,11 +75,60 @@ export function BookingView({
     }
 
     const refId = `LS-2026-${Math.floor(1000 + Math.random() * 9000)}`;
-    showToast({
-      type: 'success',
-      message: 'Payment processed! Confirming your campsite booking...',
-    });
-    router.push(`/booking/confirmed?referenceId=${refId}&propertyId=${property.id}`);
+
+    try {
+      showToast({
+        type: 'success',
+        message: 'Processing your booking...',
+      });
+
+      // Save booking to Sanity
+      const response = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          referenceId: refId,
+          propertyId: property.id,
+          propertyName: property.title,
+          propertyCategory: property.category,
+          guestName: formData.fullName,
+          guestEmail: formData.email,
+          guestPhone: formData.phone,
+          guestCity: formData.city,
+          numberOfGuests: guests,
+          addons: selectedAddons,
+          basePrice,
+          addonTotal,
+          discount,
+          couponCode: coupon,
+          totalAmount: finalTotal,
+          advancePercentage: advancePercent,
+          advanceAmount: advanceDue,
+          balanceAmount: finalTotal - advanceDue,
+          paymentMethod: formData.paymentMethod,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        showToast({
+          type: 'success',
+          message: 'Booking confirmed! Redirecting to confirmation page...',
+        });
+        router.push(`/booking/confirmed?referenceId=${refId}&propertyId=${property.id}`);
+      } else {
+        throw new Error(data.error || 'Failed to create booking');
+      }
+    } catch (error) {
+      console.error('Booking error:', error);
+      showToast({
+        type: 'error',
+        message: 'Failed to create booking. Please try again or contact support.',
+      });
+    }
   };
 
   return (
