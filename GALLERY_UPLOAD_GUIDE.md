@@ -10,7 +10,7 @@ We've created a script to automatically upload all 37 gallery images from `publi
 2. **Environment variables set** - Make sure `.env.local` has:
    - `NEXT_PUBLIC_SANITY_PROJECT_ID`
    - `NEXT_PUBLIC_SANITY_DATASET`
-   - `SANITY_API_TOKEN` (write token)
+   - `SANITY_API_WRITE_TOKEN` (write token)
 
 ## 🎯 How to Upload
 
@@ -110,10 +110,10 @@ The script uploads and categorizes:
 
 ## 🛠️ Troubleshooting
 
-### Error: SANITY_API_TOKEN not set
+### Error: SANITY_API_WRITE_TOKEN not set
 **Solution:** Add your Sanity write token to `.env.local`:
 ```env
-SANITY_API_TOKEN=sk_your_token_here
+SANITY_API_WRITE_TOKEN=sk_your_token_here
 ```
 
 ### Error: Image file not found

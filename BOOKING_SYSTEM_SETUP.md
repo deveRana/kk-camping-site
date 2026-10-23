@@ -70,7 +70,7 @@ NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
 NEXT_PUBLIC_SANITY_DATASET=production
 
 # Sanity API Token (NEW - for write operations)
-SANITY_API_TOKEN=sk_your_secret_token_here
+SANITY_API_WRITE_TOKEN=sk_your_secret_token_here
 ```
 
 ⚠️ **Important**: 
@@ -230,7 +230,7 @@ Sanity Studio allows you to:
 
 ## 🔒 Security Notes
 
-1. **API Token**: Never expose the `SANITY_API_TOKEN` in client-side code
+1. **API Token**: Never expose the `SANITY_API_WRITE_TOKEN` in client-side code
 2. **Validation**: The API routes validate all required fields
 3. **Server-Side**: All Sanity writes happen server-side only
 4. **Error Handling**: Errors are logged and don't expose sensitive data
@@ -242,7 +242,7 @@ Sanity Studio allows you to:
 ### "Failed to create booking" Error
 
 **Possible causes:**
-1. Missing `SANITY_API_TOKEN` in environment variables
+1. Missing `SANITY_API_WRITE_TOKEN` in environment variables
 2. Token doesn't have write permissions
 3. Schemas not deployed to Sanity
 4. Network connectivity issues
@@ -250,10 +250,10 @@ Sanity Studio allows you to:
 **Solution:**
 ```bash
 # 1. Check if token is set
-echo $SANITY_API_TOKEN
+echo $SANITY_API_WRITE_TOKEN
 
 # 2. Verify in .env.local
-cat .env.local | grep SANITY_API_TOKEN
+cat .env.local | grep SANITY_API_WRITE_TOKEN
 
 # 3. Restart dev server
 npm run dev

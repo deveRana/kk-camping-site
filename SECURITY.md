@@ -98,7 +98,7 @@ if (!contentType.includes('application/json')) {
 ### 6. **Environment Variable Security**
 
 **Secure Variables:**
-- `SANITY_API_TOKEN` - Server-side only, never exposed
+- `SANITY_API_WRITE_TOKEN` - Server-side only, never exposed
 - `RESEND_API_KEY` - Server-side only
 - `ADMIN_API_TOKEN` - Server-side only
 
@@ -171,7 +171,7 @@ if (!contentType.includes('application/json')) {
 
 ```env
 # Required for write operations
-SANITY_API_TOKEN=sk_xxxx
+SANITY_API_WRITE_TOKEN=sk_xxxx
 
 # Required for email
 RESEND_API_KEY=re_xxxx

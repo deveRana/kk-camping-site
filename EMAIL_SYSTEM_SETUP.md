@@ -103,7 +103,7 @@ ADMIN_EMAIL=admin@lakeora.com
 # Existing Sanity config
 NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
 NEXT_PUBLIC_SANITY_DATASET=production
-SANITY_API_TOKEN=sk_your_token_here
+SANITY_API_WRITE_TOKEN=sk_your_token_here
 ```
 
 **Configuration Options:**

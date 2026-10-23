@@ -10,7 +10,7 @@ import { useToast } from '@/components/toast/useToast';
 
 export function BookingView({
   property,
-  guests,
+  guests: initialGuests,
 }: {
   property: Property;
   guests: number;
@@ -18,23 +18,22 @@ export function BookingView({
   const router = useRouter();
 
   const [step, setStep] = useState(1);
+  const [numberOfGuests, setNumberOfGuests] = useState(initialGuests);
   const [coupon, setCoupon] = useState('');
   const [discount, setDiscount] = useState(0);
-  const [selectedAddons, setSelectedAddons] = useState<string[]>(['Kayaking']);
 
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     phone: '',
     city: '',
-    paymentMethod: 'upi',
+    paymentMethod: 'razorpay',
   });
 
   const { showToast } = useToast();
 
-  const basePrice = property.price * guests; // packages are priced per person
-  const addonTotal = selectedAddons.length * 499;
-  const totalBeforeDiscount = basePrice + addonTotal;
+  const basePrice = property.price * numberOfGuests;
+  const totalBeforeDiscount = basePrice;
   const finalTotal = Math.max(0, totalBeforeDiscount - discount);
 
   const handleApplyCoupon = (e: React.FormEvent) => {
@@ -53,13 +52,6 @@ export function BookingView({
     }
   };
 
-  const handleAddonToggle = (addonName: string) => {
-    if (selectedAddons.includes(addonName)) {
-      setSelectedAddons(selectedAddons.filter((a) => a !== addonName));
-    } else {
-      setSelectedAddons([...selectedAddons, addonName]);
-    }
-  };
 
   const handleSubmitBooking = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -94,10 +86,10 @@ export function BookingView({
           guestEmail: formData.email,
           guestPhone: formData.phone,
           guestCity: formData.city,
-          numberOfGuests: guests,
-          addons: selectedAddons,
+          numberOfGuests: numberOfGuests,
+          addons: [],
           basePrice,
-          addonTotal,
+          addonTotal: 0,
           discount,
           couponCode: coupon,
           totalAmount: finalTotal,
@@ -134,8 +126,8 @@ export function BookingView({
       </h1>
 
       {/* Step Indicators */}
-      <div className="flex items-center justify-between max-w-xl mx-auto border-b border-mist pb-4">
-        {[1, 2, 3].map((s) => (
+      <div className="flex items-center justify-between max-w-md mx-auto border-b border-mist pb-4">
+        {[1, 2].map((s) => (
           <div key={s} className="flex items-center gap-2">
             <span
               className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
@@ -153,7 +145,7 @@ export function BookingView({
                 step === s ? 'text-forest' : 'text-forest-deep/60'
               }`}
             >
-              {s === 1 ? 'Add-ons' : s === 2 ? 'Contact Details' : 'Payment'}
+              {s === 1 ? 'Contact Details' : 'Payment'}
             </span>
           </div>
         ))}
@@ -163,51 +155,6 @@ export function BookingView({
         {/* Left 2 Columns: Multi-step Form */}
         <div className="lg:col-span-2 space-y-8">
           {step === 1 && (
-            <div className="bg-white rounded-2xl p-6 border border-mist space-y-6">
-              <h3 className="font-display text-2xl font-semibold text-forest-deep">
-                Enhance Your Trip with Add-ons
-              </h3>
-
-              <div className="space-y-3">
-                {[
-                  { name: 'Sunset Kayaking', price: 499, desc: '90 minutes single/double boat rental' },
-                  { name: 'Marinated BBQ Grill Kit', price: 599, desc: 'Charcoal grill with veg/non-veg skewers' },
-                  { name: 'Tikona Fort Guided Trek', price: 399, desc: 'Early morning climb with certified guide' },
-                ].map((addon) => (
-                  <label
-                    key={addon.name}
-                    className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition ${
-                      selectedAddons.includes(addon.name)
-                        ? 'border-forest bg-forest/5'
-                        : 'border-mist bg-white hover:bg-mist/20'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <input
-                        type="checkbox"
-                        checked={selectedAddons.includes(addon.name)}
-                        onChange={() => handleAddonToggle(addon.name)}
-                        className="accent-forest w-5 h-5"
-                      />
-                      <div>
-                        <p className="font-semibold text-forest-deep text-sm">{addon.name}</p>
-                        <p className="text-xs text-forest-deep/60">{addon.desc}</p>
-                      </div>
-                    </div>
-                    <span className="font-bold text-forest text-sm">+₹{addon.price}</span>
-                  </label>
-                ))}
-              </div>
-
-              <div className="flex justify-end">
-                <Button onClick={() => setStep(2)} variant="primary" size="md">
-                  Continue to Contact Info →
-                </Button>
-              </div>
-            </div>
-          )}
-
-          {step === 2 && (
             <div className="bg-white rounded-2xl p-6 border border-mist space-y-6">
               <h3 className="font-display text-2xl font-semibold text-forest-deep">
                 Guest Contact Details
@@ -239,58 +186,57 @@ export function BookingView({
                   value={formData.city}
                   onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                 />
+                <Input
+                  label="Number of Guests *"
+                  placeholder="e.g. 2"
+                  type="number"
+                  min="1"
+                  max="50"
+                  value={numberOfGuests.toString()}
+                  onChange={(e) => {
+                    const val = parseInt(e.target.value) || 1;
+                    setNumberOfGuests(Math.min(50, Math.max(1, val)));
+                  }}
+                />
               </div>
 
-              <div className="flex justify-between pt-4">
-                <Button onClick={() => setStep(1)} variant="ghost" size="md">
-                  ← Back to Add-ons
-                </Button>
-                <Button onClick={() => setStep(3)} variant="primary" size="md">
+              <div className="flex justify-end pt-4">
+                <Button onClick={() => setStep(2)} variant="primary" size="md">
                   Proceed to Payment →
                 </Button>
               </div>
             </div>
           )}
 
-          {step === 3 && (
+          {step === 2 && (
             <form onSubmit={handleSubmitBooking} className="bg-white rounded-2xl p-6 border border-mist space-y-6">
               <h3 className="font-display text-2xl font-semibold text-forest-deep">
-                Select Payment Method
+                Complete Payment
               </h3>
 
-              <div className="space-y-3">
-                {[
-                  { id: 'upi', label: 'Google Pay / PhonePe / Paytm UPI', icon: '📱' },
-                  { id: 'card', label: 'Credit / Debit Card', icon: '💳' },
-                  { id: 'netbanking', label: 'Net Banking (All Indian Banks)', icon: '🏛️' },
-                ].map((pm) => (
-                  <label
-                    key={pm.id}
-                    className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition ${
-                      formData.paymentMethod === pm.id
-                        ? 'border-forest bg-forest/5'
-                        : 'border-mist bg-white hover:bg-mist/20'
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="payment"
-                      checked={formData.paymentMethod === pm.id}
-                      onChange={() => setFormData({ ...formData, paymentMethod: pm.id })}
-                      className="accent-forest w-5 h-5"
-                    />
-                    <span className="text-xl">{pm.icon}</span>
-                    <span className="font-semibold text-forest-deep text-sm">{pm.label}</span>
-                  </label>
-                ))}
+              <div className="bg-gradient-to-br from-forest/5 to-sage/5 rounded-xl p-6 border border-forest/20">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-12 h-12 rounded-full bg-forest text-white flex items-center justify-center">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-forest-deep">Secure Payment via Razorpay</h4>
+                    <p className="text-xs text-forest-deep/70">Pay using UPI, Card, Net Banking & more</p>
+                  </div>
+                </div>
+                <p className="text-sm text-forest-deep/80 leading-relaxed">
+                  You'll be redirected to Razorpay's secure payment gateway to complete your transaction. We accept all major payment methods.
+                </p>
               </div>
 
               <div className="flex justify-between pt-4">
-                <Button onClick={() => setStep(2)} type="button" variant="ghost" size="md">
+                <Button onClick={() => setStep(1)} type="button" variant="ghost" size="md">
                   ← Back
                 </Button>
                 <Button type="submit" variant="primary" size="lg">
-                  Pay Full Amount ₹{finalTotal.toLocaleString()}
+                  Proceed to Payment ₹{finalTotal.toLocaleString()}
                 </Button>
               </div>
             </form>
@@ -339,16 +285,10 @@ export function BookingView({
             <div className="space-y-2 text-xs text-forest-deep/80 pt-4 border-t border-mist">
               <div className="flex justify-between">
                 <span>
-                  {guests} {guests === 1 ? 'guest' : 'guests'} × ₹{property.price.toLocaleString()}
+                  {numberOfGuests} {numberOfGuests === 1 ? 'guest' : 'guests'} × ₹{property.price.toLocaleString()}
                 </span>
                 <span>₹{basePrice.toLocaleString()}</span>
               </div>
-              {selectedAddons.length > 0 && (
-                <div className="flex justify-between">
-                  <span>Add-ons ({selectedAddons.length})</span>
-                  <span>+₹{addonTotal.toLocaleString()}</span>
-                </div>
-              )}
               {discount > 0 && (
                 <div className="flex justify-between text-emerald-600 font-semibold">
                   <span>Discount (LAKEORA10)</span>
@@ -360,7 +300,7 @@ export function BookingView({
                 <span>₹{finalTotal.toLocaleString()}</span>
               </div>
               <div className="flex justify-between text-emerald-600 font-bold text-lg mt-3 pt-3 border-t-2 border-emerald-200">
-                <span>✓ Pay Full Amount Now</span>
+                <span>✓ Pay Full Amount</span>
                 <span>₹{finalTotal.toLocaleString()}</span>
               </div>
             </div>

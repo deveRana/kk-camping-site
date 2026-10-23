@@ -17,7 +17,7 @@ const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
   apiVersion: '2024-01-01',
-  token: process.env.SANITY_API_TOKEN!,
+  token: process.env.SANITY_API_WRITE_TOKEN!,
   useCdn: false,
 });
 
@@ -358,8 +358,8 @@ async function main() {
   console.log('🚀 Starting gallery upload to Sanity...\n');
 
   // Check if Sanity credentials are set
-  if (!process.env.SANITY_API_TOKEN) {
-    console.error('❌ Error: SANITY_API_TOKEN not set in environment variables');
+  if (!process.env.SANITY_API_WRITE_TOKEN) {
+    console.error('❌ Error: SANITY_API_WRITE_TOKEN not set in environment variables');
     process.exit(1);
   }
 
