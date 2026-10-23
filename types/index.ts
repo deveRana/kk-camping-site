@@ -189,9 +189,8 @@ export interface CampsiteMasterInfo {
   tagline: string;
   website?: string;
   contactNumbers: string[];
-  advancePaymentPercentage: number;
   paymentMethods: string[];
-  paymentUPI: string;
+  paymentGateway: string;
   location: {
     address: string;
     landmark: string;

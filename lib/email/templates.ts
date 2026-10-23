@@ -245,7 +245,7 @@ export function generateGuestConfirmationEmail(booking: BookingDetails): string 
       </div>
 
       <p style="color: #374151; font-size: 15px; line-height: 1.6;">
-        We're excited to host you at Lakeora! Your booking has been confirmed and we've received your advance payment.
+        We're excited to host you at Lakeora! Your booking has been confirmed and payment received successfully.
         Get ready for an unforgettable experience at Pawna Lake.
       </p>
 

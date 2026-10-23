@@ -107,9 +107,8 @@ export interface SiteSettings {
   coordinates: { lat: number; lng: number };
   checkInTime?: string;
   checkOutTime?: string;
-  advancePaymentPercentage: number;
-  paymentUPI?: string;
   paymentMethods: string[];
+  paymentGateway?: string;
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -125,9 +124,8 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     coordinates: { lat: s?.latitude ?? 18.6825, lng: s?.longitude ?? 73.4912 },
     checkInTime: s?.checkInTime,
     checkOutTime: s?.checkOutTime,
-    advancePaymentPercentage: s?.advancePaymentPercentage ?? 50,
-    paymentUPI: s?.paymentUPI,
-    paymentMethods: s?.paymentMethods ?? [],
+    paymentMethods: s?.paymentMethods ?? ['UPI', 'Credit Card', 'Debit Card', 'Net Banking'],
+    paymentGateway: s?.paymentGateway ?? 'Razorpay',
   };
 }
 
