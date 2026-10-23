@@ -90,16 +90,9 @@ export default async function HomePage() {
               Choose from luxury AC dome tents, pine cottages, and waterfront camping canvas.
             </p>
           </div>
-          <Link
-            href="/properties"
-            className="text-sm font-semibold text-forest hover:text-forest-dark flex items-center gap-1 group"
-          >
-            Explore all 25+ stays
-            <span className="transition-transform group-hover:translate-x-1">→</span>
-          </Link>
         </div>
 
-        <PropertyGrid properties={featuredProperties} layout="wide" />
+        <PropertyGrid properties={featuredProperties.slice(0, 2)} layout="wide" />
       </section>
 
 
