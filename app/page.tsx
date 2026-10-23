@@ -92,7 +92,53 @@ export default async function HomePage() {
           </div>
         </div>
 
-        <PropertyGrid properties={featuredProperties.slice(0, 2)} layout="wide" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {featuredProperties.slice(0, 4).map((property) => (
+            <Link
+              key={property.id}
+              href={`/properties/${property.slug}`}
+              className="group bg-white rounded-2xl border border-mist overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+            >
+              <div className="relative h-64 overflow-hidden">
+                <img
+                  src={property.coverImage}
+                  alt={property.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                {property.isPopular && (
+                  <span className="absolute top-4 left-4 bg-forest text-white text-xs font-bold px-3 py-1 rounded-full">
+                    Popular
+                  </span>
+                )}
+              </div>
+              <div className="p-6">
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex-1">
+                    <h3 className="font-display text-xl font-semibold text-forest-deep group-hover:text-forest transition">
+                      {property.title}
+                    </h3>
+                    <p className="text-xs text-forest-deep/60 mt-1">{property.tagline}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-forest-deep/70 mb-3">
+                  <span>{property.capacity}</span>
+                  <span>•</span>
+                  <span>{property.category}</span>
+                </div>
+                <div className="flex items-center justify-between pt-3 border-t border-mist">
+                  <div>
+                    <span className="text-2xl font-bold text-forest">₹{property.price.toLocaleString()}</span>
+                    <span className="text-xs text-forest-deep/60 ml-1">/ person</span>
+                  </div>
+                  <span className="text-forest font-semibold text-sm group-hover:gap-2 flex items-center gap-1 transition-all">
+                    Book Now
+                    <span className="transition-transform group-hover:translate-x-1">→</span>
+                  </span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </section>
 
 
