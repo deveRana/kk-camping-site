@@ -376,7 +376,7 @@ export default async function HomePage() {
           <div className="hidden md:block absolute top-9 left-[16%] right-[16%] border-t-2 border-dashed border-sage" />
           {[
             { n: '1', t: 'Choose your stay', d: 'Pick a tent, dome or cottage that fits your group.' },
-            { n: '2', t: 'Pay 50% advance', d: 'Secure your dates by UPI — Google Pay, Paytm or PhonePe.' },
+            { n: '2', t: 'Complete Payment', d: 'Secure payment via Razorpay — UPI, Cards, Net Banking.' },
             { n: '3', t: 'Arrive & unwind', d: 'Check in at 4 PM. Tea, music and sunset are waiting.' },
           ].map((st) => (
             <div key={st.n} className="relative text-center">
@@ -405,7 +405,7 @@ export default async function HomePage() {
               Your lakeside escape is <span className="italic text-sage">one tap away</span>
             </h2>
             <p className="text-white/85 max-w-xl mx-auto mb-8">
-              Pick your dates, choose your tent or cottage and secure it with just 50% advance.
+              Pick your dates, choose your tent or cottage and confirm with instant booking.
               Instant confirmation, zero hassle.
             </p>
             <div className="flex flex-wrap justify-center gap-3">

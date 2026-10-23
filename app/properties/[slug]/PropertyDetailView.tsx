@@ -220,10 +220,10 @@ export function PropertyDetailView({
               <div>
                 <p className="eyebrow text-sage mb-2">Good to know</p>
                 <p className="font-display text-2xl">
-                  Confirm with just {settings.advancePaymentPercentage}% advance.
+                  Easy booking with instant confirmation
                 </p>
                 <p className="text-sm text-white/70 mt-1">
-                  Pay the rest at check-in. Free cancellation up to 48 hours before arrival.
+                  Secure payment via Razorpay. Get confirmation email instantly after booking.
                 </p>
               </div>
               {settings.googleMapsUrl && (
@@ -286,20 +286,11 @@ export function PropertyDetailView({
                   </Button>
                 </Link>
 
-                {whatsappHref && (
-                  <a
-                    href={whatsappHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full text-center border border-forest/30 text-forest hover:bg-forest hover:text-white font-semibold text-sm py-3 rounded-xl transition"
-                  >
-                    Ask on WhatsApp
-                  </a>
-                )}
-
-                <p className="text-[11px] text-center text-forest-deep/60">
-                  Only {settings.advancePaymentPercentage}% advance · Free cancellation up to 48 hours before check-in
-                </p>
+                <div className="bg-gradient-to-br from-forest/5 to-sage/5 rounded-xl p-4 border border-forest/20">
+                  <p className="text-xs text-forest-deep/80 text-center leading-relaxed">
+                    🔒 Secure payment via Razorpay • Instant confirmation email
+                  </p>
+                </div>
               </div>
             </div>
           </aside>

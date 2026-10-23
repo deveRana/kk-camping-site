@@ -36,6 +36,42 @@ export function BookingView({
   const totalBeforeDiscount = basePrice;
   const finalTotal = Math.max(0, totalBeforeDiscount - discount);
 
+  const validateStep1 = () => {
+    if (!formData.fullName.trim()) {
+      showToast({
+        type: 'error',
+        message: 'Please enter your full name.',
+      });
+      return false;
+    }
+
+    if (!formData.email.trim() || !formData.email.includes('@')) {
+      showToast({
+        type: 'error',
+        message: 'Please enter a valid email address.',
+      });
+      return false;
+    }
+
+    if (!formData.phone.trim() || formData.phone.replace(/\D/g, '').length < 10) {
+      showToast({
+        type: 'error',
+        message: 'Please enter a valid 10-digit phone number.',
+      });
+      return false;
+    }
+
+    if (numberOfGuests < 1) {
+      showToast({
+        type: 'error',
+        message: 'Number of guests must be at least 1.',
+      });
+      return false;
+    }
+
+    return true;
+  };
+
   const handleApplyCoupon = (e: React.FormEvent) => {
     e.preventDefault();
     if (coupon.toUpperCase() === 'LAKEORA10') {
@@ -55,10 +91,36 @@ export function BookingView({
 
   const handleSubmitBooking = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.fullName || !formData.phone || !formData.email) {
+
+    // Validate required fields
+    if (!formData.fullName.trim()) {
       showToast({
         type: 'error',
-        message: 'Please complete all required contact fields.',
+        message: 'Please enter your full name.',
+      });
+      return;
+    }
+
+    if (!formData.email.trim() || !formData.email.includes('@')) {
+      showToast({
+        type: 'error',
+        message: 'Please enter a valid email address.',
+      });
+      return;
+    }
+
+    if (!formData.phone.trim() || formData.phone.replace(/\D/g, '').length < 10) {
+      showToast({
+        type: 'error',
+        message: 'Please enter a valid 10-digit phone number.',
+      });
+      return;
+    }
+
+    if (numberOfGuests < 1) {
+      showToast({
+        type: 'error',
+        message: 'Please enter number of guests (minimum 1).',
       });
       return;
     }
@@ -201,7 +263,15 @@ export function BookingView({
               </div>
 
               <div className="flex justify-end pt-4">
-                <Button onClick={() => setStep(2)} variant="primary" size="md">
+                <Button
+                  onClick={() => {
+                    if (validateStep1()) {
+                      setStep(2);
+                    }
+                  }}
+                  variant="primary"
+                  size="md"
+                >
                   Proceed to Payment →
                 </Button>
               </div>
