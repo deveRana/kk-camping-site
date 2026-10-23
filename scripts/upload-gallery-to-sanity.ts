@@ -1,12 +1,16 @@
 /**
  * Script to upload gallery images from public/gallery-images to Sanity CMS
- * Run with: npx tsx scripts/upload-gallery-to-sanity.ts
+ * Run with: npm run upload-gallery
  */
+
+// Load environment variables from .env.local
+import { config } from 'dotenv';
+import { resolve } from 'path';
+config({ path: resolve(process.cwd(), '.env.local') });
 
 import { createClient } from '@sanity/client';
 import { createReadStream } from 'fs';
 import { readdir } from 'fs/promises';
-import { resolve } from 'path';
 
 // Initialize Sanity client with write permissions
 const client = createClient({
