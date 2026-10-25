@@ -176,9 +176,9 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             }
           }}
         >
-          <div className="w-full max-w-sm sm:w-80 bg-white border border-mist rounded-2xl shadow-2xl overflow-hidden animate-scaleUp my-auto">
-            {/* Calendar Content - Scrollable on mobile */}
-            <div className="max-h-[70vh] overflow-y-auto overscroll-contain p-4 sm:max-h-none sm:overflow-visible">
+          <div className="w-full max-w-sm sm:w-80 bg-white border border-mist rounded-2xl shadow-2xl animate-scaleUp my-auto flex flex-col max-h-[85vh]">
+            {/* Calendar Content - Always scrollable when needed */}
+            <div className="overflow-y-auto overscroll-contain p-4 flex-1">
               {/* Calendar Header */}
               <div className="flex items-center justify-between pb-3 mb-3 border-b border-mist sticky top-0 bg-white z-10">
                 <button
@@ -214,7 +214,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               </div>
 
               {/* Day Grid */}
-              <div className="grid grid-cols-7 gap-1.5 text-center pb-2">
+              <div className="grid grid-cols-7 gap-1.5 text-center pb-4">
                 {Array.from({ length: firstDayOfWeek }).map((_, idx) => (
                   <div key={`empty-${idx}`} />
                 ))}
@@ -248,7 +248,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               {/* Close button for mobile */}
               <button
                 onClick={() => setIsOpen(false)}
-                className="sm:hidden w-full mt-2 py-3 bg-forest/5 text-forest font-semibold rounded-xl hover:bg-forest/10 transition"
+                className="sm:hidden w-full mt-4 py-3 bg-forest/5 text-forest font-semibold rounded-xl hover:bg-forest/10 transition touch-manipulation"
               >
                 Close
               </button>
