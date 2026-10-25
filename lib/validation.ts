@@ -32,6 +32,36 @@ export function validateReferenceId(refId: string): boolean {
   return refIdRegex.test(refId);
 }
 
+export function validateDate(dateString: string): boolean {
+  // Validates YYYY-MM-DD format and checks if it's a valid date
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  if (!dateRegex.test(dateString)) return false;
+
+  const date = new Date(dateString);
+  return !isNaN(date.getTime());
+}
+
+export function validateDateNotPast(dateString: string): boolean {
+  // Check if date is today or in the future
+  if (!validateDate(dateString)) return false;
+
+  const date = new Date(dateString);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Reset time to compare only dates
+
+  return date >= today;
+}
+
+export function validateCheckInCheckOut(checkIn: string, checkOut: string): boolean {
+  // Validates that check-out is after check-in
+  if (!validateDate(checkIn) || !validateDate(checkOut)) return false;
+
+  const checkInDate = new Date(checkIn);
+  const checkOutDate = new Date(checkOut);
+
+  return checkOutDate > checkInDate;
+}
+
 export interface ValidationResult {
   isValid: boolean;
   errors: string[];
@@ -77,9 +107,34 @@ export function validateBookingData(data: any): ValidationResult {
   }
 
   // Validate payment method
-  const validPaymentMethods = ['upi', 'card', 'netbanking', 'cash'];
+  const validPaymentMethods = ['upi', 'card', 'netbanking', 'cash', 'razorpay'];
   if (!validPaymentMethods.includes(data.paymentMethod)) {
     errors.push('Invalid payment method');
+  }
+
+  // Validate check-in date (if provided)
+  if (data.checkInDate) {
+    if (!validateDate(data.checkInDate)) {
+      errors.push('Invalid check-in date format (use YYYY-MM-DD)');
+    } else if (!validateDateNotPast(data.checkInDate)) {
+      errors.push('Check-in date cannot be in the past');
+    }
+  }
+
+  // Validate check-out date (if provided)
+  if (data.checkOutDate) {
+    if (!validateDate(data.checkOutDate)) {
+      errors.push('Invalid check-out date format (use YYYY-MM-DD)');
+    } else if (!validateDateNotPast(data.checkOutDate)) {
+      errors.push('Check-out date cannot be in the past');
+    }
+  }
+
+  // Validate check-in and check-out relationship
+  if (data.checkInDate && data.checkOutDate) {
+    if (!validateCheckInCheckOut(data.checkInDate, data.checkOutDate)) {
+      errors.push('Check-out date must be after check-in date');
+    }
   }
 
   return {

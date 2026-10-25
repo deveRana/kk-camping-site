@@ -48,6 +48,15 @@ export function PropertyDetailView({
   const [checkOut, setCheckOut] = useState('');
   const [guests, setGuests] = useState('2');
 
+  // Auto-clear checkout if it becomes invalid when check-in changes
+  const handleCheckInChange = (newCheckIn: string) => {
+    setCheckIn(newCheckIn);
+    // If checkout is before or same as new check-in, clear it
+    if (checkOut && newCheckIn && checkOut <= newCheckIn) {
+      setCheckOut('');
+    }
+  };
+
   const { openModal } = useModal();
   const { showToast } = useToast();
 
@@ -255,12 +264,18 @@ export function PropertyDetailView({
 
               <div className="p-6 space-y-5">
                 <div className="space-y-3">
-                  <DatePicker label="Check-in Date *" placeholder="Select Check-in" value={checkIn} onChange={setCheckIn} />
+                  <DatePicker
+                    label="Check-in Date *"
+                    placeholder="Select Check-in"
+                    value={checkIn}
+                    onChange={handleCheckInChange}
+                    minDate={new Date().toISOString().split('T')[0]} // Prevent past dates
+                  />
                   <DatePicker
                     label="Check-out Date *"
                     placeholder="Select Check-out"
                     value={checkOut}
-                    minDate={checkIn}
+                    minDate={checkIn || new Date().toISOString().split('T')[0]} // Minimum is check-in or today
                     onChange={setCheckOut}
                   />
                   <div>
