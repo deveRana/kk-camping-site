@@ -4,6 +4,7 @@ import { structureTool } from 'sanity/structure'
 // import { visionTool } from '@sanity/vision'
 
 // Import schemas
+import property from './sanity/property'
 import booking from './sanity/booking'
 import payment from './sanity/payment'
 import galleryItem from './sanity/galleryItem'
@@ -20,12 +21,14 @@ export default defineConfig({
 
   schema: {
     types: [
-      // Existing schemas (assumed to be in Sanity already)
-      // property, blogPost, testimonial, faq, siteSettings
+      // Property packages and accommodations
+      property,
 
-      // New schemas from local folder
+      // Bookings and payments
       booking,
       payment,
+
+      // Content
       galleryItem,
       cafeMenuItem,
     ],
