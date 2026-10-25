@@ -16,7 +16,7 @@ const MONTH_NAMES = [
   'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
-const WEEKDAYS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 export const DatePicker: React.FC<DatePickerProps> = ({
   label,
@@ -28,6 +28,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const calendarRef = useRef<HTMLDivElement>(null);
 
   const parsedDate = value ? new Date(value) : null;
   const initialViewDate = parsedDate || new Date();
@@ -45,18 +46,9 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Lock body scroll when picker is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      return () => {
-        document.body.style.overflow = 'unset';
-      };
-    }
-  }, [isOpen]);
-
   const handlePrevMonth = (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     if (currentMonth === 0) {
       setCurrentMonth(11);
       setCurrentYear(currentYear - 1);
@@ -67,6 +59,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 
   const handleNextMonth = (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     if (currentMonth === 11) {
       setCurrentMonth(0);
       setCurrentYear(currentYear + 1);
@@ -120,7 +113,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   };
 
   return (
-    <div ref={containerRef} className={`relative w-full ${isOpen ? 'z-40' : 'z-10'} ${className}`}>
+    <div ref={containerRef} className={`relative w-full ${className}`}>
       {label && (
         <label className="block text-xs font-semibold text-forest-deep uppercase tracking-wider mb-1.5">
           {label}
@@ -151,107 +144,92 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         </svg>
       </button>
 
-      {/* Calendar Modal - Bottom Sheet Style on Mobile */}
+      {/* Calendar Dropdown - Simple Inline Below Input */}
       {isOpen && (
-        <>
-          {/* Backdrop */}
-          <div
-            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
-            onClick={() => setIsOpen(false)}
-          />
+        <div
+          ref={calendarRef}
+          className="absolute top-full left-0 right-0 mt-2 bg-white border border-mist rounded-2xl shadow-2xl z-50 max-w-sm mx-auto"
+          style={{ maxHeight: '400px' }}
+        >
+          <div className="p-4">
+            {/* Calendar Header */}
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-mist">
+              <button
+                type="button"
+                onClick={handlePrevMonth}
+                className="p-2 hover:bg-mist/50 rounded-lg transition"
+              >
+                <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <span className="font-display font-semibold text-forest-deep text-base">
+                {MONTH_NAMES[currentMonth]} {currentYear}
+              </span>
+              <button
+                type="button"
+                onClick={handleNextMonth}
+                className="p-2 hover:bg-mist/50 rounded-lg transition"
+              >
+                <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
 
-          {/* Calendar Container - Bottom Sheet on Mobile, Dropdown on Desktop */}
-          <div className="fixed bottom-0 left-0 right-0 z-50 sm:absolute sm:bottom-auto sm:top-full sm:left-0 sm:right-auto sm:mt-2">
-            <div className="w-full sm:w-80 bg-white sm:border border-mist sm:rounded-2xl rounded-t-3xl sm:rounded-t-2xl shadow-2xl animate-slideUp sm:animate-scaleUp">
-              {/* Drag Handle (Mobile Only) */}
-              <div className="sm:hidden flex justify-center pt-3 pb-2">
-                <div className="w-12 h-1 bg-gray-300 rounded-full" />
-              </div>
-
-              {/* Scrollable Calendar Content */}
-              <div className="max-h-[80vh] overflow-y-auto overscroll-contain">
-                <div className="p-4 pb-safe">
-                  {/* Calendar Header - Sticky */}
-                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-mist sticky top-0 bg-white z-10">
-                    <button
-                      onClick={handlePrevMonth}
-                      type="button"
-                      className="p-2 text-forest-deep hover:bg-mist/50 rounded-lg transition touch-manipulation"
-                      aria-label="Previous Month"
-                    >
-                      <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                      </svg>
-                    </button>
-                    <span className="font-display font-semibold text-forest-deep text-base">
-                      {MONTH_NAMES[currentMonth]} {currentYear}
-                    </span>
-                    <button
-                      onClick={handleNextMonth}
-                      type="button"
-                      className="p-2 text-forest-deep hover:bg-mist/50 rounded-lg transition touch-manipulation"
-                      aria-label="Next Month"
-                    >
-                      <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
-                  </div>
-
-                  {/* Weekday Names */}
-                  <div className="grid grid-cols-7 text-center mb-2">
-                    {WEEKDAYS.map((wd) => (
-                      <span key={wd} className="text-xs font-bold text-forest-deep/60 py-2">
-                        {wd}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Day Grid - All dates visible */}
-                  <div className="grid grid-cols-7 gap-2 text-center pb-4">
-                    {Array.from({ length: firstDayOfWeek }).map((_, idx) => (
-                      <div key={`empty-${idx}`} />
-                    ))}
-
-                    {Array.from({ length: daysInMonth }).map((_, idx) => {
-                      const day = idx + 1;
-                      const selected = isSelected(day);
-                      const today = isToday(day);
-                      const disabled = isDisabled(day);
-
-                      return (
-                        <button
-                          key={day}
-                          type="button"
-                          disabled={disabled}
-                          onClick={() => handleSelectDay(day)}
-                          className={`h-11 rounded-xl text-sm font-semibold flex items-center justify-center transition-all touch-manipulation ${
-                            selected
-                              ? 'bg-forest text-white shadow-lg scale-105'
-                              : today
-                              ? 'bg-sage/20 text-forest font-bold border-2 border-sage'
-                              : 'text-forest-deep hover:bg-mist/60 active:bg-mist'
-                          } ${disabled ? 'opacity-30 cursor-not-allowed hover:bg-transparent line-through' : ''}`}
-                        >
-                          {day}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {/* Close button */}
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    type="button"
-                    className="w-full mt-4 mb-2 py-3.5 bg-forest text-white font-semibold rounded-xl hover:bg-forest/90 transition touch-manipulation shadow-md"
-                  >
-                    Close
-                  </button>
+            {/* Weekday Names */}
+            <div className="grid grid-cols-7 gap-1 mb-2">
+              {WEEKDAYS.map((wd) => (
+                <div key={wd} className="text-xs font-bold text-forest-deep/60 text-center py-1">
+                  {wd}
                 </div>
+              ))}
+            </div>
+
+            {/* Day Grid - Scrollable */}
+            <div className="overflow-y-auto" style={{ maxHeight: '260px' }}>
+              <div className="grid grid-cols-7 gap-1">
+                {Array.from({ length: firstDayOfWeek }).map((_, idx) => (
+                  <div key={`empty-${idx}`} className="h-10" />
+                ))}
+
+                {Array.from({ length: daysInMonth }).map((_, idx) => {
+                  const day = idx + 1;
+                  const selected = isSelected(day);
+                  const today = isToday(day);
+                  const disabled = isDisabled(day);
+
+                  return (
+                    <button
+                      key={day}
+                      type="button"
+                      disabled={disabled}
+                      onClick={() => handleSelectDay(day)}
+                      className={`h-10 rounded-lg text-sm font-semibold flex items-center justify-center transition ${
+                        selected
+                          ? 'bg-forest text-white shadow-md'
+                          : today
+                          ? 'bg-sage/20 text-forest font-bold border-2 border-sage'
+                          : 'text-forest-deep hover:bg-mist/60'
+                      } ${disabled ? 'opacity-30 cursor-not-allowed' : ''}`}
+                    >
+                      {day}
+                    </button>
+                  );
+                })}
               </div>
             </div>
+
+            {/* Close Button - Mobile Only */}
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              className="w-full mt-4 py-2.5 bg-forest text-white font-semibold rounded-xl hover:bg-forest/90 transition md:hidden"
+            >
+              Close
+            </button>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
