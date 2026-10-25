@@ -129,7 +129,7 @@ export async function POST(request: NextRequest) {
       customerPhone: booking.guestPhone,
 
       // Payment details
-      amount: payment.amount / 100, // Convert paise to INR
+      amount: Number(payment.amount) / 100, // Convert paise to INR
       paymentType: 'full',
       paymentMethod: payment.method || 'razorpay',
       paymentStatus: 'success',
@@ -195,7 +195,7 @@ export async function POST(request: NextRequest) {
       bookingId: booking._id,
       paymentId: paymentRecord._id,
       transactionId: paymentRecord.transactionId,
-      amount: payment.amount / 100,
+      amount: Number(payment.amount) / 100,
       message: 'Payment verified successfully',
     });
   } catch (error) {
