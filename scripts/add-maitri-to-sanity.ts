@@ -32,8 +32,13 @@ const maitriPackage = {
   capacity: '2/3/4 Guests sharing',
   rating: 4.8,
   reviewCount: 45,
-  location: 'Maitri Pawna Lake, Lonavala',
+  location: 'Pawna Tent Camp by Maitri, Lonavala',
   distance: '2 hours from Mumbai · 1.5 hours from Pune',
+  googleMapsUrl: 'https://www.google.com/maps/place/Pawna+Tent+Camp+by+Maitri+Pawna+Lake+Camping+for+Couples+%26+Family+Lonavala+%7C+Tent+%26+Cottage+Camping/@18.631163,73.495172,17z/data=!4m2!3m1!1s0x3bc2a7ea40fa93d5:0xd347c333111ba7d8',
+  coordinates: {
+    lat: 18.631163,
+    lng: 73.495172
+  },
   description: 'Welcome to Maitri Camping at Pawna Lake! Perfect for couples and families looking for an affordable lakeside getaway. Enjoy waterproof tents, western toilet facilities, free parking, and unlimited entertainment with sports activities like badminton, cricket, volleyball, and archery. Complete your experience with delicious BBQ, unlimited dinner buffet, and morning breakfast.',
   features: [
     'Western Toilet Facility',

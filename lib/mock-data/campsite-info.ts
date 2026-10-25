@@ -368,7 +368,15 @@ export const PAWNA_CAMPSITE_MASTER_DATA: CampsiteMasterInfo = {
         'Morning Breakfast: Poha & Tea',
         'Check-in: 4:00 PM | Check-out: 11:00 AM',
         'Contact: +91 95271 43112'
-      ]
+      ],
+      // Maitri Camping specific location data
+      googleMapsUrl: 'https://www.google.com/maps/place/Pawna+Tent+Camp+by+Maitri+Pawna+Lake+Camping+for+Couples+%26+Family+Lonavala+%7C+Tent+%26+Cottage+Camping/@18.631163,73.495172,17z/data=!4m2!3m1!1s0x3bc2a7ea40fa93d5:0xd347c333111ba7d8',
+      mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3780.7310443055794!2d73.49517209999999!3d18.631163200000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2a7ea40fa93d5%3A0xd347c333111ba7d8!2sPawna%20Tent%20Camp%20by%20Maitri%20Pawna%20Lake%20Camping%20for%20Couples%20%26%20Family%20Lonavala%20%7C%20Tent%20%26%20Cottage%20Camping!5e0!3m2!1sen!2sin!4v1792917602959!5m2!1sen!2sin',
+      locationName: 'Pawna Tent Camp by Maitri - Lonavala',
+      coordinates: {
+        lat: 18.631163,
+        lng: 73.495172
+      }
     }
   ]
 };
