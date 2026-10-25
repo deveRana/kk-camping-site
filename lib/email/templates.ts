@@ -417,14 +417,14 @@ export function generateGuestConfirmationEmail(booking: BookingDetails): string 
           <span>₹${booking.totalAmount.toLocaleString()}</span>
         </div>
         <div class="invoice-row paid">
-          <span>✓ Payment Received (${booking.paymentMethod.toUpperCase()})</span>
+          <span>Payment Received (${booking.paymentMethod.toUpperCase()})</span>
           <span>₹${booking.totalAmount.toLocaleString()}</span>
         </div>
       </div>
 
       <!-- Payment Confirmation -->
       <div class="highlight-box success">
-        <div class="highlight-title">✓ Payment Complete</div>
+        <div class="highlight-title">Payment Complete</div>
         <div class="highlight-text">
           Your payment of <strong>₹${booking.totalAmount.toLocaleString()}</strong> has been received successfully.
           No additional payment required at check-in.
@@ -457,7 +457,7 @@ export function generateGuestConfirmationEmail(booking: BookingDetails): string 
 
       <center>
         <a href="https://maps.app.goo.gl/c6JVSxCKqkyfMrR47" class="action-button">
-          📍 Get Directions to Lakeora
+          Get Directions to Lakeora
         </a>
       </center>
     </div>
@@ -503,7 +503,7 @@ export function generateAdminNotificationEmail(booking: BookingDetails): string 
     <div class="content">
       <!-- Alert Badge -->
       <div class="success-badge" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
-        <div class="success-icon" style="color: #3b82f6;">📅</div>
+        <div class="success-icon" style="color: #3b82f6;">!</div>
         <h1 class="success-title">New Booking Received</h1>
         <p class="success-text">
           A new booking has been confirmed. Please review and prepare.
@@ -525,7 +525,7 @@ export function generateAdminNotificationEmail(booking: BookingDetails): string 
       </p>
 
       <!-- Guest Information -->
-      <h2 class="section-title" style="color: #1e40af; border-color: #bfdbfe;">👤 Guest Information</h2>
+      <h2 class="section-title" style="color: #1e40af; border-color: #bfdbfe;">Guest Information</h2>
       <div class="info-card">
         <div class="info-row">
           <span class="info-label">Name</span>
@@ -552,7 +552,7 @@ export function generateAdminNotificationEmail(booking: BookingDetails): string 
       </div>
 
       <!-- Property & Stay Details -->
-      <h2 class="section-title" style="color: #1e40af; border-color: #bfdbfe;">🏕️ Property & Stay Details</h2>
+      <h2 class="section-title" style="color: #1e40af; border-color: #bfdbfe;">Property & Stay Details</h2>
       <div class="info-card">
         <div class="info-row">
           <span class="info-label">Property</span>
@@ -578,14 +578,14 @@ export function generateAdminNotificationEmail(booking: BookingDetails): string 
 
       ${booking.addons.length > 0 ? `
       <!-- Add-ons -->
-      <h2 class="section-title" style="color: #1e40af; border-color: #bfdbfe;">➕ Selected Add-ons</h2>
+      <h2 class="section-title" style="color: #1e40af; border-color: #bfdbfe;">Selected Add-ons</h2>
       <div class="addon-list">
         ${booking.addons.map(addon => `<div class="addon-item"><strong>${addon}</strong></div>`).join('')}
       </div>
       ` : ''}
 
       <!-- Payment Summary -->
-      <h2 class="section-title" style="color: #1e40af; border-color: #bfdbfe;">💰 Payment Summary</h2>
+      <h2 class="section-title" style="color: #1e40af; border-color: #bfdbfe;">Payment Summary</h2>
       <div class="invoice-table">
         <div class="invoice-row">
           <span>Base Price</span>
@@ -608,26 +608,26 @@ export function generateAdminNotificationEmail(booking: BookingDetails): string 
           <span>₹${booking.totalAmount.toLocaleString()}</span>
         </div>
         <div class="invoice-row paid">
-          <span>✓ Full Payment Received (${booking.paymentMethod.toUpperCase()})</span>
+          <span>Full Payment Received (${booking.paymentMethod.toUpperCase()})</span>
           <span>₹${booking.totalAmount.toLocaleString()}</span>
         </div>
       </div>
 
       <!-- Action Required -->
       <div class="highlight-box">
-        <div class="highlight-title">⚠️ Action Required</div>
+        <div class="highlight-title">Action Required</div>
         <div class="highlight-text">
           <strong>Checklist:</strong><br>
-          ✓ Check availability and prepare ${booking.propertyName}<br>
-          ✓ Contact guest: <a href="tel:${booking.guestPhone}" style="color: #92400e; font-weight: 700;">${booking.guestPhone}</a><br>
-          ✓ Arrange add-ons: ${booking.addons.length > 0 ? booking.addons.join(', ') : 'None'}<br>
-          ✓ Full payment received: ₹${booking.totalAmount.toLocaleString()} ✅
+          • Check availability and prepare ${booking.propertyName}<br>
+          • Contact guest: <a href="tel:${booking.guestPhone}" style="color: #92400e; font-weight: 700;">${booking.guestPhone}</a><br>
+          • Arrange add-ons: ${booking.addons.length > 0 ? booking.addons.join(', ') : 'None'}<br>
+          • Full payment received: ₹${booking.totalAmount.toLocaleString()}
         </div>
       </div>
 
       <center>
         <a href="https://lakeora.sanity.studio" class="action-button" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
-          📊 Open in Sanity Studio
+          Open in Sanity Studio
         </a>
       </center>
     </div>
