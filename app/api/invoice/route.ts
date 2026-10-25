@@ -439,7 +439,7 @@ export async function GET(request: Request) {
             <p>Maharashtra, India</p>
             <p>Phone: +91 74997 57607</p>
             <p>Email: booking@lakeora.com</p>
-            <p>Website: pawnatentcamp.com</p>
+            <p>Website: lakeorastay.com</p>
           </div>
           <div class="footer-section">
             <h4>Terms & Conditions</h4>

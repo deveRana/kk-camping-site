@@ -4,7 +4,7 @@ export const PAWNA_CAMPSITE_MASTER_DATA: CampsiteMasterInfo = {
   name: 'Lakeora Cafe & Camping',
   brandName: 'Lakeora',
   tagline: 'Lakeside Camping & Glamping at Pawna Lake with Live Music & Water Views',
-  website: 'https://pawnatentcamp.com/',
+  website: 'https://lakeorastay.com/',
   contactNumbers: ['+91 74997 57607'],
   paymentMethods: ['UPI', 'Credit Card', 'Debit Card', 'Net Banking'],
   paymentGateway: 'Razorpay',

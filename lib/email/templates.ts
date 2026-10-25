@@ -299,7 +299,7 @@ export function generateGuestConfirmationEmail(booking: BookingDetails): string 
 
       <!-- Action Buttons -->
       <div class="button-container">
-        <a href="https://pawnatentcamp.com/api/invoice?ref=${booking.referenceId}" class="button-primary">
+        <a href="https://lakeorastay.com/api/invoice?ref=${booking.referenceId}" class="button-primary">
           Download Invoice
         </a>
         <br />
@@ -333,7 +333,7 @@ export function generateGuestConfirmationEmail(booking: BookingDetails): string 
         Pawna Lake · Near Lonavala · Maharashtra
       </p>
       <p class="footer-text" style="margin-top: 12px;">
-        <a href="https://pawnatentcamp.com" class="footer-link">Visit Website</a>
+        <a href="https://lakeorastay.com" class="footer-link">Visit Website</a>
       </p>
     </div>
   </div>

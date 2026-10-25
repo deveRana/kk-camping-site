@@ -188,7 +188,7 @@ export default async function InvoicePage({
                 <h4 className="font-bold text-gray-900 mb-3">Contact Information</h4>
                 <p className="text-sm text-gray-600 mb-1">Phone: +91 74997 57607</p>
                 <p className="text-sm text-gray-600 mb-1">Email: booking@lakeora.com</p>
-                <p className="text-sm text-gray-600">Website: pawnatentcamp.com</p>
+                <p className="text-sm text-gray-600">Website: lakeorastay.com</p>
               </div>
               <div>
                 <h4 className="font-bold text-gray-900 mb-3">Terms & Conditions</h4>
