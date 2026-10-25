@@ -143,71 +143,84 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 
       {/* Custom Calendar Popover Menu */}
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 z-50 w-72 bg-white border border-mist rounded-2xl shadow-2xl p-4 animate-scaleUp">
-          {/* Calendar Header */}
-          <div className="flex items-center justify-between pb-3 mb-3 border-b border-mist">
-            <button
-              onClick={handlePrevMonth}
-              className="p-1 text-forest-deep hover:bg-mist/50 rounded-lg transition"
-              aria-label="Previous Month"
-            >
-              <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <span className="font-display font-semibold text-forest-deep text-sm">
-              {MONTH_NAMES[currentMonth]} {currentYear}
-            </span>
-            <button
-              onClick={handleNextMonth}
-              className="p-1 text-forest-deep hover:bg-mist/50 rounded-lg transition"
-              aria-label="Next Month"
-            >
-              <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Weekday Names */}
-          <div className="grid grid-cols-7 text-center mb-1">
-            {WEEKDAYS.map((wd) => (
-              <span key={wd} className="text-[11px] font-bold text-forest-deep/60 py-1">
-                {wd}
-              </span>
-            ))}
-          </div>
-
-          {/* Day Grid */}
-          <div className="grid grid-cols-7 gap-1 text-center">
-            {Array.from({ length: firstDayOfWeek }).map((_, idx) => (
-              <div key={`empty-${idx}`} />
-            ))}
-
-            {Array.from({ length: daysInMonth }).map((_, idx) => {
-              const day = idx + 1;
-              const selected = isSelected(day);
-              const today = isToday(day);
-              const disabled = isDisabled(day);
-
-              return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/20 backdrop-blur-sm sm:absolute sm:inset-auto sm:top-full sm:left-0 sm:mt-2 sm:p-0 sm:bg-transparent sm:backdrop-blur-none">
+          <div className="w-full max-w-sm sm:w-80 bg-white border border-mist rounded-2xl shadow-2xl overflow-hidden animate-scaleUp">
+            {/* Calendar Content - Scrollable on mobile */}
+            <div className="max-h-[80vh] overflow-y-auto p-4 sm:max-h-none sm:overflow-visible">
+              {/* Calendar Header */}
+              <div className="flex items-center justify-between pb-3 mb-3 border-b border-mist sticky top-0 bg-white z-10">
                 <button
-                  key={day}
-                  type="button"
-                  disabled={disabled}
-                  onClick={() => handleSelectDay(day)}
-                  className={`h-8 rounded-xl text-xs font-semibold flex items-center justify-center transition ${
-                    selected
-                      ? 'bg-forest text-white shadow-md'
-                      : today
-                      ? 'bg-sage/20 text-forest font-bold border border-sage'
-                      : 'text-forest-deep hover:bg-mist/60'
-                  } ${disabled ? 'opacity-30 cursor-not-allowed hover:bg-transparent' : ''}`}
+                  onClick={handlePrevMonth}
+                  className="p-2 text-forest-deep hover:bg-mist/50 rounded-lg transition touch-manipulation"
+                  aria-label="Previous Month"
                 >
-                  {day}
+                  <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                  </svg>
                 </button>
-              );
-            })}
+                <span className="font-display font-semibold text-forest-deep text-base">
+                  {MONTH_NAMES[currentMonth]} {currentYear}
+                </span>
+                <button
+                  onClick={handleNextMonth}
+                  className="p-2 text-forest-deep hover:bg-mist/50 rounded-lg transition touch-manipulation"
+                  aria-label="Next Month"
+                >
+                  <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Weekday Names */}
+              <div className="grid grid-cols-7 text-center mb-2">
+                {WEEKDAYS.map((wd) => (
+                  <span key={wd} className="text-xs font-bold text-forest-deep/60 py-2">
+                    {wd}
+                  </span>
+                ))}
+              </div>
+
+              {/* Day Grid */}
+              <div className="grid grid-cols-7 gap-1.5 text-center pb-2">
+                {Array.from({ length: firstDayOfWeek }).map((_, idx) => (
+                  <div key={`empty-${idx}`} />
+                ))}
+
+                {Array.from({ length: daysInMonth }).map((_, idx) => {
+                  const day = idx + 1;
+                  const selected = isSelected(day);
+                  const today = isToday(day);
+                  const disabled = isDisabled(day);
+
+                  return (
+                    <button
+                      key={day}
+                      type="button"
+                      disabled={disabled}
+                      onClick={() => handleSelectDay(day)}
+                      className={`h-10 sm:h-9 rounded-xl text-sm font-semibold flex items-center justify-center transition touch-manipulation ${
+                        selected
+                          ? 'bg-forest text-white shadow-md scale-105'
+                          : today
+                          ? 'bg-sage/20 text-forest font-bold border-2 border-sage'
+                          : 'text-forest-deep hover:bg-mist/60 active:bg-mist'
+                      } ${disabled ? 'opacity-30 cursor-not-allowed hover:bg-transparent line-through' : ''}`}
+                    >
+                      {day}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Close button for mobile */}
+              <button
+                onClick={() => setIsOpen(false)}
+                className="sm:hidden w-full mt-2 py-3 bg-forest/5 text-forest font-semibold rounded-xl hover:bg-forest/10 transition"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       )}
