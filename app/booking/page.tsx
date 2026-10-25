@@ -5,9 +5,9 @@ import { BookingView } from './BookingView';
 export default async function BookingPage({
   searchParams,
 }: {
-  searchParams: Promise<{ propertyId?: string; guests?: string }>;
+  searchParams: Promise<{ propertyId?: string; guests?: string; checkIn?: string; checkOut?: string }>;
 }) {
-  const { propertyId, guests } = await searchParams;
+  const { propertyId, guests, checkIn, checkOut } = await searchParams;
   const properties = await getProperties();
   const property = properties.find((p) => p.id === propertyId) ?? properties[0];
   if (!property) notFound();
@@ -16,6 +16,8 @@ export default async function BookingPage({
     <BookingView
       property={property}
       guests={guestCount}
+      checkInDate={checkIn}
+      checkOutDate={checkOut}
     />
   );
 }

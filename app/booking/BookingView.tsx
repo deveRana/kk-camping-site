@@ -16,9 +16,13 @@ import {
 export function BookingView({
   property,
   guests: initialGuests,
+  checkInDate,
+  checkOutDate,
 }: {
   property: Property;
   guests: number;
+  checkInDate?: string;
+  checkOutDate?: string;
 }) {
   const router = useRouter();
 
@@ -135,11 +139,6 @@ export function BookingView({
 
     try {
       // Step 1: Create Razorpay order
-      showToast({
-        type: 'success',
-        message: 'Creating payment order...',
-      });
-
       const orderResult = await createRazorpayOrderAPI({
         amount: finalTotal,
         currency: 'INR',
@@ -169,6 +168,8 @@ export function BookingView({
           guestPhone: formData.phone,
           guestCity: formData.city,
           numberOfGuests: numberOfGuests,
+          checkInDate: checkInDate,
+          checkOutDate: checkOutDate,
           addons: [],
           basePrice,
           addonTotal: 0,
@@ -190,11 +191,6 @@ export function BookingView({
       }
 
       // Step 3: Open Razorpay checkout
-      showToast({
-        type: 'success',
-        message: 'Opening payment gateway...',
-      });
-
       await openRazorpayCheckout({
         orderId: orderResult.orderId,
         amount: orderResult.amount || finalTotal * 100,
