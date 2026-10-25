@@ -151,6 +151,14 @@ export interface CampingPackage {
   highlights: string[];
   inclusions: string[];
   category: 'Glamping' | 'Cottage' | 'Dome' | 'Tent Camping';
+  // Optional location-specific fields (for properties at different locations)
+  googleMapsUrl?: string;
+  mapEmbed?: string;
+  locationName?: string;
+  coordinates?: {
+    lat: number;
+    lng: number;
+  };
 }
 
 export interface ScheduleItem {

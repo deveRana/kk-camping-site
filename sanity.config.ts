@@ -1,6 +1,7 @@
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
-import { visionTool } from '@sanity/vision'
+// Note: @sanity/vision is optional - only needed for Sanity Studio development
+// import { visionTool } from '@sanity/vision'
 
 // Import schemas
 import booking from './sanity/booking'
@@ -15,7 +16,7 @@ export default defineConfig({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'roac4c6v',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
 
-  plugins: [structureTool(), visionTool()],
+  plugins: [structureTool()],
 
   schema: {
     types: [
