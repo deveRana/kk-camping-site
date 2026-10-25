@@ -107,6 +107,36 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     return thisD < new Date(minD.getFullYear(), minD.getMonth(), minD.getDate());
   };
 
+  // Calculate dropdown position when opened
+  const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
+
+  useEffect(() => {
+    if (isOpen && containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const dropdownHeight = 450; // Approximate height
+
+      // Position dropdown: if not enough space below, show above
+      if (spaceBelow < dropdownHeight && rect.top > dropdownHeight) {
+        setDropdownStyle({
+          position: 'fixed',
+          top: `${rect.top - dropdownHeight - 8}px`,
+          left: `${rect.left}px`,
+          width: `${rect.width}px`,
+          zIndex: 9999,
+        });
+      } else {
+        setDropdownStyle({
+          position: 'fixed',
+          top: `${rect.bottom + 8}px`,
+          left: `${rect.left}px`,
+          width: `${rect.width}px`,
+          zIndex: 9999,
+        });
+      }
+    }
+  }, [isOpen]);
+
   return (
     <div ref={containerRef} className={`relative w-full ${className}`}>
       {label && (
@@ -139,15 +169,18 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         </svg>
       </button>
 
-      {/* Calendar Dropdown */}
+      {/* Calendar Dropdown - Fixed positioning to escape overflow containers */}
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-forest/20 rounded-xl shadow-xl z-50">
+        <div
+          style={dropdownStyle}
+          className="bg-white border-2 border-forest/20 rounded-xl shadow-2xl"
+        >
           {/* Header - Fixed */}
-          <div className="flex items-center justify-between p-3 border-b-2 border-mist">
+          <div className="flex items-center justify-between p-3 border-b-2 border-mist bg-white rounded-t-xl">
             <button
               type="button"
               onClick={handlePrevMonth}
-              className="p-2 hover:bg-mist rounded-lg"
+              className="p-2 hover:bg-mist rounded-lg transition"
             >
               <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -159,7 +192,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             <button
               type="button"
               onClick={handleNextMonth}
-              className="p-2 hover:bg-mist rounded-lg"
+              className="p-2 hover:bg-mist rounded-lg transition"
             >
               <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -168,7 +201,15 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           </div>
 
           {/* Scrollable Calendar Body */}
-          <div className="p-3" style={{ maxHeight: '300px', overflowY: 'auto', overflowX: 'hidden' }}>
+          <div
+            className="p-3 bg-white"
+            style={{
+              maxHeight: '320px',
+              overflowY: 'auto',
+              overflowX: 'hidden',
+              WebkitOverflowScrolling: 'touch' // Smooth scrolling on iOS
+            }}
+          >
             {/* Weekday Headers */}
             <div className="grid grid-cols-7 gap-1 mb-2">
               {WEEKDAYS.map((wd) => (
@@ -217,16 +258,16 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               })}
             </div>
 
-            {/* Extra padding at bottom */}
+            {/* Extra padding at bottom for smooth scrolling */}
             <div className="h-4"></div>
           </div>
 
           {/* Close button */}
-          <div className="p-3 border-t-2 border-mist">
+          <div className="p-3 border-t-2 border-mist bg-white rounded-b-xl">
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="w-full py-2 bg-forest text-white font-semibold rounded-lg hover:bg-forest/90"
+              className="w-full py-2 bg-forest text-white font-semibold rounded-lg hover:bg-forest/90 transition"
             >
               Done
             </button>

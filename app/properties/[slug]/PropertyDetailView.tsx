@@ -250,8 +250,8 @@ export function PropertyDetailView({
 
           {/* Booking card */}
           <aside className="lg:col-span-1">
-            <div className="sticky top-24 bg-white rounded-3xl border border-mist shadow-xl overflow-hidden">
-              <div className="bg-forest text-white px-6 py-5">
+            <div className="sticky top-24 bg-white rounded-3xl border border-mist shadow-xl">
+              <div className="bg-forest text-white px-6 py-5 rounded-t-3xl">
                 <p className="eyebrow text-sage">Starting from</p>
                 <div className="flex items-baseline gap-2 mt-1">
                   <span className="font-display text-4xl font-semibold">₹{property.price.toLocaleString()}</span>
