@@ -7,6 +7,11 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { useToast } from '@/components/toast/useToast';
+import {
+  createRazorpayOrderAPI,
+  openRazorpayCheckout,
+  verifyRazorpayPaymentAPI,
+} from '@/lib/razorpay/client';
 
 export function BookingView({
   property,
@@ -19,6 +24,7 @@ export function BookingView({
 
   const [step, setStep] = useState(1);
   const [numberOfGuests, setNumberOfGuests] = useState(initialGuests);
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -124,16 +130,31 @@ export function BookingView({
       return;
     }
 
+    setIsProcessingPayment(true);
     const refId = `LS-2026-${Math.floor(1000 + Math.random() * 9000)}`;
 
     try {
+      // Step 1: Create Razorpay order
       showToast({
         type: 'success',
-        message: 'Processing your booking...',
+        message: 'Creating payment order...',
       });
 
-      // Save booking to Sanity
-      const response = await fetch('/api/bookings', {
+      const orderResult = await createRazorpayOrderAPI({
+        amount: finalTotal,
+        currency: 'INR',
+        receipt: refId,
+        guestName: formData.fullName,
+        guestEmail: formData.email,
+        propertyName: property.title,
+      });
+
+      if (!orderResult.success || !orderResult.orderId) {
+        throw new Error(orderResult.error || 'Failed to create payment order');
+      }
+
+      // Step 2: Create booking with pending payment status
+      const bookingResponse = await fetch('/api/bookings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -154,29 +175,90 @@ export function BookingView({
           discount: 0,
           couponCode: '',
           totalAmount: finalTotal,
-          paymentMethod: formData.paymentMethod,
+          paymentMethod: 'razorpay',
           dataConsent: formData.dataConsent,
           consentTimestamp: new Date().toISOString(),
+          paymentStatus: 'pending', // Initially pending
+          razorpayOrderId: orderResult.orderId,
         }),
       });
 
-      const data = await response.json();
+      const bookingData = await bookingResponse.json();
 
-      if (data.success) {
-        showToast({
-          type: 'success',
-          message: 'Booking confirmed! Redirecting to confirmation page...',
-        });
-        router.push(`/booking/confirmed?referenceId=${refId}&propertyId=${property.id}`);
-      } else {
-        throw new Error(data.error || 'Failed to create booking');
+      if (!bookingData.success) {
+        throw new Error(bookingData.error || 'Failed to create booking');
       }
+
+      // Step 3: Open Razorpay checkout
+      showToast({
+        type: 'success',
+        message: 'Opening payment gateway...',
+      });
+
+      await openRazorpayCheckout({
+        orderId: orderResult.orderId,
+        amount: orderResult.amount || finalTotal * 100,
+        currency: orderResult.currency || 'INR',
+        customerName: formData.fullName,
+        customerEmail: formData.email,
+        customerPhone: formData.phone,
+        description: `Booking for ${property.title} - ${numberOfGuests} guest${numberOfGuests > 1 ? 's' : ''}`,
+        onSuccess: async (response) => {
+          // Step 4: Verify payment on server
+          showToast({
+            type: 'success',
+            message: 'Payment successful! Verifying...',
+          });
+
+          try {
+            const verifyResult = await verifyRazorpayPaymentAPI({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+              bookingReferenceId: refId,
+            });
+
+            if (verifyResult.success && verifyResult.verified) {
+              showToast({
+                type: 'success',
+                message: 'Payment verified! Redirecting to confirmation...',
+              });
+              router.push(`/booking/confirmed?referenceId=${refId}&propertyId=${property.id}`);
+            } else {
+              throw new Error(verifyResult.error || 'Payment verification failed');
+            }
+          } catch (verifyError) {
+            console.error('Payment verification error:', verifyError);
+            showToast({
+              type: 'error',
+              message: 'Payment verification failed. Please contact support with reference: ' + refId,
+            });
+            setIsProcessingPayment(false);
+          }
+        },
+        onFailure: (error) => {
+          console.error('Payment failed:', error);
+          showToast({
+            type: 'error',
+            message: error.description || 'Payment failed. Please try again.',
+          });
+          setIsProcessingPayment(false);
+        },
+        onDismiss: () => {
+          showToast({
+            type: 'error',
+            message: 'Payment cancelled. You can try again when ready.',
+          });
+          setIsProcessingPayment(false);
+        },
+      });
     } catch (error) {
       console.error('Booking error:', error);
       showToast({
         type: 'error',
-        message: 'Failed to create booking. Please try again or contact support.',
+        message: error instanceof Error ? error.message : 'Failed to process booking. Please try again.',
       });
+      setIsProcessingPayment(false);
     }
   };
 
@@ -329,11 +411,48 @@ export function BookingView({
               </div>
 
               <div className="flex justify-between pt-4">
-                <Button onClick={() => setStep(1)} type="button" variant="ghost" size="md">
+                <Button
+                  onClick={() => setStep(1)}
+                  type="button"
+                  variant="ghost"
+                  size="md"
+                  disabled={isProcessingPayment}
+                >
                   ← Back
                 </Button>
-                <Button type="submit" variant="primary" size="lg">
-                  Proceed to Payment ₹{finalTotal.toLocaleString()}
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="lg"
+                  disabled={isProcessingPayment}
+                >
+                  {isProcessingPayment ? (
+                    <>
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      Processing...
+                    </>
+                  ) : (
+                    `Proceed to Payment ₹${finalTotal.toLocaleString()}`
+                  )}
                 </Button>
               </div>
             </form>

@@ -39,6 +39,8 @@ export async function POST(request: NextRequest) {
       notes,
       dataConsent,
       consentTimestamp,
+      paymentStatus,
+      razorpayOrderId,
     } = body;
 
     // Validate required fields
@@ -76,12 +78,18 @@ export async function POST(request: NextRequest) {
     // Sanitize data to prevent injection attacks
     const sanitizedData = sanitizeBookingData(body);
 
+    // Determine booking status based on payment status
+    // If payment is pending (Razorpay), booking is initially 'pending'
+    // If payment is already completed (manual/cash), booking is 'confirmed'
+    const bookingStatus = paymentStatus === 'pending' ? 'pending' : 'confirmed';
+    const bookingPaymentStatus = paymentStatus || 'paid';
+
     // Create booking document in Sanity
     const booking = await writeClient.create({
       _type: 'booking',
       referenceId,
       bookingDate: new Date().toISOString(),
-      status: 'confirmed',
+      status: bookingStatus,
 
       // Property details
       propertyId,
@@ -109,7 +117,8 @@ export async function POST(request: NextRequest) {
 
       // Payment
       paymentMethod,
-      paymentStatus: 'paid',
+      paymentStatus: bookingPaymentStatus,
+      ...(razorpayOrderId && { razorpayOrderId }),
 
       // Notes (sanitized)
       notes: sanitizedData.notes,
@@ -120,84 +129,96 @@ export async function POST(request: NextRequest) {
       consentIpAddress: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown',
     });
 
-    // Create payment record
-    const transactionId = `TXN-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    // Only create payment record and send emails if payment is not pending
+    // For Razorpay payments, these will be done in the verify-payment endpoint
+    let payment = null;
+    let emailResults = null;
 
-    const payment = await writeClient.create({
-      _type: 'payment',
-      transactionId,
-      bookingReference: {
-        _type: 'reference',
-        _ref: booking._id,
-      },
-      bookingReferenceId: referenceId,
-      paymentDate: new Date().toISOString(),
+    if (paymentStatus !== 'pending') {
+      // Create payment record for non-Razorpay payments (manual/cash)
+      const transactionId = `TXN-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-      // Customer details
-      customerName: guestName,
-      customerEmail: guestEmail,
-      customerPhone: guestPhone,
+      payment = await writeClient.create({
+        _type: 'payment',
+        transactionId,
+        bookingReference: {
+          _type: 'reference',
+          _ref: booking._id,
+        },
+        bookingReferenceId: referenceId,
+        paymentDate: new Date().toISOString(),
 
-      // Payment details
-      amount: totalAmount,
-      paymentType: 'full',
-      paymentMethod,
-      paymentStatus: 'success',
-      currency: 'INR',
+        // Customer details
+        customerName: guestName,
+        customerEmail: guestEmail,
+        customerPhone: guestPhone,
 
-      // Additional
-      paymentGateway: 'Manual',
-      notes: `Full payment for booking ${referenceId}`,
-    });
+        // Payment details
+        amount: totalAmount,
+        paymentType: 'full',
+        paymentMethod,
+        paymentStatus: 'success',
+        currency: 'INR',
 
-    // Prepare booking details for email templates
-    const bookingDetails = {
-      referenceId,
-      guestName,
-      guestEmail,
-      guestPhone,
-      guestCity,
-      propertyName,
-      propertyCategory,
-      numberOfGuests,
-      checkInDate,
-      checkOutDate,
-      addons: addons || [],
-      basePrice,
-      addonTotal: addonTotal || 0,
-      discount: discount || 0,
-      couponCode,
-      totalAmount,
-      paymentMethod,
-      bookingDate: booking.bookingDate,
-    };
+        // Additional
+        paymentGateway: 'Manual',
+        notes: `Full payment for booking ${referenceId}`,
+      });
 
-    // Generate email templates
-    const guestEmailHtml = generateGuestConfirmationEmail(bookingDetails);
-    const adminEmailHtml = generateAdminNotificationEmail(bookingDetails);
+      // Prepare booking details for email templates
+      const bookingDetails = {
+        referenceId,
+        guestName,
+        guestEmail,
+        guestPhone,
+        guestCity,
+        propertyName,
+        propertyCategory,
+        numberOfGuests,
+        checkInDate,
+        checkOutDate,
+        addons: addons || [],
+        basePrice,
+        addonTotal: addonTotal || 0,
+        discount: discount || 0,
+        couponCode,
+        totalAmount,
+        paymentMethod,
+        bookingDate: booking.bookingDate,
+      };
 
-    // Send emails to both guest and admin
-    const emailResults = await sendBookingEmails(
-      guestEmail,
-      guestEmailHtml,
-      adminEmailHtml,
-      referenceId
-    );
+      // Generate email templates
+      const guestEmailHtml = generateGuestConfirmationEmail(bookingDetails);
+      const adminEmailHtml = generateAdminNotificationEmail(bookingDetails);
+
+      // Send emails to both guest and admin
+      emailResults = await sendBookingEmails(
+        guestEmail,
+        guestEmailHtml,
+        adminEmailHtml,
+        referenceId
+      );
+    }
 
     return NextResponse.json({
       success: true,
       booking: {
         _id: booking._id,
         referenceId: booking.referenceId,
+        status: booking.status,
       },
-      payment: {
-        _id: payment._id,
-        transactionId: payment.transactionId,
-      },
-      emails: {
-        guestEmailSent: emailResults.guestEmailSent,
-        adminEmailSent: emailResults.adminEmailSent,
-      },
+      ...(payment && {
+        payment: {
+          _id: payment._id,
+          transactionId: payment.transactionId,
+        },
+      }),
+      ...(emailResults && {
+        emails: {
+          guestEmailSent: emailResults.guestEmailSent,
+          adminEmailSent: emailResults.adminEmailSent,
+        },
+      }),
     });
   } catch (error) {
     console.error('Error creating booking:', error);

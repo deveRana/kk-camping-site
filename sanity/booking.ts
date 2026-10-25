@@ -178,6 +178,7 @@ export default defineType({
       type: 'string',
       options: {
         list: [
+          { title: 'Razorpay', value: 'razorpay' },
           { title: 'UPI', value: 'upi' },
           { title: 'Card', value: 'card' },
           { title: 'Net Banking', value: 'netbanking' },
@@ -198,6 +199,13 @@ export default defineType({
         ],
       },
       initialValue: 'pending',
+    }),
+    defineField({
+      name: 'razorpayOrderId',
+      title: 'Razorpay Order ID',
+      type: 'string',
+      description: 'Razorpay order ID for tracking payment',
+      readOnly: true,
     }),
 
     // Additional Notes
