@@ -1,0 +1,8 @@
+# Exclude Sanity Studio from Vercel build
+studio-lakeora/
+
+# Other excludes
+.git/
+node_modules/
+.next/
+.cache/
