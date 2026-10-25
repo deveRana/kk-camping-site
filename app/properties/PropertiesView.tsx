@@ -136,24 +136,89 @@ export function PropertiesView({ properties }: { properties: Property[] }) {
           {viewMode === 'grid' ? (
             <PropertyGrid properties={filteredProperties} />
           ) : (
-            <div className="bg-white rounded-2xl border border-mist p-8 text-center space-y-4">
-              <div className="h-96 w-full rounded-xl bg-mist/60 flex flex-col items-center justify-center space-y-3">
-                <div className="w-12 h-12 rounded-full bg-forest/10 text-forest flex items-center justify-center font-bold">
-                  📍
+            <div className="space-y-6">
+              {/* Map View */}
+              <div className="bg-white rounded-2xl border border-mist overflow-hidden shadow-xl">
+                <div className="bg-gradient-to-r from-forest to-forest-dark text-white p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-sage flex items-center justify-center">
+                        📍
+                      </div>
+                      <div>
+                        <h3 className="font-display text-lg font-semibold">
+                          Pawna Lake Campsites Map
+                        </h3>
+                        <p className="text-xs text-white/80">
+                          Showing {filteredProperties.length} properties around Pawna Lake
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="font-display text-xl font-semibold text-forest-deep">
-                  Interactive Pawna Lake Map View
-                </h3>
-                <p className="text-xs text-forest-deep/70 max-w-sm">
-                  Showing {filteredProperties.length} pins around Pawna Dam waterfront campsites.
-                </p>
-                <div className="flex flex-wrap justify-center gap-2 pt-2">
-                  {filteredProperties.map((p) => (
-                    <span key={p.id} className="bg-forest text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">
-                      {p.title.split(' ')[0]}: ₹{p.price}
-                    </span>
-                  ))}
+
+                {/* Google Maps Embed */}
+                <div className="relative w-full h-[500px] md:h-[600px]">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15122.924377424629!2d73.48703!3d18.63116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2a9eab3ca531b%3A0xcbb693c085173e98!2sPawna%20Lake!5e0!3m2!1sen!2sin!4v1729847440383!5m2!1sen!2sin"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Pawna Lake Properties Map"
+                    className="absolute inset-0"
+                  />
                 </div>
+
+                {/* Properties Legend */}
+                <div className="bg-mist/40 p-6 border-t border-mist">
+                  <h4 className="font-semibold text-forest-deep mb-3 flex items-center gap-2">
+                    <svg className="w-5 h-5 text-forest" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                    </svg>
+                    Available Properties ({filteredProperties.length})
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {filteredProperties.map((p) => (
+                      <a
+                        key={p.id}
+                        href={`/properties/${p.slug}`}
+                        className="flex items-center justify-between bg-white rounded-xl p-3 border border-mist hover:border-forest transition group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-full bg-forest text-white text-xs font-bold flex items-center justify-center">
+                            {p.title.substring(0, 1)}
+                          </div>
+                          <div>
+                            <p className="font-semibold text-forest-deep text-sm group-hover:text-forest transition">
+                              {p.title}
+                            </p>
+                            <p className="text-xs text-forest-deep/60">{p.category}</p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-bold text-forest text-sm">₹{p.price.toLocaleString()}</p>
+                          <p className="text-xs text-forest-deep/60">per person</p>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Switch to Grid View CTA */}
+              <div className="text-center">
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className="inline-flex items-center gap-2 text-sm text-forest hover:text-forest-dark font-semibold transition"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                  </svg>
+                  Switch to Grid View for Detailed Cards
+                </button>
               </div>
             </div>
           )}
