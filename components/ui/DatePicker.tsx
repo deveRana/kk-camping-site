@@ -45,6 +45,30 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Prevent body scroll on mobile when date picker is open
+  useEffect(() => {
+    if (isOpen) {
+      // Save original body overflow
+      const originalOverflow = document.body.style.overflow;
+      const originalPosition = document.body.style.position;
+
+      // Only lock scroll on mobile devices
+      const isMobile = window.innerWidth < 640;
+      if (isMobile) {
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+      }
+
+      return () => {
+        // Restore original styles
+        document.body.style.overflow = originalOverflow;
+        document.body.style.position = originalPosition;
+        document.body.style.width = '';
+      };
+    }
+  }, [isOpen]);
+
   const handlePrevMonth = (e: React.MouseEvent) => {
     e.preventDefault();
     if (currentMonth === 0) {
@@ -143,10 +167,18 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 
       {/* Custom Calendar Popover Menu */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/20 backdrop-blur-sm sm:absolute sm:inset-auto sm:top-full sm:left-0 sm:mt-2 sm:p-0 sm:bg-transparent sm:backdrop-blur-none">
-          <div className="w-full max-w-sm sm:w-80 bg-white border border-mist rounded-2xl shadow-2xl overflow-hidden animate-scaleUp">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/20 backdrop-blur-sm sm:absolute sm:inset-auto sm:top-full sm:left-0 sm:mt-2 sm:p-0 sm:bg-transparent sm:backdrop-blur-none overflow-y-auto"
+          onClick={(e) => {
+            // Close if clicking the backdrop (not the calendar itself)
+            if (e.target === e.currentTarget) {
+              setIsOpen(false);
+            }
+          }}
+        >
+          <div className="w-full max-w-sm sm:w-80 bg-white border border-mist rounded-2xl shadow-2xl overflow-hidden animate-scaleUp my-auto">
             {/* Calendar Content - Scrollable on mobile */}
-            <div className="max-h-[80vh] overflow-y-auto p-4 sm:max-h-none sm:overflow-visible">
+            <div className="max-h-[70vh] overflow-y-auto overscroll-contain p-4 sm:max-h-none sm:overflow-visible">
               {/* Calendar Header */}
               <div className="flex items-center justify-between pb-3 mb-3 border-b border-mist sticky top-0 bg-white z-10">
                 <button
