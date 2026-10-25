@@ -41,9 +41,43 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         setIsOpen(false);
       }
     };
+
+    const handleScroll = () => {
+      if (isOpen && containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const spaceBelow = window.innerHeight - rect.bottom;
+        const dropdownHeight = 450;
+
+        if (spaceBelow < dropdownHeight && rect.top > dropdownHeight) {
+          setDropdownStyle({
+            position: 'fixed',
+            top: `${rect.top - dropdownHeight - 8}px`,
+            left: `${rect.left}px`,
+            width: `${rect.width}px`,
+            zIndex: 9999,
+          });
+        } else {
+          setDropdownStyle({
+            position: 'fixed',
+            top: `${rect.bottom + 8}px`,
+            left: `${rect.left}px`,
+            width: `${rect.width}px`,
+            zIndex: 9999,
+          });
+        }
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+    window.addEventListener('scroll', handleScroll, true); // Capture phase to catch all scrolls
+    window.addEventListener('resize', handleScroll);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('scroll', handleScroll, true);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [isOpen]);
 
   const handlePrevMonth = () => {
     if (currentMonth === 0) {
