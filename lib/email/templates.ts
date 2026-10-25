@@ -299,7 +299,7 @@ export function generateGuestConfirmationEmail(booking: BookingDetails): string 
 
       <!-- Action Buttons -->
       <div class="button-container">
-        <a href="https://pawnatentcamp.com/booking/invoice?ref=${booking.referenceId}" class="button-primary">
+        <a href="https://pawnatentcamp.com/api/invoice?ref=${booking.referenceId}" class="button-primary">
           Download Invoice
         </a>
         <br />

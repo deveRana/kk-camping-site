@@ -85,7 +85,7 @@ export async function sendBookingEmails(
   referenceId: string
 ) {
   const guestSubject = `Booking Confirmed - ${referenceId} | Lakeora Camping`;
-  const adminSubject = `🔔 New Booking: ${referenceId}`;
+  const adminSubject = `New Booking: ${referenceId}`;
 
   // Send both emails in parallel
   const [guestResult, adminResult] = await Promise.all([
