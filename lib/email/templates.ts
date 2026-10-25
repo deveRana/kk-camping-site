@@ -1,7 +1,6 @@
 /**
- * Professional Email Templates for Lakeora Camping & Cafe
- * Modern, clean design following industry best practices
- * No icons/emojis - pure professional business style
+ * Clean Email Templates for Lakeora Camping & Cafe
+ * Minimal design with essential info + invoice download
  */
 
 interface BookingDetails {
@@ -29,220 +28,189 @@ const emailStyles = `
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
       line-height: 1.6;
-      color: #374151;
-      background-color: #f3f4f6;
+      color: #1f2937;
+      background-color: #f9fafb;
     }
-    .email-wrapper {
+    .email-container {
       max-width: 600px;
-      margin: 0 auto;
-      background-color: #ffffff;
+      margin: 40px auto;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
     }
     .header {
-      background-color: #065f46;
-      padding: 40px 30px;
+      background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+      padding: 32px 24px;
       text-align: center;
     }
     .logo {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 700;
       color: #ffffff;
-      margin: 0;
-      letter-spacing: 3px;
+      letter-spacing: 4px;
+      margin-bottom: 8px;
     }
     .tagline {
       color: #d1fae5;
       font-size: 13px;
-      margin: 8px 0 0 0;
-      font-weight: 400;
+      letter-spacing: 1px;
     }
     .content {
-      padding: 40px 30px;
+      padding: 32px 24px;
     }
-    .success-banner {
-      background-color: #ecfdf5;
-      border-left: 4px solid: #10b981;
-      padding: 24px;
-      margin-bottom: 32px;
+    .success-check {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 24px;
+      background: #10b981;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .success-title {
-      color: #065f46;
+    .checkmark {
+      width: 32px;
+      height: 32px;
+      border: 3px solid white;
+      border-top: none;
+      border-right: none;
+      transform: rotate(-45deg);
+      margin-top: -4px;
+    }
+    .title {
       font-size: 24px;
       font-weight: 700;
-      margin: 0 0 8px 0;
-    }
-    .success-text {
-      color: #047857;
-      font-size: 15px;
-      margin: 0;
-    }
-    .booking-ref-box {
-      background: #ffffff;
-      border: 2px solid #d1fae5;
-      padding: 20px;
-      margin-top: 20px;
+      color: #065f46;
       text-align: center;
+      margin-bottom: 12px;
+    }
+    .subtitle {
+      font-size: 15px;
+      color: #6b7280;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .ref-box {
+      background: #f0fdf4;
+      border: 2px dashed #10b981;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 32px;
     }
     .ref-label {
-      color: #6b7280;
       font-size: 11px;
+      color: #6b7280;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       margin-bottom: 8px;
     }
-    .ref-value {
-      color: #065f46;
-      font-size: 22px;
+    .ref-number {
+      font-size: 24px;
       font-weight: 800;
-      letter-spacing: 2px;
+      color: #065f46;
       font-family: 'Courier New', monospace;
+      letter-spacing: 2px;
     }
-    .section-title {
-      color: #111827;
-      font-size: 16px;
-      font-weight: 700;
-      margin: 32px 0 16px 0;
-      padding-bottom: 8px;
-      border-bottom: 2px solid #e5e7eb;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-size: 14px;
-    }
-    .info-table {
+    .info-grid {
+      display: table;
       width: 100%;
-      margin: 16px 0;
+      margin: 24px 0;
     }
     .info-row {
-      border-bottom: 1px solid #f3f4f6;
-    }
-    .info-row td {
-      padding: 12px 0;
+      display: table-row;
     }
     .info-label {
-      color: #6b7280;
+      display: table-cell;
+      padding: 10px 0;
       font-size: 14px;
-      font-weight: 500;
+      color: #6b7280;
       width: 40%;
     }
     .info-value {
-      color: #111827;
+      display: table-cell;
+      padding: 10px 0;
       font-size: 14px;
+      color: #111827;
       font-weight: 600;
       text-align: right;
     }
-    .invoice-table {
-      width: 100%;
-      margin: 20px 0;
-      border: 1px solid #e5e7eb;
+    .divider {
+      height: 1px;
+      background: #e5e7eb;
+      margin: 24px 0;
     }
-    .invoice-row td {
-      padding: 14px 16px;
-      border-bottom: 1px solid #f3f4f6;
-    }
-    .invoice-label {
-      color: #374151;
-      font-size: 14px;
-    }
-    .invoice-value {
-      text-align: right;
-      color: #111827;
-      font-size: 14px;
-      font-weight: 600;
-    }
-    .total-row td {
-      background-color: #f9fafb;
-      font-weight: 700;
-      font-size: 16px;
-      color: #065f46;
-      padding: 16px;
-      border-bottom: none;
-    }
-    .paid-row td {
-      background-color: #065f46;
-      color: #ffffff;
-      font-weight: 700;
-      padding: 16px;
-      border-bottom: none;
-    }
-    .action-button {
+    .button-primary {
       display: inline-block;
-      background-color: #065f46;
-      color: #ffffff;
+      background: #065f46;
+      color: #ffffff !important;
       text-decoration: none;
       padding: 14px 32px;
-      border-radius: 6px;
+      border-radius: 8px;
       font-weight: 600;
+      font-size: 15px;
+      text-align: center;
+      margin: 16px 0;
+    }
+    .button-secondary {
+      display: inline-block;
+      background: #ffffff;
+      color: #065f46 !important;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      text-align: center;
+      margin: 16px 0;
+      border: 2px solid #065f46;
+    }
+    .button-container {
+      text-align: center;
+      margin: 32px 0;
+    }
+    .price-summary {
+      background: #f9fafb;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 24px 0;
+    }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
       font-size: 14px;
-      margin: 24px 0;
+      color: #4b5563;
     }
-    .note-box {
-      background-color: #fffbeb;
-      border: 1px solid #fbbf24;
-      padding: 16px;
-      margin: 24px 0;
-    }
-    .note-box.success {
-      background-color: #ecfdf5;
-      border-color: #10b981;
-    }
-    .note-title {
+    .price-total {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px 0 0 0;
+      margin-top: 12px;
+      border-top: 2px solid #e5e7eb;
+      font-size: 18px;
       font-weight: 700;
-      font-size: 14px;
-      color: #92400e;
-      margin-bottom: 8px;
-    }
-    .note-box.success .note-title {
       color: #065f46;
     }
-    .note-text {
-      font-size: 14px;
-      color: #78350f;
-      line-height: 1.6;
-    }
-    .note-box.success .note-text {
-      color: #047857;
-    }
-    .list-item {
-      padding: 8px 0;
-      border-bottom: 1px solid #f3f4f6;
-      font-size: 14px;
-      color: #374151;
-    }
     .footer {
-      background-color: #f9fafb;
-      padding: 32px 30px;
+      background: #f9fafb;
+      padding: 24px;
       text-align: center;
       border-top: 1px solid #e5e7eb;
     }
-    .footer-brand {
-      color: #065f46;
-      font-weight: 700;
-      font-size: 16px;
-      margin-bottom: 8px;
-    }
     .footer-text {
+      font-size: 13px;
       color: #6b7280;
-      font-size: 12px;
-      margin: 6px 0;
-      line-height: 1.5;
-    }
-    .footer-links {
-      margin: 16px 0;
+      margin: 4px 0;
     }
     .footer-link {
-      color: #047857;
+      color: #065f46;
       text-decoration: none;
-      margin: 0 10px;
-      font-size: 12px;
       font-weight: 500;
-    }
-    @media only screen and (max-width: 600px) {
-      .content { padding: 24px 16px; }
-      .header { padding: 32px 16px; }
-      .logo { font-size: 24px; }
-      .success-title { font-size: 20px; }
     }
   </style>
 `;
@@ -254,177 +222,118 @@ export function generateGuestConfirmationEmail(booking: BookingDetails): string 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Booking Confirmed - Lakeora</title>
+  <title>Booking Confirmed</title>
   ${emailStyles}
 </head>
 <body>
-  <div class="email-wrapper">
+  <div class="email-container">
     <!-- Header -->
     <div class="header">
       <div class="logo">LAKEORA</div>
-      <p class="tagline">Lakeside Camping & Cafe · Pawna Lake</p>
+      <div class="tagline">Lakeside Camping & Cafe · Pawna Lake</div>
     </div>
 
     <!-- Content -->
     <div class="content">
-      <!-- Success Banner -->
-      <div class="success-banner">
-        <h1 class="success-title">Booking Confirmed</h1>
-        <p class="success-text">
-          Hi ${booking.guestName}, your reservation at Pawna Lake is confirmed and ready.
-        </p>
-        <div class="booking-ref-box">
-          <div class="ref-label">Booking Reference</div>
-          <div class="ref-value">${booking.referenceId}</div>
-        </div>
+      <!-- Success Icon -->
+      <div class="success-check">
+        <div class="checkmark"></div>
       </div>
 
-      <p style="font-size: 15px; color: #4b5563; margin-bottom: 24px;">
-        Thank you for choosing Lakeora. We look forward to hosting you at Pawna Lake.
-      </p>
+      <h1 class="title">Booking Confirmed!</h1>
+      <p class="subtitle">Hi ${booking.guestName}, your reservation is confirmed</p>
 
-      <!-- Guest Details -->
-      <h2 class="section-title">Guest Information</h2>
-      <table class="info-table">
-        <tr class="info-row">
-          <td class="info-label">Name</td>
-          <td class="info-value">${booking.guestName}</td>
-        </tr>
-        <tr class="info-row">
-          <td class="info-label">Email</td>
-          <td class="info-value">${booking.guestEmail}</td>
-        </tr>
-        <tr class="info-row">
-          <td class="info-label">Phone</td>
-          <td class="info-value">${booking.guestPhone}</td>
-        </tr>
-        ${booking.guestCity ? `
-        <tr class="info-row">
-          <td class="info-label">City</td>
-          <td class="info-value">${booking.guestCity}</td>
-        </tr>
-        ` : ''}
-        <tr class="info-row">
-          <td class="info-label">Guests</td>
-          <td class="info-value">${booking.numberOfGuests}</td>
-        </tr>
-      </table>
+      <!-- Reference Number -->
+      <div class="ref-box">
+        <div class="ref-label">Booking Reference</div>
+        <div class="ref-number">${booking.referenceId}</div>
+      </div>
 
-      <!-- Property Details -->
-      <h2 class="section-title">Reservation Details</h2>
-      <table class="info-table">
-        <tr class="info-row">
-          <td class="info-label">Property</td>
-          <td class="info-value">${booking.propertyName}</td>
-        </tr>
-        <tr class="info-row">
-          <td class="info-label">Category</td>
-          <td class="info-value">${booking.propertyCategory}</td>
-        </tr>
+      <!-- Key Details -->
+      <div class="info-grid">
+        <div class="info-row">
+          <div class="info-label">Property</div>
+          <div class="info-value">${booking.propertyName}</div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">Guests</div>
+          <div class="info-value">${booking.numberOfGuests} ${booking.numberOfGuests === 1 ? 'person' : 'people'}</div>
+        </div>
         ${booking.checkInDate ? `
-        <tr class="info-row">
-          <td class="info-label">Check-in</td>
-          <td class="info-value">${booking.checkInDate} at 4:00 PM</td>
-        </tr>
+        <div class="info-row">
+          <div class="info-label">Check-in</div>
+          <div class="info-value">${booking.checkInDate} at 4:00 PM</div>
+        </div>
         ` : ''}
         ${booking.checkOutDate ? `
-        <tr class="info-row">
-          <td class="info-label">Check-out</td>
-          <td class="info-value">${booking.checkOutDate} at 11:00 AM</td>
-        </tr>
+        <div class="info-row">
+          <div class="info-label">Check-out</div>
+          <div class="info-value">${booking.checkOutDate} at 11:00 AM</div>
+        </div>
         ` : ''}
-        <tr class="info-row">
-          <td class="info-label">Booking Date</td>
-          <td class="info-value">${new Date(booking.bookingDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</td>
-        </tr>
-      </table>
+      </div>
 
-      ${booking.addons.length > 0 ? `
-      <!-- Add-ons -->
-      <h2 class="section-title">Selected Add-ons</h2>
-      ${booking.addons.map(addon => `<div class="list-item">${addon}</div>`).join('')}
-      ` : ''}
-
-      <!-- Payment Invoice -->
-      <h2 class="section-title">Payment Summary</h2>
-      <table class="invoice-table" cellpadding="0" cellspacing="0">
-        <tr class="invoice-row">
-          <td class="invoice-label">Base Price (${booking.numberOfGuests} guests)</td>
-          <td class="invoice-value">₹${booking.basePrice.toLocaleString()}</td>
-        </tr>
+      <!-- Price Summary -->
+      <div class="price-summary">
+        <div class="price-row">
+          <span>Booking Amount</span>
+          <span>₹${booking.basePrice.toLocaleString()}</span>
+        </div>
         ${booking.addonTotal > 0 ? `
-        <tr class="invoice-row">
-          <td class="invoice-label">Add-ons</td>
-          <td class="invoice-value">₹${booking.addonTotal.toLocaleString()}</td>
-        </tr>
+        <div class="price-row">
+          <span>Add-ons</span>
+          <span>₹${booking.addonTotal.toLocaleString()}</span>
+        </div>
         ` : ''}
         ${booking.discount > 0 ? `
-        <tr class="invoice-row">
-          <td class="invoice-label">Discount ${booking.couponCode ? `(${booking.couponCode})` : ''}</td>
-          <td class="invoice-value" style="color: #10b981;">-₹${booking.discount.toLocaleString()}</td>
-        </tr>
+        <div class="price-row">
+          <span>Discount${booking.couponCode ? ` (${booking.couponCode})` : ''}</span>
+          <span style="color: #10b981;">-₹${booking.discount.toLocaleString()}</span>
+        </div>
         ` : ''}
-        <tr class="total-row">
-          <td>Total Amount</td>
-          <td style="text-align: right;">₹${booking.totalAmount.toLocaleString()}</td>
-        </tr>
-        <tr class="paid-row">
-          <td>Payment Received</td>
-          <td style="text-align: right;">₹${booking.totalAmount.toLocaleString()}</td>
-        </tr>
-      </table>
-
-      <!-- Payment Confirmation -->
-      <div class="note-box success">
-        <div class="note-title">Payment Complete</div>
-        <div class="note-text">
-          Your payment of ₹${booking.totalAmount.toLocaleString()} has been received successfully via ${booking.paymentMethod.toUpperCase()}.
-          No additional payment required at check-in.
+        <div class="price-total">
+          <span>Total Paid</span>
+          <span>₹${booking.totalAmount.toLocaleString()}</span>
         </div>
       </div>
 
-      <!-- What to Bring -->
-      <h2 class="section-title">What to Bring</h2>
-      <div class="list-item">Valid ID proof (Aadhaar/DL/Passport)</div>
-      <div class="list-item">Comfortable clothes and footwear</div>
-      <div class="list-item">Personal toiletries</div>
-      <div class="list-item">Medicines (if required)</div>
-      <div class="list-item">Power bank and charger</div>
-
-      <!-- Contact -->
-      <h2 class="section-title">Contact Us</h2>
-      <table class="info-table">
-        <tr class="info-row">
-          <td class="info-label">Phone</td>
-          <td class="info-value">+91 74997 57607</td>
-        </tr>
-        <tr class="info-row">
-          <td class="info-label">Email</td>
-          <td class="info-value">booking@lakeora.com</td>
-        </tr>
-        <tr class="info-row">
-          <td class="info-label">Location</td>
-          <td class="info-value">Pawna Lake, Maharashtra</td>
-        </tr>
-      </table>
-
-      <center>
-        <a href="https://maps.app.goo.gl/c6JVSxCKqkyfMrR47" class="action-button">
+      <!-- Action Buttons -->
+      <div class="button-container">
+        <a href="https://pawnatentcamp.com/booking/invoice?ref=${booking.referenceId}" class="button-primary">
+          Download Invoice
+        </a>
+        <br />
+        <a href="https://maps.app.goo.gl/c6JVSxCKqkyfMrR47" class="button-secondary">
           Get Directions
         </a>
-      </center>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Contact -->
+      <div style="text-align: center;">
+        <p style="font-size: 14px; color: #6b7280; margin-bottom: 16px;">
+          Need help? Contact us
+        </p>
+        <p style="font-size: 14px; color: #065f46; font-weight: 600;">
+          +91 74997 57607
+        </p>
+        <p style="font-size: 14px; color: #065f46;">
+          booking@lakeora.com
+        </p>
+      </div>
     </div>
 
     <!-- Footer -->
     <div class="footer">
-      <div class="footer-brand">Lakeora Cafe & Camping</div>
-      <p class="footer-text">Pawna Lake · Near Lonavala · Maharashtra</p>
-      <div class="footer-links">
-        <a href="https://pawnatentcamp.com" class="footer-link">Website</a>
-        <a href="tel:+917499757607" class="footer-link">Contact</a>
-      </div>
-      <p class="footer-text" style="margin-top: 16px;">
-        This is an automated confirmation. For support, contact booking@lakeora.com
+      <p class="footer-text">
+        <strong>Lakeora Cafe & Camping</strong>
+      </p>
+      <p class="footer-text">
+        Pawna Lake · Near Lonavala · Maharashtra
+      </p>
+      <p class="footer-text" style="margin-top: 12px;">
+        <a href="https://pawnatentcamp.com" class="footer-link">Visit Website</a>
       </p>
     </div>
   </div>
@@ -444,29 +353,18 @@ export function generateAdminNotificationEmail(booking: BookingDetails): string 
   ${emailStyles}
 </head>
 <body>
-  <div class="email-wrapper">
+  <div class="email-container">
     <!-- Header -->
-    <div class="header" style="background-color: #1e40af;">
+    <div class="header" style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);">
       <div class="logo">NEW BOOKING</div>
-      <p class="tagline" style="color: #bfdbfe;">Admin Notification · Lakeora</p>
+      <div class="tagline">Admin Notification · Lakeora</div>
     </div>
 
     <!-- Content -->
     <div class="content">
-      <!-- Alert Banner -->
-      <div class="success-banner" style="background-color: #dbeafe; border-left-color: #3b82f6;">
-        <h1 class="success-title" style="color: #1e40af;">New Booking Received</h1>
-        <p class="success-text" style="color: #1e40af;">
-          A new booking has been confirmed. Please review and prepare for guest arrival.
-        </p>
-        <div class="booking-ref-box" style="border-color: #bfdbfe;">
-          <div class="ref-label">Booking Reference</div>
-          <div class="ref-value" style="color: #1e40af;">${booking.referenceId}</div>
-        </div>
-      </div>
-
-      <p style="font-size: 14px; color: #6b7280; margin-bottom: 24px;">
-        <strong>Booking Time:</strong> ${new Date(booking.bookingDate).toLocaleString('en-IN', {
+      <h1 class="title" style="color: #1e40af;">New Reservation Received</h1>
+      <p class="subtitle">
+        ${new Date(booking.bookingDate).toLocaleString('en-IN', {
           day: 'numeric',
           month: 'short',
           year: 'numeric',
@@ -475,117 +373,131 @@ export function generateAdminNotificationEmail(booking: BookingDetails): string 
         })}
       </p>
 
-      <!-- Guest Information -->
-      <h2 class="section-title">Guest Information</h2>
-      <table class="info-table">
-        <tr class="info-row">
-          <td class="info-label">Name</td>
-          <td class="info-value">${booking.guestName}</td>
-        </tr>
-        <tr class="info-row">
-          <td class="info-label">Email</td>
-          <td class="info-value"><a href="mailto:${booking.guestEmail}" style="color: #2563eb; text-decoration: none;">${booking.guestEmail}</a></td>
-        </tr>
-        <tr class="info-row">
-          <td class="info-label">Phone</td>
-          <td class="info-value"><a href="tel:${booking.guestPhone}" style="color: #2563eb; text-decoration: none; font-weight: 700;">${booking.guestPhone}</a></td>
-        </tr>
-        ${booking.guestCity ? `
-        <tr class="info-row">
-          <td class="info-label">City</td>
-          <td class="info-value">${booking.guestCity}</td>
-        </tr>
-        ` : ''}
-        <tr class="info-row">
-          <td class="info-label">Guests</td>
-          <td class="info-value" style="font-size: 16px;">${booking.numberOfGuests}</td>
-        </tr>
-      </table>
+      <!-- Reference Number -->
+      <div class="ref-box" style="background: #dbeafe; border-color: #3b82f6;">
+        <div class="ref-label">Booking Reference</div>
+        <div class="ref-number" style="color: #1e40af;">${booking.referenceId}</div>
+      </div>
 
-      <!-- Property Details -->
-      <h2 class="section-title">Property & Stay Details</h2>
-      <table class="info-table">
-        <tr class="info-row">
-          <td class="info-label">Property</td>
-          <td class="info-value">${booking.propertyName}</td>
-        </tr>
-        <tr class="info-row">
-          <td class="info-label">Category</td>
-          <td class="info-value">${booking.propertyCategory}</td>
-        </tr>
+      <!-- Guest Details -->
+      <div class="info-grid">
+        <div class="info-row">
+          <div class="info-label">Guest Name</div>
+          <div class="info-value">${booking.guestName}</div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">Email</div>
+          <div class="info-value">
+            <a href="mailto:${booking.guestEmail}" style="color: #1e40af; text-decoration: none;">
+              ${booking.guestEmail}
+            </a>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">Phone</div>
+          <div class="info-value">
+            <a href="tel:${booking.guestPhone}" style="color: #1e40af; text-decoration: none; font-weight: 700;">
+              ${booking.guestPhone}
+            </a>
+          </div>
+        </div>
+        ${booking.guestCity ? `
+        <div class="info-row">
+          <div class="info-label">City</div>
+          <div class="info-value">${booking.guestCity}</div>
+        </div>
+        ` : ''}
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Booking Details -->
+      <div class="info-grid">
+        <div class="info-row">
+          <div class="info-label">Property</div>
+          <div class="info-value">${booking.propertyName}</div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">Category</div>
+          <div class="info-value">${booking.propertyCategory}</div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">Guests</div>
+          <div class="info-value">${booking.numberOfGuests}</div>
+        </div>
         ${booking.checkInDate ? `
-        <tr class="info-row">
-          <td class="info-label">Check-in</td>
-          <td class="info-value">${booking.checkInDate} at 4:00 PM</td>
-        </tr>
+        <div class="info-row">
+          <div class="info-label">Check-in</div>
+          <div class="info-value">${booking.checkInDate}</div>
+        </div>
         ` : ''}
         ${booking.checkOutDate ? `
-        <tr class="info-row">
-          <td class="info-label">Check-out</td>
-          <td class="info-value">${booking.checkOutDate} at 11:00 AM</td>
-        </tr>
+        <div class="info-row">
+          <div class="info-label">Check-out</div>
+          <div class="info-value">${booking.checkOutDate}</div>
+        </div>
         ` : ''}
-      </table>
+      </div>
 
       ${booking.addons.length > 0 ? `
-      <!-- Add-ons -->
-      <h2 class="section-title">Selected Add-ons</h2>
-      ${booking.addons.map(addon => `<div class="list-item" style="font-weight: 600;">${addon}</div>`).join('')}
+      <div class="divider"></div>
+      <p style="font-size: 13px; color: #6b7280; font-weight: 600; margin-bottom: 8px;">ADD-ONS:</p>
+      ${booking.addons.map(addon => `
+        <p style="font-size: 14px; color: #374151; margin: 4px 0; padding-left: 12px;">• ${addon}</p>
+      `).join('')}
       ` : ''}
 
-      <!-- Payment Summary -->
-      <h2 class="section-title">Payment Summary</h2>
-      <table class="invoice-table" cellpadding="0" cellspacing="0">
-        <tr class="invoice-row">
-          <td class="invoice-label">Base Price</td>
-          <td class="invoice-value">₹${booking.basePrice.toLocaleString()}</td>
-        </tr>
+      <!-- Price Summary -->
+      <div class="price-summary">
+        <div class="price-row">
+          <span>Base Price</span>
+          <span>₹${booking.basePrice.toLocaleString()}</span>
+        </div>
         ${booking.addonTotal > 0 ? `
-        <tr class="invoice-row">
-          <td class="invoice-label">Add-ons</td>
-          <td class="invoice-value">₹${booking.addonTotal.toLocaleString()}</td>
-        </tr>
+        <div class="price-row">
+          <span>Add-ons</span>
+          <span>₹${booking.addonTotal.toLocaleString()}</span>
+        </div>
         ` : ''}
         ${booking.discount > 0 ? `
-        <tr class="invoice-row">
-          <td class="invoice-label">Discount ${booking.couponCode ? `(${booking.couponCode})` : ''}</td>
-          <td class="invoice-value" style="color: #dc2626;">-₹${booking.discount.toLocaleString()}</td>
-        </tr>
+        <div class="price-row">
+          <span>Discount</span>
+          <span style="color: #dc2626;">-₹${booking.discount.toLocaleString()}</span>
+        </div>
         ` : ''}
-        <tr class="total-row" style="color: #1e40af;">
-          <td>Total Amount</td>
-          <td style="text-align: right;">₹${booking.totalAmount.toLocaleString()}</td>
-        </tr>
-        <tr class="paid-row">
-          <td>Full Payment Received</td>
-          <td style="text-align: right;">₹${booking.totalAmount.toLocaleString()}</td>
-        </tr>
-      </table>
-
-      <!-- Action Required -->
-      <div class="note-box">
-        <div class="note-title">Action Required</div>
-        <div class="note-text">
-          <strong>Checklist:</strong><br>
-          • Check availability and prepare ${booking.propertyName}<br>
-          • Contact guest: <a href="tel:${booking.guestPhone}" style="color: #92400e; font-weight: 700;">${booking.guestPhone}</a><br>
-          • Arrange add-ons: ${booking.addons.length > 0 ? booking.addons.join(', ') : 'None'}<br>
-          • Full payment received: ₹${booking.totalAmount.toLocaleString()}
+        <div class="price-total" style="color: #1e40af;">
+          <span>Total Amount</span>
+          <span>₹${booking.totalAmount.toLocaleString()}</span>
         </div>
       </div>
 
-      <center>
-        <a href="https://lakeora.sanity.studio" class="action-button" style="background-color: #2563eb;">
+      <!-- Admin Actions -->
+      <div class="button-container">
+        <a href="https://lakeora.sanity.studio" class="button-primary" style="background: #1e40af;">
           Open in Sanity Studio
         </a>
-      </center>
+      </div>
+
+      <div style="background: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 16px; margin: 24px 0;">
+        <p style="font-size: 13px; color: #92400e; font-weight: 600; margin-bottom: 8px;">
+          ACTION REQUIRED
+        </p>
+        <p style="font-size: 13px; color: #78350f; line-height: 1.6;">
+          • Confirm property availability<br>
+          • Contact guest: <strong>${booking.guestPhone}</strong><br>
+          • Arrange add-ons if any<br>
+          • Payment received: ₹${booking.totalAmount.toLocaleString()}
+        </p>
+      </div>
     </div>
 
     <!-- Footer -->
     <div class="footer">
-      <div class="footer-brand">Lakeora Admin Panel</div>
       <p class="footer-text">
-        This is an automated notification. Booking details are saved in Sanity CMS.
+        <strong>Lakeora Admin Panel</strong>
+      </p>
+      <p class="footer-text">
+        This is an automated notification from your booking system
       </p>
     </div>
   </div>

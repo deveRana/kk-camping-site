@@ -315,3 +315,43 @@ export async function getCafeMenu(): Promise<CafeMenuItem[]> {
     order: item.order ?? 0,
   }));
 }
+
+/* ---------- Bookings ---------- */
+
+interface SanityBooking {
+  _id: string;
+  referenceId: string;
+  guestName: string;
+  guestEmail: string;
+  guestPhone: string;
+  guestCity?: string;
+  propertyName: string;
+  propertyCategory: string;
+  numberOfGuests: number;
+  checkInDate?: string;
+  checkOutDate?: string;
+  addons?: string[];
+  basePrice: number;
+  addonTotal?: number;
+  discount?: number;
+  couponCode?: string;
+  totalAmount: number;
+  paymentMethod: string;
+  paymentStatus?: string;
+  bookingDate: string;
+}
+
+const BOOKINGS_QUERY = defineQuery(
+  `*[_type == "booking"] | order(bookingDate desc){
+    _id, referenceId, guestName, guestEmail, guestPhone, guestCity,
+    propertyName, propertyCategory, numberOfGuests,
+    checkInDate, checkOutDate, addons,
+    basePrice, addonTotal, discount, couponCode, totalAmount,
+    paymentMethod, paymentStatus, bookingDate
+  }`,
+);
+
+export async function getBookings(): Promise<SanityBooking[]> {
+  const rows = await client.fetch(BOOKINGS_QUERY, {}, { next: { revalidate: 30 } });
+  return rows;
+}

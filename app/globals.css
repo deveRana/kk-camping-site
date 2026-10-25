@@ -130,3 +130,13 @@ body {
 .reveal-2 { animation: float-up 0.9s 0.15s ease-out both; }
 .reveal-3 { animation: float-up 0.9s 0.3s ease-out both; }
 ::selection { background: #A8C8A6; color: #14281E; }
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+  }
+  .print-hidden {
+    display: none !important;
+  }
+}
