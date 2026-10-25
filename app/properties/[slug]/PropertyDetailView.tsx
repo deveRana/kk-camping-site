@@ -255,6 +255,14 @@ export function PropertyDetailView({
 
               <div className="p-6 space-y-5">
                 <div className="space-y-3">
+                  <DatePicker label="Check-in Date *" placeholder="Select Check-in" value={checkIn} onChange={setCheckIn} />
+                  <DatePicker
+                    label="Check-out Date *"
+                    placeholder="Select Check-out"
+                    value={checkOut}
+                    minDate={checkIn}
+                    onChange={setCheckOut}
+                  />
                   <div>
                     <label className="block text-xs font-semibold text-forest-deep uppercase tracking-wider mb-1.5">
                       Guests
@@ -270,25 +278,29 @@ export function PropertyDetailView({
                       <option value="6">6+ Guests</option>
                     </select>
                   </div>
-                  <DatePicker label="Check-in Date (Optional)" placeholder="Select Check-in" value={checkIn} onChange={setCheckIn} />
-                  <DatePicker
-                    label="Check-out Date (Optional)"
-                    placeholder="Select Check-out"
-                    value={checkOut}
-                    minDate={checkIn}
-                    onChange={setCheckOut}
-                  />
                 </div>
 
-                <Link href={bookingHref} className="block w-full">
-                  <Button variant="primary" size="lg" className="w-full">
-                    Reserve Now
+                {checkIn && checkOut ? (
+                  <Link href={bookingHref} className="block w-full">
+                    <Button variant="primary" size="lg" className="w-full">
+                      Reserve Now
+                    </Button>
+                  </Link>
+                ) : (
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    className="w-full opacity-60 cursor-not-allowed"
+                    onClick={() => {
+                      showToast({
+                        type: 'error',
+                        message: 'Please select check-in and check-out dates to proceed',
+                      });
+                    }}
+                  >
+                    Select Dates to Continue
                   </Button>
-                </Link>
-
-                <p className="text-center text-xs text-forest-deep/60">
-                  Dates are flexible? You can specify them later during booking.
-                </p>
+                )}
 
                 <div className="bg-gradient-to-br from-forest/5 to-sage/5 rounded-xl p-4 border border-forest/20">
                   <p className="text-xs text-forest-deep/80 text-center leading-relaxed">
