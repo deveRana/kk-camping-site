@@ -1,0 +1,30 @@
+✅ Cafe Menu Schema Added Successfully!
+
+📋 What was done:
+1. ✅ Copied cafeMenuItem.ts to schemaTypes/
+2. ✅ Updated schemaTypes/index.ts to include cafe menu
+3. ✅ Updated sanity.config.ts to show "☕ Cafe Menu" in sidebar
+
+🚀 Next Steps (run these commands):
+
+# Step 1: Navigate to studio
+cd D:\RANA\studio-lakeora
+
+# Step 2: Deploy schema to Sanity
+sanity deploy
+
+# Step 3: Import cafe menu data
+sanity dataset import ../kk-camping-site/sanity/cafe-menu-import.ndjson production
+
+# Step 4: Start studio locally (optional - to add images)
+npm run dev
+# Visit: http://localhost:3333
+
+✅ Done! Your cafe menu is now in Sanity CMS!
+
+📝 What you'll see in Sanity Studio:
+- "☕ Cafe Menu" in the sidebar
+- 24 menu items imported
+- You can now add images, edit prices, descriptions, etc.
+
+🌐 Website will update automatically within 60 seconds!
