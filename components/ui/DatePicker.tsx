@@ -45,26 +45,12 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Prevent body scroll on mobile when date picker is open
+  // Lock body scroll when picker is open
   useEffect(() => {
     if (isOpen) {
-      // Save original body overflow
-      const originalOverflow = document.body.style.overflow;
-      const originalPosition = document.body.style.position;
-
-      // Only lock scroll on mobile devices
-      const isMobile = window.innerWidth < 640;
-      if (isMobile) {
-        document.body.style.overflow = 'hidden';
-        document.body.style.position = 'fixed';
-        document.body.style.width = '100%';
-      }
-
+      document.body.style.overflow = 'hidden';
       return () => {
-        // Restore original styles
-        document.body.style.overflow = originalOverflow;
-        document.body.style.position = originalPosition;
-        document.body.style.width = '';
+        document.body.style.overflow = 'unset';
       };
     }
   }, [isOpen]);
@@ -165,96 +151,107 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         </svg>
       </button>
 
-      {/* Custom Calendar Popover Menu */}
+      {/* Calendar Modal - Bottom Sheet Style on Mobile */}
       {isOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/20 backdrop-blur-sm sm:absolute sm:inset-auto sm:top-full sm:left-0 sm:mt-2 sm:p-0 sm:bg-transparent sm:backdrop-blur-none overflow-y-auto"
-          onClick={(e) => {
-            // Close if clicking the backdrop (not the calendar itself)
-            if (e.target === e.currentTarget) {
-              setIsOpen(false);
-            }
-          }}
-        >
-          <div className="w-full max-w-sm sm:w-80 bg-white border border-mist rounded-2xl shadow-2xl animate-scaleUp my-auto flex flex-col max-h-[85vh]">
-            {/* Calendar Content - Always scrollable when needed */}
-            <div className="overflow-y-auto overscroll-contain p-4 flex-1">
-              {/* Calendar Header */}
-              <div className="flex items-center justify-between pb-3 mb-3 border-b border-mist sticky top-0 bg-white z-10">
-                <button
-                  onClick={handlePrevMonth}
-                  className="p-2 text-forest-deep hover:bg-mist/50 rounded-lg transition touch-manipulation"
-                  aria-label="Previous Month"
-                >
-                  <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <span className="font-display font-semibold text-forest-deep text-base">
-                  {MONTH_NAMES[currentMonth]} {currentYear}
-                </span>
-                <button
-                  onClick={handleNextMonth}
-                  className="p-2 text-forest-deep hover:bg-mist/50 rounded-lg transition touch-manipulation"
-                  aria-label="Next Month"
-                >
-                  <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
+            onClick={() => setIsOpen(false)}
+          />
+
+          {/* Calendar Container - Bottom Sheet on Mobile, Dropdown on Desktop */}
+          <div className="fixed bottom-0 left-0 right-0 z-50 sm:absolute sm:bottom-auto sm:top-full sm:left-0 sm:right-auto sm:mt-2">
+            <div className="w-full sm:w-80 bg-white sm:border border-mist sm:rounded-2xl rounded-t-3xl sm:rounded-t-2xl shadow-2xl animate-slideUp sm:animate-scaleUp">
+              {/* Drag Handle (Mobile Only) */}
+              <div className="sm:hidden flex justify-center pt-3 pb-2">
+                <div className="w-12 h-1 bg-gray-300 rounded-full" />
               </div>
 
-              {/* Weekday Names */}
-              <div className="grid grid-cols-7 text-center mb-2">
-                {WEEKDAYS.map((wd) => (
-                  <span key={wd} className="text-xs font-bold text-forest-deep/60 py-2">
-                    {wd}
-                  </span>
-                ))}
-              </div>
-
-              {/* Day Grid */}
-              <div className="grid grid-cols-7 gap-1.5 text-center pb-4">
-                {Array.from({ length: firstDayOfWeek }).map((_, idx) => (
-                  <div key={`empty-${idx}`} />
-                ))}
-
-                {Array.from({ length: daysInMonth }).map((_, idx) => {
-                  const day = idx + 1;
-                  const selected = isSelected(day);
-                  const today = isToday(day);
-                  const disabled = isDisabled(day);
-
-                  return (
+              {/* Scrollable Calendar Content */}
+              <div className="max-h-[80vh] overflow-y-auto overscroll-contain">
+                <div className="p-4 pb-safe">
+                  {/* Calendar Header - Sticky */}
+                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-mist sticky top-0 bg-white z-10">
                     <button
-                      key={day}
+                      onClick={handlePrevMonth}
                       type="button"
-                      disabled={disabled}
-                      onClick={() => handleSelectDay(day)}
-                      className={`h-10 sm:h-9 rounded-xl text-sm font-semibold flex items-center justify-center transition touch-manipulation ${
-                        selected
-                          ? 'bg-forest text-white shadow-md scale-105'
-                          : today
-                          ? 'bg-sage/20 text-forest font-bold border-2 border-sage'
-                          : 'text-forest-deep hover:bg-mist/60 active:bg-mist'
-                      } ${disabled ? 'opacity-30 cursor-not-allowed hover:bg-transparent line-through' : ''}`}
+                      className="p-2 text-forest-deep hover:bg-mist/50 rounded-lg transition touch-manipulation"
+                      aria-label="Previous Month"
                     >
-                      {day}
+                      <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                      </svg>
                     </button>
-                  );
-                })}
-              </div>
+                    <span className="font-display font-semibold text-forest-deep text-base">
+                      {MONTH_NAMES[currentMonth]} {currentYear}
+                    </span>
+                    <button
+                      onClick={handleNextMonth}
+                      type="button"
+                      className="p-2 text-forest-deep hover:bg-mist/50 rounded-lg transition touch-manipulation"
+                      aria-label="Next Month"
+                    >
+                      <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
 
-              {/* Close button for mobile */}
-              <button
-                onClick={() => setIsOpen(false)}
-                className="sm:hidden w-full mt-4 py-3 bg-forest/5 text-forest font-semibold rounded-xl hover:bg-forest/10 transition touch-manipulation"
-              >
-                Close
-              </button>
+                  {/* Weekday Names */}
+                  <div className="grid grid-cols-7 text-center mb-2">
+                    {WEEKDAYS.map((wd) => (
+                      <span key={wd} className="text-xs font-bold text-forest-deep/60 py-2">
+                        {wd}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Day Grid - All dates visible */}
+                  <div className="grid grid-cols-7 gap-2 text-center pb-4">
+                    {Array.from({ length: firstDayOfWeek }).map((_, idx) => (
+                      <div key={`empty-${idx}`} />
+                    ))}
+
+                    {Array.from({ length: daysInMonth }).map((_, idx) => {
+                      const day = idx + 1;
+                      const selected = isSelected(day);
+                      const today = isToday(day);
+                      const disabled = isDisabled(day);
+
+                      return (
+                        <button
+                          key={day}
+                          type="button"
+                          disabled={disabled}
+                          onClick={() => handleSelectDay(day)}
+                          className={`h-11 rounded-xl text-sm font-semibold flex items-center justify-center transition-all touch-manipulation ${
+                            selected
+                              ? 'bg-forest text-white shadow-lg scale-105'
+                              : today
+                              ? 'bg-sage/20 text-forest font-bold border-2 border-sage'
+                              : 'text-forest-deep hover:bg-mist/60 active:bg-mist'
+                          } ${disabled ? 'opacity-30 cursor-not-allowed hover:bg-transparent line-through' : ''}`}
+                        >
+                          {day}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Close button */}
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    type="button"
+                    className="w-full mt-4 mb-2 py-3.5 bg-forest text-white font-semibold rounded-xl hover:bg-forest/90 transition touch-manipulation shadow-md"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
