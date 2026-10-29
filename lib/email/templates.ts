@@ -22,6 +22,8 @@ interface BookingDetails {
   discount: number;
   couponCode?: string;
   totalAmount: number;
+  advanceAmount?: number;
+  remainingAmount?: number;
   paymentMethod: string;
   bookingDate: string;
 }
@@ -303,9 +305,24 @@ export function generateGuestConfirmationEmail(booking: BookingDetails): string 
         </div>
         ` : ''}
         <div class="price-total">
-          <span>Total Paid</span>
+          <span>Total Amount</span>
           <span>₹${booking.totalAmount.toLocaleString()}</span>
         </div>
+        ${booking.advanceAmount ? `
+        <div class="price-row" style="background: #10b981; color: white; padding: 12px; margin-top: 8px; border-radius: 6px; font-weight: 700;">
+          <span>✓ Advance Paid (50%)</span>
+          <span>₹${booking.advanceAmount.toLocaleString()}</span>
+        </div>
+        <div class="price-row" style="background: #fbbf24; color: #78350f; padding: 12px; margin-top: 4px; border-radius: 6px; font-weight: 600;">
+          <span>⏰ Remaining (Pay on arrival)</span>
+          <span>₹${booking.remainingAmount?.toLocaleString() || '0'}</span>
+        </div>
+        ` : `
+        <div class="price-row" style="background: #10b981; color: white; padding: 12px; margin-top: 8px; border-radius: 6px; font-weight: 700;">
+          <span>✓ Full Payment Received</span>
+          <span>₹${booking.totalAmount.toLocaleString()}</span>
+        </div>
+        `}
       </div>
 
       <!-- Action Buttons -->
@@ -493,6 +510,16 @@ export function generateAdminNotificationEmail(booking: BookingDetails): string 
           <span>Total Amount</span>
           <span>₹${booking.totalAmount.toLocaleString()}</span>
         </div>
+        ${booking.advanceAmount ? `
+        <div class="price-row" style="background: #10b981; color: white; padding: 12px; margin-top: 8px; border-radius: 6px; font-weight: 700;">
+          <span>💳 Advance Received (50%)</span>
+          <span>₹${booking.advanceAmount.toLocaleString()}</span>
+        </div>
+        <div class="price-row" style="background: #fbbf24; color: #78350f; padding: 12px; margin-top: 4px; border-radius: 6px; font-weight: 700;">
+          <span>💵 Collect on Arrival (50%)</span>
+          <span>₹${booking.remainingAmount?.toLocaleString() || '0'}</span>
+        </div>
+        ` : ''}
       </div>
 
       <!-- Admin Actions -->
@@ -509,8 +536,13 @@ export function generateAdminNotificationEmail(booking: BookingDetails): string 
         <p style="font-size: 13px; color: #78350f; line-height: 1.6;">
           • Confirm property availability<br>
           • Contact guest: <strong>${booking.guestPhone}</strong><br>
-          • Arrange add-ons if any<br>
-          • Payment received: ₹${booking.totalAmount.toLocaleString()}
+          • Arrange add-ons: ${booking.addons && booking.addons.length > 0 ? booking.addons.join(', ') : 'None'}<br>
+          ${booking.advanceAmount ? `
+          • <strong style="color: #10b981;">✓ Advance received: ₹${booking.advanceAmount.toLocaleString()}</strong><br>
+          • <strong style="color: #d97706;">Collect on arrival: ₹${booking.remainingAmount?.toLocaleString() || '0'}</strong>
+          ` : `
+          • <strong style="color: #10b981;">✓ Full payment received: ₹${booking.totalAmount.toLocaleString()}</strong>
+          `}
         </p>
       </div>
     </div>

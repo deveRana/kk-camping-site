@@ -45,6 +45,8 @@ export function BookingView({
 
   const basePrice = property.price * numberOfGuests;
   const finalTotal = basePrice;
+  const advanceAmount = Math.round(finalTotal * 0.5); // 50% advance
+  const remainingAmount = finalTotal - advanceAmount; // 50% remaining
 
   const validateStep1 = () => {
     if (!formData.fullName.trim()) {
@@ -148,9 +150,9 @@ export function BookingView({
     const refId = `LS-2026-${Math.floor(1000 + Math.random() * 9000)}`;
 
     try {
-      // Step 1: Create Razorpay order
+      // Step 1: Create Razorpay order (50% advance payment)
       const orderResult = await createRazorpayOrderAPI({
-        amount: finalTotal,
+        amount: advanceAmount,
         currency: 'INR',
         receipt: refId,
         guestName: formData.fullName,
@@ -188,6 +190,8 @@ export function BookingView({
           discount: 0,
           couponCode: '',
           totalAmount: finalTotal,
+          advanceAmount: advanceAmount,
+          remainingAmount: remainingAmount,
           paymentMethod: 'razorpay',
           dataConsent: formData.dataConsent,
           consentTimestamp: new Date().toISOString(),
@@ -202,15 +206,15 @@ export function BookingView({
         throw new Error(bookingData.error || 'Failed to create booking');
       }
 
-      // Step 3: Open Razorpay checkout
+      // Step 3: Open Razorpay checkout (50% advance)
       await openRazorpayCheckout({
         orderId: orderResult.orderId,
-        amount: orderResult.amount || finalTotal * 100,
+        amount: orderResult.amount || advanceAmount * 100,
         currency: orderResult.currency || 'INR',
         customerName: formData.fullName,
         customerEmail: formData.email,
         customerPhone: formData.phone,
-        description: `Booking for ${property.title} - ${numberOfGuests} guest${numberOfGuests > 1 ? 's' : ''}`,
+        description: `50% Advance Payment - ${property.title} (${numberOfGuests} guests)`,
         onSuccess: async (response) => {
           // Step 4: Verify payment on server
           showToast({
@@ -552,7 +556,7 @@ export function BookingView({
                           d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                         />
                       </svg>
-                      <span>Secure Payment · ₹{finalTotal.toLocaleString()}</span>
+                      <span>Pay 50% Advance · ₹{advanceAmount.toLocaleString()}</span>
                     </div>
                   )}
                 </Button>
@@ -597,10 +601,19 @@ export function BookingView({
                 <span>Total Amount</span>
                 <span>₹{finalTotal.toLocaleString()}</span>
               </div>
-              <div className="flex justify-between text-emerald-600 font-bold text-lg mt-3 pt-3 border-t-2 border-emerald-200">
-                <span>✓ Pay Full Amount</span>
-                <span>₹{finalTotal.toLocaleString()}</span>
+              <div className="bg-green-50 rounded-lg p-4 mt-3 border border-green-200">
+                <div className="flex justify-between text-green-700 font-bold mb-2">
+                  <span>💳 Pay Now (50% Advance)</span>
+                  <span className="text-lg">₹{advanceAmount.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between text-amber-700 font-semibold text-sm">
+                  <span>⏰ Remaining (Pay on arrival)</span>
+                  <span>₹{remainingAmount.toLocaleString()}</span>
+                </div>
               </div>
+              <p className="text-xs text-gray-600 mt-2 text-center">
+                ℹ️ 50% advance secures your booking. Remaining 50% payable at check-in
+              </p>
             </div>
           </div>
         </div>

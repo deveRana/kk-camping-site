@@ -338,6 +338,8 @@ interface SanityBooking {
   discount?: number;
   couponCode?: string;
   totalAmount: number;
+  advanceAmount?: number;
+  remainingAmount?: number;
   paymentMethod: string;
   paymentStatus?: string;
   bookingDate: string;
@@ -349,6 +351,7 @@ const BOOKINGS_QUERY = defineQuery(
     propertyName, propertyCategory, numberOfGuests, vegCount, nonVegCount,
     checkInDate, checkOutDate, addons,
     basePrice, addonTotal, discount, couponCode, totalAmount,
+    advanceAmount, remainingAmount,
     paymentMethod, paymentStatus, bookingDate
   }`,
 );

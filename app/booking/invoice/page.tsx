@@ -183,12 +183,33 @@ export default async function InvoicePage({
                       ₹{booking.totalAmount?.toLocaleString() || '0'}
                     </td>
                   </tr>
-                  <tr className="bg-green-50">
-                    <td className="py-4 text-green-800 font-bold">AMOUNT PAID</td>
-                    <td className="py-4 text-right font-bold text-xl text-green-600">
-                      ₹{booking.totalAmount?.toLocaleString() || '0'}
-                    </td>
-                  </tr>
+                  {booking.advanceAmount ? (
+                    <>
+                      <tr className="bg-green-50">
+                        <td className="py-4 text-green-800 font-bold">
+                          ADVANCE PAID (50%)
+                        </td>
+                        <td className="py-4 text-right font-bold text-xl text-green-600">
+                          ₹{booking.advanceAmount.toLocaleString()}
+                        </td>
+                      </tr>
+                      <tr className="bg-amber-50">
+                        <td className="py-4 text-amber-800 font-bold">
+                          REMAINING (PAY ON ARRIVAL)
+                        </td>
+                        <td className="py-4 text-right font-bold text-xl text-amber-600">
+                          ₹{booking.remainingAmount?.toLocaleString() || '0'}
+                        </td>
+                      </tr>
+                    </>
+                  ) : (
+                    <tr className="bg-green-50">
+                      <td className="py-4 text-green-800 font-bold">FULL PAYMENT RECEIVED</td>
+                      <td className="py-4 text-right font-bold text-xl text-green-600">
+                        ₹{booking.totalAmount?.toLocaleString() || '0'}
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>

@@ -16,6 +16,7 @@ export async function GET(request: Request) {
       propertyName, propertyCategory, numberOfGuests, vegCount, nonVegCount,
       checkInDate, checkOutDate, addons,
       basePrice, addonTotal, discount, couponCode, totalAmount,
+      advanceAmount, remainingAmount,
       paymentMethod, paymentStatus, bookingDate
     }`,
     { ref }
@@ -435,10 +436,21 @@ export async function GET(request: Request) {
             <div class="payment-label">TOTAL AMOUNT</div>
             <div class="payment-value">₹${booking.totalAmount?.toLocaleString() || '0'}</div>
           </div>
+          ${booking.advanceAmount ? `
+          <div class="payment-row" style="background: #10b981; color: white; font-weight: 700;">
+            <div class="payment-label">ADVANCE PAID (50%)</div>
+            <div class="payment-value">₹${booking.advanceAmount.toLocaleString()}</div>
+          </div>
+          <div class="payment-row" style="background: #fbbf24; color: #78350f; font-weight: 700;">
+            <div class="payment-label">REMAINING (PAY ON ARRIVAL)</div>
+            <div class="payment-value">₹${booking.remainingAmount?.toLocaleString() || '0'}</div>
+          </div>
+          ` : `
           <div class="payment-row payment-paid">
-            <div class="payment-label">AMOUNT PAID</div>
+            <div class="payment-label">FULL PAYMENT RECEIVED</div>
             <div class="payment-value">₹${booking.totalAmount?.toLocaleString() || '0'}</div>
           </div>
+          `}
         </div>
       </div>
 
