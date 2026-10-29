@@ -335,7 +335,7 @@ export const PAWNA_CAMPSITE_MASTER_DATA: CampsiteMasterInfo = {
       id: 'pkg-maitri-camping',
       slug: 'maitri-camping',
       name: 'Maitri Camping',
-      tagline: 'Affordable lakeside camping with complete meals, BBQ, and free activities for couples & families',
+      tagline: 'Featured Stays at Pawna Lake - Choose from luxury AC dome tents, pine cottages, and waterfront camping canvas',
       pricePerPerson: 1500,
       washroomType: 'Common',
       capacity: '2/3/4 Guests sharing',

@@ -26,7 +26,7 @@ const maitriPackage = {
     _type: 'slug',
     current: 'maitri-camping',
   },
-  tagline: 'Affordable lakeside camping with complete meals, BBQ, and free activities for couples & families',
+  tagline: 'Featured Stays at Pawna Lake - Choose from luxury AC dome tents, pine cottages, and waterfront camping canvas',
   category: 'Tent Camping',
   price: 1500,
   capacity: '2/3/4 Guests sharing',
@@ -40,7 +40,7 @@ const maitriPackage = {
     lat: 18.6311632,
     lng: 73.4951721
   },
-  description: 'Welcome to Maitri Camping at Pawna Lake! Perfect for couples and families looking for an affordable lakeside getaway. Enjoy waterproof tents, western toilet facilities, free parking, and unlimited entertainment with sports activities like badminton, cricket, volleyball, and archery. Complete your experience with delicious BBQ, unlimited dinner buffet, and morning breakfast.',
+  description: 'Featured Stays at Pawna Lake - Choose from luxury AC dome tents, pine cottages, and waterfront camping canvas. Welcome to Maitri Camping at Pawna Lake! Perfect for couples and families looking for an affordable lakeside getaway. Enjoy waterproof tents, western toilet facilities, free parking, and unlimited entertainment with sports activities like badminton, cricket, volleyball, and archery. Complete your experience with delicious BBQ, unlimited dinner buffet, and morning breakfast.',
   features: [
     'Western Toilet Facility',
     'Free Parking',
