@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sendEmail } from '@/lib/email/send';
+import { sendEmail } from '@/lib/email/client';
 
 export async function POST(request: NextRequest) {
   try {
@@ -64,11 +64,11 @@ export async function POST(request: NextRequest) {
     `;
 
     // Send email to admin
-    await sendEmail(
-      process.env.ADMIN_EMAIL || 'info@lakeorastay.com',
-      adminEmailSubject,
-      adminEmailContent
-    );
+    await sendEmail({
+      to: process.env.ADMIN_EMAIL || 'info@lakeorastay.com',
+      subject: adminEmailSubject,
+      html: adminEmailContent,
+    });
 
     // Send acknowledgment email to user
     const userEmailSubject = 'Data Deletion Request Received - Lakeora';
@@ -118,7 +118,11 @@ export async function POST(request: NextRequest) {
       </div>
     `;
 
-    await sendEmail(email, userEmailSubject, userEmailContent);
+    await sendEmail({
+      to: email,
+      subject: userEmailSubject,
+      html: userEmailContent,
+    });
 
     return NextResponse.json({
       success: true,
