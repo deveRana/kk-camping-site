@@ -5,6 +5,7 @@ import { ModalProvider } from '@/components/modal/ModalProvider';
 import { ToastProvider } from '@/components/toast/ToastProvider';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { GoogleAnalytics } from '@/components/GoogleAnalytics';
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${cormorant.variable} ${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-paper text-forest-deep font-sans">
+        <GoogleAnalytics />
         <ToastProvider>
           <ModalProvider>
             <Navbar />
