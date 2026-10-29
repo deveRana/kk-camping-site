@@ -335,7 +335,7 @@ export const PAWNA_CAMPSITE_MASTER_DATA: CampsiteMasterInfo = {
       id: 'pkg-maitri-camping',
       slug: 'maitri-camping',
       name: 'Maitri Camping',
-      tagline: 'Featured Stays at Pawna Lake - Choose from luxury AC dome tents, pine cottages, and waterfront camping canvas',
+      tagline: 'Affordable lakeside camping with complete meals, BBQ, and free activities for couples & families',
       pricePerPerson: 1500,
       washroomType: 'Common',
       capacity: '2/3/4 Guests sharing',
@@ -369,6 +369,9 @@ export const PAWNA_CAMPSITE_MASTER_DATA: CampsiteMasterInfo = {
         'Check-in: 4:00 PM | Check-out: 11:00 AM',
         'Contact: +91 95271 43112'
       ],
+      isPopular: false,
+      isFeatured: true,
+      order: 5,
       // Maitri Camping specific location data
       googleMapsUrl: 'https://www.google.com/maps/place/Pawna+Tent+Camp+by+Maitri+Pawna+Lake+Camping+for+Couples+%26+Family+Lonavala+%7C+Tent+%26+Cottage+Camping/@18.6324747,73.4943782,17z/data=!4m9!3m8!1s0x3bc2a7ea40fa93d5:0xd347c333111ba7d8!5m2!4m1!1i2!8m2!3d18.6311632!4d73.4951721!16s%2Fg%2F11x8v2c58q',
       mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3780.7018670068865!2d73.49437816613157!3d18.632474684937243!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2a7ea40fa93d5%3A0xd347c333111ba7d8!2sPawna%20Tent%20Camp%20by%20Maitri%20Pawna%20Lake%20Camping%20for%20Couples%20%26%20Family%20Lonavala%20%7C%20Tent%20%26%20Cottage%20Camping!5e0!3m2!1sen!2sin!4v1792930352424!5m2!1sen!2sin',

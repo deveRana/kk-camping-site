@@ -151,6 +151,9 @@ export interface CampingPackage {
   highlights: string[];
   inclusions: string[];
   category: 'Glamping' | 'Cottage' | 'Dome' | 'Tent Camping';
+  isPopular?: boolean;
+  isFeatured?: boolean;
+  order?: number;
   // Optional location-specific fields (for properties at different locations)
   googleMapsUrl?: string;
   mapEmbed?: string;

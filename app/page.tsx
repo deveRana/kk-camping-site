@@ -26,13 +26,7 @@ export default async function HomePage() {
 
       {/* Feature Highlights Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
-          <div className="bg-gradient-to-br from-forest to-forest-dark text-white rounded-2xl p-6 border border-forest shadow-lg hover:shadow-xl transition">
-            <div className="font-display text-4xl font-bold mb-2">25+</div>
-            <h3 className="font-display font-semibold text-lg">Properties</h3>
-            <p className="text-xs text-white/80 mt-1">Tents, Cottages & Domes to choose from</p>
-          </div>
-
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div className="bg-white rounded-2xl p-6 border border-mist shadow-sm hover:border-forest/30 transition">
             <div className="w-12 h-12 rounded-xl bg-forest/10 text-forest mx-auto flex items-center justify-center mb-3">
               <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
