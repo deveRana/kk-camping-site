@@ -163,6 +163,8 @@ export async function POST(request: NextRequest) {
         propertyName: booking.propertyName,
         propertyCategory: booking.propertyCategory,
         numberOfGuests: booking.numberOfGuests,
+        ...(booking.vegCount !== undefined && { vegCount: booking.vegCount }),
+        ...(booking.nonVegCount !== undefined && { nonVegCount: booking.nonVegCount }),
         checkInDate: booking.checkInDate,
         checkOutDate: booking.checkOutDate,
         addons: booking.addons || [],
@@ -171,6 +173,8 @@ export async function POST(request: NextRequest) {
         discount: booking.discount || 0,
         couponCode: booking.couponCode,
         totalAmount: booking.totalAmount,
+        ...(booking.advanceAmount !== undefined && { advanceAmount: booking.advanceAmount }),
+        ...(booking.remainingAmount !== undefined && { remainingAmount: booking.remainingAmount }),
         paymentMethod: 'razorpay',
         bookingDate: booking.bookingDate,
       };

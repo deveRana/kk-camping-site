@@ -27,6 +27,8 @@ export async function POST(request: NextRequest) {
       guestPhone,
       guestCity,
       numberOfGuests,
+      vegCount,
+      nonVegCount,
       checkInDate,
       checkOutDate,
       addons,
@@ -35,6 +37,8 @@ export async function POST(request: NextRequest) {
       discount,
       couponCode,
       totalAmount,
+      advanceAmount,
+      remainingAmount,
       paymentMethod,
       notes,
       dataConsent,
@@ -104,6 +108,8 @@ export async function POST(request: NextRequest) {
 
       // Booking details
       numberOfGuests,
+      ...(vegCount !== undefined && { vegCount: Number(vegCount) }),
+      ...(nonVegCount !== undefined && { nonVegCount: Number(nonVegCount) }),
       checkInDate,
       checkOutDate,
       addons: addons || [],
@@ -114,6 +120,8 @@ export async function POST(request: NextRequest) {
       discount: Number(discount) || 0,
       couponCode: sanitizedData.couponCode,
       totalAmount: Number(totalAmount),
+      ...(advanceAmount !== undefined && { advanceAmount: Number(advanceAmount) }),
+      ...(remainingAmount !== undefined && { remainingAmount: Number(remainingAmount) }),
 
       // Payment
       paymentMethod,
@@ -175,6 +183,8 @@ export async function POST(request: NextRequest) {
         propertyName,
         propertyCategory,
         numberOfGuests,
+        ...(vegCount !== undefined && { vegCount }),
+        ...(nonVegCount !== undefined && { nonVegCount }),
         checkInDate,
         checkOutDate,
         addons: addons || [],
@@ -183,6 +193,8 @@ export async function POST(request: NextRequest) {
         discount: discount || 0,
         couponCode,
         totalAmount,
+        ...(advanceAmount !== undefined && { advanceAmount }),
+        ...(remainingAmount !== undefined && { remainingAmount }),
         paymentMethod,
         bookingDate: booking.bookingDate,
       };
