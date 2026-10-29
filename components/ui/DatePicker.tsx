@@ -35,6 +35,37 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   const [currentYear, setCurrentYear] = useState(initialViewDate.getFullYear());
   const [currentMonth, setCurrentMonth] = useState(initialViewDate.getMonth());
 
+  // Calculate dropdown position
+  const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
+
+  // Calculate position immediately when opening (memoized to prevent re-creation)
+  const calculatePosition = useCallback(() => {
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const dropdownHeight = 450; // Approximate height
+
+      // Position dropdown: if not enough space below, show above
+      if (spaceBelow < dropdownHeight && rect.top > dropdownHeight) {
+        setDropdownStyle({
+          position: 'fixed',
+          top: `${rect.top - dropdownHeight - 8}px`,
+          left: `${rect.left}px`,
+          width: `${rect.width}px`,
+          zIndex: 9999,
+        });
+      } else {
+        setDropdownStyle({
+          position: 'fixed',
+          top: `${rect.bottom + 8}px`,
+          left: `${rect.left}px`,
+          width: `${rect.width}px`,
+          zIndex: 9999,
+        });
+      }
+    }
+  }, []);
+
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
@@ -57,6 +88,13 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       window.removeEventListener('scroll', handleScroll, true);
       window.removeEventListener('resize', handleScroll);
     };
+  }, [isOpen, calculatePosition]);
+
+  // Recalculate on scroll/resize when open
+  useEffect(() => {
+    if (isOpen) {
+      calculatePosition();
+    }
   }, [isOpen, calculatePosition]);
 
   const handlePrevMonth = () => {
@@ -120,44 +158,6 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     const thisD = new Date(currentYear, currentMonth, day);
     return thisD < new Date(minD.getFullYear(), minD.getMonth(), minD.getDate());
   };
-
-  // Calculate dropdown position
-  const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
-
-  // Calculate position immediately when opening (memoized to prevent re-creation)
-  const calculatePosition = useCallback(() => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      const spaceBelow = window.innerHeight - rect.bottom;
-      const dropdownHeight = 450; // Approximate height
-
-      // Position dropdown: if not enough space below, show above
-      if (spaceBelow < dropdownHeight && rect.top > dropdownHeight) {
-        setDropdownStyle({
-          position: 'fixed',
-          top: `${rect.top - dropdownHeight - 8}px`,
-          left: `${rect.left}px`,
-          width: `${rect.width}px`,
-          zIndex: 9999,
-        });
-      } else {
-        setDropdownStyle({
-          position: 'fixed',
-          top: `${rect.bottom + 8}px`,
-          left: `${rect.left}px`,
-          width: `${rect.width}px`,
-          zIndex: 9999,
-        });
-      }
-    }
-  }, []);
-
-  // Recalculate on scroll/resize when open
-  useEffect(() => {
-    if (isOpen) {
-      calculatePosition();
-    }
-  }, [isOpen, calculatePosition]);
 
   return (
     <div ref={containerRef} className={`relative w-full ${className}`}>
