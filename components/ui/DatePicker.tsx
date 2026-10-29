@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 
 export interface DatePickerProps {
   label?: string;
@@ -43,28 +43,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     };
 
     const handleScroll = () => {
-      if (isOpen && containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        const spaceBelow = window.innerHeight - rect.bottom;
-        const dropdownHeight = 450;
-
-        if (spaceBelow < dropdownHeight && rect.top > dropdownHeight) {
-          setDropdownStyle({
-            position: 'fixed',
-            top: `${rect.top - dropdownHeight - 8}px`,
-            left: `${rect.left}px`,
-            width: `${rect.width}px`,
-            zIndex: 9999,
-          });
-        } else {
-          setDropdownStyle({
-            position: 'fixed',
-            top: `${rect.bottom + 8}px`,
-            left: `${rect.left}px`,
-            width: `${rect.width}px`,
-            zIndex: 9999,
-          });
-        }
+      if (isOpen) {
+        calculatePosition();
       }
     };
 
@@ -77,7 +57,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       window.removeEventListener('scroll', handleScroll, true);
       window.removeEventListener('resize', handleScroll);
     };
-  }, [isOpen]);
+  }, [isOpen, calculatePosition]);
 
   const handlePrevMonth = () => {
     if (currentMonth === 0) {
@@ -141,11 +121,12 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     return thisD < new Date(minD.getFullYear(), minD.getMonth(), minD.getDate());
   };
 
-  // Calculate dropdown position when opened
+  // Calculate dropdown position
   const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
 
-  useEffect(() => {
-    if (isOpen && containerRef.current) {
+  // Calculate position immediately when opening (memoized to prevent re-creation)
+  const calculatePosition = useCallback(() => {
+    if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       const spaceBelow = window.innerHeight - rect.bottom;
       const dropdownHeight = 450; // Approximate height
@@ -169,7 +150,14 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         });
       }
     }
-  }, [isOpen]);
+  }, []);
+
+  // Recalculate on scroll/resize when open
+  useEffect(() => {
+    if (isOpen) {
+      calculatePosition();
+    }
+  }, [isOpen, calculatePosition]);
 
   return (
     <div ref={containerRef} className={`relative w-full ${className}`}>
@@ -182,7 +170,13 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       {/* Input Trigger Button */}
       <button
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          if (!isOpen) {
+            // Calculate position BEFORE opening to prevent glitch
+            calculatePosition();
+          }
+          setIsOpen(!isOpen);
+        }}
         className="w-full bg-paper/40 border border-mist rounded-xl px-3.5 py-2.5 text-left text-sm font-medium text-forest-deep flex items-center justify-between hover:bg-mist/40 focus:outline-none focus:ring-2 focus:ring-forest transition shadow-sm"
       >
         <span className={value ? 'font-semibold text-forest-deep' : 'text-gray-400'}>
