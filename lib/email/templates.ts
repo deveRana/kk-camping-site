@@ -12,6 +12,8 @@ interface BookingDetails {
   propertyName: string;
   propertyCategory: string;
   numberOfGuests: number;
+  vegCount?: number;
+  nonVegCount?: number;
   checkInDate?: string;
   checkOutDate?: string;
   addons: string[];
@@ -259,6 +261,15 @@ export function generateGuestConfirmationEmail(booking: BookingDetails): string 
           <div class="info-label">Guests</div>
           <div class="info-value">${booking.numberOfGuests} ${booking.numberOfGuests === 1 ? 'person' : 'people'}</div>
         </div>
+        ${booking.vegCount !== undefined && booking.nonVegCount !== undefined ? `
+        <div class="info-row">
+          <div class="info-label">Food Preference</div>
+          <div class="info-value">
+            <span style="color: #10b981;">🥗 ${booking.vegCount} Veg</span> ·
+            <span style="color: #ef4444;">🍗 ${booking.nonVegCount} Non-Veg</span>
+          </div>
+        </div>
+        ` : ''}
         ${booking.checkInDate ? `
         <div class="info-row">
           <div class="info-label">Check-in</div>
@@ -425,6 +436,19 @@ export function generateAdminNotificationEmail(booking: BookingDetails): string 
           <div class="info-label">Guests</div>
           <div class="info-value">${booking.numberOfGuests}</div>
         </div>
+        ${booking.vegCount !== undefined && booking.nonVegCount !== undefined ? `
+        <div class="info-row">
+          <div class="info-label">Food Preference</div>
+          <div class="info-value">
+            <span style="display: inline-block; padding: 4px 12px; background: #10b981; color: white; border-radius: 12px; font-size: 12px; font-weight: 700; margin-right: 8px;">
+              🥗 ${booking.vegCount} VEG
+            </span>
+            <span style="display: inline-block; padding: 4px 12px; background: #ef4444; color: white; border-radius: 12px; font-size: 12px; font-weight: 700;">
+              🍗 ${booking.nonVegCount} NON-VEG
+            </span>
+          </div>
+        </div>
+        ` : ''}
         ${booking.checkInDate ? `
         <div class="info-row">
           <div class="info-label">Check-in</div>

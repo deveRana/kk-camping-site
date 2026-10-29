@@ -328,6 +328,8 @@ interface SanityBooking {
   propertyName: string;
   propertyCategory: string;
   numberOfGuests: number;
+  vegCount?: number;
+  nonVegCount?: number;
   checkInDate?: string;
   checkOutDate?: string;
   addons?: string[];
@@ -344,7 +346,7 @@ interface SanityBooking {
 const BOOKINGS_QUERY = defineQuery(
   `*[_type == "booking"] | order(bookingDate desc){
     _id, referenceId, guestName, guestEmail, guestPhone, guestCity,
-    propertyName, propertyCategory, numberOfGuests,
+    propertyName, propertyCategory, numberOfGuests, vegCount, nonVegCount,
     checkInDate, checkOutDate, addons,
     basePrice, addonTotal, discount, couponCode, totalAmount,
     paymentMethod, paymentStatus, bookingDate

@@ -13,7 +13,7 @@ export async function GET(request: Request) {
   const booking = await client.fetch(
     `*[_type == "booking" && referenceId == $ref][0]{
       referenceId, guestName, guestEmail, guestPhone, guestCity,
-      propertyName, propertyCategory, numberOfGuests,
+      propertyName, propertyCategory, numberOfGuests, vegCount, nonVegCount,
       checkInDate, checkOutDate, addons,
       basePrice, addonTotal, discount, couponCode, totalAmount,
       paymentMethod, paymentStatus, bookingDate
@@ -363,6 +363,19 @@ export async function GET(request: Request) {
             <div class="info-label">Number of Guests</div>
             <div class="info-value">${booking.numberOfGuests} ${booking.numberOfGuests === 1 ? 'person' : 'people'}</div>
           </div>
+          ${booking.vegCount !== undefined && booking.nonVegCount !== undefined ? `
+          <div class="info-row">
+            <div class="info-label">Food Preference</div>
+            <div class="info-value">
+              <span style="display: inline-block; padding: 4px 12px; background: #10b981; color: white; border-radius: 12px; font-size: 11px; font-weight: 700; margin-right: 8px;">
+                🥗 ${booking.vegCount} VEG
+              </span>
+              <span style="display: inline-block; padding: 4px 12px; background: #ef4444; color: white; border-radius: 12px; font-size: 11px; font-weight: 700;">
+                🍗 ${booking.nonVegCount} NON-VEG
+              </span>
+            </div>
+          </div>
+          ` : ''}
           ${booking.checkInDate ? `
           <div class="info-row">
             <div class="info-label">Check-in Date</div>

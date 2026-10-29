@@ -80,6 +80,19 @@ export default async function InvoicePage({
                     {booking.numberOfGuests}
                   </td>
                 </tr>
+                {booking.vegCount !== undefined && booking.nonVegCount !== undefined && (
+                  <tr className="border-b border-gray-200">
+                    <td className="py-3 text-gray-600">Food Preference</td>
+                    <td className="py-3 text-right font-semibold text-gray-900">
+                      <span className="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-bold mr-2">
+                        🥗 {booking.vegCount} Veg
+                      </span>
+                      <span className="inline-block px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-bold">
+                        🍗 {booking.nonVegCount} Non-Veg
+                      </span>
+                    </td>
+                  </tr>
+                )}
                 {booking.checkInDate && (
                   <tr className="border-b border-gray-200">
                     <td className="py-3 text-gray-600">Check-in</td>

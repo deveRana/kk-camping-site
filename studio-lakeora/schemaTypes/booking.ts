@@ -119,6 +119,20 @@ export default defineType({
       validation: (Rule) => Rule.required().positive().integer(),
     }),
     defineField({
+      name: 'vegCount',
+      title: 'Number of Veg Guests',
+      type: 'number',
+      description: 'Number of vegetarian guests',
+      validation: (Rule) => Rule.min(0).integer(),
+    }),
+    defineField({
+      name: 'nonVegCount',
+      title: 'Number of Non-Veg Guests',
+      type: 'number',
+      description: 'Number of non-vegetarian guests',
+      validation: (Rule) => Rule.min(0).integer(),
+    }),
+    defineField({
       name: 'checkInDate',
       title: 'Check-in Date',
       type: 'date',
