@@ -16,6 +16,22 @@ export const Footer: React.FC = () => {
             <p className="text-sm text-paper/80 leading-relaxed max-w-sm">
               Premium lakeside glamping, cozy wooden cottages, and camping tents at Pawna Lake near Lonavala. Bonfires, kayaking, BBQ, and memorable sunsets.
             </p>
+            <div className="space-y-2 pt-2">
+              <a
+                href="tel:+917499757607"
+                className="flex items-center gap-2 text-sm text-paper/80 hover:text-sage transition"
+              >
+                <span>📞</span>
+                <span>+91 74997 57607</span>
+              </a>
+              <a
+                href="mailto:info@lakeorastay.com"
+                className="flex items-center gap-2 text-sm text-paper/80 hover:text-sage transition"
+              >
+                <span>📧</span>
+                <span>info@lakeorastay.com</span>
+              </a>
+            </div>
           </div>
 
           {/* Quick Links */}

@@ -71,9 +71,34 @@ export function ContactView({ settings }: { settings: SiteSettings }) {
               📞
             </div>
             <h3 className="font-display text-lg font-semibold text-forest-deep">Phone &amp; WhatsApp</h3>
-            <p className="text-xs text-forest-deep/70">{settings.contactNumbers.join(' / ')}</p>
+            <div className="space-y-2">
+              {settings.contactNumbers.map((phone) => (
+                <a
+                  key={phone}
+                  href={`tel:${phone.replace(/\s/g, '')}`}
+                  className="block text-xs text-forest-deep/70 hover:text-forest hover:underline transition"
+                >
+                  {phone}
+                </a>
+              ))}
+            </div>
             <p className="text-[11px] text-forest-deep/50">Mon – Sun: 9:00 AM – 9:00 PM</p>
           </div>
+
+          {settings.email && (
+            <div className="bg-white rounded-2xl p-6 border border-mist shadow-sm space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-forest/10 text-forest flex items-center justify-center font-bold">
+                📧
+              </div>
+              <h3 className="font-display text-lg font-semibold text-forest-deep">Email</h3>
+              <a
+                href={`mailto:${settings.email}`}
+                className="block text-xs text-forest-deep/70 hover:text-forest hover:underline transition break-all"
+              >
+                {settings.email}
+              </a>
+            </div>
+          )}
 
           <div className="bg-white rounded-2xl p-6 border border-mist shadow-sm space-y-3">
             <div className="w-10 h-10 rounded-xl bg-sage/30 text-forest flex items-center justify-center font-bold">
@@ -81,6 +106,16 @@ export function ContactView({ settings }: { settings: SiteSettings }) {
             </div>
             <h3 className="font-display text-lg font-semibold text-forest-deep">Location</h3>
             <p className="text-xs text-forest-deep/70">{settings.address}</p>
+            {settings.googleMapsUrl && (
+              <a
+                href={settings.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-xs text-forest hover:underline mt-2"
+              >
+                Open in Google Maps →
+              </a>
+            )}
           </div>
         </div>
 
