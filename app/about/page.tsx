@@ -1,9 +1,14 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { Button } from '@/components/ui/Button';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About Us — Lakeora Pawna Lake Camping',
+  description:
+    'Learn about Lakeora, your premier lakeside camping destination at Pawna Lake. Founded in 2021 to bring nature closer with glamping domes, wooden chalets, and safari tents near Lonavala.',
+};
 
 export default function AboutPage() {
   return (

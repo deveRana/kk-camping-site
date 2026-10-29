@@ -1,7 +1,12 @@
-'use client';
-
 import React from 'react';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Terms & Conditions — Lakeora',
+  description:
+    'Terms and conditions for booking and staying at Lakeora Pawna Lake. Read our policies on reservations, check-in, cancellations, and guest responsibilities.',
+};
 
 export default function TermsPage() {
   return (

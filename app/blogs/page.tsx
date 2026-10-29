@@ -3,6 +3,13 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { BlogCard } from '@/components/sections/BlogCard';
 import { getBlogs } from '@/lib/sanity/data';
 import { Badge } from '@/components/ui/Badge';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Pawna Lake Travel Blog & Camping Guides — Lakeora',
+  description:
+    'Read insider camping tips, travel guides, and stories about Pawna Lake. Best seasons to visit, route directions, glamping advice, and hidden sunset spots around Lonavala.',
+};
 
 export const revalidate = 60;
 

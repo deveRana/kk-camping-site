@@ -1,7 +1,12 @@
-'use client';
-
 import React from 'react';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy — Lakeora',
+  description:
+    'Privacy policy for Lakeora Pawna Lake. Learn how we collect, use, and protect your personal information when you book and stay with us.',
+};
 
 export default function PrivacyPage() {
   return (

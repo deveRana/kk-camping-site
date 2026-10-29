@@ -1,8 +1,13 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Cancellation & Refund Policy — Lakeora',
+  description:
+    'Cancellation and refund policy for Lakeora Pawna Lake bookings. Understand our cancellation timelines, refund rules, and how to modify or cancel your reservation.',
+};
 
 export default function CancellationPage() {
   return (
