@@ -81,6 +81,11 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/grievance" className="hover:text-sage transition">
+                  Grievance Officer
+                </Link>
+              </li>
+              <li>
                 <Link href="/cancellation" className="hover:text-sage transition">
                   Cancellation Policy
                 </Link>
@@ -90,7 +95,7 @@ export const Footer: React.FC = () => {
 
           {/* Legal Policies */}
           <div>
-            <h4 className="font-display text-lg font-semibold text-sage mb-4">Legal</h4>
+            <h4 className="font-display text-lg font-semibold text-sage mb-4">Legal & Privacy</h4>
             <ul className="space-y-2.5 text-sm text-paper/80">
               <li>
                 <Link href="/terms" className="hover:text-sage transition">
@@ -105,6 +110,11 @@ export const Footer: React.FC = () => {
               <li>
                 <Link href="/cookie-policy" className="hover:text-sage transition">
                   Cookie Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/data-deletion" className="hover:text-sage transition">
+                  Delete My Data
                 </Link>
               </li>
               <li>
