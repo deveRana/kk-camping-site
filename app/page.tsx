@@ -87,7 +87,7 @@ export default async function HomePage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {featuredProperties.slice(0, 4).map((property) => (
+          {featuredProperties.map((property) => (
             <Link
               key={property.id}
               href={`/properties/${property.slug}`}

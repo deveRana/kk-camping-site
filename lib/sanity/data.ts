@@ -28,6 +28,10 @@ interface SanityProperty {
   location?: string;
   distance?: string;
   capacity?: string;
+  locationName?: string;
+  googleMapsUrl?: string;
+  mapEmbed?: string;
+  coordinates?: { lat: number; lng: number };
   coverImage: SanityImageSource;
   gallery?: SanityImageSource[];
   description?: string;
@@ -133,8 +137,8 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 
 const PROPERTY_FIELDS = `
   _id, title, "slug": slug.current, tagline, category, price, originalPrice,
-  capacity, rating, reviewCount, location, distance, description,
-  coverImage, gallery, features, amenities, inclusions, isPopular, isFeatured
+  capacity, rating, reviewCount, location, distance, locationName, googleMapsUrl, mapEmbed, coordinates,
+  description, coverImage, gallery, features, amenities, inclusions, isPopular, isFeatured
 `;
 
 const PROPERTIES_QUERY = defineQuery(
@@ -171,7 +175,10 @@ function mapProperty(p: SanityProperty, s: SiteSettings): Property {
       joined: 'Verified Lakeside Campsite',
       phone: s.contactNumbers[0] ?? '',
     },
-    coordinates: s.coordinates,
+    coordinates: p.coordinates ?? s.coordinates,
+    googleMapsUrl: p.googleMapsUrl,
+    mapEmbed: p.mapEmbed,
+    locationName: p.locationName,
     isPopular: p.isPopular ?? false,
     isFeatured: p.isFeatured ?? false,
   };

@@ -22,7 +22,8 @@
     "razorpay": "^2.9.8",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "resend": "^4.0.1"
+    "resend": "^4.0.1",
+    "styled-components": "^6.6.0"
   },
   "devDependencies": {
     "@sanity/client": "^8.9.0",

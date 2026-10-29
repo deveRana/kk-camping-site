@@ -32,6 +32,12 @@ export const property = defineType({
     defineField({name: 'location', type: 'string', initialValue: 'Gevhande Khadak, Pawna Lake'}),
     defineField({name: 'distance', type: 'string', initialValue: '2.5 hrs from Mumbai · 1.5 hrs from Pune'}),
     defineField({
+      name: 'locationName',
+      title: 'Location Name',
+      type: 'string',
+      description: 'Specific location name for this property (e.g., "Pawna Tent Camp by Maitri - Lonavala")',
+    }),
+    defineField({
       name: 'googleMapsUrl',
       title: 'Google Maps URL',
       type: 'url',

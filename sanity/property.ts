@@ -86,6 +86,12 @@ export default defineType({
       description: 'e.g., "2 hours from Mumbai · 1.5 hours from Pune"',
     }),
     defineField({
+      name: 'locationName',
+      title: 'Location Name',
+      type: 'string',
+      description: 'Specific location name for this property (e.g., "Pawna Tent Camp by Maitri - Lonavala")',
+    }),
+    defineField({
       name: 'googleMapsUrl',
       title: 'Google Maps URL',
       type: 'url',

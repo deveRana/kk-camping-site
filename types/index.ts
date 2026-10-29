@@ -31,6 +31,9 @@ export interface Property {
     lat: number;
     lng: number;
   };
+  googleMapsUrl?: string;
+  mapEmbed?: string;
+  locationName?: string;
   isPopular?: boolean;
   isFeatured?: boolean;
 }
