@@ -336,27 +336,33 @@ export function PropertyDetailView({
               How to Reach
             </h2>
             <p className="text-sm text-forest-deep/70">
-              We're located at Pawna Lake, easily accessible from Mumbai and Pune
+              {property.locationName || `Located at ${property.location}`}
             </p>
           </div>
 
           <div className="bg-white rounded-3xl border border-mist overflow-hidden shadow-xl">
-            {/* Map Embed */}
+            {/* Map Embed - Uses property-specific map from Sanity */}
             <div className="relative w-full h-[400px] md:h-[500px]">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d376.097023599811!2d73.49601918122337!3d18.64128502032591!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2a9eab3ca531b%3A0xcbb693c085173e98!2sLakeora%20Cafe%20Pawna%20Lake!5e0!3m2!1sen!2sin!4v1792746933973!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0"
-                title="Lakeora Cafe Pawna Lake Location"
-              />
+              {property.mapEmbed ? (
+                <iframe
+                  src={property.mapEmbed}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0"
+                  title={`${property.title} Location Map`}
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center bg-mist">
+                  <p className="text-forest-deep/60">Map not available</p>
+                </div>
+              )}
             </div>
 
-            {/* Map Info Footer */}
+            {/* Map Info Footer - All data from Sanity */}
             <div className="bg-gradient-to-br from-forest to-forest-dark text-white p-6">
               <div className="grid md:grid-cols-3 gap-6">
                 <div className="space-y-2">
@@ -365,10 +371,10 @@ export function PropertyDetailView({
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <span className="font-semibold text-sage text-sm">Address</span>
+                    <span className="font-semibold text-sage text-sm">Location</span>
                   </div>
                   <p className="text-xs text-white/80 leading-relaxed">
-                    Lakeora, Pawna Lake, Thakursai-Aajiwali Rd, Gevhande Khadak, Maharashtra 410406
+                    {property.locationName || property.location}
                   </p>
                 </div>
 
@@ -380,8 +386,7 @@ export function PropertyDetailView({
                     <span className="font-semibold text-sage text-sm">Travel Time</span>
                   </div>
                   <p className="text-xs text-white/80">
-                    From Mumbai: 2.5 hours<br />
-                    From Pune: 1.5 hours
+                    {property.distance || 'Contact us for directions'}
                   </p>
                 </div>
 
@@ -392,17 +397,21 @@ export function PropertyDetailView({
                     </svg>
                     <span className="font-semibold text-sage text-sm">Get Directions</span>
                   </div>
-                  <a
-                    href="https://maps.app.goo.gl/jqCWfXeDt9qb61Qr6"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-white text-forest hover:bg-sage hover:text-forest-deep px-6 py-2.5 rounded-full text-sm font-semibold transition shadow-lg group"
-                  >
-                    Open in Google Maps
-                    <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </a>
+                  {property.googleMapsUrl ? (
+                    <a
+                      href={property.googleMapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-white text-forest hover:bg-sage hover:text-forest-deep px-6 py-2.5 rounded-full text-sm font-semibold transition shadow-lg group"
+                    >
+                      Open in Google Maps
+                      <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </a>
+                  ) : (
+                    <p className="text-xs text-white/60">Directions available on request</p>
+                  )}
                 </div>
               </div>
             </div>
