@@ -25,7 +25,7 @@ export const blogPost = defineType({
       type: 'array',
       of: [defineArrayMember({type: 'block'})],
     }),
-    defineField({name: 'authorName', type: 'string'}),
+    defineField({name: 'authorName', type: 'string', validation: (r) => r.required()}),
     defineField({name: 'authorRole', type: 'string'}),
     defineField({name: 'authorAvatar', type: 'image'}),
     defineField({name: 'publishedAt', type: 'datetime', validation: (r) => r.required()}),

@@ -79,6 +79,7 @@ export default defineType({
       type: 'boolean',
       initialValue: true,
       description: '✅ Check if this is a vegetarian dish',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'isSpecial',

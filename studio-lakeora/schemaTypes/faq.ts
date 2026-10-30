@@ -14,6 +14,7 @@ export const faq = defineType({
         list: ['General', 'Booking & Payment', 'Check-in/out', 'Food & Activities', 'Safety'],
       },
       initialValue: 'General',
+      validation: (r) => r.required(),
     }),
     defineField({name: 'order', type: 'number', description: 'Lower numbers show first'}),
   ],
