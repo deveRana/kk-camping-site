@@ -157,7 +157,8 @@ function mapProperty(p: SanityProperty, s: SiteSettings): Property {
     category: p.category as Property['category'],
     price: p.price,
     originalPrice: p.originalPrice ?? undefined,
-    rating: p.rating ?? 4.9,
+    // Use Sanity data directly - no fallbacks
+    rating: p.rating ?? 0,
     reviewCount: p.reviewCount ?? 0,
     location: p.location ?? '',
     distance: p.distance ?? '',
