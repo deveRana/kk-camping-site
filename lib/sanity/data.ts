@@ -281,7 +281,7 @@ export async function getTestimonials(): Promise<Testimonial[]> {
     name: t.name,
     location: t.location ?? '',
     avatar: urlFor(t.avatar, 200) || '/logos/lakeora-mark-dark.png',
-    rating: t.rating ?? 5,
+    rating: t.rating ?? 0,  // Changed from 5 to 0 - makes missing data obvious
     stayType: t.stayType ?? '',
     comment: t.comment,
     date: t.date ?? '',
@@ -317,7 +317,7 @@ export async function getCafeMenu(): Promise<CafeMenuItem[]> {
     category: item.category as CafeMenuItem['category'],
     price: item.price,
     description: item.description ?? '',
-    isVeg: item.isVeg ?? true,
+    isVeg: item.isVeg,  // Removed fallback - must be set in Sanity!
     isSpecial: item.isSpecial ?? false,
     imageUrl: urlFor(item.image, 800),
     order: item.order ?? 0,
