@@ -123,7 +123,8 @@ export function PropertyDetailView({
 
         {/* Photo gallery: layout adapts to how many photos the stay has */}
         {(() => {
-          const photos = property.gallery.length > 0 ? property.gallery : [property.coverImage];
+          const validPhotos = property.gallery.filter(Boolean);
+          const photos = validPhotos.length > 0 ? validPhotos : (property.coverImage ? [property.coverImage] : ['/logos/logo.PNG']);
           const count = photos.length;
           const rest = photos.slice(1, 5);
           const tile = 'relative bg-mist group overflow-hidden';

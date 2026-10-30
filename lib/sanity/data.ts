@@ -138,7 +138,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 const PROPERTY_FIELDS = `
   _id, title, "slug": slug.current, tagline, category, price, originalPrice,
   capacity, rating, reviewCount, location, distance, locationName, googleMapsUrl, mapEmbed, coordinates,
-  description, coverImage, gallery, features, amenities, inclusions, isPopular, isFeatured
+  description, coverImage, "gallery": coalesce(gallery[defined(asset)], []), features, amenities, inclusions, isPopular, isFeatured
 `;
 
 const PROPERTIES_QUERY = defineQuery(
@@ -149,6 +149,9 @@ const PROPERTY_QUERY = defineQuery(
 );
 
 function mapProperty(p: SanityProperty, s: SiteSettings): Property {
+  const coverImage = urlFor(p.coverImage, 1400);
+  const gallery = (p.gallery ?? []).map((g) => urlFor(g, 1600)).filter(Boolean);
+
   return {
     id: p._id,
     slug: p.slug,
@@ -163,8 +166,8 @@ function mapProperty(p: SanityProperty, s: SiteSettings): Property {
     location: p.location ?? '',
     distance: p.distance ?? '',
     capacity: p.capacity ?? '',
-    coverImage: urlFor(p.coverImage, 1400),
-    gallery: (p.gallery ?? []).map((g) => urlFor(g, 1600)).filter(Boolean),
+    coverImage: coverImage || gallery[0] || '',
+    gallery: gallery.length > 0 ? gallery : (coverImage ? [coverImage] : []),
     description: p.description ?? '',
     features: p.features ?? [],
     inclusions: p.inclusions ?? [],

@@ -95,7 +95,7 @@ export default async function HomePage() {
             >
               <div className="relative h-64 overflow-hidden">
                 <img
-                  src={property.coverImage}
+                  src={property.coverImage || property.gallery[0] || '/logos/logo.PNG'}
                   alt={property.title}
                   className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
                 />
