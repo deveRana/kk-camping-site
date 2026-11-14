@@ -129,7 +129,7 @@ export interface GalleryItem {
 export interface CafeMenuItem {
   id: string;
   name: string;
-  category: 'Breakfast' | 'Lunch' | 'Snacks' | 'Dinner' | 'Beverages' | 'Desserts';
+  category: string;
   price: number;
   description: string;
   isVeg: boolean;

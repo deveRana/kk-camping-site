@@ -6,248 +6,14 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { Badge } from '@/components/ui/Badge';
 import type { CafeMenuItem } from '@/types';
 
-type MenuCategory = 'All' | 'Breakfast' | 'Lunch' | 'Snacks' | 'Dinner' | 'Beverages' | 'Desserts';
-
-// Fallback menu items if Sanity data is not available
-const fallbackMenuItems: CafeMenuItem[] = [
-  // Breakfast
-  {
-    id: '1',
-    name: 'Classic Masala Chai',
-    category: 'Breakfast',
-    price: 30,
-    description: 'Traditional Indian spiced tea',
-    isVeg: true,
-    isSpecial: true,
-    imageUrl: '/cafe-images/chai.svg'
-  },
-  {
-    id: '2',
-    name: 'Filter Coffee',
-    category: 'Breakfast',
-    price: 40,
-    description: 'South Indian style filter coffee',
-    isVeg: true,
-    imageUrl: '/cafe-images/coffee.svg'
-  },
-  {
-    id: '3',
-    name: 'Poha',
-    category: 'Breakfast',
-    price: 80,
-    description: 'Maharashtrian style flattened rice',
-    isVeg: true,
-    imageUrl: '/cafe-images/poha.svg'
-  },
-  {
-    id: '4',
-    name: 'Masala Omelette',
-    category: 'Breakfast',
-    price: 60,
-    description: 'Two eggs with onions, tomatoes & spices',
-    isVeg: false,
-    imageUrl: '/cafe-images/omelette.svg'
-  },
-  {
-    id: '5',
-    name: 'Aloo Paratha',
-    category: 'Breakfast',
-    price: 100,
-    description: 'Stuffed potato flatbread with curd & pickle',
-    isVeg: true,
-    imageUrl: '/cafe-images/paratha.svg'
-  },
-  {
-    id: '6',
-    name: 'French Toast',
-    category: 'Breakfast',
-    price: 120,
-    description: 'Classic breakfast with maple syrup',
-    isVeg: true,
-    imageUrl: '/cafe-images/toast.svg'
-  },
-
-  // Lunch & Dinner
-  {
-    id: '7',
-    name: 'Paneer Butter Masala',
-    category: 'Lunch',
-    price: 220,
-    description: 'Cottage cheese in rich tomato gravy',
-    isVeg: true,
-    isSpecial: true,
-    imageUrl: '/cafe-images/paneer-masala.svg'
-  },
-  {
-    id: '8',
-    name: 'Dal Tadka',
-    category: 'Lunch',
-    price: 150,
-    description: 'Yellow lentils tempered with spices',
-    isVeg: true,
-    imageUrl: '/cafe-images/dal.svg'
-  },
-  {
-    id: '9',
-    name: 'Chicken Curry',
-    category: 'Lunch',
-    price: 280,
-    description: 'Home-style chicken curry',
-    isVeg: false,
-    isSpecial: true,
-    imageUrl: '/cafe-images/chicken-curry.svg'
-  },
-  {
-    id: '10',
-    name: 'Veg Biryani',
-    category: 'Lunch',
-    price: 200,
-    description: 'Aromatic rice with mixed vegetables',
-    isVeg: true,
-    imageUrl: '/cafe-images/veg-biryani.svg'
-  },
-  {
-    id: '11',
-    name: 'Chicken Biryani',
-    category: 'Lunch',
-    price: 280,
-    description: 'Hyderabadi style chicken biryani',
-    isVeg: false,
-    imageUrl: '/cafe-images/chicken-biryani.svg'
-  },
-  {
-    id: '12',
-    name: 'Jeera Rice',
-    category: 'Lunch',
-    price: 100,
-    description: 'Cumin flavored basmati rice',
-    isVeg: true,
-    imageUrl: '/cafe-images/rice.svg'
-  },
-
-  // Snacks
-  {
-    id: '13',
-    name: 'Veg Pakora',
-    category: 'Snacks',
-    price: 100,
-    description: 'Mixed vegetable fritters',
-    isVeg: true,
-    imageUrl: '/cafe-images/pakora.svg'
-  },
-  {
-    id: '14',
-    name: 'Corn Bhel',
-    category: 'Snacks',
-    price: 80,
-    description: 'Sweet corn chaat',
-    isVeg: true,
-    imageUrl: '/cafe-images/bhel.svg'
-  },
-  {
-    id: '15',
-    name: 'Maggi',
-    category: 'Snacks',
-    price: 60,
-    description: 'Classic instant noodles',
-    isVeg: true,
-    imageUrl: '/cafe-images/maggi.svg'
-  },
-  {
-    id: '16',
-    name: 'Cheese Sandwich',
-    category: 'Snacks',
-    price: 100,
-    description: 'Grilled cheese sandwich',
-    isVeg: true,
-    imageUrl: '/cafe-images/sandwich.svg'
-  },
-  {
-    id: '17',
-    name: 'Vada Pav',
-    category: 'Snacks',
-    price: 40,
-    description: 'Mumbai street food special',
-    isVeg: true,
-    imageUrl: '/cafe-images/vada-pav.svg'
-  },
-
-  // Beverages
-  {
-    id: '18',
-    name: 'Cold Coffee',
-    category: 'Beverages',
-    price: 80,
-    description: 'Chilled coffee with ice cream',
-    isVeg: true,
-    imageUrl: '/cafe-images/cold-coffee.svg'
-  },
-  {
-    id: '19',
-    name: 'Fresh Lime Soda',
-    category: 'Beverages',
-    price: 50,
-    description: 'Sweet/salt/plain',
-    isVeg: true,
-    imageUrl: '/cafe-images/lime-soda.svg'
-  },
-  {
-    id: '20',
-    name: 'Mango Shake',
-    category: 'Beverages',
-    price: 100,
-    description: 'Thick and creamy',
-    isVeg: true,
-    isSpecial: true,
-    imageUrl: '/cafe-images/mango-shake.svg'
-  },
-  {
-    id: '21',
-    name: 'Masala Buttermilk',
-    category: 'Beverages',
-    price: 40,
-    description: 'Spiced yogurt drink',
-    isVeg: true,
-    imageUrl: '/cafe-images/buttermilk.svg'
-  },
-  {
-    id: '22',
-    name: 'Fresh Coconut Water',
-    category: 'Beverages',
-    price: 60,
-    description: 'Natural and refreshing',
-    isVeg: true,
-    imageUrl: '/cafe-images/coconut.svg'
-  },
-
-  // Desserts
-  {
-    id: '23',
-    name: 'Gulab Jamun',
-    category: 'Desserts',
-    price: 60,
-    description: '2 pieces - milk solid dumplings in sugar syrup',
-    isVeg: true,
-    imageUrl: '/cafe-images/gulab-jamun.svg'
-  },
-  {
-    id: '24',
-    name: 'Ice Cream',
-    category: 'Desserts',
-    price: 80,
-    description: 'Vanilla/Chocolate/Strawberry',
-    isVeg: true,
-    imageUrl: '/cafe-images/ice-cream.svg'
-  },
-];
+type MenuCategory = string;
 
 export function CafeView({ menuItems }: { menuItems?: CafeMenuItem[] }) {
   const [selectedCategory, setSelectedCategory] = useState<MenuCategory>('All');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const categories: MenuCategory[] = ['All', 'Breakfast', 'Lunch', 'Snacks', 'Dinner', 'Beverages', 'Desserts'];
 
-  // Use fallback if no menu items from Sanity
-  let items = menuItems && menuItems.length > 0 ? menuItems : fallbackMenuItems;
+  // Menu comes from Sanity (see scripts/import-lakeora-menu.js)
+  let items = menuItems ?? [];
 
   // Deduplicate items by ID (in case of any caching issues)
   const seenIds = new Set<string>();
@@ -259,14 +25,12 @@ export function CafeView({ menuItems }: { menuItems?: CafeMenuItem[] }) {
     return true;
   });
 
+  // Category pills follow the order of the menu card
+  const categories: MenuCategory[] = ['All', ...Array.from(new Set(items.map(item => item.category)))];
+
   const filteredMenu = selectedCategory === 'All'
     ? items
-    : items.filter(item => {
-        if (selectedCategory === 'Lunch' || selectedCategory === 'Dinner') {
-          return item.category === 'Lunch';
-        }
-        return item.category === selectedCategory;
-      });
+    : items.filter(item => item.category === selectedCategory);
 
   return (
     <div className="min-h-screen bg-paper">
