@@ -322,7 +322,8 @@ export async function getCafeMenu(): Promise<CafeMenuItem[]> {
     description: item.description ?? '',
     isVeg: item.isVeg,  // Removed fallback - must be set in Sanity!
     isSpecial: item.isSpecial ?? false,
-    imageUrl: urlFor(item.image, 800),
+    // Sanity image if set, otherwise the bundled photo in /public/cafe-menu/<slug>.jpg
+    imageUrl: urlFor(item.image, 800) || `/cafe-menu/${item._id.replace(/^drafts\./, '').replace(/^cafe-/, '')}.jpg`,
     order: item.order ?? 0,
   }));
 }
