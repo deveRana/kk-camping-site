@@ -38,16 +38,24 @@ export function CafeView({ menuItems }: { menuItems?: CafeMenuItem[] }) {
       <section className="relative h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/swiss-tent/swiss-tent-1.jpg"
-            alt="Lakeora Cafe"
+            src="/cafe-images/cafe-hero.jpg"
+            alt="Garden cafe seating with umbrellas surrounded by greenery"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-forest-deep/70 to-forest-deep/90" />
         </div>
+        <a
+          href="https://commons.wikimedia.org/wiki/File:Lawn_at_Trerice_with_cafe_tables_and_umbrellas_-_geograph.org.uk_-_4041193.jpg"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute bottom-2 right-3 z-10 text-[10px] text-white/50 hover:text-white/80"
+        >
+          Photo: David Hawgood, CC BY-SA 2.0
+        </a>
 
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto text-white">
           <div className="inline-flex items-center gap-2 bg-sage/90 text-forest-deep px-6 py-2 rounded-full text-sm font-semibold mb-4">
-            ☕ Open Daily 8 AM - 10 PM
+            ☕ Open Daily 11 AM - 10:30 PM
           </div>
           <h1 className="font-display text-5xl md:text-7xl font-semibold mb-4">
             Lakeora <span className="italic text-sage">Cafe</span>
@@ -254,10 +262,7 @@ export function CafeView({ menuItems }: { menuItems?: CafeMenuItem[] }) {
               <span>🕐</span> Timings
             </h3>
             <p className="text-forest-deep/80 leading-relaxed">
-              <strong>Breakfast:</strong> 8:00 AM - 11:00 AM<br />
-              <strong>Lunch:</strong> 12:00 PM - 3:00 PM<br />
-              <strong>Snacks:</strong> 3:00 PM - 6:00 PM<br />
-              <strong>Dinner:</strong> 7:00 PM - 10:00 PM
+              <strong>Open daily:</strong> 11:00 AM - 10:30 PM
             </p>
           </div>
 
